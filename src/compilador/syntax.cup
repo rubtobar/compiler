@@ -1,0 +1,632 @@
+package compilador;
+import compilador.Nodes.*;
+import compilador.SymbolTable.*;
+import compilador.SymbolTable.Description.DescriptionType;
+import compilador.SymbolTable.Description.TSB;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/* Simple +/-/* EXPR language; parser evaluates constant EXPRs on the fly*/
+import java_cup.runtime.*;
+
+class Parser;
+
+parser code {:
+    // Connect this parser to a scanner!
+    public static ErrorPrinter errPrinter = compilador.Compilador.errPrinter;
+    public static TreePrinter derTree = compilador.Compilador.derTree;
+    compilador.Scanner scanner;
+    SymbolTable st;
+    SyntaxTree sytr;
+
+    public Parser(Scanner scanner, SyntaxTree sytr){ 
+    	this.scanner=scanner;
+    	this.sytr = sytr;
+    	st = new SymbolTable(sytr.getVt(), sytr.getPt());
+    }
+:}
+
+/* define how to connect to the scanner! */
+init with {: :};
+scan with {: 
+		  Token t = scanner.getToken();
+		  if (t == null){
+		  	return new java_cup.runtime.Symbol(0);
+		  }
+		  return t.toSymbol();
+		  :};
+
+/* Terminals (tokens returned by the scanner). */
+terminal Token tk_string, tk_return, tk_digits, tk_openp, tk_closep, tk_leftb, tk_rightb, tk_coma, tk_pcoma, tk_if, tk_while, tk_main, tk_const, tk_equal, tk_op_aritm, tk_op_rel, tk_op_log, tk_id;
+
+/* Non terminals */
+non terminal NodeProg PROG;
+non terminal INIT;
+non terminal NodeMethods METHODS;
+non terminal NodeMethod METHOD;
+non terminal NodeContHead CONT_HEAD; 
+non terminal ENTERBLOCK;
+non terminal NodeHead HEAD;
+non terminal NodeSentences SENTENCES;
+non terminal Node SENTENCE; 
+non terminal NodeDecls LDECL;
+non terminal NodeDecl DECL;
+non terminal NodeConstDecl CONST_DECL;
+non terminal NodeAssign ASSIGN;
+non terminal NodeCall CALL;
+non terminal NodeContCall CONT_CALL;
+non terminal NodeExpr EXPR;
+non terminal NodeLogExpr LOG_EXPR;
+non terminal NodeArExpr AR_EXPR;
+non terminal NodeValue VALUE;
+
+start with PROG;
+
+/* The grammar rules */
+PROG ::= 
+		INIT LDECL:dcls METHODS:mthds ENTERBLOCK tk_main tk_leftb SENTENCES:stcs tk_rightb
+		{:
+		try {
+            st.exitBlock();
+        } catch (IllegalBlockExitException ex) {
+        }
+		st.printOnFile();
+
+		sytr.setRoot(new NodeProg(dcls, mthds, stcs, null));
+		:}
+	|
+		INIT LDECL METHODS ENTERBLOCK tk_main tk_leftb error tk_rightb:rb
+		{:
+			errPrinter.badMainSyntax(rb.line, rb.column);
+			try {
+            	st.exitBlock();
+	        } catch (IllegalBlockExitException ex) {
+	        }
+		:}
+	;
+
+INIT ::=												
+		{: 
+		try{
+		Description d = new TypeDescription(TSB.BOOL, 1, 0, 1);
+		st.add("boolean", d, true);
+
+		d = new ConstDescription(TSB.BOOL);
+		st.add("true", d, true);
+		st.add("false", d, true);
+
+		d = new TypeDescription(TSB.INT, 4, Integer.MIN_VALUE, Integer.MAX_VALUE);
+		st.add("int", d, true);
+
+		d = new TypeDescription(TSB.VOID, 0, 0, 0);
+		st.add("void", d, true);
+
+		d = new TypeDescription(TSB.STRING, 0, 0, 0);
+		st.add("string", d, true);
+
+		d = new ProcDescription(TSB.VOID);
+		st.add("write", d, true);
+		d = new ArgDescription("write", TSB.STRING);
+		st.addParameter("write", "value", (ArgDescription) d);
+
+		d = new ProcDescription(TSB.STRING);
+		st.add("read", d, true);
+		} catch (AlreadyDeclaredException ex) {
+            Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ReservedSymbolException ex) {
+            Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoProcGivenException ex) {
+            Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		:}
+	;
+
+METHODS ::= 
+		METHOD:mth METHODS:mths
+		{: 
+			RESULT = new NodeMethods(mth, mths, null);
+		:}		
+
+	|	
+		{:
+		 	/*DONE*/ 
+		:}
+	;
+
+METHOD 	::=
+		HEAD:nP tk_leftb SENTENCES:stcs tk_return:rtn EXPR:et tk_pcoma tk_rightb 
+		{:
+		try {
+        st.exitBlock();
+	    } catch (IllegalBlockExitException ex) {
+	        Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	    TblSymbol aux = st.get((String) nP.result);
+		if (aux == null){/*ignora*/}
+		else if (aux.d.tsb == TSB.VOID) {
+			errPrinter.unexpectedReturn(rtn.line, rtn.column);
+		} else if (aux.d.tsb != et.result) {
+			errPrinter.unexpectedReturnType(rtn.line, rtn.column, (String) nP.result, aux.d.tsb.toString(), et.result.toString());
+		}
+
+		RESULT = new NodeMethod(nP, stcs, et, null);
+		:}
+	|
+		HEAD:nP tk_leftb SENTENCES:stcs tk_rightb:cc
+		{:
+		try {
+        st.exitBlock();
+	    } catch (IllegalBlockExitException ex) {
+	        Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	    TblSymbol aux = st.get((String) nP.result);
+	    if (aux == null){/*ignora*/}
+	    else if (aux.d.tsb != TSB.VOID){
+	    	errPrinter.missingReturn(cc.line, cc.column, (String) nP.result);
+	    }
+
+	    RESULT = new NodeMethod(nP, stcs, null);
+		:}
+	|
+		HEAD:nP tk_leftb:lb error tk_rightb
+		{:
+			errPrinter.badBlockInstructions(lb.line, lb.column, (String) nP.result);
+		:}
+	;
+
+HEAD ::= 
+		CONT_HEAD:nP tk_closep:cp					
+		{:
+		st.enterBlock();
+		TblSymbol aux = st.get((String)nP.result);
+		if (aux != null  && aux.d.dt == DescriptionType.DPROC) {		
+			int arg = ((ProcDescription)aux.d).firstArg;
+	        while (arg != 0 ){
+	            aux = st.getParameter(arg);
+	            try {
+	                st.add(aux.lexema, new VarDescription(aux.d.tsb), false);
+	            } catch (AlreadyDeclaredException ex) {
+	                Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+	            } catch (ReservedSymbolException ex) {
+	            }
+	            arg = ((ArgDescription)aux.d).next;
+	        }
+			RESULT = new NodeHead(nP,nP.result);
+		} else {
+			RESULT = new NodeHead(nP,"");
+		}
+		:}
+	|	
+		tk_id:tipus tk_id:nom tk_openp tk_closep	
+		{:
+		TblSymbol aux = st.get(tipus.getAtribut());
+		if (aux == null || aux.d.dt != DescriptionType.DTYPE) {
+            errPrinter.nonExistingType(tipus.line, tipus.column, tipus.getAtribut());
+        } else {
+        	try {
+	            st.add(nom.getAtribut(), new ProcDescription(aux.d.tsb), false);
+	        } catch (AlreadyDeclaredException ex) {
+                errPrinter.alreadyDeclaredFunction(nom.line, nom.column, nom.getAtribut());
+	        } catch (ReservedSymbolException ex) {
+                errPrinter.reservedFunctionName(nom.line, nom.column, nom.getAtribut());
+	        }
+        	RESULT = new NodeHead(null, nom.getAtribut());
+        }
+        st.enterBlock();
+		:}
+	|
+		error tk_closep:cp
+		{:
+			errPrinter.unexpectedArguments(cp.line, cp.column);
+			st.enterBlock();
+			RESULT = new NodeHead(null, "");
+		:}
+	;
+
+CONT_HEAD ::= 
+		tk_id:tP tk_id:nP tk_openp tk_id:tA tk_id:nA 
+		{:
+		TblSymbol aux = st.get(tP.getAtribut());
+		if (aux == null || aux.d.dt != DescriptionType.DTYPE) {
+            errPrinter.nonExistingType(tP.line, tP.column, tP.getAtribut());
+        } 
+    	try {
+        	st.add(nP.getAtribut(), new ProcDescription(aux.d.tsb), false);
+        } catch (AlreadyDeclaredException ex) {
+            errPrinter.alreadyDeclaredFunction(nP.line, nP.column, nP.getAtribut());
+        } catch (ReservedSymbolException ex) {
+            errPrinter.reservedFunctionName(nP.line, nP.column, nP.getAtribut());
+        }
+        aux = st.get(tA.getAtribut());
+        if (aux == null || aux.d.dt != DescriptionType.DTYPE) {
+            errPrinter.nonExistingType(tA.line, tA.column, tA.getAtribut());
+        } else {
+            try {
+            	st.addParameter(nP.getAtribut(), nA.getAtribut(), new ArgDescription(nP.getAtribut(), aux.d.tsb));
+            	RESULT = new NodeContHead(null,nP.getAtribut());
+          	} catch (NoProcGivenException ex) {
+          		// Ignorar
+          	} catch (AlreadyDeclaredException ex) {
+                errPrinter.alreadyDeclaredArgument(nA.line, nA.column, nP.getAtribut(), nA.getAtribut());
+          	} catch (ReservedSymbolException ex) {
+                errPrinter.reservedArgumentName(nA.line, nA.column, nP.getAtribut(), nA.getAtribut());
+            }
+        }
+		:}
+	| 
+		CONT_HEAD:proc tk_coma tk_id:tipus tk_id:nom 	
+		{:
+
+		RESULT = new NodeContHead(proc,proc.result);
+
+		TblSymbol aux = st.get(tipus.getAtribut());
+        if (aux == null || aux.d.dt != DescriptionType.DTYPE) { 
+            errPrinter.nonExistingType(tipus.line, tipus.column, tipus.getAtribut());
+        } else {
+            try {
+                st.addParameter((String) proc.result, nom.getAtribut(), new ArgDescription((String) proc.result, aux.d.tsb));
+            } catch (NoProcGivenException ex) {
+            	// Ignorar
+            } catch (AlreadyDeclaredException ex) {
+                errPrinter.alreadyDeclaredArgument(nom.line, nom.column, (String) proc.result, nom.getAtribut());
+            } catch (ReservedSymbolException ex) {
+                errPrinter.reservedArgumentName(nom.line, nom.column, (String) proc.result, nom.getAtribut());
+            }
+        }
+		:}
+	;
+
+SENTENCES ::= 
+		SENTENCE:stc SENTENCES:stcs
+		{: 
+		RESULT = new NodeSentences(stc,stcs,null);
+		:}
+	|											
+		{:
+			/* DONE */ 
+		:}
+	;
+
+SENTENCE ::= 
+		CALL:cll tk_pcoma 								
+		{:
+		RESULT = cll;
+		:}
+
+	|
+		DECL:dcl tk_pcoma 							
+		{: 
+		RESULT = dcl;
+		:}
+	| 
+		CONST_DECL:cdcl tk_pcoma 						
+		{: 
+		RESULT = cdcl;
+		:}
+
+	| 
+		tk_id:id tk_equal:eq EXPR:te tk_pcoma 		
+		{:
+
+		TblSymbol aux = st.get(id.getAtribut());
+        if (aux == null) {
+            errPrinter.undeclaredVariable(id.line, id.column, id.getAtribut());
+        } else if (aux.d.dt == DescriptionType.DCONST){
+            errPrinter.assigmentToConst(id.line, id.column, id.getAtribut());
+        } else if (aux.d.dt != DescriptionType.DVAR) {
+            errPrinter.undeclaredVariable(id.line, id.column, id.getAtribut());
+        }else if (te.result == null) {
+            // Ignorar
+        } else if (te.result != aux.d.tsb) {
+            errPrinter.unexpectedValueType(eq.line, eq.column, te.result.toString(), aux.d.tsb.toString());
+        } else {
+			RESULT = new NodeAssignation(te, null);
+        }
+		:}
+	|
+		tk_if tk_openp:opp EXPR:cond tk_closep ENTERBLOCK tk_leftb SENTENCES:stcs tk_rightb  
+		{:
+		try {
+        	st.exitBlock();
+        } catch (IllegalBlockExitException ex) {
+        	Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		if (cond == null) {
+			// Ignorar
+		}
+		else if (cond.result != TSB.BOOL){
+			errPrinter.notALogicStatement(opp.line, opp.column, (String) cond.result);
+		} else {
+			RESULT = new NodeIf(cond,stcs,null);
+		}
+		:}
+	|
+		tk_while tk_openp:opp EXPR:cond tk_closep ENTERBLOCK tk_leftb SENTENCES:stcs tk_rightb  
+		{:
+		try {
+        	st.exitBlock();
+        } catch (IllegalBlockExitException ex) {
+        	Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		if (cond.result == null) {
+			// Ignorar
+		}
+		else if (cond.result != TSB.BOOL){
+			errPrinter.notALogicStatement(opp.line, opp.column, (String) cond.result);
+		} else {
+			RESULT = new NodeWhile(cond,stcs,null);
+		}
+		:}
+	|
+		error tk_pcoma:pc
+		{:
+			errPrinter.unexpectedSentence(pc.line, pc.column);
+		:}
+	;
+
+LDECL ::= 
+		LDECL:lde DECL:de tk_pcoma							
+		{: 
+
+		RESULT = new NodeDecls(lde,(NodeDecl)de,null);
+		:}
+	|	
+		LDECL:lde CONST_DECL:cde tk_pcoma					
+		{: 
+
+		RESULT = new NodeDecls(lde,(NodeConstDecl)cde,null);
+		:}
+
+	|		
+		{:
+		 	/* DONE */
+		:}
+	|	
+		LDECL error tk_pcoma:pc
+		{:
+			errPrinter.badDeclaration(pc.line, pc.column);
+		:}
+	;
+
+DECL ::= 
+		tk_id:tipus tk_id:nom ASSIGN:vt				
+		{:
+		TblSymbol aux = st.get(tipus.getAtribut());
+	    if (aux == null || aux.d.dt != DescriptionType.DTYPE) {
+            errPrinter.nonExistingType(tipus.line, tipus.column, tipus.getAtribut());
+	    } else {
+	        if (vt == null) {
+	        	//ingorar
+	        } else if (vt.result.getClass() != Boolean.class && vt.result != aux.d.tsb) {
+                errPrinter.unexpectedValueType(nom.line, nom.column, vt.result.toString(), aux.d.tsb.toString());
+	        } 
+	        try {
+            	st.add(nom.getAtribut(), new VarDescription(aux.d.tsb), false);
+            	if (vt.expr != null){
+            		RESULT = new NodeDecl(vt,nom.getAtribut(),null);
+            	} else {
+            		RESULT = new NodeDecl(null,nom.getAtribut(),null);
+            	}
+            } catch (AlreadyDeclaredException ex) {
+                errPrinter.alreadyDeclaredVariable(nom.line, nom.column, nom.getAtribut());
+            } catch (ReservedSymbolException ex) {
+                errPrinter.reservedVariableName(nom.line, nom.column, nom.getAtribut());
+            }
+	    }
+		:}
+	;
+
+CONST_DECL	::= 
+		tk_const tk_id:tipus tk_id:nom tk_equal:eq EXPR:et 
+		{: 
+		TblSymbol aux = st.get(tipus.getAtribut());
+        if (aux == null || aux.d.dt != DescriptionType.DTYPE) {
+            errPrinter.nonExistingType(tipus.line, tipus.column, tipus.getAtribut());
+        } else if (et == null) {
+        	//ingorar
+        } else if (et.result.getClass() != Boolean.class && et.result != aux.d.tsb) {
+            errPrinter.unexpectedValueType(eq.line, eq.column, et.result.toString(), aux.d.tsb.toString());
+        } else {
+            try {
+            	st.add(nom.getAtribut(), new ConstDescription(aux.d.tsb), false);
+            	RESULT = new NodeConstDecl(et,null);
+            } catch (AlreadyDeclaredException ex) {
+                errPrinter.alreadyDeclaredVariable(nom.line, nom.column, nom.getAtribut());
+            } catch (ReservedSymbolException ex) {
+                errPrinter.reservedVariableName(nom.line, nom.column, nom.getAtribut());
+            }
+    	}
+		:}
+	;
+
+ASSIGN ::= 
+		tk_equal EXPR:et 							
+		{: 
+		if (et != null) {
+			RESULT = new NodeAssign(et,et.result);
+		}
+		:}
+	|											
+		{: 
+			RESULT = new NodeAssign(null, new Boolean(false)); 
+		:}
+	;
+
+CALL ::= 
+		CONT_CALL:rtn tk_closep:clp 					
+		{:
+		if (rtn != null) {
+            if (rtn.result.getClass() == Integer.class) {
+                String pname = ((ArgDescription)st.getParameter((Integer)rtn.result).d).idProc;
+                errPrinter.tooFewArgs(clp.line, clp.column, pname);
+            } else {
+                RESULT = new NodeCall(rtn,rtn.result);
+            }
+        }
+		:}
+	| 
+		tk_id:id tk_openp tk_closep				
+		{:	
+		TblSymbol aux = st.get(id.getAtribut());
+		if (aux == null || aux.d.dt != DescriptionType.DPROC) {
+            errPrinter.undeclaredFunction(id.line, id.column, id.getAtribut());
+		} else if (((ProcDescription) aux.d).firstArg != 0) { 
+            errPrinter.tooFewArgs(id.line, id.column, id.getAtribut());
+		} else {
+			RESULT = new NodeCall(null,((ProcDescription) aux.d).tsb);
+		}
+		:}
+	;
+
+CONT_CALL ::= 
+		tk_id:id tk_openp:opp EXPR:arg1 				
+		{:	
+		TblSymbol aux = st.get(id.getAtribut());
+		if (aux == null || aux.d.dt != DescriptionType.DPROC) {
+            errPrinter.undeclaredFunction(id.line, id.column, id.getAtribut());
+        } else {
+            TblSymbol param = st.getParameter(((ProcDescription) aux.d).firstArg);
+            if (param == null) {
+                errPrinter.tooManyArgs(id.line, id.column, id.getAtribut());
+            } else if (!arg1.result.equals(param.d.tsb)) {
+                errPrinter.unexpectedArgType(opp.line, opp.column, arg1.result.toString(), param.d.tsb.toString());
+            } else {
+            	int next = ((ArgDescription) st.getParameter(((ProcDescription) aux.d).firstArg).d).next;
+                if (next == 0){
+            		RESULT = new NodeContCall(arg1,null,aux.d.tsb);
+                } else {
+                	RESULT = new NodeContCall(arg1,null,next);
+
+                }
+            }
+        }
+		:}
+	| 	CONT_CALL:idxP tk_coma:coma EXPR:argX			
+		{:
+		if (idxP != null && argX != null) {
+			if (idxP.result.getClass() != Integer.class) {
+                errPrinter.tooManyArgs(coma.line, coma.column);
+	        } else {
+	            TblSymbol aux = st.getParameter((Integer) idxP.result);
+	            if (aux.d.tsb != argX.result){
+                    errPrinter.unexpectedArgType(coma.line, coma.column, argX.result.toString(), aux.d.tsb.toString());
+	            }
+	            int next = ((ArgDescription) aux.d).next;
+	            if (next == 0){
+	            	aux = st.get(((ArgDescription) aux.d).idProc);
+					RESULT = new NodeContCall(argX,idxP,aux.d.tsb);
+	            } else {
+	            	RESULT = new NodeContCall(argX,idxP,next);
+	            }
+	        }
+        }
+		:}
+	;
+
+EXPR ::= 
+		EXPR:et tk_op_log:op LOG_EXPR:vt				
+		{:
+		if (et == null || vt == null) {
+			// Ignorar
+		} else if (et.result != TSB.BOOL) {
+            errPrinter.unexpectedValueType(op.line, op.column, et.result.toString(), TSB.BOOL.toString());
+		} else if (vt.result != TSB.BOOL) {
+            errPrinter.unexpectedValueType(op.line, op.column, vt.result.toString(), TSB.BOOL.toString());
+        } else {
+        	RESULT = new NodeExpr(et,vt,TSB.BOOL);
+        }
+		:}
+	| 
+		LOG_EXPR:vt							
+		{: 
+		if (vt != null) {
+			RESULT = new NodeExpr(null, vt, vt.result);
+		}
+		:}
+	;
+
+LOG_EXPR ::= 
+		LOG_EXPR:et tk_op_rel:op AR_EXPR:vt 			
+		{:
+		if (et == null || vt == null) {
+			// Ignorar
+		} else if (et.result != TSB.INT) {
+            errPrinter.unexpectedValueType(op.line, op.column, et.result.toString(), TSB.INT.toString());
+		} else if (vt.result != TSB.INT){
+            errPrinter.unexpectedValueType(op.line, op.column, vt.result.toString(), TSB.INT.toString());
+        } else {
+        	RESULT = new NodeLogExpr(et,vt,TSB.BOOL);
+		}
+		:}
+	|	
+		AR_EXPR:vt						
+		{: 
+			if (vt != null) {
+				RESULT = new NodeLogExpr(null,vt,vt.result);
+			}
+		:}
+	;
+
+AR_EXPR ::= 
+		AR_EXPR:et tk_op_aritm:op VALUE:vt				
+		{:
+		if (et == null || vt == null) {
+            // Ignorar
+		} else if (et.result != TSB.INT) {
+            errPrinter.unexpectedValueType(op.line, op.column, et.result.toString(), TSB.INT.toString());
+		} else if (vt.result != TSB.INT){ 
+            errPrinter.unexpectedValueType(op.line, op.column, vt.result.toString(), TSB.INT.toString());
+        } else {
+        	RESULT = new NodeArExpr(et,vt,TSB.INT);
+		}
+		:}
+	| 	
+		VALUE:vt 									
+		{: 
+		if (vt != null) {
+			RESULT = new NodeArExpr(null,vt,vt.result); 
+		}
+		:}
+	;
+
+VALUE ::= 
+		tk_openp EXPR:expr tk_closep				
+		{: 
+		RESULT = new NodeValue(expr, null, null, null, expr.result);
+		:}
+	|
+		tk_id:id 									
+		{:	
+		TblSymbol aux = st.get(id.getAtribut()); 
+		if (aux == null || (aux.d.dt != DescriptionType.DVAR && aux.d.dt != DescriptionType.DCONST)) {
+            errPrinter.undeclaredVariable(id.line, id.column, id.getAtribut());
+        } else {
+        	RESULT = new NodeValue(null, null, aux.id, null, aux.d.tsb);
+        }
+		:}
+	| 	
+		tk_string:str 							
+		{: 
+		RESULT = new NodeValue(null, null, null, str.getAtribut(), TSB.STRING);
+		:}
+	| 
+		tk_digits:dig 							
+		{:	
+		try{
+			Integer value = Integer.parseInt(dig.getAtribut());
+			RESULT = new NodeValue(null, null, null, value, TSB.INT);
+		}catch(NumberFormatException e){
+            errPrinter.overflow(dig.line, dig.column, dig.getAtribut());
+		}
+		:}
+	| 
+		CALL:call 								
+		{: 
+		if (call != null) {
+			RESULT = new NodeValue(null, call, null, null, call.result); 
+		}
+		:}
+	;
+
+ENTERBLOCK 	::= {: st.enterBlock(); :}
+	;

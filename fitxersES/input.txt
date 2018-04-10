@@ -1,0 +1,10 @@
+// Declaracions //
+
+// Procediments //
+
+/*
+* Programa principal
+*/
+main {
+
+}
