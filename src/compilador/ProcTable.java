@@ -33,7 +33,7 @@ public class ProcTable {
         
         @Override
         public String toString(){     
-            return name + "\t\t\t" + label + "\t\t\t" + depth + "\t\t\t" + nparam + "\t\t\t" + localSize + "\t\t\t" + name;
+            return name + "\t\t" + label + "\t\t" + depth + "\t\t" + nparam + "\t\t" + localSize + "\t\t" + name;
         }
     }
 
@@ -43,16 +43,16 @@ public class ProcTable {
         procTable = new HashMap<>();
     }
 
-    public void add(String name, String label, int prof, int nparam, int localSize) {
-        procTable.put(IdCount.count++, new Proc(name, label, prof, nparam, localSize));
+    public void add(int id, String name, String label, int prof, int nparam, int localSize) {
+        procTable.put(id, new Proc(name, label, prof, nparam, localSize));
     }
     
         @Override
     public String toString(){
-        String str = "ID\t\t\tNAME\t\t\tLABEL\t\t\tPROF\t\t\tNPARAM\t\t\tL.SIZE\t\t\tNAME\n";
+        String str = "ID\t\tNAME\t\tLABEL\t\tPROF\t\tNPARAM\t\tL.SIZE\t\tNAME\n";
         str = str + "-----------------------------------------------------------------------------------------------------------------------------------------------------\n";
         for (int id : this.procTable.keySet()) {
-            str = str + id + "\t\t\t" + procTable.get(id) + "\n";
+            str = str + id + "\t\t" + procTable.get(id) + "\n";
         }
         return str;
     }

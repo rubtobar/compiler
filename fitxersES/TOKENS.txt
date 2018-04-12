@@ -51,7 +51,4 @@
 19:8: tk_string: 'asd'
 19:13: tk_closep
 19:14: tk_pcoma
-20:2: tk_id: 'int'
-20:6: tk_id: 'a'
-20:7: tk_pcoma
-21:1: tk_rightb
+20:1: tk_rightb

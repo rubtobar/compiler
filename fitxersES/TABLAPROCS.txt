@@ -1,5 +1,5 @@
-ID			NAME			LABEL			PROF			NPARAM			L.SIZE			NAME
+ID		NAME		LABEL		PROF		NPARAM		L.SIZE		NAME
 -----------------------------------------------------------------------------------------------------------------------------------------------------
-7			write			null			0			0			0			write
-10			read			null			0			0			5			read
-15			fun			null			0			0			4			fun
+6		write		null		0		1		0		write
+8		read		null		0		0		5		read
+12		fun		null		0		3		4		fun

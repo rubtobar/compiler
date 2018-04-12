@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class VarTable {
 
-    private class Balde {
+    public class Balde {
 
         String procName;
         int size;
@@ -32,7 +32,7 @@ public class VarTable {
         
         @Override
         public String toString(){
-            return procName + "\t\t\t" + size + "\t\t\t" + offset + "\t\t\t" + name;
+            return procName + "\t\t" + size + "\t\t" + offset + "\t\t" + name;
         }
 
     }
@@ -49,10 +49,10 @@ public class VarTable {
     
     @Override
     public String toString(){
-        String str = "ID\t\t\tPROC\t\t\tSIZE\t\t\tOFFSET\t\t\tVALUE\n";
+        String str = "ID\t\tPROC\t\tSIZE\t\tOFFSET\t\tVALUE\n";
         str = str + "-----------------------------------------------------------------------------------------------------\n";
         for (int id : this.varTable.keySet()) {
-            str = str + id + "\t\t\t" + varTable.get(id) + "\n";
+            str = str + id + "\t\t" + varTable.get(id) + "\n";
         }
         return str;
     }

@@ -17,5 +17,4 @@ int fun(int c, int d, int e){
 main {
 	read();
 	write("asd");
-	int a;
 }

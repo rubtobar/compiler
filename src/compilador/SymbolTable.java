@@ -143,7 +143,7 @@ public class SymbolTable {
                 // modificamos los valores de las variables que 
                 // hemos encontrado al encontrar el prog al que pertenecen
                 // String name, String label, int prof, int nparam, int localSize
-                pt.add(id, null, 0, 0, size);
+                pt.add(descriptionTable.get(id).id,id, null, 0, 0, size);
                 break;
             default:
                 break;
@@ -183,6 +183,14 @@ public class SymbolTable {
         } else {
             darg.next = idx_e;
         }
+        
+        /*Por cada parametro perteneciente a un proceso, aumentamos la cantidad de
+        parametros del proceso en la tabla de procs, para la generación de codigo*/
+        int id = descriptionTable.get(idproc).id;
+        ProcTable.Proc p = pt.procTable.get(id);
+        p.nparam = p.nparam+1;
+        pt.procTable.replace(id, p);
+        
     }
 
     public TblSymbol getParameter(int idx) {
