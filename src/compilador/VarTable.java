@@ -17,13 +17,13 @@ public class VarTable {
 
     public class Balde {
 
-        String procName;
+        int proc;
         int size;
         int offset;
         String name;
 
-        public Balde(String proc, int size, int offset, String name) {
-            this.procName = proc;
+        public Balde(int proc, int size, int offset, String name) {
+            this.proc = proc;
             this.size = size;
             this.offset = offset;
             this.name = name;
@@ -32,7 +32,7 @@ public class VarTable {
         
         @Override
         public String toString(){
-            return procName + "\t\t" + size + "\t\t" + offset + "\t\t" + name;
+            return proc + "\t\t" + size + "\t\t" + offset + "\t\t" + name;
         }
 
     }
@@ -43,7 +43,7 @@ public class VarTable {
         this.varTable = new HashMap<>();
     }
 
-    public void addVar(int id, String proc, int size, int offset, String name) {
+    public void addVar(int id, int proc, int size, int offset, String name) {
         varTable.put(id, new Balde(proc, size, offset, name));
     }
     

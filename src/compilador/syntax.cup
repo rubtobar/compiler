@@ -106,6 +106,7 @@ INIT ::=
 
 		d = new ProcDescription(TSB.VOID);
 		st.add("write", d, true);
+		
 		d = new ArgDescription("write", TSB.STRING);
 		st.addParameter("write", "value", (ArgDescription) d);
 

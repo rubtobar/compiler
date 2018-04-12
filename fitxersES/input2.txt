@@ -2,10 +2,19 @@ const int a = 5;
 const int b = 4;
 const int c = 6;
 
-int fun(int c, int d, int e){
-	int a;
-	a = 4;
+int fun(int d, int e){
 	return 0;
+}
+
+int fun2(int f, int g){
+	return 0;
+}
+
+boolean fun3(boolean h){
+	return false;
+}
+
+void fun4(int i){
 }
 
 
@@ -15,6 +24,9 @@ int fun(int c, int d, int e){
 * Programa principal
 */
 main {
+	int x;
+	int y;
+	int z;
 	read();
 	write("asd");
 }

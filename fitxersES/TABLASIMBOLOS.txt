@@ -2,16 +2,19 @@
 |			POSICION		LEX			NIVEL			DESCR.TYPE		TSB			|ID			NIVEL			DESCR.TYPE		TSB	|***************|
 |***********************************************************************************************************************************************|*******************************************************************************|***************|
 |			0			a			1			DCONST			INT			|null										|	0	|
-|			1			b			1			DCONST			INT			|value			-1			DARG			STRING	|	4	|
-|			2			void			0			DTYPE			VOID			|c			-1			DARG			INT	|		|
-|			3			read			0			DPROC			STRING			|d			-1			DARG			INT	|		|
-|			4			c			1			DCONST			INT			|e			-1			DARG			INT	|		|
-|			5			string			0			DTYPE			STRING			|										|		|
-|			6			false			0			DCONST			BOOL			|										|		|
-|			7			int			0			DTYPE			INT			|										|		|
-|			8			boolean			0			DTYPE			BOOL			|										|		|
-|			9			true			0			DCONST			BOOL			|										|		|
-|			10			write			0			DPROC			VOID			|										|		|
-|			11			fun			1			DPROC			INT			|										|		|
+|			1			b			1			DCONST			INT			|value			-1			DARG			STRING	|	7	|
+|			2			void			0			DTYPE			VOID			|d			-1			DARG			INT	|		|
+|			3			read			0			DPROC			STRING			|e			-1			DARG			INT	|		|
+|			4			c			1			DCONST			INT			|f			-1			DARG			INT	|		|
+|			5			fun2			1			DPROC			INT			|g			-1			DARG			INT	|		|
+|			6			string			0			DTYPE			STRING			|h			-1			DARG			BOOL	|		|
+|			7			fun3			1			DPROC			BOOL			|i			-1			DARG			INT	|		|
+|			8			fun4			1			DPROC			VOID			|										|		|
+|			9			false			0			DCONST			BOOL			|										|		|
+|			10			int			0			DTYPE			INT			|										|		|
+|			11			boolean			0			DTYPE			BOOL			|										|		|
+|			12			true			0			DCONST			BOOL			|										|		|
+|			13			write			0			DPROC			VOID			|										|		|
+|			14			fun			1			DPROC			INT			|										|		|
 +-----------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------+---------------+
 Current Level: 1
