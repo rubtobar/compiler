@@ -16,71 +16,76 @@
 3:13: tk_equal
 3:15: tk_digits: '6'
 3:16: tk_pcoma
-5:1: tk_id: 'int'
-5:5: tk_id: 'fun'
-5:8: tk_openp
-5:9: tk_id: 'int'
-5:13: tk_id: 'd'
-5:14: tk_coma
-5:16: tk_id: 'int'
-5:20: tk_id: 'e'
-5:21: tk_closep
-5:22: tk_leftb
-6:2: tk_return
-6:9: tk_digits: '0'
-6:10: tk_pcoma
-7:1: tk_rightb
-9:1: tk_id: 'int'
-9:5: tk_id: 'fun2'
-9:9: tk_openp
-9:10: tk_id: 'int'
-9:14: tk_id: 'f'
-9:15: tk_coma
-9:17: tk_id: 'int'
-9:21: tk_id: 'g'
-9:22: tk_closep
-9:23: tk_leftb
-10:2: tk_return
-10:9: tk_digits: '0'
-10:10: tk_pcoma
-11:1: tk_rightb
-13:1: tk_id: 'boolean'
-13:9: tk_id: 'fun3'
-13:13: tk_openp
-13:14: tk_id: 'boolean'
-13:22: tk_id: 'h'
-13:23: tk_closep
-13:24: tk_leftb
-14:2: tk_return
-14:9: tk_id: 'false'
-14:14: tk_pcoma
-15:1: tk_rightb
-17:1: tk_id: 'void'
-17:6: tk_id: 'fun4'
-17:10: tk_openp
-17:11: tk_id: 'int'
-17:15: tk_id: 'i'
-17:16: tk_closep
-17:17: tk_leftb
+6:1: tk_id: 'string'
+6:8: tk_id: 'str'
+6:12: tk_equal
+6:14: tk_string: 'holasoyunstring'
+6:31: tk_pcoma
+8:1: tk_id: 'int'
+8:5: tk_id: 'fun'
+8:8: tk_openp
+8:9: tk_id: 'int'
+8:13: tk_id: 'd'
+8:14: tk_coma
+8:16: tk_id: 'int'
+8:20: tk_id: 'e'
+8:21: tk_closep
+8:22: tk_leftb
+9:2: tk_return
+9:9: tk_digits: '0'
+9:10: tk_pcoma
+10:1: tk_rightb
+12:1: tk_id: 'int'
+12:5: tk_id: 'fun2'
+12:9: tk_openp
+12:10: tk_id: 'int'
+12:14: tk_id: 'f'
+12:15: tk_coma
+12:17: tk_id: 'int'
+12:21: tk_id: 'g'
+12:22: tk_closep
+12:23: tk_leftb
+13:2: tk_return
+13:9: tk_digits: '0'
+13:10: tk_pcoma
+14:1: tk_rightb
+16:1: tk_id: 'boolean'
+16:9: tk_id: 'fun3'
+16:13: tk_openp
+16:14: tk_id: 'boolean'
+16:22: tk_id: 'h'
+16:23: tk_closep
+16:24: tk_leftb
+17:2: tk_return
+17:9: tk_id: 'false'
+17:14: tk_pcoma
 18:1: tk_rightb
-26:1: tk_main
-26:6: tk_leftb
-27:2: tk_id: 'int'
-27:6: tk_id: 'x'
-27:7: tk_pcoma
-28:2: tk_id: 'int'
-28:6: tk_id: 'y'
-28:7: tk_pcoma
-29:2: tk_id: 'int'
-29:6: tk_id: 'z'
-29:7: tk_pcoma
-30:2: tk_id: 'read'
-30:6: tk_openp
-30:7: tk_closep
-30:8: tk_pcoma
-31:2: tk_id: 'write'
-31:7: tk_openp
-31:8: tk_string: 'asd'
-31:13: tk_closep
-31:14: tk_pcoma
-32:1: tk_rightb
+20:1: tk_id: 'void'
+20:6: tk_id: 'fun4'
+20:10: tk_openp
+20:11: tk_id: 'int'
+20:15: tk_id: 'i'
+20:16: tk_closep
+20:17: tk_leftb
+21:1: tk_rightb
+29:1: tk_main
+29:6: tk_leftb
+30:2: tk_id: 'int'
+30:6: tk_id: 'x'
+30:7: tk_pcoma
+31:2: tk_id: 'int'
+31:6: tk_id: 'y'
+31:7: tk_pcoma
+32:2: tk_id: 'int'
+32:6: tk_id: 'z'
+32:7: tk_pcoma
+33:2: tk_id: 'read'
+33:6: tk_openp
+33:7: tk_closep
+33:8: tk_pcoma
+34:2: tk_id: 'write'
+34:7: tk_openp
+34:8: tk_string: 'asd'
+34:13: tk_closep
+34:14: tk_pcoma
+35:1: tk_rightb

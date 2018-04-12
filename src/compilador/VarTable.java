@@ -27,11 +27,10 @@ public class VarTable {
             this.size = size;
             this.offset = offset;
             this.name = name;
-            
         }
-        
+
         @Override
-        public String toString(){
+        public String toString() {
             return proc + "\t\t" + size + "\t\t" + offset + "\t\t" + name;
         }
 
@@ -39,16 +38,34 @@ public class VarTable {
 
     HashMap<Integer, Balde> varTable;
 
+    /*Tabla con los offsets de cada variable, al entrar
+    una variable nueva, el valor aumentara para cada programa
+    -Los offsets seran siempre positivos, se cambiara el signo en 
+    funcion de si son var de retorno, argumentos o variables*/
+    HashMap<Integer, Integer> offsets;
+
     public VarTable() {
         this.varTable = new HashMap<>();
+        this.offsets = new HashMap<>();
     }
 
-    public void addVar(int id, int proc, int size, int offset, String name) {
-        varTable.put(id, new Balde(proc, size, offset, name));
+    public void addVar(int id, int proc, int size, String name) {
+        int offset = offsets.getOrDefault(proc, -1);
+        if (offset == -1) {
+            //el offset para este programa no esta creado
+            offsets.put(proc, size);
+            offset = size;
+        } else {
+            /*el offset ya existe, lo aumentamos para dejar cabida a la
+            nueva variable*/
+            offset = offset + size;
+            offsets.replace(proc, offset);
+        }
+        varTable.put(id, new Balde(proc, offset, offset, name));
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         String str = "ID\t\tPROC\t\tSIZE\t\tOFFSET\t\tVALUE\n";
         str = str + "-----------------------------------------------------------------------------------------------------\n";
         for (int id : this.varTable.keySet()) {
@@ -56,7 +73,7 @@ public class VarTable {
         }
         return str;
     }
-    
+
     public void printOnFile() {
         PrintWriter writer;
         try {

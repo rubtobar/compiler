@@ -133,6 +133,7 @@ public class SymbolTable {
                 //depende de la cantidad de caracteres
                 //en nuestro caso 1 byte por caracter y 1 para el final de linea
                 size = id.length() + 1;
+                System.out.println(id);
                 if ("read".equals(id)) {
                     size = READ_BUFFER;  //en caso de ser un read, retorna un buffer
                     //de loectura de 50 bytes
@@ -146,11 +147,11 @@ public class SymbolTable {
         switch (d.dt) {
             case DVAR:
                 // id,programa,size,offset,value
-                vt.addVar(descriptionTable.get(id).id, currentProcId, size, 0, id);
+                vt.addVar(descriptionTable.get(id).id, currentProcId, size, id);
                 break;
             case DCONST:
                 // id,programa,size,offset,value
-                vt.addVar(descriptionTable.get(id).id, currentProcId, size, 0, id);
+                vt.addVar(descriptionTable.get(id).id, currentProcId, size, id);
                 break;
             case DPROC:
                 // añadimos proc a la tabla de procs

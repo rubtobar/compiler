@@ -12,9 +12,10 @@
 |			8			fun4			1			DPROC			VOID			|										|		|
 |			9			false			0			DCONST			BOOL			|										|		|
 |			10			int			0			DTYPE			INT			|										|		|
-|			11			boolean			0			DTYPE			BOOL			|										|		|
-|			12			true			0			DCONST			BOOL			|										|		|
-|			13			write			0			DPROC			VOID			|										|		|
-|			14			fun			1			DPROC			INT			|										|		|
+|			11			str			1			DVAR			STRING			|										|		|
+|			12			boolean			0			DTYPE			BOOL			|										|		|
+|			13			true			0			DCONST			BOOL			|										|		|
+|			14			write			0			DPROC			VOID			|										|		|
+|			15			fun			1			DPROC			INT			|										|		|
 +-----------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------+---------------+
 Current Level: 1
