@@ -1,0 +1,2 @@
+java -jar java-cup-11b.jar -interface -parser Parser syntax.cup
+./dot -Tpng C:\Users\Ruben\Desktop\gr.dot -o C:\Users\Ruben\Desktop\gr.png

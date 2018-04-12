@@ -1,0 +1,12 @@
+8:12: SYNTAX ERROR:   Not a sentence
+
+9:1: SEMANTIC ERROR:
+> }
+Missing return statement in function 'imprimir'
+
+11:27: SYNTAX ERROR:   Bad argument declaration
+
+18:3: SEMANTIC ERROR:
+> 		imprimir();
+Too few arguments to function 'imprimir'
+

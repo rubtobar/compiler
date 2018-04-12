@@ -1,0 +1,6 @@
+19:8: SEMANTIC ERROR: Unexpected argument type. Expected: INT, Found: BOOL
+> 	suma(a,true);
+
+20:7: SEMANTIC ERROR: Unexpected argument type. Expected: INT, Found: STRING
+> 	resta("asd",b);
+

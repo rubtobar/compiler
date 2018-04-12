@@ -1,0 +1,1 @@
+dotimgcreator\bin\./dot -Tpng DERIVATION_TREE.dot -o DERIVATION_TREE.png
