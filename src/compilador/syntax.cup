@@ -89,29 +89,29 @@ INIT ::=
 		{: 
 		try{
 		Description d = new TypeDescription(TSB.BOOL, 1, 0, 1);
-		st.add("boolean", d, true);
+		st.add("boolean", d, true, null);
 
 		d = new ConstDescription(TSB.BOOL);
-		st.add("true", d, true);
-		st.add("false", d, true);
+		st.add("true", d, true, null);
+		st.add("false", d, true, null);
 
 		d = new TypeDescription(TSB.INT, 4, Integer.MIN_VALUE, Integer.MAX_VALUE);
-		st.add("int", d, true);
+		st.add("int", d, true, null);
 
 		d = new TypeDescription(TSB.VOID, 0, 0, 0);
-		st.add("void", d, true);
+		st.add("void", d, true, null);
 
 		d = new TypeDescription(TSB.STRING, 0, 0, 0);
-		st.add("string", d, true);
+		st.add("string", d, true, null);
 
 		d = new ProcDescription(TSB.VOID);
-		st.add("write", d, true);
+		st.add("write", d, true, null);
 		
 		d = new ArgDescription("write", TSB.STRING);
 		st.addParameter("write", "value", (ArgDescription) d);
 
 		d = new ProcDescription(TSB.STRING);
-		st.add("read", d, true);
+		st.add("read", d, true, null);
 		} catch (AlreadyDeclaredException ex) {
             Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ReservedSymbolException ex) {
@@ -185,7 +185,7 @@ HEAD ::=
 	        while (arg != 0 ){
 	            aux = st.getParameter(arg);
 	            try {
-	                st.add(aux.lexema, new VarDescription(aux.d.tsb), false);
+	                st.add(aux.lexema, new VarDescription(aux.d.tsb), false, null);
 	            } catch (AlreadyDeclaredException ex) {
 	                Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
 	            } catch (ReservedSymbolException ex) {
@@ -205,7 +205,7 @@ HEAD ::=
             errPrinter.nonExistingType(tipus.line, tipus.column, tipus.getAtribut());
         } else {
         	try {
-	            st.add(nom.getAtribut(), new ProcDescription(aux.d.tsb), false);
+	            st.add(nom.getAtribut(), new ProcDescription(aux.d.tsb), false, null);
 	        } catch (AlreadyDeclaredException ex) {
                 errPrinter.alreadyDeclaredFunction(nom.line, nom.column, nom.getAtribut());
 	        } catch (ReservedSymbolException ex) {
@@ -232,7 +232,7 @@ CONT_HEAD ::=
             errPrinter.nonExistingType(tP.line, tP.column, tP.getAtribut());
         } 
     	try {
-        	st.add(nP.getAtribut(), new ProcDescription(aux.d.tsb), false);
+        	st.add(nP.getAtribut(), new ProcDescription(aux.d.tsb), false, null);
         } catch (AlreadyDeclaredException ex) {
             errPrinter.alreadyDeclaredFunction(nP.line, nP.column, nP.getAtribut());
         } catch (ReservedSymbolException ex) {
@@ -402,7 +402,15 @@ DECL ::=
                 errPrinter.unexpectedValueType(nom.line, nom.column, vt.result.toString(), aux.d.tsb.toString());
 	        } 
 	        try {
-            	st.add(nom.getAtribut(), new VarDescription(aux.d.tsb), false);
+	        	String str = null;
+	        	if (aux.d.tsb == TSB.STRING) {
+            		try{
+                		str = (String) vt.expr.logExpr.arExpr.value.value;
+           			}catch (NullPointerException npe){
+                		//en este caso la declaración no tiene el string definido
+            		}
+        		}
+            	st.add(nom.getAtribut(), new VarDescription(aux.d.tsb), false, str);
             	if (vt.expr != null){
             		RESULT = new NodeDecl(vt,nom.getAtribut(),null);
             	} else {
@@ -429,7 +437,15 @@ CONST_DECL	::=
             errPrinter.unexpectedValueType(eq.line, eq.column, et.result.toString(), aux.d.tsb.toString());
         } else {
             try {
-            	st.add(nom.getAtribut(), new ConstDescription(aux.d.tsb), false);
+            	String str = null;
+	        	if (aux.d.tsb == TSB.STRING) {
+            		try{
+                		str = (String) et.expr.logExpr.arExpr.value.value;
+           			}catch (NullPointerException npe){
+                		//en este caso la declaración no tiene el string definido
+            		}
+        		}
+            	st.add(nom.getAtribut(), new ConstDescription(aux.d.tsb), false, str);
             	RESULT = new NodeConstDecl(et,null);
             } catch (AlreadyDeclaredException ex) {
                 errPrinter.alreadyDeclaredVariable(nom.line, nom.column, nom.getAtribut());

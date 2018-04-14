@@ -7,6 +7,7 @@ package compilador;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -61,17 +62,26 @@ public class VarTable {
             offset = offset + size;
             offsets.replace(proc, offset);
         }
-        varTable.put(id, new Balde(proc, offset, offset, name));
+        varTable.put(id, new Balde(proc, size, offset, name));
     }
 
     @Override
     public String toString() {
-        String str = "ID\t\tPROC\t\tSIZE\t\tOFFSET\t\tVALUE\n";
-        str = str + "-----------------------------------------------------------------------------------------------------\n";
+        String str[] = new String[varTable.size()];
+        String str1 = "ID\t\tPROC\t\tSIZE\t\tOFFSET\t\tVARNAME\n"
+        + "----------------------------------------------------------------------\n";
+        //kuytckyuytc
+        int i = 0;
         for (int id : this.varTable.keySet()) {
-            str = str + id + "\t\t" + varTable.get(id) + "\n";
+            str[i] = String.format("%03d", id) + "\t\t" + varTable.get(id) + "\n";
+            i++;
         }
-        return str;
+        Arrays.sort(str);
+        String row = "";
+        for (String string : str) {
+            row = row + string;
+        }
+        return str1 + row;
     }
 
     public void printOnFile() {

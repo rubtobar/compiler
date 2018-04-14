@@ -7,6 +7,7 @@ package compilador;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -33,7 +34,7 @@ public class ProcTable {
         
         @Override
         public String toString(){     
-            return name + "\t\t" + label + "\t\t" + depth + "\t\t" + nparam + "\t\t" + localSize + "\t\t" + name;
+            return name + "\t\t" + label + "\t\t" + depth + "\t\t" + nparam + "\t\t" + localSize;
         }
     }
 
@@ -49,12 +50,21 @@ public class ProcTable {
     
         @Override
     public String toString(){
-        String str = "ID\t\tNAME\t\tLABEL\t\tPROF\t\tNPARAM\t\tL.SIZE\t\tNAME\n";
-        str = str + "-----------------------------------------------------------------------------------------------------------------------------------------------------\n";
+        String str[] = new String[procTable.size()];
+        String str1 = "ID\t\tNAME\t\tLABEL\t\tPROF\t\tNPARAM\t\tL.SIZE\n"
+        + "-----------------------------------------------------------------------------------------------------------------------------------------------------\n";
+
+        int i = 0;
         for (int id : this.procTable.keySet()) {
-            str = str + id + "\t\t" + procTable.get(id) + "\n";
+            str[i] = String.format("%03d", id) + "\t\t" + procTable.get(id) + "\n";
+            i++;
         }
-        return str;
+        Arrays.sort(str);
+        String row = "";
+        for (String string : str) {
+            row = row + string;
+        }
+        return str1 + row;
     }
     
     public void printOnFile() {

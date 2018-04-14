@@ -2,10 +2,10 @@ package compilador.Nodes;
 
 public class NodeValue extends Node {
 
-    NodeExpr expr;
-    NodeCall call;
-    Integer id;
-    Object value;
+    public NodeExpr expr;
+    public NodeCall call;
+    public Integer id;
+    public Object value;
 
     public NodeValue(NodeExpr expr, NodeCall call,
             Integer id, Object value, Object result) {

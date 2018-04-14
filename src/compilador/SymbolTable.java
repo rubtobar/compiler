@@ -19,7 +19,7 @@ import java.util.TreeSet;
  */
 public class SymbolTable {
 
-    private final int READ_BUFFER = 50;
+    private final int STRING_BUFFER = 32;
     private int currentLevel;
     private final ArrayList<Integer> scopeTable;
     private final ArrayList<TblSymbol> expansionTable;
@@ -92,7 +92,7 @@ public class SymbolTable {
         return descriptionTable.get(id);
     }
 
-    public int add(String id, Description d, boolean reserved)
+    public int add(String id, Description d, boolean reserved, String str)
             throws AlreadyDeclaredException, ReservedSymbolException {
 
         /*
@@ -132,11 +132,16 @@ public class SymbolTable {
             case STRING:
                 //depende de la cantidad de caracteres
                 //en nuestro caso 1 byte por caracter y 1 para el final de linea
-                size = id.length() + 1;
-                System.out.println(id);
-                if ("read".equals(id)) {
-                    size = READ_BUFFER;  //en caso de ser un read, retorna un buffer
-                    //de loectura de 50 bytes
+                if (str != null) {
+                    size = str.length() + 1;
+                }else{
+                    size = 0;
+                }
+                if ("read".equals(id) || d.dt == DescriptionType.DVAR) {
+                    /*en caso de ser un read, o de ser una variable
+                    que podra ser reasignada con otro string, retorna un buffer
+                    de loectura de 50 bytes*/
+                    size = STRING_BUFFER;  
                 }
                 break;
             case VOID:

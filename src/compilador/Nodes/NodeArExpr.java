@@ -2,8 +2,8 @@ package compilador.Nodes;
 
 public class NodeArExpr extends Node {
 
-    NodeArExpr arExpr;
-    NodeValue value;
+    public NodeArExpr arExpr;
+    public NodeValue value;
 
     public NodeArExpr(NodeArExpr arExpr, NodeValue value, Object result) {
         super(result);

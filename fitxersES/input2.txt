@@ -3,7 +3,11 @@ const int b = 4;
 const int c = 6;
 
 
-string str = "holasoyunstring";
+const string str = "holasoyunstring";
+
+string str2;
+
+string str3 = "hola";
 
 int fun(int d, int e){
 	return 0;

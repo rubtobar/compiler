@@ -1,8 +1,8 @@
 package compilador.Nodes;
 
     public class NodeExpr extends Node{
-        NodeExpr expr;
-        NodeLogExpr logExpr;
+        public NodeExpr expr;
+        public NodeLogExpr logExpr;
 
         public NodeExpr(NodeExpr expr, NodeLogExpr logExpr, Object result) {
             super(result);
