@@ -364,9 +364,8 @@ class CUP$Parser$actions {
 		Description d = new TypeDescription(TSB.BOOL, 1, 0, 1);
 		st.add("boolean", d, true, null);
 
-		d = new ConstDescription(TSB.BOOL);
-		st.add("true", d, true, null);
-		st.add("false", d, true, null);
+		st.add("true", new ConstDescription(TSB.BOOL, true), true, null);
+		st.add("false",  new ConstDescription(TSB.BOOL, false), true, null);
 
 		d = new TypeDescription(TSB.INT, 4, Integer.MIN_VALUE, Integer.MAX_VALUE);
 		st.add("int", d, true, null);
@@ -994,12 +993,12 @@ class CUP$Parser$actions {
             	String str = null;
 	        	if (aux.d.tsb == TSB.STRING) {
             		try{
-                		str = (String) et.logExpr.arExpr.value.value;
+                		str = (String) et.expr.logExpr.arExpr.value.value;
            			}catch (NullPointerException npe){
                 		//en este caso la declaración no tiene el string definido
             		}
         		}
-            	st.add(nom.getAtribut(), new ConstDescription(aux.d.tsb), false, str);
+            	st.add(nom.getAtribut(), new ConstDescription(aux.d.tsb, et), false, str);
             	RESULT = new NodeConstDecl(et,null);
             } catch (AlreadyDeclaredException ex) {
                 errPrinter.alreadyDeclaredVariable(nom.line, nom.column, nom.getAtribut());
@@ -1316,7 +1315,11 @@ class CUP$Parser$actions {
 		if (aux == null || (aux.d.dt != DescriptionType.DVAR && aux.d.dt != DescriptionType.DCONST)) {
             errPrinter.undeclaredVariable(id.line, id.column, id.getAtribut());
         } else {
-        	RESULT = new NodeValue(null, null, aux.id, null, aux.d.tsb);
+        	if (aux.d.dt == DescriptionType.DCONST) {
+        		RESULT = new NodeValue(null, null, null, ((ConstDescription)aux.d).constValue, aux.d.tsb);
+        	} else {
+        		RESULT = new NodeValue(null, null, aux.id, null, aux.d.tsb);
+        	}
         }
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("VALUE",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);

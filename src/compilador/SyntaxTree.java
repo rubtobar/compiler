@@ -5,9 +5,6 @@
  */
 package compilador;
 
-import compilador.Nodes.NodeConstDecl;
-import compilador.Nodes.NodeDecl;
-import compilador.Nodes.NodeDecls;
 import compilador.Nodes.NodeProg;
 
 /**
@@ -17,8 +14,8 @@ import compilador.Nodes.NodeProg;
 public class SyntaxTree {
 
     private NodeProg root;
-    private VarTable vt;
-    private ProcTable pt;
+    private final VarTable vt;
+    private final ProcTable pt;
     
     public SyntaxTree() {
         this.vt = new VarTable();
@@ -40,18 +37,4 @@ public class SyntaxTree {
     void generateCode() {
         root.generateCode();
     }
-
-    /*private void generateDecls(NodeDecls p) {
-        if (p.decls != null) {
-            p.decls.generateCode();
-        }
-        if (p.decl != null) {
-            if (p.decl instanceof NodeDecl) {
-                ((NodeDecl) p.decl).generateCode();
-            } else if (p.decl instanceof NodeConstDecl) {
-                ((NodeConstDecl) p.decl).generateCode();
-            }
-        }
-    }*/
-
 }
