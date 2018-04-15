@@ -19,12 +19,14 @@ import java.util.TreeSet;
  */
 public class SymbolTable {
 
+    private final int STRING_BUFFER = 32;
     private int currentLevel;
     private final ArrayList<Integer> scopeTable;
     private final ArrayList<TblSymbol> expansionTable;
     private final HashMap<String, TblSymbol> descriptionTable;
     private VarTable vt;
     private ProcTable pt;
+    private int currentProcId;
 
     public SymbolTable(VarTable vt, ProcTable pt) {
         this.expansionTable = new ArrayList<>();
@@ -36,6 +38,7 @@ public class SymbolTable {
         currentLevel = 1;
         this.vt = vt;
         this.pt = pt;
+        currentProcId = 0;  //las variables con proc=0 pertenecen al main 
     }
 
     public void reset() {
@@ -79,6 +82,10 @@ public class SymbolTable {
         for (String key : keys_to_remove) {
             descriptionTable.remove(key);
         }
+        
+        /*al salir de un bloque quiere decir que salimos de la funcion
+        que hemos declarado, por tanto reiniciamos el current proc ID*/
+        currentProcId = 0;
     }
 
     public TblSymbol get(String id) {
@@ -132,13 +139,23 @@ public class SymbolTable {
         switch (d.dt) {
             case DVAR:
                 // id,programa,size,offset,value
-                vt.addVar(descriptionTable.get(id).id, -1, size, id);
+                vt.addVar(descriptionTable.get(id).id, currentProcId, size, id);
+                break;
+            case DCONST:
+                // id,programa,size,offset,value
+                vt.addVar(descriptionTable.get(id).id, currentProcId, size, id);
                 break;
             case DPROC:
+                // añadimos proc a la tabla de procs
+                // modificamos los valores de las variables que 
+                // hemos encontrado al encontrar el prog al que pertenecen
                 // String name, String label, int prof, int nparam, int localSize
-                pt.add(descriptionTable.get(id).id, id, -1, -1, -1, 0);
-                break;
-            default:
+                pt.add(descriptionTable.get(id).id, id, null, 0, 0, size);
+                /*En caso de que sean funciones reservadas no cambiamos el
+                corrent proc durante las declaraciones*/
+                if (!"write".equals(id) && !"read".equals(id)) {
+                    currentProcId = descriptionTable.get(id).id;
+                }
                 break;
         }
 
