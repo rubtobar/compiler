@@ -1,7 +1,8 @@
 package compilador.Nodes;
 
     public class NodeConstDecl extends Node{
-        NodeExpr expr;
+        
+        private final NodeExpr expr;
 
         public NodeConstDecl(NodeExpr expr, Object result) {
             super(result);

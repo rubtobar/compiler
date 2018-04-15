@@ -3,7 +3,7 @@ package compilador.Nodes;
 //sin declaracion de la varia
 public class NodeAssignation extends Node {
 
-    NodeExpr expr;
+    private final NodeExpr expr;
 
     public NodeAssignation(NodeExpr expr, Object result) {
         super(result);

@@ -4,7 +4,8 @@ package compilador.Nodes;
 
 
     public class NodeAssign extends Node{
-        public NodeExpr expr;
+        
+        private final NodeExpr expr;
 
         public NodeAssign(NodeExpr expr, Object result) {
             super(result);

@@ -93,7 +93,6 @@ public class VarTable {
         } catch (FileNotFoundException ex) {
             System.err.println("FALLO DE IMPRESIÓN");
         }
-
     }
 
 }

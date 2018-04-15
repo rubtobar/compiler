@@ -1,7 +1,8 @@
 package compilador.Nodes;
 
     public class NodeCall extends Node{
-        NodeContCall contCall;
+        
+        private final NodeContCall contCall;
 
         public NodeCall(NodeContCall contCall, Object result) {
             super(result);

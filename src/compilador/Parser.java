@@ -11,7 +11,6 @@ import compilador.SymbolTable.Description.DescriptionType;
 import compilador.SymbolTable.Description.TSB;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java_cup.runtime.*;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -362,33 +361,29 @@ class CUP$Parser$actions {
 		 
 		try{
 		Description d = new TypeDescription(TSB.BOOL, 1, 0, 1);
-		st.add("boolean", d, true, null);
+		st.add("boolean", d, true);
 
-		st.add("true", new ConstDescription(TSB.BOOL, true), true, null);
-		st.add("false",  new ConstDescription(TSB.BOOL, false), true, null);
+		st.add("true", new ConstDescription(TSB.BOOL, true), true);
+		st.add("false",  new ConstDescription(TSB.BOOL, false), true);
 
 		d = new TypeDescription(TSB.INT, 4, Integer.MIN_VALUE, Integer.MAX_VALUE);
-		st.add("int", d, true, null);
+		st.add("int", d, true);
 
 		d = new TypeDescription(TSB.VOID, 0, 0, 0);
-		st.add("void", d, true, null);
+		st.add("void", d, true);
 
-		d = new TypeDescription(TSB.STRING, 0, 0, 0);
-		st.add("string", d, true, null);
+		d = new TypeDescription(TSB.STRING, 32, 0, 0);
+		st.add("string", d, true);
 
 		d = new ProcDescription(TSB.VOID);
-		st.add("write", d, true, null);
+		st.add("write", d, true);
 		
 		d = new ArgDescription("write", TSB.STRING);
 		st.addParameter("write", "value", (ArgDescription) d);
 
 		d = new ProcDescription(TSB.STRING);
-		st.add("read", d, true, null);
-		} catch (AlreadyDeclaredException ex) {
-            Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ReservedSymbolException ex) {
-            Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoProcGivenException ex) {
+		st.add("read", d, true);
+		} catch (AlreadyDeclaredException | ReservedSymbolException | NoProcGivenException ex) {
             Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
         }
 		
@@ -526,7 +521,7 @@ class CUP$Parser$actions {
 	        while (arg != 0 ){
 	            aux = st.getParameter(arg);
 	            try {
-	                st.add(aux.lexema, new VarDescription(aux.d.tsb), false, null);
+	                st.add(aux.lexema, new VarDescription(aux.d.tsb), false);
 	            } catch (AlreadyDeclaredException ex) {
 	                Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
 	            } catch (ReservedSymbolException ex) {
@@ -558,7 +553,7 @@ class CUP$Parser$actions {
             errPrinter.nonExistingType(tipus.line, tipus.column, tipus.getAtribut());
         } else {
         	try {
-	            st.add(nom.getAtribut(), new ProcDescription(aux.d.tsb), false, null);
+	            st.add(nom.getAtribut(), new ProcDescription(aux.d.tsb), false);
 	        } catch (AlreadyDeclaredException ex) {
                 errPrinter.alreadyDeclaredFunction(nom.line, nom.column, nom.getAtribut());
 	        } catch (ReservedSymbolException ex) {
@@ -610,7 +605,7 @@ class CUP$Parser$actions {
             errPrinter.nonExistingType(tP.line, tP.column, tP.getAtribut());
         } 
     	try {
-        	st.add(nP.getAtribut(), new ProcDescription(aux.d.tsb), false, null);
+        	st.add(nP.getAtribut(), new ProcDescription(aux.d.tsb), false);
         } catch (AlreadyDeclaredException ex) {
             errPrinter.alreadyDeclaredFunction(nP.line, nP.column, nP.getAtribut());
         } catch (ReservedSymbolException ex) {
@@ -939,20 +934,8 @@ class CUP$Parser$actions {
                 errPrinter.unexpectedValueType(nom.line, nom.column, vt.result.toString(), aux.d.tsb.toString());
 	        } 
 	        try {
-	        	String str = null;
-	        	if (aux.d.tsb == TSB.STRING) {
-            		try{
-                		str = (String) vt.expr.logExpr.arExpr.value.value;
-           			}catch (NullPointerException npe){
-                		//en este caso la declaración no tiene el string definido
-            		}
-        		}
-            	st.add(nom.getAtribut(), new VarDescription(aux.d.tsb), false, str);
-            	if (vt.expr != null){
-            		RESULT = new NodeDecl(vt,nom.getAtribut(),null);
-            	} else {
-            		RESULT = new NodeDecl(null,nom.getAtribut(),null);
-            	}
+            	int id = st.add(nom.getAtribut(), new VarDescription(aux.d.tsb), false);
+            	RESULT = new NodeDecl(vt, id, null);
             } catch (AlreadyDeclaredException ex) {
                 errPrinter.alreadyDeclaredVariable(nom.line, nom.column, nom.getAtribut());
             } catch (ReservedSymbolException ex) {
@@ -990,15 +973,7 @@ class CUP$Parser$actions {
             errPrinter.unexpectedValueType(eq.line, eq.column, et.result.toString(), aux.d.tsb.toString());
         } else {
             try {
-            	String str = null;
-	        	if (aux.d.tsb == TSB.STRING) {
-            		try{
-                		str = (String) et.expr.logExpr.arExpr.value.value;
-           			}catch (NullPointerException npe){
-                		//en este caso la declaración no tiene el string definido
-            		}
-        		}
-            	st.add(nom.getAtribut(), new ConstDescription(aux.d.tsb, et), false, str);
+            	st.add(nom.getAtribut(), new ConstDescription(aux.d.tsb, et), false);
             	RESULT = new NodeConstDecl(et,null);
             } catch (AlreadyDeclaredException ex) {
                 errPrinter.alreadyDeclaredVariable(nom.line, nom.column, nom.getAtribut());
@@ -1266,7 +1241,7 @@ class CUP$Parser$actions {
 		} else if (vt.result != TSB.INT){ 
             errPrinter.unexpectedValueType(op.line, op.column, vt.result.toString(), TSB.INT.toString());
         } else {
-        	RESULT = new NodeArExpr(et,vt,TSB.INT);
+        	RESULT = new NodeArExpr(et, vt, op.getAtribut(), TSB.INT);
 		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("AR_EXPR",17, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1282,7 +1257,7 @@ class CUP$Parser$actions {
 		NodeValue vt = (NodeValue)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
 		if (vt != null) {
-			RESULT = new NodeArExpr(null,vt,vt.result); 
+			RESULT = new NodeArExpr(null, vt, null, vt.result); 
 		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("AR_EXPR",17, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);

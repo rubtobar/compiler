@@ -14,12 +14,14 @@ import compilador.Nodes.NodeProg;
 public class SyntaxTree {
 
     private NodeProg root;
-    private final VarTable vt;
-    private final ProcTable pt;
+    public static VarTable vt;
+    public static ProcTable pt;
+    public static ThreeAddrCode codeGen;
     
     public SyntaxTree() {
-        this.vt = new VarTable();
-        this.pt = new ProcTable();
+        vt = new VarTable();
+        pt = new ProcTable();
+        codeGen = new ThreeAddrCode();
     }
 
     public void setRoot(NodeProg root) {
