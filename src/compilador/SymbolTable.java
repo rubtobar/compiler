@@ -25,7 +25,7 @@ public class SymbolTable {
     private final HashMap<String, TblSymbol> descriptionTable;
     private VarTable vt;
     private ProcTable pt;
-    private int currentProcId;
+    int currentProcId;
 
     public SymbolTable(VarTable vt, ProcTable pt) {
         this.expansionTable = new ArrayList<>();
@@ -81,7 +81,7 @@ public class SymbolTable {
         for (String key : keys_to_remove) {
             descriptionTable.remove(key);
         }
-        
+
         /*al salir de un bloque quiere decir que salimos de la funcion
         que hemos declarado, por tanto reiniciamos el current proc ID*/
         currentProcId = 0;
@@ -132,7 +132,7 @@ public class SymbolTable {
                 if (d.dt == DescriptionType.DVAR || id.equals("read")) {
                     size = ((TypeDescription) descriptionTable.get("string").d).size;
                 }
-                
+
                 break;
         }
 
@@ -162,6 +162,26 @@ public class SymbolTable {
         //retornamos el ID de la nueva var para recuperarla en
         //la tabla de var durante la generacion de codigo
         return descriptionTable.get(id).id;
+    }
+
+    public int addTemp(Description.TSB tsb) {
+        int size = 0;
+        int id = IdCount.count++;
+        switch (tsb) {
+            case BOOL:
+                //se debe declarar el tipo "boolean" antes que cualquier var booleana
+                size = ((TypeDescription) descriptionTable.get("boolean").d).size;
+                break;
+            case INT:
+                //se debe declarar el tipo "int" antes que cualquier var int
+                size = ((TypeDescription) descriptionTable.get("int").d).size;
+                break;
+            case STRING:
+                size = ((TypeDescription) descriptionTable.get("string").d).size;
+                break;
+        }
+        vt.addVar(id, currentProcId, size, "t" + id);
+        return id;
     }
 
     public void addParameter(String idproc, String idparam, ArgDescription d)
@@ -278,7 +298,7 @@ public class SymbolTable {
     public static class ConstDescription extends Description {
 
         public Object constValue;
-        
+
         public ConstDescription(Description.TSB tsb, Object constValue) {
             this.dt = DescriptionType.DCONST;
             this.tsb = tsb;

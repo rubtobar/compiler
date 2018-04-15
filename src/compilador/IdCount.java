@@ -10,5 +10,5 @@ package compilador;
  * @author Ruben
  */
 public class IdCount {
-    static int count = 0;
+    public static int count = 0;
 }

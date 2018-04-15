@@ -14,9 +14,9 @@ import compilador.Nodes.NodeProg;
 public class SyntaxTree {
 
     private NodeProg root;
-    final private VarTable vt;
-    final private ProcTable pt;
-    final private ThreeAddrCode codeGen;
+    final VarTable vt;
+    final ProcTable pt;
+    final ThreeAddrCode codeGen;
     
     public SyntaxTree() {
         vt = new VarTable();

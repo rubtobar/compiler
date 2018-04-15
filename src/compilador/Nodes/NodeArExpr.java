@@ -1,7 +1,7 @@
 package compilador.Nodes;
 
+import compilador.IdCount;
 import compilador.ProcTable;
-import compilador.SyntaxTree;
 import compilador.ThreeAddrCode;
 import compilador.ThreeAddrCode.Operand;
 import compilador.VarTable;
@@ -24,8 +24,9 @@ public class NodeArExpr extends Node {
             arExpr.generateCode(vt,pt,gen);
         }
         value.generateCode(vt,pt,gen);
-        //int id = SyntaxTree.vt.addVar();
+        
+        //int id = vt.addVar(IdCount.count++, proc, 0, op);
         //this.result = id;
-        //SyntaxTree.codeGen.add(Operand.OR, (Integer) arExpr.result, (Integer) value.result, 0);
+        gen.add(Operand.OR, (Integer) arExpr.result, (Integer) value.result, 0);
     }
 }
