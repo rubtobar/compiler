@@ -7,8 +7,9 @@ import compilador.VarTable;
     public class NodeExpr extends Node{
         public NodeExpr expr;
         public NodeLogExpr logExpr;
-
-        public NodeExpr(NodeExpr expr, NodeLogExpr logExpr, Object result) {
+        public Integer tid;
+        
+        public NodeExpr(NodeExpr expr, NodeLogExpr logExpr, Integer tid, Object result) {
             super(result);
             this.expr = expr;
             this.logExpr = logExpr;

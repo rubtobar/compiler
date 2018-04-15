@@ -15,6 +15,10 @@ import compilador.VarTable;
         
         public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen){
             if (contCall != null) contCall.generateCode(vt,pt,gen);
+            /*for(param : contCall.params){
+                gen.add(Operand.PARAM, 0, 0, param);
+            }*/
+            //gen.add(Operand.CALL, 0, 0, np);
         }
         
     }

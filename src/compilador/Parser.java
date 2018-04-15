@@ -1153,7 +1153,8 @@ class CUP$Parser$actions {
 		} else if (vt.result != TSB.BOOL) {
             errPrinter.unexpectedValueType(op.line, op.column, vt.result.toString(), TSB.BOOL.toString());
         } else {
-        	RESULT = new NodeExpr(et,vt,TSB.BOOL);
+        	int tid = st.addTemp(TSB.BOOL);
+        	RESULT = new NodeExpr(et,vt,tid,TSB.BOOL);
         }
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("EXPR",15, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1169,7 +1170,7 @@ class CUP$Parser$actions {
 		NodeLogExpr vt = (NodeLogExpr)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
 		if (vt != null) {
-			RESULT = new NodeExpr(null, vt, vt.result);
+			RESULT = new NodeExpr(null, vt, vt.tid, vt.result);
 		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("EXPR",15, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1197,7 +1198,8 @@ class CUP$Parser$actions {
 		} else if (vt.result != TSB.INT){
             errPrinter.unexpectedValueType(op.line, op.column, vt.result.toString(), TSB.INT.toString());
         } else {
-        	RESULT = new NodeLogExpr(et,vt,TSB.BOOL);
+        	int tid = st.addTemp(TSB.BOOL);
+        	RESULT = new NodeLogExpr(et,vt,tid,op.getAtribut(),TSB.BOOL);
 		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("LOG_EXPR",16, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1213,7 +1215,7 @@ class CUP$Parser$actions {
 		NodeArExpr vt = (NodeArExpr)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
 			if (vt != null) {
-				RESULT = new NodeLogExpr(null,vt,vt.result);
+				RESULT = new NodeLogExpr(null,vt,vt.tid,null,vt.result);
 			}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("LOG_EXPR",16, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1241,7 +1243,8 @@ class CUP$Parser$actions {
 		} else if (vt.result != TSB.INT){ 
             errPrinter.unexpectedValueType(op.line, op.column, vt.result.toString(), TSB.INT.toString());
         } else {
-        	RESULT = new NodeArExpr(et, vt, op.getAtribut(), TSB.INT);
+            int tid = st.addTemp(TSB.INT);
+        	RESULT = new NodeArExpr(et, vt, op.getAtribut(), tid, TSB.INT);
 		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("AR_EXPR",17, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1257,7 +1260,7 @@ class CUP$Parser$actions {
 		NodeValue vt = (NodeValue)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
 		if (vt != null) {
-			RESULT = new NodeArExpr(null, vt, null, vt.result); 
+			RESULT = new NodeArExpr(null, vt, null, vt.id, vt.result); 
 		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("AR_EXPR",17, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1291,7 +1294,8 @@ class CUP$Parser$actions {
             errPrinter.undeclaredVariable(id.line, id.column, id.getAtribut());
         } else {
         	if (aux.d.dt == DescriptionType.DCONST) {
-        		RESULT = new NodeValue(null, null, null, ((ConstDescription)aux.d).constValue, aux.d.tsb);
+        		int tid = st.addTemp(aux.d.tsb);
+        		RESULT = new NodeValue(null, null, tid, ((ConstDescription)aux.d).constValue, aux.d.tsb);
         	} else {
         		RESULT = new NodeValue(null, null, aux.id, null, aux.d.tsb);
         	}
@@ -1309,7 +1313,8 @@ class CUP$Parser$actions {
 		int strright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token str = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
-		RESULT = new NodeValue(null, null, null, str.getAtribut(), TSB.STRING);
+		int tid = st.addTemp(TSB.STRING);
+		RESULT = new NodeValue(null, null, tid, str.getAtribut(), TSB.STRING);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("VALUE",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1325,7 +1330,8 @@ class CUP$Parser$actions {
 			
 		try{
 			Integer value = Integer.parseInt(dig.getAtribut());
-			RESULT = new NodeValue(null, null, null, value, TSB.INT);
+			int tid = st.addTemp(TSB.INT);
+			RESULT = new NodeValue(null, null, tid, value, TSB.INT);
 		}catch(NumberFormatException e){
             errPrinter.overflow(dig.line, dig.column, dig.getAtribut());
 		}

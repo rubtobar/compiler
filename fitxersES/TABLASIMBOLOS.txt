@@ -1,23 +1,16 @@
 +-----------------------------------------------------------------SYMBOL TABLE------------------------------------------------------------------+--------------------------------EXPANSION TABLE--------------------------------+--SCOPE TABLE--+
 |			POSICION		LEX			NIVEL			DESCR.TYPE		TSB			|ID			NIVEL			DESCR.TYPE		TSB	|***************|
 |***********************************************************************************************************************************************|*******************************************************************************|***************|
-|			0			a			1			DCONST			INT			|null										|	0	|
-|			1			b			1			DCONST			INT			|value			-1			DARG			STRING	|	7	|
-|			2			void			0			DTYPE			VOID			|d			-1			DARG			INT	|		|
-|			3			read			0			DPROC			STRING			|e			-1			DARG			INT	|		|
-|			4			c			1			DCONST			INT			|f			-1			DARG			INT	|		|
-|			5			fun2			1			DPROC			INT			|g			-1			DARG			INT	|		|
-|			6			string			0			DTYPE			STRING			|h			-1			DARG			BOOL	|		|
-|			7			fun3			1			DPROC			BOOL			|i			-1			DARG			INT	|		|
-|			8			fun4			1			DPROC			VOID			|										|		|
-|			9			false			0			DCONST			BOOL			|										|		|
+|			0			a			1			DVAR			BOOL			|null										|	0	|
+|			1			boolean			0			DTYPE			BOOL			|value			-1			DARG			STRING	|	1	|
+|			2			void			0			DTYPE			VOID			|										|		|
+|			3			read			0			DPROC			STRING			|										|		|
+|			4			s			1			DVAR			STRING			|										|		|
+|			5			string			0			DTYPE			STRING			|										|		|
+|			6			f			1			DPROC			VOID			|										|		|
+|			7			true			0			DCONST			BOOL			|										|		|
+|			8			false			0			DCONST			BOOL			|										|		|
+|			9			write			0			DPROC			VOID			|										|		|
 |			10			int			0			DTYPE			INT			|										|		|
-|			11			str			1			DCONST			STRING			|										|		|
-|			12			boolean			0			DTYPE			BOOL			|										|		|
-|			13			str3			1			DVAR			STRING			|										|		|
-|			14			str2			1			DVAR			STRING			|										|		|
-|			15			true			0			DCONST			BOOL			|										|		|
-|			16			write			0			DPROC			VOID			|										|		|
-|			17			fun			1			DPROC			INT			|										|		|
 +-----------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------+---------------+
 Current Level: 1

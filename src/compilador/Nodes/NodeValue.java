@@ -21,7 +21,15 @@ public class NodeValue extends Node {
     }
 
     public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
-        
+        if (expr != null) {
+            
+        } else if (call != null) {
+
+        } else if (value != null) {
+            //gen.add(Operand.ASSIG, id, 0, 0);
+        } else {
+            
+        }
     }
 
 }

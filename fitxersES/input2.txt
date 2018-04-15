@@ -1,39 +1,17 @@
-const int a = 5;
-const int b = 4;
-const int c = 6;
+boolean a = (5+2)>(4+5) & true;
+string s;
 
-
-const string str = "holasoyunstring";
-
-string str2;
-
-string str3 = "hola";
-
-int fun(int d, int e){
-	return 0;
+void f(){
+	s = read();
+	boolean b = a | a;
+	if (b) {
+		s = "hola";
+	}
 }
-
-int fun2(int f, int g){
-	return 0;
-}
-
-boolean fun3(boolean h){
-	return false;
-}
-
-void fun4(int i){
-}
-
-
-
 
 /*
 * Programa principal
 */
 main {
-	int x;
-	int y;
-	int z;
-	read();
-	write("asd");
+	write(s);
 }
