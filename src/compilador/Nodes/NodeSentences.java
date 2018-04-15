@@ -1,5 +1,9 @@
 package compilador.Nodes;
 
+import compilador.ProcTable;
+import compilador.ThreeAddrCode;
+import compilador.VarTable;
+
 public class NodeSentences extends Node {
 
     Node sentence;
@@ -11,24 +15,24 @@ public class NodeSentences extends Node {
         this.sentences = sentences;
     }
 
-    public void generateCode() {
+    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
         if (sentence != null) {
             if (sentence instanceof NodeDecl) {
-                ((NodeDecl) sentence).generateCode();
+                ((NodeDecl) sentence).generateCode(vt,pt,gen);
             } else if (sentence instanceof NodeConstDecl) {
-                ((NodeConstDecl) sentence).generateCode();
+                ((NodeConstDecl) sentence).generateCode(vt,pt,gen);
             } else if (sentence instanceof NodeCall) {
-                ((NodeCall) sentence).generateCode();
+                ((NodeCall) sentence).generateCode(vt,pt,gen);
             } else if (sentence instanceof NodeAssignation) {
-                ((NodeAssignation) sentence).generateCode();
+                ((NodeAssignation) sentence).generateCode(vt,pt,gen);
             } else if (sentence instanceof NodeIf) {
-                ((NodeIf) sentence).generateCode();
+                ((NodeIf) sentence).generateCode(vt,pt,gen);
             } else if (sentence instanceof NodeWhile)  {
-                ((NodeWhile) sentence).generateCode();
+                ((NodeWhile) sentence).generateCode(vt,pt,gen);
             }
         }
         if (sentences != null) {
-            sentences.generateCode();
+            sentences.generateCode(vt,pt,gen);
         }
     }
 

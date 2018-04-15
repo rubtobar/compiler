@@ -1,5 +1,9 @@
 package compilador.Nodes;
 
+import compilador.ProcTable;
+import compilador.ThreeAddrCode;
+import compilador.VarTable;
+
 public class NodeWhile extends Node {
 
     NodeExpr expr;
@@ -11,10 +15,10 @@ public class NodeWhile extends Node {
         this.sentences = sentences;
     }
 
-    public void generateCode() {
-        expr.generateCode();
+    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
+        expr.generateCode(vt,pt,gen);
         if (sentences != null) {
-            sentences.generateCode();
+            sentences.generateCode(vt,pt,gen);
         }
     }
 

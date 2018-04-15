@@ -1,6 +1,10 @@
 package compilador.Nodes;
 
-    //declarando la variable al mismo tie
+    //declarando la variable al mismo 
+import compilador.ProcTable;
+import compilador.ThreeAddrCode;
+import compilador.VarTable;
+
 
 
     public class NodeAssign extends Node{
@@ -12,8 +16,8 @@ package compilador.Nodes;
             this.expr = expr;
         }
         
-        public void generateCode(){
-            if (expr != null) expr.generateCode();
+        public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen){
+            if (expr != null) expr.generateCode(vt,pt,gen);
         }
         
     }

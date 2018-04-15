@@ -1,5 +1,9 @@
 package compilador.Nodes;
 
+import compilador.ProcTable;
+import compilador.ThreeAddrCode;
+import compilador.VarTable;
+
     public class NodeContCall extends Node{
         
         private final NodeExpr expr;
@@ -11,9 +15,9 @@ package compilador.Nodes;
             this.contCall = contCall;
         }
         
-        public void generateCode(){
-            expr.generateCode();
-            if (contCall != null) contCall.generateCode();
+        public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen){
+            expr.generateCode(vt,pt,gen);
+            if (contCall != null) contCall.generateCode(vt,pt,gen);
         }
         
     }

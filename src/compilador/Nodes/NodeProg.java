@@ -1,5 +1,7 @@
 package compilador.Nodes;
 
+import compilador.*;
+
     public class NodeProg extends Node{
         public NodeDecls decls;
         public NodeMethods methods;
@@ -12,9 +14,9 @@ package compilador.Nodes;
             this.sentences = sentences;
         }
         
-        public void generateCode(){
-            if (decls != null)  decls.generateCode();
-            if (methods != null) methods.generateCode();
-            if (sentences != null) sentences.generateCode();
+        public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen){
+            if (decls != null)  decls.generateCode(vt,pt,gen);
+            if (methods != null) methods.generateCode(vt,pt,gen);
+            if (sentences != null) sentences.generateCode(vt,pt,gen);
         }
     }

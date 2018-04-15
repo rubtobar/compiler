@@ -1,5 +1,9 @@
 package compilador.Nodes;
 
+import compilador.ProcTable;
+import compilador.ThreeAddrCode;
+import compilador.VarTable;
+
     public class NodeDecl extends Node {
         
         private final NodeAssign assign;
@@ -11,9 +15,9 @@ package compilador.Nodes;
             this.vid = vid;
         }
         
-        public void generateCode(){
+        public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen){
             if (assign != null) {
-                assign.generateCode();
+                assign.generateCode(vt,pt,gen);
             }
         }
     }

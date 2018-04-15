@@ -19,7 +19,6 @@ import java.util.TreeSet;
  */
 public class SymbolTable {
 
-    private final int STRING_BUFFER = 32;
     private int currentLevel;
     private final ArrayList<Integer> scopeTable;
     private final ArrayList<TblSymbol> expansionTable;
@@ -130,9 +129,10 @@ public class SymbolTable {
                 size = ((TypeDescription) descriptionTable.get("int").d).size;
                 break;
             case STRING:
-                if (d.dt == DescriptionType.DVAR) {
+                if (d.dt == DescriptionType.DVAR || id.equals("read")) {
                     size = ((TypeDescription) descriptionTable.get("string").d).size;
                 }
+                
                 break;
         }
 
@@ -150,7 +150,7 @@ public class SymbolTable {
                 // modificamos los valores de las variables que 
                 // hemos encontrado al encontrar el prog al que pertenecen
                 // String name, String label, int prof, int nparam, int localSize
-                pt.add(descriptionTable.get(id).id, id, null, 0, 0, size);
+                pt.add(descriptionTable.get(id).id, id, 0, 0, 0, size);
                 /*En caso de que sean funciones reservadas no cambiamos el
                 corrent proc durante las declaraciones*/
                 if (!"write".equals(id) && !"read".equals(id)) {

@@ -1,7 +1,10 @@
 package compilador.Nodes;
 
+import compilador.ProcTable;
 import compilador.SyntaxTree;
+import compilador.ThreeAddrCode;
 import compilador.ThreeAddrCode.Operand;
+import compilador.VarTable;
 
 public class NodeArExpr extends Node {
 
@@ -16,13 +19,13 @@ public class NodeArExpr extends Node {
         this.op = op;
     }
 
-    public void generateCode() {
+    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
         if (arExpr != null) {
-            arExpr.generateCode();
+            arExpr.generateCode(vt,pt,gen);
         }
-        value.generateCode();
+        value.generateCode(vt,pt,gen);
         //int id = SyntaxTree.vt.addVar();
         //this.result = id;
-        SyntaxTree.codeGen.add(Operand.OR, (Integer) arExpr.result, (Integer) value.result, 0);
+        //SyntaxTree.codeGen.add(Operand.OR, (Integer) arExpr.result, (Integer) value.result, 0);
     }
 }

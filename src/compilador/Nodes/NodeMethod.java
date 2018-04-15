@@ -1,5 +1,9 @@
 package compilador.Nodes;
 
+import compilador.ProcTable;
+import compilador.ThreeAddrCode;
+import compilador.VarTable;
+
     public class NodeMethod extends Node{
 
         NodeHead head;
@@ -20,9 +24,9 @@ package compilador.Nodes;
             this.returnExpr = returnExpr;
         }
         
-        public void generateCode(){
-            if (head != null)  head.generateCode();
-            if (sentences != null)  sentences.generateCode();
-            if (returnExpr != null)  returnExpr.generateCode();
+        public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen){
+            if (head != null)  head.generateCode(vt,pt,gen);
+            if (sentences != null)  sentences.generateCode(vt,pt,gen);
+            if (returnExpr != null)  returnExpr.generateCode(vt,pt,gen);
         }
     }

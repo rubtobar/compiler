@@ -1,5 +1,9 @@
 package compilador.Nodes;
 
+import compilador.ProcTable;
+import compilador.ThreeAddrCode;
+import compilador.VarTable;
+
 public class NodeMethods extends Node {
 
     NodeMethod method;
@@ -11,12 +15,12 @@ public class NodeMethods extends Node {
         this.methods = methods;
     }
 
-    public void generateCode() {
+    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
         if (method != null) {
-            method.generateCode();
+            method.generateCode(vt,pt,gen);
         }
         if (methods != null) {
-            methods.generateCode();
+            methods.generateCode(vt,pt,gen);
         }
 
     }

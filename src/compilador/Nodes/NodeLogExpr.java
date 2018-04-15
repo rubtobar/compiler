@@ -1,5 +1,9 @@
 package compilador.Nodes;
 
+import compilador.ProcTable;
+import compilador.ThreeAddrCode;
+import compilador.VarTable;
+
 public class NodeLogExpr extends Node {
 
     public NodeLogExpr logExpr;
@@ -11,11 +15,11 @@ public class NodeLogExpr extends Node {
         this.arExpr = arExpr;
     }
 
-    public void generateCode() {
+    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
         if (logExpr != null) {
-            logExpr.generateCode();
+            logExpr.generateCode(vt,pt,gen);
         }
-        arExpr.generateCode();
+        arExpr.generateCode(vt,pt,gen);
     }
 
 }

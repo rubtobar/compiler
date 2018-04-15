@@ -1,5 +1,9 @@
 package compilador.Nodes;
 
+import compilador.ProcTable;
+import compilador.ThreeAddrCode;
+import compilador.VarTable;
+
 public class NodeValue extends Node {
 
     public NodeExpr expr;
@@ -16,7 +20,7 @@ public class NodeValue extends Node {
         this.value = value;
     }
 
-    public void generateCode() {
+    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
         
     }
 

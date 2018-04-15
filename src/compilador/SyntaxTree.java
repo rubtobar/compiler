@@ -14,9 +14,9 @@ import compilador.Nodes.NodeProg;
 public class SyntaxTree {
 
     private NodeProg root;
-    public static VarTable vt;
-    public static ProcTable pt;
-    public static ThreeAddrCode codeGen;
+    final private VarTable vt;
+    final private ProcTable pt;
+    final private ThreeAddrCode codeGen;
     
     public SyntaxTree() {
         vt = new VarTable();
@@ -37,6 +37,6 @@ public class SyntaxTree {
     }
 
     void generateCode() {
-        root.generateCode();
+        root.generateCode(vt, pt, codeGen);
     }
 }

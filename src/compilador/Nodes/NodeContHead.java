@@ -1,5 +1,9 @@
 package compilador.Nodes;
 
+import compilador.ProcTable;
+import compilador.ThreeAddrCode;
+import compilador.VarTable;
+
 public class NodeContHead extends Node {
 
     private final NodeContHead contHead;
@@ -9,9 +13,9 @@ public class NodeContHead extends Node {
         this.contHead = contHead;
     }
 
-    public void generateCode() {
+    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
         if (contHead != null) {
-            contHead.generateCode();
+            contHead.generateCode(vt,pt,gen);
         }
     }
 }
