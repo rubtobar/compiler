@@ -141,8 +141,7 @@ METHOD 	::=
 		} else if (aux.d.tsb != et.result) {
 			errPrinter.unexpectedReturnType(rtn.line, rtn.column, (String) nP.result, aux.d.tsb.toString(), et.result.toString());
 		}
-
-		RESULT = new NodeMethod(nP, stcs, et, null);
+		RESULT = new NodeMethod(nP, stcs, et, st.get((String)nP.result).id, null);
 		:}
 	|
 		HEAD:nP tk_leftb SENTENCES:stcs tk_rightb:cc
@@ -158,7 +157,7 @@ METHOD 	::=
 	    	errPrinter.missingReturn(cc.line, cc.column, (String) nP.result);
 	    }
 
-	    RESULT = new NodeMethod(nP, stcs, null);
+	    RESULT = new NodeMethod(nP, stcs, st.get((String)nP.result).id, null);
 		:}
 	|
 		HEAD:nP tk_leftb:lb error tk_rightb

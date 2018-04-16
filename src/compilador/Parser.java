@@ -448,8 +448,7 @@ class CUP$Parser$actions {
 		} else if (aux.d.tsb != et.result) {
 			errPrinter.unexpectedReturnType(rtn.line, rtn.column, (String) nP.result, aux.d.tsb.toString(), et.result.toString());
 		}
-
-		RESULT = new NodeMethod(nP, stcs, et, null);
+		RESULT = new NodeMethod(nP, stcs, et, st.get((String)nP.result).id, null);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("METHOD",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -480,7 +479,7 @@ class CUP$Parser$actions {
 	    	errPrinter.missingReturn(cc.line, cc.column, (String) nP.result);
 	    }
 
-	    RESULT = new NodeMethod(nP, stcs, null);
+	    RESULT = new NodeMethod(nP, stcs, st.get((String)nP.result).id, null);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("METHOD",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }

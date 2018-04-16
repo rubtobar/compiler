@@ -3,6 +3,7 @@ package compilador.Nodes;
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
+import compilador.LabelTable;
 
     public class NodeDecl extends Node {
         
@@ -15,9 +16,9 @@ import compilador.VarTable;
             this.vid = vid;
         }
         
-        public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen){
+        public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen){
             if (assign != null) {
-                assign.generateCode(vt,pt,gen);
+                assign.generateCode(vt,pt,lt,gen);
             }
         }
     }

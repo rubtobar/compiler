@@ -3,6 +3,8 @@ package compilador.Nodes;
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
+import compilador.LabelTable;
+import compilador.ThreeAddrCode.Operand;
 
 public class NodeValue extends Node {
 

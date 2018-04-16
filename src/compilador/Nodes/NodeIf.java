@@ -4,6 +4,7 @@ import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.ThreeAddrCode.Operand;
 import compilador.VarTable;
+import compilador.LabelTable;
 
     public class NodeIf extends Node{
         NodeExpr expr;
@@ -15,12 +16,12 @@ import compilador.VarTable;
             this.sentences = sentences;
         }
         
-        public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen){
-            expr.generateCode(vt,pt,gen);
-            //generar etiqueta e
-            //gen.add(Operand.BEQ, expr.tid, 1, e);
-            if (sentences != null) sentences.generateCode(vt,pt,gen);
-            //gen.add(Operand.SKIP, 0, 0, e);
+        public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen){
+            expr.generateCode(vt,pt,lt,gen);
+            int e = lt.add();
+            gen.add(Operand.BEQ, "v"+expr.tid, "1", e);
+            if (sentences != null) sentences.generateCode(vt,pt,lt,gen);
+            gen.add(Operand.SKIP, null, null, e);
         }
         
     }

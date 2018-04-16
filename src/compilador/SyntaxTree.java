@@ -16,12 +16,14 @@ public class SyntaxTree {
     private NodeProg root;
     final VarTable vt;
     final ProcTable pt;
+    final LabelTable lt;
     final ThreeAddrCode codeGen;
     
     public SyntaxTree() {
         vt = new VarTable();
         pt = new ProcTable();
-        codeGen = new ThreeAddrCode();
+        lt = new LabelTable();
+        codeGen = new ThreeAddrCode(vt,pt,lt);
     }
 
     public void setRoot(NodeProg root) {
@@ -37,6 +39,6 @@ public class SyntaxTree {
     }
 
     void generateCode() {
-        root.generateCode(vt, pt, codeGen);
+        root.generateCode(vt, pt, lt, codeGen);
     }
 }

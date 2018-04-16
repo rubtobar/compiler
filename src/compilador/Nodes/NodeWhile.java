@@ -4,6 +4,7 @@ import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.ThreeAddrCode.Operand;
 import compilador.VarTable;
+import compilador.LabelTable;
 
 public class NodeWhile extends Node {
 
@@ -16,17 +17,17 @@ public class NodeWhile extends Node {
         this.sentences = sentences;
     }
 
-    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
-        expr.generateCode(vt,pt,gen);
-        //genera et_f
-        //genera et_i
-        //gen.add(Operand.SKIP, 0, 0, et_i);
-        //gen.add(Operand.BEQ, expr.tid, 0, et_f);
+    public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
+        expr.generateCode(vt,pt,lt,gen);
+        int etf = lt.add();
+        int eti = lt.add();
+        gen.add(Operand.SKIP, null, null, eti);
+        gen.add(Operand.BEQ, "v"+expr.tid, "0", etf);
         if (sentences != null) {
-            sentences.generateCode(vt,pt,gen);
+            sentences.generateCode(vt,pt,lt,gen);
         }
-        //gen.add(Operand.GOTO, 0, 0, et_i);
-        //gen.add(Operand.SKIP, 0, 0, et_f);
+        gen.add(Operand.GOTO, null, null, eti);
+        gen.add(Operand.SKIP, null, null, etf);
     }
 
 }

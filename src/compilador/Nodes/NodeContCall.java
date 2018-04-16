@@ -3,6 +3,7 @@ package compilador.Nodes;
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
+import compilador.LabelTable;
 
     public class NodeContCall extends Node{
         
@@ -15,9 +16,9 @@ import compilador.VarTable;
             this.contCall = contCall;
         }
         
-        public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen){
-            expr.generateCode(vt,pt,gen);
-            if (contCall != null) contCall.generateCode(vt,pt,gen);
+        public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen){
+            expr.generateCode(vt,pt,lt,gen);
+            if (contCall != null) contCall.generateCode(vt,pt,lt,gen);
         }
         
     }

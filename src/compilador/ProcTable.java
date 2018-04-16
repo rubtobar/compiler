@@ -19,7 +19,7 @@ public class ProcTable {
     public class Proc {
         
         String name;
-        int label;
+        public int label;
         int depth;
         int nparam;
         int localSize;
@@ -38,7 +38,7 @@ public class ProcTable {
         }
     }
 
-    HashMap<Integer, Proc> procTable;
+    public HashMap<Integer, Proc> procTable;
 
     public ProcTable() {
         procTable = new HashMap<>();

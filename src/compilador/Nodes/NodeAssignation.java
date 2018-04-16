@@ -5,6 +5,7 @@ package compilador.Nodes;
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
+import compilador.LabelTable;
 
 public class NodeAssignation extends Node {
 
@@ -15,9 +16,9 @@ public class NodeAssignation extends Node {
         this.expr = expr;
     }
 
-    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
+    public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
         if (expr != null) {
-            expr.generateCode(vt,pt,gen);
+            expr.generateCode(vt,pt,lt,gen);
         }
     }
 

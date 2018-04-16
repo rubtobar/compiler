@@ -3,6 +3,7 @@ package compilador.Nodes;
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
+import compilador.LabelTable;
 
     public class NodeExpr extends Node{
         public NodeExpr expr;
@@ -15,9 +16,9 @@ import compilador.VarTable;
             this.logExpr = logExpr;
         }
         
-        public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen){
-            if (expr != null) expr.generateCode(vt,pt,gen);
-            logExpr.generateCode(vt,pt,gen);
+        public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen){
+            if (expr != null) expr.generateCode(vt,pt,lt,gen);
+            logExpr.generateCode(vt,pt,lt,gen);
         }
         
     }

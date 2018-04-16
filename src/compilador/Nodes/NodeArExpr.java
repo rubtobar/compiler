@@ -32,7 +32,7 @@ public class NodeArExpr extends Node {
             } else {
                 operand = Operand.SUB;
             }
-            gen.add(operand, arExpr.tid, value.id, tid);
+            gen.add(operand, "v"+arExpr.tid, "v"+value.id, tid);
         }
     }
 }

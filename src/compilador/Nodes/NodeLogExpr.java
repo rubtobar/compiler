@@ -4,6 +4,7 @@ import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.ThreeAddrCode.Operand;
 import compilador.VarTable;
+import compilador.LabelTable;
 
 public class NodeLogExpr extends Node {
 
@@ -20,33 +21,34 @@ public class NodeLogExpr extends Node {
         this.tid = tid;
     }
 
-    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
-        Operand operand = null;
+    public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
+        Operand comparator = null;
+        int e1, e2;
         if (logExpr != null) {
-            logExpr.generateCode(vt, pt, gen);
+            logExpr.generateCode(vt, pt, lt, gen);
             switch (op) {
                 case ">":
-                    operand = Operand.BGT;
+                    comparator = Operand.BGT;
                     break;
                 case "<":
-                    operand = Operand.BLT;
+                    comparator = Operand.BLT;
                     break;
                 case ">=":
-                    operand = Operand.BGE;
+                    comparator = Operand.BGE;
                     break;
                 case "<=":
-                    operand = Operand.BLE;
+                    comparator = Operand.BLE;
                     break;
             }
         }
         arExpr.generateCode(vt, pt, gen);
-        //genera etiqueta e1
-        //gen.add(operand, logExpr.tid, arExpr.tid, e1);
-        //gen.add(Operand.ASSIG, 0, 0, tid);
-        //genera etiqueta e2
-        //gen.add(Operand.GOTO, 0, 0, e2);
-        //gen.add(Operand.SKIP, 0, 0, e1);
-        //gen.add(Operand.ASSIG, 1, 0, tid);
-        //gen.add(Operand.SKIP, 0, 0, e2);
+        e1 = lt.add();
+        gen.add(comparator, "v"+logExpr.tid, "v"+arExpr.tid, e1);
+        gen.add(Operand.ASSIG, "0", null, tid);
+        e2 = lt.add();
+        gen.add(Operand.GOTO, null, null, e2);
+        gen.add(Operand.SKIP, null, null, e1);
+        gen.add(Operand.ASSIG, "1", null, tid);
+        gen.add(Operand.SKIP, null, null, e2);
     }
 }

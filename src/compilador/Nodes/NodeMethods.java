@@ -3,6 +3,7 @@ package compilador.Nodes;
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
+import compilador.LabelTable;
 
 public class NodeMethods extends Node {
 
@@ -15,12 +16,12 @@ public class NodeMethods extends Node {
         this.methods = methods;
     }
 
-    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
+    public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
         if (method != null) {
-            method.generateCode(vt,pt,gen);
+            method.generateCode(vt,pt,lt,gen);
         }
         if (methods != null) {
-            methods.generateCode(vt,pt,gen);
+            methods.generateCode(vt,pt,lt,gen);
         }
 
     }
