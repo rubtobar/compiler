@@ -24,6 +24,7 @@ public class NodeLogExpr extends Node {
     public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
         Operand comparator = null;
         int e1, e2;
+        arExpr.generateCode(vt, pt, gen);
         if (logExpr != null) {
             logExpr.generateCode(vt, pt, lt, gen);
             switch (op) {
@@ -40,15 +41,14 @@ public class NodeLogExpr extends Node {
                     comparator = Operand.BLE;
                     break;
             }
+            e1 = lt.add();
+            gen.add(comparator, "v" + logExpr.tid, "v" + arExpr.tid, e1);
+            gen.add(Operand.ASSIG, "0", null, tid);
+            e2 = lt.add();
+            gen.add(Operand.GOTO, null, null, e2);
+            gen.add(Operand.SKIP, null, null, e1);
+            gen.add(Operand.ASSIG, "1", null, tid);
+            gen.add(Operand.SKIP, null, null, e2);
         }
-        arExpr.generateCode(vt, pt, gen);
-        e1 = lt.add();
-        gen.add(comparator, "v"+logExpr.tid, "v"+arExpr.tid, e1);
-        gen.add(Operand.ASSIG, "0", null, tid);
-        e2 = lt.add();
-        gen.add(Operand.GOTO, null, null, e2);
-        gen.add(Operand.SKIP, null, null, e1);
-        gen.add(Operand.ASSIG, "1", null, tid);
-        gen.add(Operand.SKIP, null, null, e2);
     }
 }
