@@ -32,9 +32,9 @@ import compilador.LabelTable;
             head.generateCode(vt,pt,gen);
             int e = lt.add();
             pt.procTable.get(np).label = e;
-            gen.add(Operand.SKIP, null, null, e);
+            gen.add(Operand.SKIP, null, null, "l"+e);
             if (sentences != null)  sentences.generateCode(vt,pt,lt,gen);
             if (returnExpr != null)  returnExpr.generateCode(vt,pt,lt,gen);
-            gen.add(Operand.RETURN, null, null, np);
+            gen.add(Operand.RETURN, null, null, "p"+np);
         }
     }

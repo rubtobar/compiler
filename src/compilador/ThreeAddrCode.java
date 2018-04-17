@@ -30,9 +30,9 @@ public class ThreeAddrCode {
         private final Operand op;
         private final String src1;
         private final String src2;
-        private final int dest;
+        private final String dest;
 
-        public ThreeAddrIstr(Operand op, String src1, String src2, int dest) {
+        public ThreeAddrIstr(Operand op, String src1, String src2, String dest) {
             this.op = op;
             this.src1 = src1;
             this.src2 = src2;
@@ -42,43 +42,43 @@ public class ThreeAddrCode {
         @Override
         public String toString() {
 
-            String ssrc1 = getPrintable(src1), ssrc2 = getPrintable(src2);
+            String sdest = getPrintable(dest), ssrc1 = getPrintable(src1), ssrc2 = getPrintable(src2);
 
             switch (op) {
                 case ADD:
-                    return dest + " = " + ssrc1 + " + " + ssrc2;
+                    return sdest + " = " + ssrc1 + " + " + ssrc2;
                 case SUB:
-                    return dest + " = " + ssrc1 + " - " + ssrc2;
+                    return sdest + " = " + ssrc1 + " - " + ssrc2;
                 case AND:
-                    return dest + " = " + ssrc1 + " & " + ssrc2;
+                    return sdest + " = " + ssrc1 + " & " + ssrc2;
                 case OR:
-                    return dest + " = " + ssrc1 + " | " + ssrc2;
+                    return sdest + " = " + ssrc1 + " | " + ssrc2;
                 case SKIP:
-                    return "skip: " + dest;
+                    return "skip: " + sdest;
                 case GOTO:
-                    return "goto: " + dest;
+                    return "goto: " + sdest;
                 case BLT:
-                    return "if " + ssrc1 + " < " + ssrc2 + " goto " + dest;
+                    return "if " + ssrc1 + " < " + ssrc2 + " goto " + sdest;
                 case BLE:
-                    return "if " + ssrc1 + " <= " + ssrc2 + " goto " + dest;
+                    return "if " + ssrc1 + " <= " + ssrc2 + " goto " + sdest;
                 case BGE:
-                    return "if " + ssrc1 + " >= " + ssrc2 + " goto " + dest;
+                    return "if " + ssrc1 + " >= " + ssrc2 + " goto " + sdest;
                 case BGT:
-                    return "if " + ssrc1 + " > " + ssrc2 + " goto " + dest;
+                    return "if " + ssrc1 + " > " + ssrc2 + " goto " + sdest;
                 case BNE:
-                    return "if " + ssrc1 + " != " + ssrc2 + " goto " + dest;
+                    return "if " + ssrc1 + " != " + ssrc2 + " goto " + sdest;
                 case BEQ:
-                    return "if " + ssrc1 + " = " + ssrc2 + " goto " + dest;
+                    return "if " + ssrc1 + " = " + ssrc2 + " goto " + sdest;
                 case CALL:
-                    return "call " + dest;
+                    return "call " + sdest;
                 case FUN:
-                    return dest + " = fun " + ssrc1;
+                    return sdest + " = fun " + ssrc1;
                 case RETURN:
-                    return "return " + dest;
+                    return "return " + sdest;
                 case PARAM:
-                    return "param " + dest;
+                    return "param " + sdest;
                 case ASSIG:
-                    return dest + " = " + ssrc1;
+                    return sdest + " = " + ssrc1;
             }
             return "--:INSTRUCTIONERROR:--";
         }
@@ -106,7 +106,7 @@ public class ThreeAddrCode {
         this.lt = lt;
     }
 
-    public void add(Operand op, String src1, String src2, int dest) {
+    public void add(Operand op, String src1, String src2, String dest) {
         code.add(new ThreeAddrIstr(op, src1, src2, dest));
     }
 

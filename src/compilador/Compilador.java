@@ -50,5 +50,6 @@ public class Compilador {
             sytr.getPt().printOnFile();
             sytr.generateCode();
         }
+        sytr.codeGen.flush();
     }
 }

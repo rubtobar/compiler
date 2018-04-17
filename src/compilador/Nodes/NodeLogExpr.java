@@ -42,13 +42,13 @@ public class NodeLogExpr extends Node {
                     break;
             }
             e1 = lt.add();
-            gen.add(comparator, "v" + logExpr.tid, "v" + arExpr.tid, e1);
-            gen.add(Operand.ASSIG, "0", null, tid);
+            gen.add(comparator, "v" + logExpr.tid, "v" + arExpr.tid, "l"+e1);
+            gen.add(Operand.ASSIG, "0", null, "v"+tid);
             e2 = lt.add();
-            gen.add(Operand.GOTO, null, null, e2);
-            gen.add(Operand.SKIP, null, null, e1);
-            gen.add(Operand.ASSIG, "1", null, tid);
-            gen.add(Operand.SKIP, null, null, e2);
+            gen.add(Operand.GOTO, null, null, "l"+e2);
+            gen.add(Operand.SKIP, null, null, "l"+e1);
+            gen.add(Operand.ASSIG, "1", null, "v"+tid);
+            gen.add(Operand.SKIP, null, null, "l"+e2);
         }
     }
 }

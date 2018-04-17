@@ -21,13 +21,13 @@ public class NodeWhile extends Node {
         expr.generateCode(vt,pt,lt,gen);
         int etf = lt.add();
         int eti = lt.add();
-        gen.add(Operand.SKIP, null, null, eti);
-        gen.add(Operand.BEQ, "v"+expr.tid, "0", etf);
+        gen.add(Operand.SKIP, null, null, "l"+eti);
+        gen.add(Operand.BEQ, "v"+expr.tid, "0", "l"+etf);
         if (sentences != null) {
             sentences.generateCode(vt,pt,lt,gen);
         }
-        gen.add(Operand.GOTO, null, null, eti);
-        gen.add(Operand.SKIP, null, null, etf);
+        gen.add(Operand.GOTO, null, null, "l"+eti);
+        gen.add(Operand.SKIP, null, null, "l"+etf);
     }
 
 }
