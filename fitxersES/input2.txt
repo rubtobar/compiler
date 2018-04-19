@@ -1,12 +1,11 @@
-boolean a = true;
-boolean b;
-void f(){
-	b = a;
-	string s = read();
-}
 
+int fun(){
+return 3;
+}
 /*
 * Programa principal
 */
 main {
+        write("1");
+        fun();
 }

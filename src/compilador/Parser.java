@@ -363,8 +363,8 @@ class CUP$Parser$actions {
 		Description d = new TypeDescription(TSB.BOOL, 1, 0, 1);
 		st.add("boolean", d, true);
 
-		st.add("true", new ConstDescription(TSB.BOOL, "1"), true);
-		st.add("false",  new ConstDescription(TSB.BOOL, "0"), true);
+		st.add("true", new ConstDescription(TSB.BOOL, "TRUE"), true);
+		st.add("false",  new ConstDescription(TSB.BOOL, "FALSE"), true);
 
 		d = new TypeDescription(TSB.INT, 4, Integer.MIN_VALUE, Integer.MAX_VALUE);
 		st.add("int", d, true);
@@ -1028,7 +1028,7 @@ class CUP$Parser$actions {
                 String pname = ((ArgDescription)st.getParameter((Integer)rtn.result).d).idProc;
                 errPrinter.tooFewArgs(clp.line, clp.column, pname);
             } else {
-                RESULT = new NodeCall(rtn,rtn.result);
+                RESULT = new NodeCall(rtn,rtn.procId,rtn.result);
             }
         }
 		
@@ -1050,7 +1050,7 @@ class CUP$Parser$actions {
 		} else if (((ProcDescription) aux.d).firstArg != 0) { 
             errPrinter.tooFewArgs(id.line, id.column, id.getAtribut());
 		} else {
-			RESULT = new NodeCall(null,((ProcDescription) aux.d).tsb);
+			RESULT = new NodeCall(null, aux.id, ((ProcDescription) aux.d).tsb);
 		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("CALL",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1083,9 +1083,9 @@ class CUP$Parser$actions {
             } else {
             	int next = ((ArgDescription) st.getParameter(((ProcDescription) aux.d).firstArg).d).next;
                 if (next == 0){
-            		RESULT = new NodeContCall(arg1,null,aux.d.tsb);
+            		RESULT = new NodeContCall(arg1,null,aux.id,aux.d.tsb);
                 } else {
-                	RESULT = new NodeContCall(arg1,null,next);
+                	RESULT = new NodeContCall(arg1,null,aux.id,next);
 
                 }
             }
@@ -1120,9 +1120,9 @@ class CUP$Parser$actions {
 	            int next = ((ArgDescription) aux.d).next;
 	            if (next == 0){
 	            	aux = st.get(((ArgDescription) aux.d).idProc);
-					RESULT = new NodeContCall(argX,idxP,aux.d.tsb);
+					RESULT = new NodeContCall(argX,idxP,aux.id,aux.d.tsb);
 	            } else {
-	            	RESULT = new NodeContCall(argX,idxP,next);
+	            	RESULT = new NodeContCall(argX,idxP,aux.id,next);
 	            }
 	        }
         }

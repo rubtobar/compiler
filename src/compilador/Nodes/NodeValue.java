@@ -3,7 +3,7 @@ package compilador.Nodes;
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
-import compilador.LabelTable;
+import compilador.LabelCount;
 import compilador.ThreeAddrCode.Operand;
 
 public class NodeValue extends Node {
@@ -22,7 +22,7 @@ public class NodeValue extends Node {
         this.value = value;
     }
 
-    public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
+    public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
         if (expr != null) {
             // Expressió
             id = expr.tid;

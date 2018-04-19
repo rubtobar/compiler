@@ -3,7 +3,7 @@ package compilador.Nodes;
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
-import compilador.LabelTable;
+import compilador.LabelCount;
 
     public class NodeConstDecl extends Node{
         
@@ -14,7 +14,7 @@ import compilador.LabelTable;
             this.expr = expr;
         }
         
-        public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen){
+        public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen){
             // a continuacion se genera el valor o expr a asignar en la variable
             expr.generateCode(vt,pt,lt,gen);
         }

@@ -4,7 +4,7 @@ import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.ThreeAddrCode.Operand;
 import compilador.VarTable;
-import compilador.LabelTable;
+import compilador.LabelCount;
 
     public class NodeIf extends Node{
         NodeExpr expr;
@@ -16,12 +16,12 @@ import compilador.LabelTable;
             this.sentences = sentences;
         }
         
-        public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen){
+        public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen){
             expr.generateCode(vt,pt,lt,gen);
-            int e = lt.add();
-            gen.add(Operand.BEQ, "v"+expr.tid, "0", "l"+e);
+            String e = lt.add();
+            gen.add(Operand.BEQ, "v"+expr.tid, "FALSE", e);
             if (sentences != null) sentences.generateCode(vt,pt,lt,gen);
-            gen.add(Operand.SKIP, null, null, "l"+e);
+            gen.add(Operand.SKIP, null, null, e);
         }
         
     }

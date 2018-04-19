@@ -4,7 +4,7 @@ import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.ThreeAddrCode.Operand;
 import compilador.VarTable;
-import compilador.LabelTable;
+import compilador.LabelCount;
 
 public class NodeWhile extends Node {
 
@@ -17,17 +17,17 @@ public class NodeWhile extends Node {
         this.sentences = sentences;
     }
 
-    public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
+    public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
         expr.generateCode(vt,pt,lt,gen);
-        int eti = lt.add();
-        int etf = lt.add();
-        gen.add(Operand.SKIP, null, null, "l"+eti);
-        gen.add(Operand.BEQ, "v"+expr.tid, "0", "l"+etf);
+        String eti = lt.add();
+        String etf = lt.add();
+        gen.add(Operand.SKIP, null, null, eti);
+        gen.add(Operand.BEQ, "v"+expr.tid, "FALSE", etf);
         if (sentences != null) {
             sentences.generateCode(vt,pt,lt,gen);
         }
-        gen.add(Operand.GOTO, null, null, "l"+eti);
-        gen.add(Operand.SKIP, null, null, "l"+etf);
+        gen.add(Operand.GOTO, null, null, eti);
+        gen.add(Operand.SKIP, null, null, etf);
     }
 
 }

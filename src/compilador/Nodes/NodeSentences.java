@@ -3,7 +3,7 @@ package compilador.Nodes;
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
-import compilador.LabelTable;
+import compilador.LabelCount;
 
 public class NodeSentences extends Node {
 
@@ -16,7 +16,7 @@ public class NodeSentences extends Node {
         this.sentences = sentences;
     }
 
-    public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
+    public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
         if (sentence != null) {
             if (sentence instanceof NodeDecl) {
                 ((NodeDecl) sentence).generateCode(vt,pt,lt,gen);

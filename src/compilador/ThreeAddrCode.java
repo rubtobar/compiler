@@ -19,7 +19,6 @@ public class ThreeAddrCode {
 
     private final VarTable vt;
     private final ProcTable pt;
-    private final LabelTable lt;
 
     public enum Operand {
         ADD, SUB, AND, OR, SKIP, GOTO, BLT, BLE, BGE, BGT, BNE, BEQ, CALL, FUN, RETURN, PARAM, ASSIG
@@ -54,7 +53,7 @@ public class ThreeAddrCode {
                 case OR:
                     return sdest + " = " + ssrc1 + " | " + ssrc2;
                 case SKIP:
-                    return "skip: " + sdest;
+                    return sdest + ": skip";
                 case GOTO:
                     return "goto: " + sdest;
                 case BLT:
@@ -90,9 +89,9 @@ public class ThreeAddrCode {
                 if (arg.startsWith("v")) {
                     s = vt.varTable.get(Integer.parseInt(arg.substring(1))).name;
                 } else if (arg.startsWith("p")) {
-                    s = pt.procTable.get(Integer.parseInt(arg.substring(1))).name;
+                    s = pt.procTable.get(Integer.parseInt(arg.substring(1))).label;
                 } else if (arg.startsWith("'")){
-                    s = arg.substring(1);
+                    s = "\"" + arg.substring(1) + "\"";
                 } else {
                     s = new String(arg);
                 }
@@ -101,11 +100,10 @@ public class ThreeAddrCode {
         }
     }
 
-    public ThreeAddrCode(VarTable vt, ProcTable pt, LabelTable lt) {
+    public ThreeAddrCode(VarTable vt, ProcTable pt) {
         code = new ArrayList<>();
         this.vt = vt;
         this.pt = pt;
-        this.lt = lt;
     }
 
     public void add(Operand op, String src1, String src2, String dest) {
@@ -117,7 +115,6 @@ public class ThreeAddrCode {
         PrintWriter writer;
         try {
             writer = new PrintWriter("fitxersES/THREEADDRCODE.txt");
-            writer.print(this.toString());
             code.forEach((_item) -> {
                 writer.print(_item.toString() + "\n");
             });

@@ -149,8 +149,14 @@ public class SymbolTable {
                 // añadimos proc a la tabla de procs
                 // modificamos los valores de las variables que 
                 // hemos encontrado al encontrar el prog al que pertenecen
+                String wrid = "";
+                if ("write".equals(id)) {
+                    wrid = "WRITE";
+                } else if ("read".equals(id)) {
+                    wrid = "READ";
+                }
                 // String name, String label, int prof, int nparam, int localSize
-                pt.add(descriptionTable.get(id).id, id, 0, 0, 0, size);
+                pt.add(descriptionTable.get(id).id, id, wrid, 0, 0, size);
                 /*En caso de que sean funciones reservadas no cambiamos el
                 corrent proc durante las declaraciones*/
                 if (!"write".equals(id) && !"read".equals(id)) {

@@ -18,13 +18,13 @@ public class ProcTable {
 
     public class Proc {
         
-        String name;
-        public int label;
+        public String name;
+        public String label;
         int depth;
         int nparam;
         int localSize;
 
-        public Proc(String name, int label, int depth, int nparam, int localSize) {
+        public Proc(String name, String label, int depth, int nparam, int localSize) {
             this.name = name;
             this.label = label;
             this.depth = depth;
@@ -44,7 +44,7 @@ public class ProcTable {
         procTable = new HashMap<>();
     }
 
-    public void add(int id, String name, int label, int prof, int nparam, int localSize) {
+    public void add(int id, String name, String label, int prof, int nparam, int localSize) {
         procTable.put(id, new Proc(name, label, prof, nparam, localSize));
     }
     

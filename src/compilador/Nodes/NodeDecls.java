@@ -3,7 +3,7 @@ package compilador.Nodes;
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
-import compilador.LabelTable;
+import compilador.LabelCount;
 
     public class NodeDecls extends Node{
         public NodeDecls decls;
@@ -15,7 +15,7 @@ import compilador.LabelTable;
             this.decl = decl;
         }
         
-        public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen){
+        public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen){
             if (decls != null)  decls.generateCode(vt,pt,lt,gen);
             if (decl != null){
                 if (decl instanceof NodeDecl) {

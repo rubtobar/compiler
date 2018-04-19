@@ -1,5 +1,5 @@
 package compilador.Nodes;
-import compilador.LabelTable;
+import compilador.LabelCount;
 
 import compilador.*;
 
@@ -15,7 +15,7 @@ import compilador.*;
             this.sentences = sentences;
         }
         
-        public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen){
+        public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen){
             if (decls != null)  decls.generateCode(vt,pt,lt,gen);
             if (methods != null) methods.generateCode(vt,pt,lt,gen);
             if (sentences != null) sentences.generateCode(vt,pt,lt,gen);

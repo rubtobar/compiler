@@ -4,7 +4,7 @@ import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.ThreeAddrCode.Operand;
 import compilador.VarTable;
-import compilador.LabelTable;
+import compilador.LabelCount;
 
 public class NodeLogExpr extends Node {
 
@@ -21,9 +21,9 @@ public class NodeLogExpr extends Node {
         this.tid = tid;
     }
 
-    public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
+    public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
         Operand comparator = null;
-        int e1, e2;
+        String e1, e2;
         arExpr.generateCode(vt, pt, lt, gen);
         if (logExpr != null) {
             logExpr.generateCode(vt, pt, lt, gen);
@@ -40,15 +40,21 @@ public class NodeLogExpr extends Node {
                 case "<=":
                     comparator = Operand.BLE;
                     break;
+                case "==":
+                    comparator = Operand.BEQ;
+                    break;
+                case "!=":
+                    comparator = Operand.BNE;
+                    break;
             }
             e1 = lt.add();
-            gen.add(comparator, "v" + logExpr.tid, "v" + arExpr.tid, "l"+e1);
-            gen.add(Operand.ASSIG, "0", null, "v"+tid);
+            gen.add(comparator, "v" + logExpr.tid, "v" + arExpr.tid, e1);
+            gen.add(Operand.ASSIG, "FALSE", null, "v"+tid);
             e2 = lt.add();
-            gen.add(Operand.GOTO, null, null, "l"+e2);
-            gen.add(Operand.SKIP, null, null, "l"+e1);
-            gen.add(Operand.ASSIG, "1", null, "v"+tid);
-            gen.add(Operand.SKIP, null, null, "l"+e2);
+            gen.add(Operand.GOTO, null, null, e2);
+            gen.add(Operand.SKIP, null, null, e1);
+            gen.add(Operand.ASSIG, "TRUE", null, "v"+tid);
+            gen.add(Operand.SKIP, null, null, e2);
         }
     }
 }
