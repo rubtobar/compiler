@@ -1,17 +1,12 @@
-boolean a = (5+2)>(4+5) & true;
-string s;
-
+boolean a = true;
+boolean b;
 void f(){
-	s = read();
-	boolean b = a | a;
-	if (b) {
-		s = "hola";
-	}
+	b = a;
+	string s = read();
 }
 
 /*
 * Programa principal
 */
 main {
-	write(s);
 }

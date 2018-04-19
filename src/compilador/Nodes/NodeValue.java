@@ -11,10 +11,10 @@ public class NodeValue extends Node {
     public NodeExpr expr;
     public NodeCall call;
     public Integer id;
-    public Object value;
+    public String value;
 
     public NodeValue(NodeExpr expr, NodeCall call,
-            Integer id, Object value, Object result) {
+            Integer id, String value, Object result) {
         super(result);
         this.expr = expr;
         this.call = call;
@@ -22,16 +22,19 @@ public class NodeValue extends Node {
         this.value = value;
     }
 
-    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
+    public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
         if (expr != null) {
-            
+            // Expressió
+            id = expr.tid;
         } else if (call != null) {
-
-        } else if (value != null) {
-            //gen.add(Operand.ASSIG, id, 0, 0);
-        } else {
+            // Call
+            call.generateCode(vt, pt, lt, gen);
             
+        } else if (value != null) {
+            // Literal
+            gen.add(Operand.ASSIG, value, null, "v"+id);
         }
+        // else Variable (id ja està assignat)
     }
 
 }

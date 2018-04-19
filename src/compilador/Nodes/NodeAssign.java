@@ -9,7 +9,7 @@ import compilador.LabelTable;
 
     public class NodeAssign extends Node{
         
-        private final NodeExpr expr;
+        final NodeExpr expr;
 
         public NodeAssign(NodeExpr expr, Object result) {
             super(result);

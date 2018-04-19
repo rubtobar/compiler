@@ -363,8 +363,8 @@ class CUP$Parser$actions {
 		Description d = new TypeDescription(TSB.BOOL, 1, 0, 1);
 		st.add("boolean", d, true);
 
-		st.add("true", new ConstDescription(TSB.BOOL, true), true);
-		st.add("false",  new ConstDescription(TSB.BOOL, false), true);
+		st.add("true", new ConstDescription(TSB.BOOL, "1"), true);
+		st.add("false",  new ConstDescription(TSB.BOOL, "0"), true);
 
 		d = new TypeDescription(TSB.INT, 4, Integer.MIN_VALUE, Integer.MAX_VALUE);
 		st.add("int", d, true);
@@ -763,7 +763,7 @@ class CUP$Parser$actions {
         } else if (te.result != aux.d.tsb) {
             errPrinter.unexpectedValueType(eq.line, eq.column, te.result.toString(), aux.d.tsb.toString());
         } else {
-			RESULT = new NodeAssignation(te, null);
+			RESULT = new NodeAssignation(aux.id, te, null);
         }
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("SENTENCE",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -972,7 +972,7 @@ class CUP$Parser$actions {
             errPrinter.unexpectedValueType(eq.line, eq.column, et.result.toString(), aux.d.tsb.toString());
         } else {
             try {
-            	st.add(nom.getAtribut(), new ConstDescription(aux.d.tsb, et), false);
+            	st.add(nom.getAtribut(), new ConstDescription(aux.d.tsb, "v"+et.tid), false);
             	RESULT = new NodeConstDecl(et,null);
             } catch (AlreadyDeclaredException ex) {
                 errPrinter.alreadyDeclaredVariable(nom.line, nom.column, nom.getAtribut());
@@ -1153,7 +1153,7 @@ class CUP$Parser$actions {
             errPrinter.unexpectedValueType(op.line, op.column, vt.result.toString(), TSB.BOOL.toString());
         } else {
         	int tid = st.addTemp(TSB.BOOL);
-        	RESULT = new NodeExpr(et,vt,tid,TSB.BOOL);
+        	RESULT = new NodeExpr(et,vt,tid,op.getAtribut(),TSB.BOOL);
         }
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("EXPR",15, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1169,7 +1169,7 @@ class CUP$Parser$actions {
 		NodeLogExpr vt = (NodeLogExpr)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
 		if (vt != null) {
-			RESULT = new NodeExpr(null, vt, vt.tid, vt.result);
+			RESULT = new NodeExpr(null, vt, vt.tid, null, vt.result);
 		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("EXPR",15, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1274,7 +1274,7 @@ class CUP$Parser$actions {
 		int exprright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
 		NodeExpr expr = (NodeExpr)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		 
-		RESULT = new NodeValue(expr, null, null, null, expr.result);
+		RESULT = new NodeValue(expr, null, expr.tid, null, expr.result);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("VALUE",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1313,7 +1313,7 @@ class CUP$Parser$actions {
 		Token str = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
 		int tid = st.addTemp(TSB.STRING);
-		RESULT = new NodeValue(null, null, tid, str.getAtribut(), TSB.STRING);
+		RESULT = new NodeValue(null, null, tid, "'"+str.getAtribut(), TSB.STRING);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("VALUE",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1330,7 +1330,7 @@ class CUP$Parser$actions {
 		try{
 			Integer value = Integer.parseInt(dig.getAtribut());
 			int tid = st.addTemp(TSB.INT);
-			RESULT = new NodeValue(null, null, tid, value, TSB.INT);
+			RESULT = new NodeValue(null, null, tid, value.toString(), TSB.INT);
 		}catch(NumberFormatException e){
             errPrinter.overflow(dig.line, dig.column, dig.getAtribut());
 		}

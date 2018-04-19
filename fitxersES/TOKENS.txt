@@ -1,57 +1,28 @@
 1:1: tk_id: 'boolean'
 1:9: tk_id: 'a'
 1:11: tk_equal
-1:13: tk_openp
-1:14: tk_digits: '5'
-1:15: tk_op_aritm: '+'
-1:16: tk_digits: '2'
-1:17: tk_closep
-1:18: tk_op_rel: '>'
-1:19: tk_openp
-1:20: tk_digits: '4'
-1:21: tk_op_aritm: '+'
-1:22: tk_digits: '5'
-1:23: tk_closep
-1:25: tk_op_log: '&'
-1:27: tk_id: 'true'
-1:31: tk_pcoma
-2:1: tk_id: 'string'
-2:8: tk_id: 's'
-2:9: tk_pcoma
-4:1: tk_id: 'void'
-4:6: tk_id: 'f'
-4:7: tk_openp
-4:8: tk_closep
-4:9: tk_leftb
-5:2: tk_id: 's'
-5:4: tk_equal
-5:6: tk_id: 'read'
-5:10: tk_openp
-5:11: tk_closep
-5:12: tk_pcoma
-6:2: tk_id: 'boolean'
-6:10: tk_id: 'b'
-6:12: tk_equal
-6:14: tk_id: 'a'
-6:16: tk_op_log: '|'
-6:18: tk_id: 'a'
-6:19: tk_pcoma
-7:2: tk_if
-7:5: tk_openp
-7:6: tk_id: 'b'
-7:7: tk_closep
-7:9: tk_leftb
-8:3: tk_id: 's'
-8:5: tk_equal
-8:7: tk_string: 'hola'
-8:13: tk_pcoma
-9:2: tk_rightb
-10:1: tk_rightb
-15:1: tk_main
-15:6: tk_leftb
-16:2: tk_id: 'write'
-16:7: tk_openp
-16:8: tk_id: 's'
-16:9: tk_closep
-16:10: tk_pcoma
-17:1: tk_rightb
+1:13: tk_id: 'true'
+1:17: tk_pcoma
+2:1: tk_id: 'boolean'
+2:9: tk_id: 'b'
+2:10: tk_pcoma
+3:1: tk_id: 'void'
+3:6: tk_id: 'f'
+3:7: tk_openp
+3:8: tk_closep
+3:9: tk_leftb
+4:2: tk_id: 'b'
+4:4: tk_equal
+4:6: tk_id: 'a'
+4:7: tk_pcoma
+5:2: tk_id: 'string'
+5:9: tk_id: 's'
+5:11: tk_equal
+5:13: tk_id: 'read'
+5:17: tk_openp
+5:18: tk_closep
+5:19: tk_pcoma
+6:1: tk_rightb
+11:1: tk_main
+11:6: tk_leftb
+12:1: tk_rightb

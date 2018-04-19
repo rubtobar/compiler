@@ -86,11 +86,13 @@ public class ThreeAddrCode {
         /* Donat un argument d'una instrucció, obté un String amb el format per imprimir */
         private String getPrintable(String arg) {
             String s = null;
-            if (!arg.equals("")) {
+            if (arg != null) {
                 if (arg.startsWith("v")) {
                     s = vt.varTable.get(Integer.parseInt(arg.substring(1))).name;
                 } else if (arg.startsWith("p")) {
                     s = pt.procTable.get(Integer.parseInt(arg.substring(1))).name;
+                } else if (arg.startsWith("'")){
+                    s = arg.substring(1);
                 } else {
                     s = new String(arg);
                 }

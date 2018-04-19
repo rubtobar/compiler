@@ -4,6 +4,7 @@ import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.ThreeAddrCode.Operand;
 import compilador.VarTable;
+import compilador.LabelTable;
 
 public class NodeArExpr extends Node {
 
@@ -20,11 +21,11 @@ public class NodeArExpr extends Node {
         this.tid = tid;
     }
 
-    public void generateCode(VarTable vt, ProcTable pt, ThreeAddrCode gen) {
+    public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
         if (arExpr != null) {
-            arExpr.generateCode(vt, pt, gen);
+            arExpr.generateCode(vt, pt,lt, gen);
         }
-        value.generateCode(vt, pt, gen);
+        value.generateCode(vt, pt, lt, gen);
         if (op != null) {
             Operand operand;
             if (op.equals("+")) {

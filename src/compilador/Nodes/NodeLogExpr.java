@@ -24,7 +24,7 @@ public class NodeLogExpr extends Node {
     public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
         Operand comparator = null;
         int e1, e2;
-        arExpr.generateCode(vt, pt, gen);
+        arExpr.generateCode(vt, pt, lt, gen);
         if (logExpr != null) {
             logExpr.generateCode(vt, pt, lt, gen);
             switch (op) {

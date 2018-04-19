@@ -19,8 +19,8 @@ public class NodeWhile extends Node {
 
     public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen) {
         expr.generateCode(vt,pt,lt,gen);
-        int etf = lt.add();
         int eti = lt.add();
+        int etf = lt.add();
         gen.add(Operand.SKIP, null, null, "l"+eti);
         gen.add(Operand.BEQ, "v"+expr.tid, "0", "l"+etf);
         if (sentences != null) {

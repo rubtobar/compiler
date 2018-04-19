@@ -297,9 +297,9 @@ public class SymbolTable {
 
     public static class ConstDescription extends Description {
 
-        public Object constValue;
+        public String constValue;
 
-        public ConstDescription(Description.TSB tsb, Object constValue) {
+        public ConstDescription(Description.TSB tsb, String constValue) {
             this.dt = DescriptionType.DCONST;
             this.tsb = tsb;
             this.constValue = constValue;

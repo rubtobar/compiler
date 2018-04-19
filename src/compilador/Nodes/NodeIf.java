@@ -19,7 +19,7 @@ import compilador.LabelTable;
         public void generateCode(VarTable vt, ProcTable pt, LabelTable lt, ThreeAddrCode gen){
             expr.generateCode(vt,pt,lt,gen);
             int e = lt.add();
-            gen.add(Operand.BEQ, "v"+expr.tid, "1", "l"+e);
+            gen.add(Operand.BEQ, "v"+expr.tid, "0", "l"+e);
             if (sentences != null) sentences.generateCode(vt,pt,lt,gen);
             gen.add(Operand.SKIP, null, null, "l"+e);
         }
