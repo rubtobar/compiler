@@ -6,7 +6,7 @@ import static compilador.Compilador.*;
 %%
 // Declaracions
 
-string    = \" [^\"]* \"
+string     = (\" ([^\"] | [(\\\")])* \") | (\' ([^\'] | [(\\\')])* \')
 digit      = [0-9]
 digits     = {digit}+
 id         = [A-Za-z_][A-Za-z0-9_]*
@@ -73,7 +73,9 @@ equal      = "="
 
 	{string}       		
 		{
-		Token tk = new Token(Token.Tipus.tk_string, yytext().replaceAll("\"", ""), getLine(), getColumn()); 
+		String cleared = yytext().substring(1, yytext().length()-1);
+		cleared = cleared.replaceAll("\\\\("+yytext().charAt(0)+")", "$1");
+		Token tk = new Token(Token.Tipus.tk_string,cleared, getLine(), getColumn());
 		printToken(tk);
 		return tk;
 		}

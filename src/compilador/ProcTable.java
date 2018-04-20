@@ -5,6 +5,8 @@
  */
 package compilador;
 
+import static compilador.Compilador.OUTPUT_PATH;
+import static compilador.Compilador.PROC_TABLE_PRINTER_FILENAME;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -70,7 +72,7 @@ public class ProcTable {
     public void printOnFile() {
         PrintWriter writer;
         try {
-            writer = new PrintWriter("fitxersES/TABLAPROCS.txt");
+            writer = new PrintWriter(OUTPUT_PATH+PROC_TABLE_PRINTER_FILENAME);
             writer.print(this.toString());
             writer.close();
         } catch (FileNotFoundException ex) {

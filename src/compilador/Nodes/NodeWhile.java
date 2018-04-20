@@ -18,13 +18,13 @@ public class NodeWhile extends Node {
     }
 
     public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
-        expr.generateCode(vt,pt,lt,gen);
         String eti = lt.add();
         String etf = lt.add();
         gen.add(Operand.SKIP, null, null, eti);
-        gen.add(Operand.BEQ, "v"+expr.tid, "FALSE", etf);
+        expr.generateCode(vt, pt, lt, gen);
+        gen.add(Operand.BEQ, "v" + expr.tid, "FALSE", etf);
         if (sentences != null) {
-            sentences.generateCode(vt,pt,lt,gen);
+            sentences.generateCode(vt, pt, lt, gen);
         }
         gen.add(Operand.GOTO, null, null, eti);
         gen.add(Operand.SKIP, null, null, etf);

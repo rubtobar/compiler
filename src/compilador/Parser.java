@@ -821,7 +821,7 @@ class CUP$Parser$actions {
         } catch (IllegalBlockExitException ex) {
         	Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
         }
-		if (cond.result == null) {
+		if (cond == null || cond.result == null) {
 			// Ignorar
 		}
 		else if (cond.result != TSB.BOOL){
@@ -1078,6 +1078,8 @@ class CUP$Parser$actions {
             TblSymbol param = st.getParameter(((ProcDescription) aux.d).firstArg);
             if (param == null) {
                 errPrinter.tooManyArgs(id.line, id.column, id.getAtribut());
+            } else if (arg1 == null){
+                // ignora
             } else if (!arg1.result.equals(param.d.tsb)) {
                 errPrinter.unexpectedArgType(opp.line, opp.column, arg1.result.toString(), param.d.tsb.toString());
             } else {

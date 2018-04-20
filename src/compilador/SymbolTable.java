@@ -5,6 +5,8 @@
  */
 package compilador;
 
+import static compilador.Compilador.OUTPUT_PATH;
+import static compilador.Compilador.SYMBOL_TABLE_PRINTER_FILENAME;
 import compilador.SymbolTable.Description.DescriptionType;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -25,6 +27,7 @@ public class SymbolTable {
     private final HashMap<String, TblSymbol> descriptionTable;
     private VarTable vt;
     private ProcTable pt;
+    private int tempVarCounter;
     int currentProcId;
 
     public SymbolTable(VarTable vt, ProcTable pt) {
@@ -38,6 +41,7 @@ public class SymbolTable {
         this.vt = vt;
         this.pt = pt;
         currentProcId = 0;  //las variables con proc=0 pertenecen al main 
+        this.tempVarCounter = 0;
     }
 
     public void reset() {
@@ -186,7 +190,7 @@ public class SymbolTable {
                 size = ((TypeDescription) descriptionTable.get("string").d).size;
                 break;
         }
-        vt.addVar(id, currentProcId, size, "t" + id);
+        vt.addVar(id, currentProcId, size, "t" + tempVarCounter++);
         return id;
     }
 
@@ -419,7 +423,7 @@ public class SymbolTable {
     public void printOnFile() {
         PrintWriter writer;
         try {
-            writer = new PrintWriter("fitxersES/TABLASIMBOLOS.txt");
+            writer = new PrintWriter(OUTPUT_PATH+SYMBOL_TABLE_PRINTER_FILENAME);
             writer.print(this.toString());
             writer.print("Current Level: " + this.currentLevel);
             writer.close();

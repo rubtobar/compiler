@@ -1,0 +1,6 @@
+/*
+* Programa principal
+*/
+main {
+
+}

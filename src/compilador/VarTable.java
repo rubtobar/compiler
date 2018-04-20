@@ -5,6 +5,8 @@
  */
 package compilador;
 
+import static compilador.Compilador.OUTPUT_PATH;
+import static compilador.Compilador.VAR_TABLE_PRINTER_FILENAME;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -87,7 +89,7 @@ public class VarTable {
     public void printOnFile() {
         PrintWriter writer;
         try {
-            writer = new PrintWriter("fitxersES/TABLAVARIABLES.txt");
+            writer = new PrintWriter(OUTPUT_PATH+VAR_TABLE_PRINTER_FILENAME);
             writer.print(this.toString());
             writer.close();
         } catch (FileNotFoundException ex) {

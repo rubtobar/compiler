@@ -1,7 +1,0 @@
-L0: skip
-t10 = 3
-return t10
-t11 = "1"
-param t11
-call WRITE
-call L0

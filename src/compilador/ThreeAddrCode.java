@@ -5,6 +5,8 @@
  */
 package compilador;
 
+import static compilador.Compilador.OUTPUT_PATH;
+import static compilador.Compilador.THREE_ADDR_PRINTER_FILENAME;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -114,7 +116,7 @@ public class ThreeAddrCode {
         /*escribir en fichero*/
         PrintWriter writer;
         try {
-            writer = new PrintWriter("fitxersES/THREEADDRCODE.txt");
+            writer = new PrintWriter(OUTPUT_PATH+THREE_ADDR_PRINTER_FILENAME);
             code.forEach((_item) -> {
                 writer.print(_item.toString() + "\n");
             });
