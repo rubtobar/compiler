@@ -49,12 +49,14 @@ public class NodeLogExpr extends Node {
             }
             e1 = lt.add();
             gen.add(comparator, "v" + logExpr.tid, "v" + arExpr.tid, e1);
-            gen.add(Operand.ASSIG, "FALSE", null, "v"+tid);
+            gen.add(Operand.ASSIG, "FALSE", null, "v" + tid);
             e2 = lt.add();
             gen.add(Operand.GOTO, null, null, e2);
             gen.add(Operand.SKIP, null, null, e1);
-            gen.add(Operand.ASSIG, "TRUE", null, "v"+tid);
+            gen.add(Operand.ASSIG, "TRUE", null, "v" + tid);
             gen.add(Operand.SKIP, null, null, e2);
+        } else {
+            tid = arExpr.tid;
         }
     }
 }

@@ -1028,7 +1028,11 @@ class CUP$Parser$actions {
                 String pname = ((ArgDescription)st.getParameter((Integer)rtn.result).d).idProc;
                 errPrinter.tooFewArgs(clp.line, clp.column, pname);
             } else {
-                RESULT = new NodeCall(rtn,rtn.procId,rtn.result);
+            	Integer tid = null;
+            	if (rtn.result != TSB.VOID) {
+            		tid = st.addTemp((TSB)rtn.result);
+            	}
+                RESULT = new NodeCall(rtn,rtn.procId,tid,rtn.result);
             }
         }
 		
@@ -1050,7 +1054,11 @@ class CUP$Parser$actions {
 		} else if (((ProcDescription) aux.d).firstArg != 0) { 
             errPrinter.tooFewArgs(id.line, id.column, id.getAtribut());
 		} else {
-			RESULT = new NodeCall(null, aux.id, ((ProcDescription) aux.d).tsb);
+		    Integer tid = null;
+        	if (aux.d.tsb != TSB.VOID) {
+        		tid = st.addTemp(aux.d.tsb);
+        	}
+			RESULT = new NodeCall(null, aux.id, tid, ((ProcDescription) aux.d).tsb);
 		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("CALL",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);

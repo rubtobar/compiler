@@ -11,11 +11,13 @@ public class NodeCall extends Node {
 
     private final NodeContCall contCall;
     public int procId;
+    public Integer tid;
 
-    public NodeCall(NodeContCall contCall, int procId, Object result) {
+    public NodeCall(NodeContCall contCall, int procId, Integer tid, Object result) {
         super(result);
         this.contCall = contCall;
         this.procId = procId;
+        this.tid = tid;
     }
 
     public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
@@ -25,7 +27,11 @@ public class NodeCall extends Node {
                 gen.add(Operand.PARAM, null, null, "v" + param);
             }
         }
-        gen.add(Operand.CALL, null, null, "p" + procId);
+        if (tid != null) {
+            gen.add(Operand.CALL, "v" + tid, null, "p" + procId);
+        } else {
+            gen.add(Operand.CALL, null, null, "p" + procId);
+        }
     }
 
 }

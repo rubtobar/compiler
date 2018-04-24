@@ -1,0 +1,19 @@
+1:1: tk_id: 'void'
+1:6: tk_id: 'fun'
+1:9: tk_openp
+1:10: tk_closep
+1:11: tk_leftb
+1:12: tk_rightb
+5:1: tk_main
+5:6: tk_leftb
+6:10: tk_while
+6:16: tk_openp
+6:17: tk_id: 'true'
+6:21: tk_closep
+6:23: tk_leftb
+7:18: tk_id: 'fun'
+7:21: tk_openp
+7:22: tk_closep
+7:23: tk_pcoma
+8:10: tk_rightb
+9:1: tk_rightb

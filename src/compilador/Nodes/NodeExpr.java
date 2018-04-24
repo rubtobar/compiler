@@ -35,6 +35,8 @@ public class NodeExpr extends Node {
                 log_op = Operand.OR;
             }
             gen.add(log_op, "v"+expr.tid, "v"+logExpr.tid, "v"+tid);
+        } else {
+            this.tid = logExpr.tid;
         }
     }
 
