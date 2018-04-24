@@ -1,11 +1,9 @@
-
-int fun(){
-return 3;
-}
+void fun(){}
 /*
 * Programa principal
 */
 main {
-        write("1");
-        fun();
+         while (true) {
+                 fun();
+         }
 }

@@ -1,0 +1,19 @@
+	ORG	$1000
+START:
+;L0: skip
+L0:
+BAD INSTR
+BAD INSTR
+;L1: skip
+L1:
+BAD INSTR
+BAD INSTR
+;goto: L1
+BRA L1
+;L2: skip
+L2:
+	SIMHALT
+
+
+
+	END	START

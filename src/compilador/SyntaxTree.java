@@ -40,5 +40,6 @@ public class SyntaxTree {
 
     void generateCode() {
         root.generateCode(vt, pt, lt, codeGen);
+        codeGen.write68Kcode();
     }
 }

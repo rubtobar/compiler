@@ -29,6 +29,7 @@ public class NodeValue extends Node {
         } else if (call != null) {
             // Call
             call.generateCode(vt, pt, lt, gen);
+            this.id = call.tid;
             
         } else if (value != null) {
             // Literal

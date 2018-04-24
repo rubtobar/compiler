@@ -90,7 +90,7 @@ public class ThreeAddrCode {
                     s = vt.varTable.get(Integer.parseInt(arg.substring(1))).name;
                 } else if (arg.startsWith("p")) {
                     s = pt.procTable.get(Integer.parseInt(arg.substring(1))).label;
-                } else if (arg.startsWith("'")){
+                } else if (arg.startsWith("'")) {
                     s = "\"" + arg.substring(1) + "\"";
                 } else {
                     s = new String(arg);
@@ -98,6 +98,52 @@ public class ThreeAddrCode {
             }
             return s;
         }
+
+        public String get68KCode() {
+            String instr = ";" + this.toString() + "\n";
+            switch (op) {
+                case ADD:
+                    break;
+                case SUB:
+                    break;
+                case AND:
+                    break;
+                case OR:
+                    break;
+                case SKIP:
+                    instr += dest + ":";
+                    break;
+                case GOTO:
+                    instr += "BRA " + dest;
+                    break;
+                case BLT:
+                    break;
+                case BLE:
+                    break;
+                case BGE:
+                    break;
+                case BGT:
+                    break;
+                case BNE:
+                    break;
+                case BEQ:
+                    break;
+                case CALL:
+                    break;
+                case FUN:
+                    break;
+                case RETURN:
+                    break;
+                case PARAM:
+                    break;
+                case ASSIG:
+                    break;
+                default:
+                    return "BAD INSTR";
+            }
+            return instr;
+        }
+
     }
 
     public ThreeAddrCode(VarTable vt, ProcTable pt) {
@@ -122,6 +168,20 @@ public class ThreeAddrCode {
         } catch (FileNotFoundException ex) {
             System.err.println("FALLO DE ESCRITURA EN EL CODIGO DE 3 DIRECCIONES");
         }
+    }
 
+    public void write68Kcode() {
+        PrintWriter writer;
+        try {
+            writer = new PrintWriter("fitxersES/ASSEMBLY_CODE.X68");
+            writer.print("\tORG\t$1000\nSTART:\n");
+            code.forEach((_item) -> {
+                writer.print(_item.get68KCode() + "\n");
+            });
+            writer.print("\tSIMHALT\n\n\n\n\tEND\tSTART");
+            writer.close();
+        } catch (FileNotFoundException ex) {
+            System.err.println("FALLO DE ESCRITURA EN EL CODIGO DE ENSAMBLADOR");
+        }
     }
 }
