@@ -6,7 +6,7 @@
 package compilador;
 
 import static compilador.Compilador.OUTPUT_PATH;
-import static compilador.Compilador.PROC_TABLE_PRINTER_FILENAME;
+import static compilador.Compilador.PROC_TABLE_PRINTER_FILEPATH;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -50,6 +50,10 @@ public class ProcTable {
         procTable.put(id, new Proc(name, label, prof, nparam, localSize));
     }
     
+    public void updateProcSize(int proc, int size) {
+        procTable.get(proc).localSize = size;
+    }
+    
         @Override
     public String toString(){
         String str[] = new String[procTable.size()];
@@ -72,7 +76,7 @@ public class ProcTable {
     public void printOnFile() {
         PrintWriter writer;
         try {
-            writer = new PrintWriter(OUTPUT_PATH+PROC_TABLE_PRINTER_FILENAME);
+            writer = new PrintWriter(PROC_TABLE_PRINTER_FILEPATH);
             writer.print(this.toString());
             writer.close();
         } catch (FileNotFoundException ex) {

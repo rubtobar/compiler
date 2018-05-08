@@ -5,8 +5,7 @@
  */
 package compilador;
 
-import static compilador.Compilador.OUTPUT_PATH;
-import static compilador.Compilador.VAR_TABLE_PRINTER_FILENAME;
+import static compilador.Compilador.VAR_TABLE_PRINTER_FILEPATH;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -41,37 +40,55 @@ public class VarTable {
 
     HashMap<Integer, Balde> varTable;
 
-    /*Tabla con los offsets de cada variable, al entrar
+    /*Tabla con los varOffsets de cada variable, al entrar
     una variable nueva, el valor aumentara para cada programa
-    -Los offsets seran siempre positivos, se cambiara el signo en 
+    -Los varOffsets seran siempre positivos, se cambiara el signo en 
     funcion de si son var de retorno, argumentos o variables*/
-    HashMap<Integer, Integer> offsets;
+    HashMap<Integer, Integer> varOffsets;
+    HashMap<Integer, Integer> paramOffsets;
 
     public VarTable() {
         this.varTable = new HashMap<>();
-        this.offsets = new HashMap<>();
+        this.varOffsets = new HashMap<>();
+        this.paramOffsets = new HashMap<>();
     }
 
-    public void addVar(int id, int proc, int size, String name) {
-        int offset = offsets.getOrDefault(proc, -1);
-        if (offset == -1) {
+    public int addVar(int id, int proc, int size, String name, boolean isParam) {
+
+        HashMap<Integer, Integer> map;
+
+        if (!isParam) {
+            map = varOffsets;
+            size = -size;
+        } else {
+            map = paramOffsets;
+        }
+
+        Integer offset = map.getOrDefault(proc, null);
+        if (offset == null) {
             //el offset para este programa no esta creado
-            offsets.put(proc, size);
-            offset = size;
+            if (isParam) {
+                map.put(proc, 0);
+                offset = 0;
+            } else {
+                map.put(proc, size);
+                offset = size;
+            }
         } else {
             /*el offset ya existe, lo aumentamos para dejar cabida a la
-            nueva variable*/
+        nueva variable*/
             offset = offset + size;
-            offsets.replace(proc, offset);
+            map.replace(proc, offset);
         }
-        varTable.put(id, new Balde(proc, size, offset, name));
+        varTable.put(id, new Balde(proc, Math.abs(size), offset, name));
+        return Math.abs(varOffsets.getOrDefault(proc, 0));
     }
 
     @Override
     public String toString() {
         String str[] = new String[varTable.size()];
         String str1 = "ID\t\tPROC\t\tSIZE\t\tOFFSET\t\tVARNAME\n"
-        + "----------------------------------------------------------------------\n";
+                + "----------------------------------------------------------------------\n";
         //kuytckyuytc
         int i = 0;
         for (int id : this.varTable.keySet()) {
@@ -89,7 +106,7 @@ public class VarTable {
     public void printOnFile() {
         PrintWriter writer;
         try {
-            writer = new PrintWriter(OUTPUT_PATH+VAR_TABLE_PRINTER_FILENAME);
+            writer = new PrintWriter(VAR_TABLE_PRINTER_FILEPATH);
             writer.print(this.toString());
             writer.close();
         } catch (FileNotFoundException ex) {

@@ -5,6 +5,8 @@
  */
 package compilador;
 
+import static compilador.Compilador.ASSEMBLY_PRINTER_FILEPATH;
+import static compilador.Compilador.THREE_ADDR_PRINTER_FILEPATH;
 import compilador.Nodes.NodeProg;
 
 /**
@@ -14,16 +16,17 @@ import compilador.Nodes.NodeProg;
 public class SyntaxTree {
 
     private NodeProg root;
-    final VarTable vt;
-    final ProcTable pt;
-    final LabelCount lt;
-    final ThreeAddrCode codeGen;
+    private final VarTable vt;
+    private final ProcTable pt;
+    private final LabelCount lt;
+    private final ThreeAddrCode code;
     
     public SyntaxTree() {
         vt = new VarTable();
         pt = new ProcTable();
         lt = new LabelCount();
-        codeGen = new ThreeAddrCode(vt,pt);
+        code = new ThreeAddrCode(vt,pt);
+        root = null;
     }
 
     public void setRoot(NodeProg root) {
@@ -39,7 +42,11 @@ public class SyntaxTree {
     }
 
     void generateCode() {
-        root.generateCode(vt, pt, lt, codeGen);
-        codeGen.write68Kcode();
+        root.generateCode(vt, pt, lt, code);
+        code.flush(THREE_ADDR_PRINTER_FILEPATH);
+        code.write68Kcode(ASSEMBLY_PRINTER_FILEPATH);
+        code.optimize();
+        code.flush(THREE_ADDR_PRINTER_FILEPATH.replace(".txt", "_OPT.txt"));
+        code.write68Kcode(ASSEMBLY_PRINTER_FILEPATH.replace(".X68", "_OPT.X68"));
     }
 }

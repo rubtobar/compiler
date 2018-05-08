@@ -1,8 +1,0 @@
-L0: skip
-return null
-t10 = TRUE
-L1: skip
-if t10 = FALSE goto L2
-call L0
-goto: L1
-L2: skip

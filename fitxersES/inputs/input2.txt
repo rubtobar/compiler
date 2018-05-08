@@ -1,6 +1,15 @@
+int a = 5;
+const int asdsdfghjkjhgf = 10;
+
+int func(boolean bo, int abcd, boolean hola, string queue) {
+	int asd = 4;
+	a = 34;
+	return a;
+}
+
 /*
 * Programa principal
 */
 main {
-
+	int b = a + 1;
 }

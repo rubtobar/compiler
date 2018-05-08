@@ -6,7 +6,7 @@
 package compilador;
 
 import static compilador.Compilador.OUTPUT_PATH;
-import static compilador.Compilador.SYMBOL_TABLE_PRINTER_FILENAME;
+import static compilador.Compilador.SYMBOL_TABLE_PRINTER_FILEPATH;
 import compilador.SymbolTable.Description.DescriptionType;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -95,7 +95,7 @@ public class SymbolTable {
         return descriptionTable.get(id);
     }
 
-    public int add(String id, Description d, boolean reserved)
+    public int add(String id, Description d, boolean reserved, boolean isParam)
             throws AlreadyDeclaredException, ReservedSymbolException {
 
         /*
@@ -143,12 +143,13 @@ public class SymbolTable {
         switch (d.dt) {
             case DVAR:
                 // id,programa,size,offset,value
-                vt.addVar(descriptionTable.get(id).id, currentProcId, size, id);
+                int procSize = vt.addVar(descriptionTable.get(id).id, currentProcId, size, id, isParam);
+                pt.updateProcSize(currentProcId, procSize);
                 break;
-            case DCONST:
-                // id,programa,size,offset,value
-                vt.addVar(descriptionTable.get(id).id, currentProcId, size, id);
-                break;
+//            case DCONST:
+//                // id,programa,size,offset,value
+//                vt.addVar(descriptionTable.get(id).id, currentProcId, size, id);
+//                break;
             case DPROC:
                 // añadimos proc a la tabla de procs
                 // modificamos los valores de las variables que 
@@ -190,7 +191,8 @@ public class SymbolTable {
                 size = ((TypeDescription) descriptionTable.get("string").d).size;
                 break;
         }
-        vt.addVar(id, currentProcId, size, "t" + tempVarCounter++);
+        int procSize = vt.addVar(id, currentProcId, size, "t" + tempVarCounter++, false);
+        pt.updateProcSize(currentProcId, procSize);
         return id;
     }
 
@@ -423,7 +425,7 @@ public class SymbolTable {
     public void printOnFile() {
         PrintWriter writer;
         try {
-            writer = new PrintWriter(OUTPUT_PATH+SYMBOL_TABLE_PRINTER_FILENAME);
+            writer = new PrintWriter(SYMBOL_TABLE_PRINTER_FILEPATH);
             writer.print(this.toString());
             writer.print("Current Level: " + this.currentLevel);
             writer.close();

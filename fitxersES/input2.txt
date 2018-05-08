@@ -1,9 +1,0 @@
-void fun(){}
-/*
-* Programa principal
-*/
-main {
-         while (true) {
-                 fun();
-         }
-}

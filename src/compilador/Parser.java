@@ -360,29 +360,33 @@ class CUP$Parser$actions {
               Object RESULT =null;
 		 
 		try{
-		Description d = new TypeDescription(TSB.BOOL, 1, 0, 1);
-		st.add("boolean", d, true);
 
-		st.add("true", new ConstDescription(TSB.BOOL, "TRUE"), true);
-		st.add("false",  new ConstDescription(TSB.BOOL, "FALSE"), true);
+		Description d = new ProcDescription(TSB.VOID);
+		st.add("main", d, true, false);
+
+		d = new TypeDescription(TSB.BOOL, 1, 0, 1);
+		st.add("boolean", d, true, false);
+
+		st.add("true", new ConstDescription(TSB.BOOL, "TRUE"), true, false);
+		st.add("false",  new ConstDescription(TSB.BOOL, "FALSE"), true, false);
 
 		d = new TypeDescription(TSB.INT, 4, Integer.MIN_VALUE, Integer.MAX_VALUE);
-		st.add("int", d, true);
+		st.add("int", d, true, false);
 
 		d = new TypeDescription(TSB.VOID, 0, 0, 0);
-		st.add("void", d, true);
+		st.add("void", d, true, false);
 
 		d = new TypeDescription(TSB.STRING, 32, 0, 0);
-		st.add("string", d, true);
+		st.add("string", d, true, false);
 
 		d = new ProcDescription(TSB.VOID);
-		st.add("write", d, true);
+		st.add("write", d, true, false);
 		
 		d = new ArgDescription("write", TSB.STRING);
 		st.addParameter("write", "value", (ArgDescription) d);
 
 		d = new ProcDescription(TSB.STRING);
-		st.add("read", d, true);
+		st.add("read", d, true, false);
 		} catch (AlreadyDeclaredException | ReservedSymbolException | NoProcGivenException ex) {
             Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -520,7 +524,7 @@ class CUP$Parser$actions {
 	        while (arg != 0 ){
 	            aux = st.getParameter(arg);
 	            try {
-	                st.add(aux.lexema, new VarDescription(aux.d.tsb), false);
+	                st.add(aux.lexema, new VarDescription(aux.d.tsb), false, true);
 	            } catch (AlreadyDeclaredException ex) {
 	                Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
 	            } catch (ReservedSymbolException ex) {
@@ -552,7 +556,7 @@ class CUP$Parser$actions {
             errPrinter.nonExistingType(tipus.line, tipus.column, tipus.getAtribut());
         } else {
         	try {
-	            st.add(nom.getAtribut(), new ProcDescription(aux.d.tsb), false);
+	            st.add(nom.getAtribut(), new ProcDescription(aux.d.tsb), false, false);
 	        } catch (AlreadyDeclaredException ex) {
                 errPrinter.alreadyDeclaredFunction(nom.line, nom.column, nom.getAtribut());
 	        } catch (ReservedSymbolException ex) {
@@ -604,7 +608,7 @@ class CUP$Parser$actions {
             errPrinter.nonExistingType(tP.line, tP.column, tP.getAtribut());
         } 
     	try {
-        	st.add(nP.getAtribut(), new ProcDescription(aux.d.tsb), false);
+        	st.add(nP.getAtribut(), new ProcDescription(aux.d.tsb), false, false);
         } catch (AlreadyDeclaredException ex) {
             errPrinter.alreadyDeclaredFunction(nP.line, nP.column, nP.getAtribut());
         } catch (ReservedSymbolException ex) {
@@ -933,7 +937,7 @@ class CUP$Parser$actions {
                 errPrinter.unexpectedValueType(nom.line, nom.column, vt.result.toString(), aux.d.tsb.toString());
 	        } 
 	        try {
-            	int id = st.add(nom.getAtribut(), new VarDescription(aux.d.tsb), false);
+            	int id = st.add(nom.getAtribut(), new VarDescription(aux.d.tsb), false, false);
             	RESULT = new NodeDecl(vt, id, null);
             } catch (AlreadyDeclaredException ex) {
                 errPrinter.alreadyDeclaredVariable(nom.line, nom.column, nom.getAtribut());
@@ -972,7 +976,7 @@ class CUP$Parser$actions {
             errPrinter.unexpectedValueType(eq.line, eq.column, et.result.toString(), aux.d.tsb.toString());
         } else {
             try {
-            	st.add(nom.getAtribut(), new ConstDescription(aux.d.tsb, "v"+et.tid), false);
+            	st.add(nom.getAtribut(), new ConstDescription(aux.d.tsb, "v"+et.tid), false, false);
             	RESULT = new NodeConstDecl(et,null);
             } catch (AlreadyDeclaredException ex) {
                 errPrinter.alreadyDeclaredVariable(nom.line, nom.column, nom.getAtribut());
