@@ -16,6 +16,9 @@ import java.util.HashMap;
  * @author Ruben
  */
 public class VarTable {
+    
+    //Tamaño de el estado de la maquina a guardar en la pila
+    final int SAVED_STATE_SIZE = 64;
 
     public class Balde {
 
@@ -59,6 +62,7 @@ public class VarTable {
 
         if (!isParam) {
             map = varOffsets;
+            // Sumamos el offset del estado de la maquina guardado
             size = -size;
         } else {
             map = paramOffsets;
@@ -71,8 +75,9 @@ public class VarTable {
                 map.put(proc, 0);
                 offset = 0;
             } else {
-                map.put(proc, size);
-                offset = size;
+                // Le añadimos el espacio para guardar los registros
+                map.put(proc, size-SAVED_STATE_SIZE);
+                offset = size-SAVED_STATE_SIZE;
             }
         } else {
             /*el offset ya existe, lo aumentamos para dejar cabida a la

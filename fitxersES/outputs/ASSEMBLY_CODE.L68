@@ -1,0 +1,70 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 11/05/2018 22:43:55
+
+00001000                             1      ORG $1000
+00001000                             2  START:
+00001000                             3      ;t0 to Stack
+00001000  588F                       4      add.l #4, SP
+00001002                             5      ;a to Stack
+00001002  588F                       6      add.l #4, SP
+00001004                             7      ;t1 to Stack
+00001004  588F                       8      add.l #4, SP
+00001006                             9      ;t4 to Stack
+00001006  588F                      10      add.l #4, SP
+00001008                            11      ;t5 to Stack
+00001008  588F                      12      add.l #4, SP
+0000100A                            13      ;variabledelmain to Stack
+0000100A  588F                      14      add.l #4, SP
+0000100C                            15      ;SAVED_STATE to Stack
+0000100C  48A7 FFFF                 16      movem D0-D7/A0-A7,-(A7) 
+00001010                            17      ;A6 to index variables
+00001010  2C4F                      18      move.l SP, A6
+00001012                            19      ;t0 = 5
+00001012  2F7C 00000005 FFBC        20      move.l #5, -68(SP)
+0000101A                            21  
+0000101A                            22      ;a = t0
+0000101A  2F6F FFBC FFB8            23      move.l -68(SP), -72(SP)
+00001020                            24  
+00001020                            25      ;t1 = 10
+00001020  2F7C 0000000A FFB4        26      move.l #10, -76(SP)
+00001028                            27  
+00001028                            28  ;L0: skip
+00001028                            29  L0:
+00001028                            30      ;t2 = 4
+00001028  2F7C 00000004 FFBC        31      move.l #4, -68(SP)
+00001030                            32  
+00001030                            33      ;asd = t2
+00001030  2F6F FFBC FFB8            34      move.l -68(SP), -72(SP)
+00001036                            35  
+00001036                            36      ;t3 = 34
+00001036  2F7C 00000022 FFB4        37      move.l #34, -76(SP)
+0000103E                            38  
+0000103E                            39      ;a = t3
+0000103E  2F6F FFB4 FFB8            40      move.l -76(SP), -72(SP)
+00001044                            41  
+00001044                            42      ;return a
+00001044                            43  
+00001044                            44      ;t4 = 1
+00001044  2F7C 00000001 FFB0        45      move.l #1, -80(SP)
+0000104C                            46  
+0000104C                            47      ;t5 = a + t4
+0000104C                            48  
+0000104C                            49      ;variabledelmain = t5
+0000104C  2F6F FFAC FFA8            50      move.l -84(SP), -88(SP)
+00001052                            51  
+00001052  FFFF FFFF                 52      SIMHALT
+00001056                            53  
+00001056                            54  
+00001056                            55  
+00001056                            56      END START
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+L0                  1028
+START               1000

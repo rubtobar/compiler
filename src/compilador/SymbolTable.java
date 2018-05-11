@@ -5,7 +5,6 @@
  */
 package compilador;
 
-import static compilador.Compilador.OUTPUT_PATH;
 import static compilador.Compilador.SYMBOL_TABLE_PRINTER_FILEPATH;
 import compilador.SymbolTable.Description.DescriptionType;
 import java.io.FileNotFoundException;

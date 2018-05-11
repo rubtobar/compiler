@@ -1,12 +1,12 @@
-t0 = 5
-a = t0
-t1 = 10
+t0 = #5
+a = -68(A6)
+t1 = #10
 L0: skip
-t2 = 4
-asd = t2
-t3 = 34
-a = t3
+t2 = #4
+asd = -68(A6)
+t3 = #34
+a = -76(A6)
 return a
-t4 = 1
+t4 = #1
 t5 = a + t4
-b = t5
+variabledelmain = -84(A6)

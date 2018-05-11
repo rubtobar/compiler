@@ -41,10 +41,10 @@
 13:1: tk_main
 13:6: tk_leftb
 14:2: tk_id: 'int'
-14:6: tk_id: 'b'
-14:8: tk_equal
-14:10: tk_id: 'a'
-14:12: tk_op_aritm: '+'
-14:14: tk_digits: '1'
-14:15: tk_pcoma
+14:6: tk_id: 'variabledelmain'
+14:22: tk_equal
+14:24: tk_id: 'a'
+14:26: tk_op_aritm: '+'
+14:28: tk_digits: '1'
+14:29: tk_pcoma
 15:1: tk_rightb

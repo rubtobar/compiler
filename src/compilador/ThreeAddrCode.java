@@ -5,6 +5,7 @@
  */
 package compilador;
 
+import compilador.VarTable.Balde;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -163,6 +164,31 @@ public class ThreeAddrCode {
                 case PARAM:
                     break;
                 case ASSIG:
+                    // Copiamos la variable a su lugar de destino
+                    Balde varDestino = vt.varTable.get(Integer.parseInt(dest.substring(1)));
+                    Balde source1;
+                    // Es un avariable
+                    if(src1.startsWith("v")){
+                        source1 = vt.varTable.get(Integer.parseInt(src1.substring(1)));
+                        // Pasamos su indexado en la pila
+                        src1 = source1.offset+"(A6)";
+                    }else{
+                        //Si no es una variable añadimos '#'
+                        src1 = "#"+src1;
+                    }
+                    // Boolean
+                    if(varDestino.size == 1){
+                        instr += "\tmove.b #"+ src1 +", "+varDestino.offset+"(A6)\n";
+                        break;
+                    // Integer
+                    }else if (varDestino.size == 4) {
+                        instr += "\tmove.l "+ src1 +", "+varDestino.offset+"(A6)\n";
+                        break;
+                    }
+                    // String
+                    for (int i = 0; i < varDestino.size; i++) {
+                        // Mover string trozo a trozo
+                    }
                     break;
                 default:
                     return "bad instr: " + op.toString();
@@ -315,10 +341,36 @@ public class ThreeAddrCode {
         PrintWriter writer;
         try {
             writer = new PrintWriter(filename);
+            // Generamos etiqueta de START
             writer.print("\tORG\t$1000\nSTART:\n");
+
+            // Generamos variables globales 
+            // Generamos variables del main
+            Balde balde;
+            for (Integer id : vt.varTable.keySet()) {
+                balde = vt.varTable.get(id);
+                // Pertenece al main(Proc = 0)
+                if (balde.proc == 0) {
+                    // Añadimos comentario
+                    writer.print("\t;" + balde.name + " to Stack\n");
+                    // Asignamos el espacio en la pila
+                    writer.print("\tadd.l #" + balde.size + ", SP\n");
+                }
+            }
+            // Añadimos el estado guardado
+            writer.print("\t;SAVED_STATE to Stack\n");
+            writer.print("\tmovem D0-D7/A0-A7,-(A7) \n");
+            // Colocamos A6 para indexar el StackPointer
+            writer.print("\t;A6 to index variables\n");
+            writer.print("\tmove.l SP, A6\n");
+
+
+            // Generamos codigo de instrucciones
             code.forEach((_item) -> {
                 writer.print(_item.get68KCode() + "\n");
             });
+
+            // Generamos codigo de END
             writer.print("\tSIMHALT\n\n\n\n\tEND\tSTART");
             writer.close();
         } catch (FileNotFoundException ex) {

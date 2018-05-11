@@ -9,4 +9,4 @@ a = t3
 return a
 t4 = 1
 t5 = a + t4
-b = t5
+variabledelmain = t5

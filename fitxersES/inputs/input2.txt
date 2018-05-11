@@ -11,5 +11,5 @@ int func(boolean bo, int abcd, boolean hola, string queue) {
 * Programa principal
 */
 main {
-	int b = a + 1;
+	int variabledelmain = a + 1;
 }
