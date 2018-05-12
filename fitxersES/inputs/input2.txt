@@ -1,15 +1,15 @@
 int a = 5;
-const int asdsdfghjkjhgf = 10;
+const string str = "-------stringde31digitos-------"; //mas el 0 de final(max string)
 
-int func(boolean bo, int abcd, boolean hola, string queue) {
-	int asd = 4;
-	a = 34;
-	return a;
-}
+//int func(boolean bo, int abcd, boolean hola, string queue) {
+//	int asd = 4;
+//	a = 34;
+//	return a;
+//}
 
 /*
 * Programa principal
 */
 main {
-	int variabledelmain = a + 1;
+	boolean varDemainBol = false;
 }

@@ -72,12 +72,13 @@ public class VarTable {
         if (offset == null) {
             //el offset para este programa no esta creado
             if (isParam) {
-                map.put(proc, 0);
-                offset = 0;
-            } else {
                 // Le añadimos el espacio para guardar los registros
-                map.put(proc, size-SAVED_STATE_SIZE);
-                offset = size-SAVED_STATE_SIZE;
+                map.put(proc, 0+SAVED_STATE_SIZE);
+                offset = 0+SAVED_STATE_SIZE;
+            } else {
+                
+                map.put(proc, size);
+                offset = size;
             }
         } else {
             /*el offset ya existe, lo aumentamos para dejar cabida a la

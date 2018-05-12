@@ -1,12 +1,5 @@
 t0 = 5
 a = t0
-t1 = 10
-L0: skip
-t2 = 4
-asd = t2
-t3 = 34
-a = t3
-return a
-t4 = 1
-t5 = a + t4
-variabledelmain = t5
+t1 = "-------stringde31digitos-------"
+t2 = FALSE
+varDemainBol = t2

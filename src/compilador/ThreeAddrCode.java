@@ -168,27 +168,32 @@ public class ThreeAddrCode {
                     Balde varDestino = vt.varTable.get(Integer.parseInt(dest.substring(1)));
                     Balde source1;
                     // Es un avariable
-                    if(src1.startsWith("v")){
+                    if (src1.startsWith("v")) {
                         source1 = vt.varTable.get(Integer.parseInt(src1.substring(1)));
                         // Pasamos su indexado en la pila
-                        src1 = source1.offset+"(A6)";
-                    }else{
+                        src1 = source1.offset + "(A6)";
+                    } else if (src1.startsWith("\'")) {
+                        // Quitamo la comilla del string
+                        src1 = src1.replace("\'", "");
+                    } else {
                         //Si no es una variable añadimos '#'
-                        src1 = "#"+src1;
+                        src1 = "#" + src1;
                     }
                     // Boolean
-                    if(varDestino.size == 1){
-                        instr += "\tmove.b #"+ src1 +", "+varDestino.offset+"(A6)\n";
+                    if (varDestino.size == 1) {
+                        instr += "\tmove.b " + src1 + ", " + varDestino.offset + "(A6)\n";
                         break;
-                    // Integer
-                    }else if (varDestino.size == 4) {
-                        instr += "\tmove.l "+ src1 +", "+varDestino.offset+"(A6)\n";
+                        // Integer
+                    } else if (varDestino.size == 4) {
+                        instr += "\tmove.l " + src1 + ", " + varDestino.offset + "(A6)\n";
                         break;
                     }
                     // String
-                    for (int i = 0; i < varDestino.size; i++) {
+                    for (int i = 0; i < src1.toCharArray().length; i++) {
                         // Mover string trozo a trozo
+                        instr += "\tmove.b #\'" + src1.toCharArray()[i] + "\', " + (varDestino.offset + i) + "(A6)\n";
                     }
+                    instr += "\tmove.b #0, " + (varDestino.offset + src1.toCharArray().length) + "(A6)\n";
                     break;
                 default:
                     return "bad instr: " + op.toString();
@@ -341,8 +346,17 @@ public class ThreeAddrCode {
         PrintWriter writer;
         try {
             writer = new PrintWriter(filename);
-            // Generamos etiqueta de START
-            writer.print("\tORG\t$1000\nSTART:\n");
+            // Generamos etiqueta de ORG
+            writer.print("\tORG\t$1000\n");
+            // Generamos valores TRUE y FALSE
+            writer.print("\tTRUE:\tEQU\t1\n");
+            writer.print("\tFALSE:\tEQU\t0\n");
+            // Generamos etiqueta START
+            writer.print("START:\n");
+            
+            // Colocamos A6 para indexar el StackPointer
+            writer.print("\t;A6 to index variables\n");
+            writer.print("\tmove.l SP, A6\n");
 
             // Generamos variables globales 
             // Generamos variables del main
@@ -352,18 +366,11 @@ public class ThreeAddrCode {
                 // Pertenece al main(Proc = 0)
                 if (balde.proc == 0) {
                     // Añadimos comentario
-                    writer.print("\t;" + balde.name + " to Stack\n");
+                    writer.print("\t;" + balde.name + " save space in Stack\n");
                     // Asignamos el espacio en la pila
-                    writer.print("\tadd.l #" + balde.size + ", SP\n");
+                    writer.print("\tsub.l #" + balde.size + ", SP\n");
                 }
             }
-            // Añadimos el estado guardado
-            writer.print("\t;SAVED_STATE to Stack\n");
-            writer.print("\tmovem D0-D7/A0-A7,-(A7) \n");
-            // Colocamos A6 para indexar el StackPointer
-            writer.print("\t;A6 to index variables\n");
-            writer.print("\tmove.l SP, A6\n");
-
 
             // Generamos codigo de instrucciones
             code.forEach((_item) -> {
