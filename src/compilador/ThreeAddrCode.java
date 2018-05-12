@@ -170,8 +170,17 @@ public class ThreeAddrCode {
                     // Es un avariable
                     if (src1.startsWith("v")) {
                         source1 = vt.varTable.get(Integer.parseInt(src1.substring(1)));
+                        
+                        // En caso de estar pasando un String, lo copiamos
+                        if(varDestino.size == 32){
+                            for (int i = 0; i < 32; i++) {
+                                instr += "\tmove.b " + (source1.offset + i) + "(A6), " + (varDestino.offset + i) + "(A6)\n";
+                            }
+                            break;
+                        }
                         // Pasamos su indexado en la pila
                         src1 = source1.offset + "(A6)";
+                        
                     } else if (src1.startsWith("\'")) {
                         // Quitamo la comilla del string
                         src1 = src1.replace("\'", "");
@@ -180,11 +189,13 @@ public class ThreeAddrCode {
                         src1 = "#" + src1;
                     }
                     // Boolean
-                    if (varDestino.size == 1) {
-                        instr += "\tmove.b " + src1 + ", " + varDestino.offset + "(A6)\n";
+                    if (varDestino.size == 2) {
+                        instr += "\tmove.w " + src1 + ", " + varDestino.offset + "(A6)\n";
                         break;
-                        // Integer
-                    } else if (varDestino.size == 4) {
+                        
+                    } 
+                    // Integer
+                    if (varDestino.size == 4) {
                         instr += "\tmove.l " + src1 + ", " + varDestino.offset + "(A6)\n";
                         break;
                     }
@@ -353,7 +364,7 @@ public class ThreeAddrCode {
             writer.print("\tFALSE:\tEQU\t0\n");
             // Generamos etiqueta START
             writer.print("START:\n");
-            
+
             // Colocamos A6 para indexar el StackPointer
             writer.print("\t;A6 to index variables\n");
             writer.print("\tmove.l SP, A6\n");

@@ -364,7 +364,7 @@ class CUP$Parser$actions {
 		Description d = new ProcDescription(TSB.VOID);
 		st.add("main", d, true, false);
 
-		d = new TypeDescription(TSB.BOOL, 1, 0, 1);
+		d = new TypeDescription(TSB.BOOL, 2, 0, 1);
 		st.add("boolean", d, true, false);
 
 		st.add("true", new ConstDescription(TSB.BOOL, "TRUE"), true, false);
