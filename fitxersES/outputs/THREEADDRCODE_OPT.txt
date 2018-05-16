@@ -1,18 +1,4 @@
-t0 = #5
-a = -4(A6)
-t1 = #######stringde31digitos#######
-L0: skip
-asd = 68(A6)
-t2 = #34
-a = -8(A6)
-return a
-t6 = t1
-t5 = #FALSE
-t4 = #2
-t3 = #TRUE
-param t3
-param t4
-param t5
-param t6
-call L0
-z = -84(A6)
+t0 = #2
+t1 = #4
+t2 = t0 - t1
+a = -12(A6)

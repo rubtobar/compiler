@@ -127,11 +127,28 @@ public class ThreeAddrCode {
         }
 
         public String get68KCode() {
+            Balde varDestino;
+            Balde varSrc1;
+            Balde varSrc2;
             String instr = "\t;" + this.toString() + "\n";
             switch (op) {
                 case ADD:
+                    varDestino = vt.varTable.get(Integer.parseInt(dest.substring(1)));
+                    varSrc1 = vt.varTable.get(Integer.parseInt(src1.substring(1)));
+                    varSrc2 = vt.varTable.get(Integer.parseInt(src2.substring(1)));
+                    // Sumamos los valores en D0
+                    instr += "\tmove.l " + varSrc1.offset + "(A6), D0\n"; // enviamos a D0
+                    instr += "\tadd.l " + varSrc2.offset + "(A6), D0\n"; // sumamos en D0
+                    instr += "\tmove.l D0," + varDestino.offset + "(A6)\n"; // enviamos a dest
                     break;
                 case SUB:
+                    varDestino = vt.varTable.get(Integer.parseInt(dest.substring(1)));
+                    varSrc1 = vt.varTable.get(Integer.parseInt(src1.substring(1)));
+                    varSrc2 = vt.varTable.get(Integer.parseInt(src2.substring(1)));
+                    // Sumamos los valores en D0
+                    instr += "\tmove.l " + varSrc1.offset + "(A6), D0\n"; // enviamos a D0
+                    instr += "\tsub.l " + varSrc2.offset + "(A6), D0\n"; // sumamos en D0
+                    instr += "\tmove.l D0," + varDestino.offset + "(A6)\n"; // enviamos a dest
                     break;
                 case AND:
                     break;
@@ -165,7 +182,7 @@ public class ThreeAddrCode {
                     break;
                 case ASSIG:
                     // Copiamos la variable a su lugar de destino
-                    Balde varDestino = vt.varTable.get(Integer.parseInt(dest.substring(1)));
+                    varDestino = vt.varTable.get(Integer.parseInt(dest.substring(1)));
                     Balde source1;
                     // Es un avariable
                     if (src1.startsWith("v")) {

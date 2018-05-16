@@ -1,18 +1,4 @@
-t0 = 5
-a = t0
-t1 = "#######stringde31digitos#######"
-L0: skip
-asd = abcd
-t2 = 34
+t0 = 2
+t1 = 4
+t2 = t0 - t1
 a = t2
-return a
-t6 = t1
-t5 = FALSE
-t4 = 2
-t3 = TRUE
-param t3
-param t4
-param t5
-param t6
-call L0
-z = t7
