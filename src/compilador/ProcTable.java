@@ -5,7 +5,6 @@
  */
 package compilador;
 
-import static compilador.Compilador.OUTPUT_PATH;
 import static compilador.Compilador.PROC_TABLE_PRINTER_FILEPATH;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -23,20 +22,20 @@ public class ProcTable {
         public String name;
         public String label;
         int depth;
-        int nparam;
+        int paramSize;
         int localSize;
 
-        public Proc(String name, String label, int depth, int nparam, int localSize) {
+        public Proc(String name, String label, int depth, int paramSize, int localSize) {
             this.name = name;
             this.label = label;
             this.depth = depth;
-            this.nparam = nparam;
+            this.paramSize = paramSize;
             this.localSize = localSize;
         }
         
         @Override
         public String toString(){     
-            return name + "\t\t" +label + "\t\t" + depth + "\t\t" + nparam + "\t\t" + localSize;
+            return name + "\t\t" +label + "\t\t" + depth + "\t\t" + paramSize + "\t\t" + localSize;
         }
     }
 
@@ -57,7 +56,7 @@ public class ProcTable {
         @Override
     public String toString(){
         String str[] = new String[procTable.size()];
-        String str1 = "ID\t\tNAME\t\tLABEL\t\tPROF\t\tNPARAM\t\tL.SIZE\n"
+        String str1 = "ID\t\tNAME\t\tLABEL\t\tPROF\t\tP.SIZE\t\tL.SIZE\n"
         + "-----------------------------------------------------------------------------------------------------------------------------------------------------\n";
 
         int i = 0;

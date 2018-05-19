@@ -229,7 +229,7 @@ public class SymbolTable {
         parametros del proceso en la tabla de procs, para la generación de codigo*/
         int id = descriptionTable.get(idproc).id;
         ProcTable.Proc p = pt.procTable.get(id);
-        p.nparam = p.nparam + 1;
+        p.paramSize += d.tsb == Description.TSB.BOOL ? 2 : d.tsb == Description.TSB.INT ? 4 : 32 ;
         pt.procTable.replace(id, p);
     }
 

@@ -29,7 +29,7 @@ public class ThreeAddrCode {
     private final ProcTable pt;
 
     public enum Operand {
-        ADD, SUB, AND, OR, SKIP, GOTO, BLT, BLE, BGE, BGT, BNE, BEQ, CALL, RETURN, PARAM, ASSIG
+        ADD, SUB, AND, OR, SKIP, GOTO, BLT, BLE, BGE, BGT, BNE, BEQ, CALL, RETURN, PARAM, ASSIG, PREFUNCT
     }
 
     private class ThreeAddrIstr {
@@ -103,6 +103,8 @@ public class ThreeAddrCode {
                     return "param " + sdest;
                 case ASSIG:
                     return sdest + " = " + ssrc1;
+                case PREFUNCT:
+                    return "preambulo funcion";
             }
             return "--:INSTRUCTIONERROR:--";
         }
@@ -141,10 +143,8 @@ public class ThreeAddrCode {
         }
 
         public String get68KCode() {
-            Balde varDestino;
-            Balde varSrc1;
-            Balde varSrc2;
             String instr = "\t;" + this.toString() + "\n";
+            int size;
             switch (op) {
                 case ADD:
                     // Sumamos los valores en D0
@@ -207,16 +207,33 @@ public class ThreeAddrCode {
                     instr += "\tbeq.l " + dest + "\n"; // enviamos a D0
                     break;
                 case CALL:
+                    ProcTable.Proc prog = pt.procTable.get(Integer.parseInt(dest.substring(1)));
+                    instr += "\tbsr.l " + prog.label + "\n"; // Saltamos a dest
+                    instr += "\tadd.l " + prog.paramSize + ", SP\n"; // limpiamos los parametros de la pila
                     break;
                 case RETURN:
+                    instr += "\tmove.l A6, SP\n";
+                    instr += "\tmove.l (SP)+, A6\n";
+                    instr += "\trts\n"; // Saltamos
                     break;
                 case PARAM:
+                    size = vt.varTable.get(Integer.parseInt(dest.substring(1))).size;
+                    if (size == 32) {
+                        int srcOff = vt.varTable.get(Integer.parseInt(dest.substring(1))).offset;
+                        String regSrc = vt.varTable.get(Integer.parseInt(dest.substring(1))).proc == 0 ? "(A5)" : "(A6)";
+                        instr += "\tsub.l #32, SP\n"; // Reservamos espacio en la pila
+                        for (int i = 0; i < 32; i += 4) {
+                            instr += "\tmove.l " + (srcOff + i) + regSrc + ", " + i + "(SP)\n";
+                        }
+                    } else {
+                        instr += "\tmove." + (size == 4 ? "l" : "w") + " " + getLocation(dest) + ", -(SP)\n";
+                    }
                     break;
                 case ASSIG:
                     if (!src1.startsWith("\'")) {
                         String destLoc = getLocation(dest);
                         String srcLoc = getLocation(src1);
-                        int size = vt.varTable.get(Integer.parseInt(dest.substring(1))).size;
+                        size = vt.varTable.get(Integer.parseInt(dest.substring(1))).size;
                         switch (size) {
                             case 2:
                                 instr += "\tmove.w" + " " + srcLoc + ", " + destLoc;
@@ -252,6 +269,11 @@ public class ThreeAddrCode {
                     }
 
                     break;
+                    case PREFUNCT:
+                        instr += "\tmove.l A6, -(SP)\n"; // Guardamos BP
+                        instr += "\tmove.l SP, A6\n"; // colocamos BP nuevo
+                        instr += "\tsub.l #" + pt.procTable.get(Integer.parseInt(dest)).localSize + ", SP\n"; // colocamos espacio para variables locales
+                        break;
                 default:
                     return "bad instr: " + op.toString();
             }

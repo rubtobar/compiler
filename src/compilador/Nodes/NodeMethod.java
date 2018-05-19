@@ -34,6 +34,8 @@ public class NodeMethod extends Node {
         String e = lt.add();
         pt.procTable.get(np).label = e;
         gen.add(Operand.SKIP, null, null, e);
+        // Generamos preambulo de funcion
+        gen.add(Operand.PREFUNCT, null, null, ""+np);
         if (sentences != null) {
             sentences.generateCode(vt, pt, lt, gen);
         }

@@ -17,7 +17,9 @@ import compilador.*;
         
         public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen){
             if (decls != null)  decls.generateCode(vt,pt,lt,gen);
+            gen.add(ThreeAddrCode.Operand.GOTO, null, null, "MAIN");
             if (methods != null) methods.generateCode(vt,pt,lt,gen);
+            gen.add(ThreeAddrCode.Operand.SKIP, null, null, "MAIN");
             if (sentences != null) sentences.generateCode(vt,pt,lt,gen);
         }
     }

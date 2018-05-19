@@ -23,8 +23,8 @@ public class NodeCall extends Node {
     public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
         if (contCall != null) {
             ArrayList<Integer> params = contCall.generateCode(vt, pt, lt, gen);
-            for (int param : params) {
-                gen.add(Operand.PARAM, null, null, "v" + param);
+            for (int i = params.size()-1; i >= 0; i--) {
+                gen.add(Operand.PARAM, null, null, "v" + params.get(i));
             }
         }
         if (tid != null) {

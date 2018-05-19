@@ -1,9 +1,9 @@
+void a (boolean b, int i, string s){
 
+}
 /*
 * Programa principal
 */
 main {
-	if (2 > 3) {
-		string str = "asdf";
-	}
+	a(true,3,"!ESTOESUNESTRINGDE31POSICIONES!");
 }

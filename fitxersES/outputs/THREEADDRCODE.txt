@@ -1,12 +1,12 @@
-t1 = 3
-t0 = 2
-if t0 > t1 goto L0
-t2 = FALSE
-goto: L1
+goto: MAIN
 L0: skip
-t2 = TRUE
-L1: skip
-if t2 = FALSE goto L2
-t3 = "asdf"
-str = t3
-L2: skip
+preambulo funcion
+return null
+MAIN: skip
+t2 = "!ESTOESUNESTRINGDE31POSICIONES!"
+t1 = 3
+t0 = TRUE
+param t2
+param t1
+param t0
+call L0

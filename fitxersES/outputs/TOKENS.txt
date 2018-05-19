@@ -1,16 +1,26 @@
-5:1: tk_main
-5:6: tk_leftb
-6:2: tk_if
-6:5: tk_openp
-6:6: tk_digits: '2'
-6:8: tk_op_rel: '>'
-6:10: tk_digits: '3'
-6:11: tk_closep
-6:13: tk_leftb
-7:3: tk_id: 'string'
-7:10: tk_id: 'str'
-7:14: tk_equal
-7:16: tk_string: 'asdf'
-7:22: tk_pcoma
-8:2: tk_rightb
+1:1: tk_id: 'void'
+1:6: tk_id: 'a'
+1:8: tk_openp
+1:9: tk_id: 'boolean'
+1:17: tk_id: 'b'
+1:18: tk_coma
+1:20: tk_id: 'int'
+1:24: tk_id: 'i'
+1:25: tk_coma
+1:27: tk_id: 'string'
+1:34: tk_id: 's'
+1:35: tk_closep
+1:36: tk_leftb
+3:1: tk_rightb
+7:1: tk_main
+7:6: tk_leftb
+8:2: tk_id: 'a'
+8:3: tk_openp
+8:4: tk_id: 'true'
+8:8: tk_coma
+8:9: tk_digits: '3'
+8:10: tk_coma
+8:11: tk_string: '!ESTOESUNESTRINGDE31POSICIONES!'
+8:44: tk_closep
+8:45: tk_pcoma
 9:1: tk_rightb
