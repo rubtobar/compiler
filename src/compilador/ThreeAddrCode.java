@@ -29,7 +29,7 @@ public class ThreeAddrCode {
     private final ProcTable pt;
 
     public enum Operand {
-        ADD, SUB, AND, OR, SKIP, GOTO, BLT, BLE, BGE, BGT, BNE, BEQ, CALL, FUN, RETURN, PARAM, ASSIG
+        ADD, SUB, AND, OR, SKIP, GOTO, BLT, BLE, BGE, BGT, BNE, BEQ, CALL, RETURN, PARAM, ASSIG
     }
 
     private class ThreeAddrIstr {
@@ -97,8 +97,6 @@ public class ThreeAddrCode {
                     return "if " + ssrc1 + " = " + ssrc2 + " goto " + sdest;
                 case CALL:
                     return "call " + sdest;
-                case FUN:
-                    return sdest + " = fun " + ssrc1;
                 case RETURN:
                     return "return " + sdest;
                 case PARAM:
@@ -126,6 +124,22 @@ public class ThreeAddrCode {
             return s;
         }
 
+        public String getLocation(String source) {
+            Balde var;
+            if (source.startsWith("v")) {
+                var = vt.varTable.get(Integer.parseInt(source.substring(1)));
+                if (var.proc == 0) {
+                    // Global var/main
+                    return var.offset + "(A5)";
+                } else {
+                    // Variable local
+                    return var.offset + "(A6)";
+                }
+            } else {
+                return "#" + source;
+            }
+        }
+
         public String get68KCode() {
             Balde varDestino;
             Balde varSrc1;
@@ -133,26 +147,28 @@ public class ThreeAddrCode {
             String instr = "\t;" + this.toString() + "\n";
             switch (op) {
                 case ADD:
-                    varDestino = vt.varTable.get(Integer.parseInt(dest.substring(1)));
-                    varSrc1 = vt.varTable.get(Integer.parseInt(src1.substring(1)));
-                    varSrc2 = vt.varTable.get(Integer.parseInt(src2.substring(1)));
                     // Sumamos los valores en D0
-                    instr += "\tmove.l " + varSrc1.offset + "(A6), D0\n"; // enviamos a D0
-                    instr += "\tadd.l " + varSrc2.offset + "(A6), D0\n"; // sumamos en D0
-                    instr += "\tmove.l D0," + varDestino.offset + "(A6)\n"; // enviamos a dest
+                    instr += "\tmove.l " + getLocation(src1) + ", D0\n"; // enviamos a D0
+                    instr += "\tadd.l " + getLocation(src2) + ", D0\n"; // sumamos en D0
+                    instr += "\tmove.l D0," + getLocation(dest) + "\n"; // enviamos a dest
                     break;
                 case SUB:
-                    varDestino = vt.varTable.get(Integer.parseInt(dest.substring(1)));
-                    varSrc1 = vt.varTable.get(Integer.parseInt(src1.substring(1)));
-                    varSrc2 = vt.varTable.get(Integer.parseInt(src2.substring(1)));
-                    // Sumamos los valores en D0
-                    instr += "\tmove.l " + varSrc1.offset + "(A6), D0\n"; // enviamos a D0
-                    instr += "\tsub.l " + varSrc2.offset + "(A6), D0\n"; // sumamos en D0
-                    instr += "\tmove.l D0," + varDestino.offset + "(A6)\n"; // enviamos a dest
+                    // Restamos los valores en D0
+                    instr += "\tmove.l " + getLocation(src1) + ", D0\n"; // enviamos a D0
+                    instr += "\tsub.l " + getLocation(src2) + ", D0\n"; // sumamos en D0
+                    instr += "\tmove.l D0," + getLocation(dest) + "\n"; // enviamos a dest
                     break;
                 case AND:
+                    // AND de los valores en D0
+                    instr += "\tmove.w " + getLocation(src1) + ", D0\n"; // enviamos a D0
+                    instr += "\tand.w " + getLocation(src2) + ", D0\n"; // sumamos en D0
+                    instr += "\tmove.w D0," + getLocation(dest) + "\n"; // enviamos a dest
                     break;
                 case OR:
+                    // OF de los valores en D0
+                    instr += "\tmove.w " + getLocation(src1) + ", D0\n"; // enviamos a D0
+                    instr += "\tor.w " + getLocation(src2) + ", D0\n"; // sumamos en D0
+                    instr += "\tmove.w D0," + getLocation(dest) + "\n"; // enviamos a dest
                     break;
                 case SKIP:
                     instr = instr.substring(1) + dest + ":";
@@ -161,88 +177,86 @@ public class ThreeAddrCode {
                     instr += "\tBRA " + dest;
                     break;
                 case BLT:
+                    instr += "\tmove.l " + getLocation(src1) + ", D0\n"; // enviamos a D0
+                    instr += "\tcmp.l " + getLocation(src2) + ", D0\n"; // enviamos a D0
+                    instr += "\tblt.l " + dest + "\n"; // enviamos a D0
                     break;
                 case BLE:
+                    instr += "\tmove.l " + getLocation(src1) + ", D0\n"; // enviamos a D0
+                    instr += "\tcmp.l " + getLocation(src2) + ", D0\n"; // enviamos a D0
+                    instr += "\tble.l " + dest + "\n"; // enviamos a D0
                     break;
                 case BGE:
+                    instr += "\tmove.l " + getLocation(src1) + ", D0\n"; // enviamos a D0
+                    instr += "\tcmp.l " + getLocation(src2) + ", D0\n"; // enviamos a D0
+                    instr += "\tbge.l " + dest + "\n"; // enviamos a D0
                     break;
                 case BGT:
+                    instr += "\tmove.l " + getLocation(src1) + ", D0\n"; // enviamos a D0
+                    instr += "\tcmp.l " + getLocation(src2) + ", D0\n"; // enviamos a D0
+                    instr += "\tbgt.l " + dest + "\n"; // enviamos a D0
                     break;
                 case BNE:
+                    instr += "\tmove.l " + getLocation(src1) + ", D0\n"; // enviamos a D0
+                    instr += "\tcmp.l " + getLocation(src2) + ", D0\n"; // enviamos a D0
+                    instr += "\tbne.l " + dest + "\n"; // enviamos a D0
                     break;
                 case BEQ:
+                    instr += "\tmove.l " + getLocation(src1) + ", D0\n"; // enviamos a D0
+                    instr += "\tcmp.l " + getLocation(src2) + ", D0\n"; // enviamos a D0
+                    instr += "\tbeq.l " + dest + "\n"; // enviamos a D0
                     break;
                 case CALL:
-                    break;
-                case FUN:
                     break;
                 case RETURN:
                     break;
                 case PARAM:
                     break;
                 case ASSIG:
-                    // Copiamos la variable a su lugar de destino
-                    varDestino = vt.varTable.get(Integer.parseInt(dest.substring(1)));
-                    Balde source1;
-                    // Es un avariable
-                    if (src1.startsWith("v")) {
-                        source1 = vt.varTable.get(Integer.parseInt(src1.substring(1)));
-                        
-                        // En caso de estar pasando un String, lo copiamos
-                        if(varDestino.size == 32){
-                            for (int i = 0; i < 32; i++) {
-                                instr += "\tmove.b " + (source1.offset + i) + "(A6), " + (varDestino.offset + i) + "(A6)\n";
-                            }
-                            break;
+                    if (!src1.startsWith("\'")) {
+                        String destLoc = getLocation(dest);
+                        String srcLoc = getLocation(src1);
+                        int size = vt.varTable.get(Integer.parseInt(dest.substring(1))).size;
+                        switch (size) {
+                            case 2:
+                                instr += "\tmove.w" + " " + srcLoc + ", " + destLoc;
+                                break;
+                            case 4:
+                                instr += "\tmove.l" + " " + srcLoc + ", " + destLoc;
+                                break;
+                            case 32:
+                                // Var String = Var String
+                                int destinoOff = vt.varTable.get(Integer.parseInt(dest.substring(1))).offset;
+                                String regDest = vt.varTable.get(Integer.parseInt(dest.substring(1))).proc == 0 ? "(A5)" : "(A6)";
+                                int srcOff = vt.varTable.get(Integer.parseInt(src1.substring(1))).offset;
+                                String regSrc = vt.varTable.get(Integer.parseInt(src1.substring(1))).proc == 0 ? "(A5)" : "(A6)";
+                                for (int i = 0; i < 32; i += 4) {
+                                    instr += "\tmove.l " + (srcOff + i) + regSrc + ", " + (destinoOff + i) + regDest + "\n";
+                                }
+                                break;
                         }
-                        // Pasamos su indexado en la pila
-                        src1 = source1.offset + "(A6)";
-                        
-                    } else if (src1.startsWith("\'")) {
-                        // Quitamo la comilla del string
-                        src1 = src1.replace("\'", "");
                     } else {
-                        //Si no es una variable añadimos '#'
-                        src1 = "#" + src1;
+                        // String
+                        int i;
+                        int j;
+                        int destino = vt.varTable.get(Integer.parseInt(dest.substring(1))).offset;
+                        String reg = vt.varTable.get(Integer.parseInt(dest.substring(1))).proc == 0 ? "(A5)" : "(A6)";
+                        String stringBuffer = src1.substring(1);
+                        for (i = 0; i + 4 <= stringBuffer.length(); i += 4) {
+                            instr += "\tmove.l " + "#\'" + stringBuffer.substring(i, i + 4) + "\', " + (destino + i) + reg + "\n";
+                        }
+                        for (j = i; j < stringBuffer.length(); j++) {
+                            instr += "\tmove.b " + "#\'" + stringBuffer.substring(j, j + 1) + "\', " + (destino + j) + reg + "\n";
+                        }
+                        instr += "\tmove.b " + "#0, " + (destino + j) + reg + "\n";
                     }
-                    // Boolean
-                    if (varDestino.size == 2) {
-                        instr += "\tmove.w " + src1 + ", " + varDestino.offset + "(A6)\n";
-                        break;
-                        
-                    } 
-                    // Integer
-                    if (varDestino.size == 4) {
-                        instr += "\tmove.l " + src1 + ", " + varDestino.offset + "(A6)\n";
-                        break;
-                    }
-                    // String
-                    for (int i = 0; i < src1.toCharArray().length; i++) {
-                        // Mover string trozo a trozo
-                        instr += "\tmove.b #\'" + src1.toCharArray()[i] + "\', " + (varDestino.offset + i) + "(A6)\n";
-                    }
-                    instr += "\tmove.b #0, " + (varDestino.offset + src1.toCharArray().length) + "(A6)\n";
+
                     break;
                 default:
                     return "bad instr: " + op.toString();
             }
             return instr;
         }
-
-        /*private String getLoadInstr(String src, String reg) {
-            String code;
-            String val = src.substring(1);
-            if (src.charAt(0) == 'v') {
-                int varId = Integer.parseInt(val);
-                int v_depth = pt.procTable.get(vt.varTable.get(varId).proc).depth;
-                int v_offset = vt.varTable.get(varId).offset;
-                //int p_depth = pt.procTable.get(*nivellActual*).depth;
-                int v_4depth = v_depth * 4;
-            } else {
-                code = "MOVE.L #"+val+", "+reg;
-            }
-            return code;
-        }*/
     }
 
     private class BasicBlock {
@@ -385,6 +399,9 @@ public class ThreeAddrCode {
             // Colocamos A6 para indexar el StackPointer
             writer.print("\t;A6 to index variables\n");
             writer.print("\tmove.l SP, A6\n");
+            // Colocamos A6 para indexar el StackPointer
+            writer.print("\t;A5 to index global variables\n");
+            writer.print("\tmove.l SP, A5\n");
 
             // Generamos variables globales 
             // Generamos variables del main

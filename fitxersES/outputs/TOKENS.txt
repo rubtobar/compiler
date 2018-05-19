@@ -1,10 +1,16 @@
-4:1: tk_main
-4:6: tk_leftb
-5:2: tk_id: 'int'
-5:6: tk_id: 'a'
-5:8: tk_equal
-5:10: tk_digits: '2'
-5:12: tk_op_aritm: '-'
-5:14: tk_digits: '4'
-5:15: tk_pcoma
-7:1: tk_rightb
+5:1: tk_main
+5:6: tk_leftb
+6:2: tk_if
+6:5: tk_openp
+6:6: tk_digits: '2'
+6:8: tk_op_rel: '>'
+6:10: tk_digits: '3'
+6:11: tk_closep
+6:13: tk_leftb
+7:3: tk_id: 'string'
+7:10: tk_id: 'str'
+7:14: tk_equal
+7:16: tk_string: 'asdf'
+7:22: tk_pcoma
+8:2: tk_rightb
+9:1: tk_rightb

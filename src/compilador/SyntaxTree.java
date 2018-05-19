@@ -20,12 +20,12 @@ public class SyntaxTree {
     private final ProcTable pt;
     private final LabelCount lt;
     private final ThreeAddrCode code;
-    
+
     public SyntaxTree() {
         vt = new VarTable();
         pt = new ProcTable();
         lt = new LabelCount();
-        code = new ThreeAddrCode(vt,pt);
+        code = new ThreeAddrCode(vt, pt);
         root = null;
     }
 
@@ -45,8 +45,8 @@ public class SyntaxTree {
         root.generateCode(vt, pt, lt, code);
         code.flush(THREE_ADDR_PRINTER_FILEPATH);
         code.write68Kcode(ASSEMBLY_PRINTER_FILEPATH);
-        code.optimize();
-        code.flush(THREE_ADDR_PRINTER_FILEPATH.replace(".txt", "_OPT.txt"));
-        code.write68Kcode(ASSEMBLY_PRINTER_FILEPATH.replace(".X68", "_OPT.X68"));
+        //code.optimize();
+        //code.flush(THREE_ADDR_PRINTER_FILEPATH.replace(".txt", "_OPT.txt"));
+        // code.write68Kcode(ASSEMBLY_PRINTER_FILEPATH.replace(".X68", "_OPT.X68"));
     }
 }

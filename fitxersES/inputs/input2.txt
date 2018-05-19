@@ -1,7 +1,9 @@
+
 /*
 * Programa principal
 */
 main {
-	int a = 2 - 4;
-
+	if (2 > 3) {
+		string str = "asdf";
+	}
 }
