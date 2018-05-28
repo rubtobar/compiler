@@ -4,8 +4,8 @@ preambulo funcion
 t0 = 5
 return t0
 MAIN: skip
-return space
+space for return
 t1 = 3
 param t1
-call L0
-w = t2
+t2 = call L0
+num = t2

@@ -96,7 +96,7 @@ public class ThreeAddrCode {
                 case BEQ:
                     return "if " + ssrc1 + " = " + ssrc2 + " goto " + sdest;
                 case CALL:
-                    return "call " + sdest;
+                    return (src1 == null ? "" : ssrc1 + " = ") + "call " + sdest;
                 case RETURN:
                     return "return " + sdest;
                 case PARAM:
@@ -106,7 +106,7 @@ public class ThreeAddrCode {
                 case PREFUNCT:
                     return "preambulo funcion";
                 case RETURN_SPACE:
-                    return "return space";
+                    return "space for return";
             }
             return "--:INSTRUCTIONERROR:--";
         }
@@ -211,6 +211,9 @@ public class ThreeAddrCode {
                 case CALL:
                     ProcTable.Proc prog = pt.procTable.get(Integer.parseInt(dest.substring(1)));
                     instr += "\tbsr.l " + prog.label + "\n"; // Saltamos a dest
+                    /* 
+                        Aquí movemos el valor de retorno a la variable indicada por src1, i eliminamos ese espacio de la pila 
+                    */
                     instr += "\tadd.l #" + prog.paramSize + ", SP\n"; // limpiamos los parametros de la pila a la vuelta
                     break;
                 case RETURN:

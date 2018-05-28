@@ -12,11 +12,11 @@
 7:1: tk_main
 7:6: tk_leftb
 8:2: tk_id: 'int'
-8:6: tk_id: 'w'
-8:8: tk_equal
-8:10: tk_id: 'a'
-8:11: tk_openp
-8:12: tk_digits: '3'
-8:13: tk_closep
-8:14: tk_pcoma
+8:6: tk_id: 'num'
+8:10: tk_equal
+8:12: tk_id: 'a'
+8:13: tk_openp
+8:14: tk_digits: '3'
+8:15: tk_closep
+8:16: tk_pcoma
 9:1: tk_rightb

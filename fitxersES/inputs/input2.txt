@@ -5,5 +5,5 @@ int a(int z){
 * Programa principal
 */
 main {
-	int w = a(3);
+	int num = a(3);
 }
