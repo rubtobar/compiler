@@ -1,26 +1,22 @@
-1:1: tk_id: 'void'
-1:6: tk_id: 'a'
-1:8: tk_openp
-1:9: tk_id: 'boolean'
-1:17: tk_id: 'b'
-1:18: tk_coma
-1:20: tk_id: 'int'
-1:24: tk_id: 'i'
-1:25: tk_coma
-1:27: tk_id: 'string'
-1:34: tk_id: 's'
-1:35: tk_closep
-1:36: tk_leftb
+1:1: tk_id: 'int'
+1:5: tk_id: 'a'
+1:6: tk_openp
+1:7: tk_id: 'int'
+1:11: tk_id: 'z'
+1:12: tk_closep
+1:13: tk_leftb
+2:2: tk_return
+2:9: tk_digits: '5'
+2:10: tk_pcoma
 3:1: tk_rightb
 7:1: tk_main
 7:6: tk_leftb
-8:2: tk_id: 'a'
-8:3: tk_openp
-8:4: tk_id: 'true'
-8:8: tk_coma
-8:9: tk_digits: '3'
-8:10: tk_coma
-8:11: tk_string: '!ESTOESUNESTRINGDE31POSICIONES!'
-8:44: tk_closep
-8:45: tk_pcoma
+8:2: tk_id: 'int'
+8:6: tk_id: 'w'
+8:8: tk_equal
+8:10: tk_id: 'a'
+8:11: tk_openp
+8:12: tk_digits: '3'
+8:13: tk_closep
+8:14: tk_pcoma
 9:1: tk_rightb

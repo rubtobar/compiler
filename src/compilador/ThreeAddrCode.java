@@ -29,7 +29,7 @@ public class ThreeAddrCode {
     private final ProcTable pt;
 
     public enum Operand {
-        ADD, SUB, AND, OR, SKIP, GOTO, BLT, BLE, BGE, BGT, BNE, BEQ, CALL, RETURN, PARAM, ASSIG, PREFUNCT
+        ADD, SUB, AND, OR, SKIP, GOTO, BLT, BLE, BGE, BGT, BNE, BEQ, CALL, RETURN, PARAM, ASSIG, PREFUNCT, RETURN_SPACE
     }
 
     private class ThreeAddrIstr {
@@ -105,6 +105,8 @@ public class ThreeAddrCode {
                     return sdest + " = " + ssrc1;
                 case PREFUNCT:
                     return "preambulo funcion";
+                case RETURN_SPACE:
+                    return "return space";
             }
             return "--:INSTRUCTIONERROR:--";
         }
@@ -209,12 +211,20 @@ public class ThreeAddrCode {
                 case CALL:
                     ProcTable.Proc prog = pt.procTable.get(Integer.parseInt(dest.substring(1)));
                     instr += "\tbsr.l " + prog.label + "\n"; // Saltamos a dest
-                    instr += "\tadd.l " + prog.paramSize + ", SP\n"; // limpiamos los parametros de la pila
+                    instr += "\tadd.l #" + prog.paramSize + ", SP\n"; // limpiamos los parametros de la pila a la vuelta
                     break;
                 case RETURN:
+                    int returnOffset = pt.procTable.get(Integer.parseInt(src1)).paramSize;
+                    returnOffset += vt.SAVED_STATE_SIZE; //Espacio de variables de retorno 
+                    int returnedVarOffset = vt.varTable.get(Integer.parseInt(dest.substring(1))).offset;
+                    instr += "\tmove.l " + returnedVarOffset + "(A6), " + returnOffset + "(A6)\n";
                     instr += "\tmove.l A6, SP\n";
                     instr += "\tmove.l (SP)+, A6\n";
                     instr += "\trts\n"; // Saltamos
+                    break;
+                case RETURN_SPACE:
+                    int retSize = pt.procTable.get(Integer.parseInt(dest)).returnSize;
+                    instr += "\tsub.l #" + retSize + ", SP\n" ; // reservamos el espacio en la pila para el return
                     break;
                 case PARAM:
                     size = vt.varTable.get(Integer.parseInt(dest.substring(1))).size;
@@ -269,11 +279,11 @@ public class ThreeAddrCode {
                     }
 
                     break;
-                    case PREFUNCT:
-                        instr += "\tmove.l A6, -(SP)\n"; // Guardamos BP
-                        instr += "\tmove.l SP, A6\n"; // colocamos BP nuevo
-                        instr += "\tsub.l #" + pt.procTable.get(Integer.parseInt(dest)).localSize + ", SP\n"; // colocamos espacio para variables locales
-                        break;
+                case PREFUNCT:
+                    instr += "\tmove.l A6, -(SP)\n"; // Guardamos BP
+                    instr += "\tmove.l SP, A6\n"; // colocamos BP nuevo
+                    instr += "\tsub.l #" + pt.procTable.get(Integer.parseInt(dest)).localSize + ", SP\n"; // colocamos espacio para variables locales
+                    break;
                 default:
                     return "bad instr: " + op.toString();
             }
@@ -445,7 +455,7 @@ public class ThreeAddrCode {
             });
 
             // Generamos codigo de END
-            writer.print("\tSIMHALT\n\n\n\n\tEND\tSTART");
+            writer.print("\n\tSIMHALT\n\n\n\n\tEND\tSTART");
             writer.close();
         } catch (FileNotFoundException ex) {
             System.err.println("FALLO DE ESCRITURA EN EL CODIGO DE ENSAMBLADOR");

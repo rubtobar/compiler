@@ -1,9 +1,9 @@
-void a (boolean b, int i, string s){
-
+int a(int z){
+	return 5;
 }
 /*
 * Programa principal
 */
 main {
-	a(true,3,"!ESTOESUNESTRINGDE31POSICIONES!");
+	int w = a(3);
 }

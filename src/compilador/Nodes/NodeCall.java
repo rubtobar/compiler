@@ -21,6 +21,8 @@ public class NodeCall extends Node {
     }
 
     public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
+        //Generamos el espacio del parametro de retorno
+        gen.add(Operand.RETURN_SPACE, null, null, ""+procId);
         if (contCall != null) {
             ArrayList<Integer> params = contCall.generateCode(vt, pt, lt, gen);
             for (int i = params.size()-1; i >= 0; i--) {

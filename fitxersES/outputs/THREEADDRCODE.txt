@@ -1,12 +1,11 @@
 goto: MAIN
 L0: skip
 preambulo funcion
-return null
+t0 = 5
+return t0
 MAIN: skip
-t2 = "!ESTOESUNESTRINGDE31POSICIONES!"
+return space
 t1 = 3
-t0 = TRUE
-param t2
 param t1
-param t0
 call L0
+w = t2

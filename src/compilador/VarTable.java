@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class VarTable {
     
     //Tamaño de el estado de la maquina a guardar en la pila
-    final int SAVED_STATE_SIZE = 64;
+    final int SAVED_STATE_SIZE = 8;
 
     public class Balde {
 

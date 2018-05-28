@@ -150,6 +150,7 @@ public class SymbolTable {
 //                vt.addVar(descriptionTable.get(id).id, currentProcId, size, id);
 //                break;
             case DPROC:
+                int returnSize = 0;  // Tamaño de return de la funcion
                 // añadimos proc a la tabla de procs
                 // modificamos los valores de las variables que 
                 // hemos encontrado al encontrar el prog al que pertenecen
@@ -158,9 +159,25 @@ public class SymbolTable {
                     wrid = "WRITE";
                 } else if ("read".equals(id)) {
                     wrid = "READ";
+                    returnSize = 32;
                 }
-                // String name, String label, int prof, int nparam, int localSize
-                pt.add(descriptionTable.get(id).id, id, wrid, 0, 0, size);
+                if (null != d.tsb) {
+                    switch (d.tsb) {
+                        case INT:
+                            returnSize = 4;
+                            break;
+                        case BOOL:
+                            returnSize = 2;
+                            break;
+                        case STRING:
+                            returnSize = 32;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                // String name, String label, int prof, int nparam, int localSize, int returnSize
+                pt.add(descriptionTable.get(id).id, id, wrid, 0, 0, size, returnSize);
                 /*En caso de que sean funciones reservadas no cambiamos el
                 corrent proc durante las declaraciones*/
                 if (!"write".equals(id) && !"read".equals(id)) {
@@ -229,7 +246,7 @@ public class SymbolTable {
         parametros del proceso en la tabla de procs, para la generación de codigo*/
         int id = descriptionTable.get(idproc).id;
         ProcTable.Proc p = pt.procTable.get(id);
-        p.paramSize += d.tsb == Description.TSB.BOOL ? 2 : d.tsb == Description.TSB.INT ? 4 : 32 ;
+        p.paramSize += d.tsb == Description.TSB.BOOL ? 2 : d.tsb == Description.TSB.INT ? 4 : 32;
         pt.procTable.replace(id, p);
     }
 

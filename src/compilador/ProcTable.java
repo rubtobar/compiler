@@ -24,18 +24,20 @@ public class ProcTable {
         int depth;
         int paramSize;
         int localSize;
+        int returnSize;
 
-        public Proc(String name, String label, int depth, int paramSize, int localSize) {
+        public Proc(String name, String label, int depth, int paramSize, int localSize, int returnSize) {
             this.name = name;
             this.label = label;
             this.depth = depth;
             this.paramSize = paramSize;
             this.localSize = localSize;
+            this.returnSize = returnSize;
         }
         
         @Override
         public String toString(){     
-            return name + "\t\t" +label + "\t\t" + depth + "\t\t" + paramSize + "\t\t" + localSize;
+            return name + "\t\t" +label + "\t\t" + depth + "\t\t" + paramSize + "\t\t" + localSize + "\t\t" + returnSize;
         }
     }
 
@@ -45,8 +47,8 @@ public class ProcTable {
         procTable = new HashMap<>();
     }
 
-    public void add(int id, String name, String label, int prof, int nparam, int localSize) {
-        procTable.put(id, new Proc(name, label, prof, nparam, localSize));
+    public void add(int id, String name, String label, int prof, int nparam, int localSize, int returnSize) {
+        procTable.put(id, new Proc(name, label, prof, nparam, localSize, returnSize));
     }
     
     public void updateProcSize(int proc, int size) {
@@ -56,7 +58,7 @@ public class ProcTable {
         @Override
     public String toString(){
         String str[] = new String[procTable.size()];
-        String str1 = "ID\t\tNAME\t\tLABEL\t\tPROF\t\tP.SIZE\t\tL.SIZE\n"
+        String str1 = "ID\t\tNAME\t\tLABEL\t\tPROF\t\tP.SIZE\t\tL.SIZE\t\tR.SIZE\n"
         + "-----------------------------------------------------------------------------------------------------------------------------------------------------\n";
 
         int i = 0;

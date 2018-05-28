@@ -43,7 +43,7 @@ public class NodeMethod extends Node {
             returnExpr.generateCode(vt, pt, lt, gen);
         }
         if (returnExpr != null) {
-            gen.add(Operand.RETURN, null, null, "v" + returnExpr.tid);
+            gen.add(Operand.RETURN, ""+np, null, "v" + returnExpr.tid);
         } else {
             gen.add(Operand.RETURN, null, null, null);
         }
