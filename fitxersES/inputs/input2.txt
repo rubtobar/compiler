@@ -1,10 +1,14 @@
-
-boolean a(int z){
-	return true;
+int a(int var){
+	return var;
 }
 /*
 * Programa principal
 */
 main {
-	boolean num = a(3);
+	string str = read();
+	int i = a(0);
+	while (i < 5) {
+		write(str);
+		i = i + 1; 
+	}
 }

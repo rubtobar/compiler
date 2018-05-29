@@ -213,54 +213,57 @@ public class ThreeAddrCode {
                     instr += "\tbsr.l " + prog.label + "\n"; // Saltamos a dest
                     instr += "\t;clean parameters\n";
                     instr += "\tadd.l #" + prog.paramSize + ", SP\n"; // limpiamos los parametros de la pila a la vuelta
-                    int returnTemporalVar = vt.varTable.get(Integer.parseInt(src1.substring(1))).offset;
+                    //int returnTemporalVar = vt.varTable.get(Integer.parseInt(src1.substring(1))).offset;
                     instr += "\t;fetch return\n";
                     //instr += "\tmove.l (SP)+, " + returnTemporalVar + "(A5)\n";
-                    String destLoc1 = getLocation(src1);
-                    size = vt.varTable.get(Integer.parseInt(src1.substring(1))).size;
-                    switch (size) {
-                        case 2:
-                            instr += "\tmove.w (SP)+, " + destLoc1 + "\n";
-                            break;
-                        case 4:
-                            instr += "\tmove.l (SP)+, " + destLoc1 + "\n";
-                            break;
-                        case 32:
-                            // Var String = Var String
-                            int destinoOff = vt.varTable.get(Integer.parseInt(src1.substring(1))).offset;
-                            String regDest = vt.varTable.get(Integer.parseInt(src1.substring(1))).proc == 0 ? "(A5)" : "(A6)";
-                            for (int i = 0; i < 32; i += 4) {
-                                instr += "\tmove.l (SP)+, " + (destinoOff + i) + regDest + "\n";
-                            }
-                            break;
+                    if (src1 != null) {
+                        String destLoc1 = getLocation(src1);
+                        size = vt.varTable.get(Integer.parseInt(src1.substring(1))).size;
+                        switch (size) {
+                            case 2:
+                                instr += "\tmove.w (SP)+, " + destLoc1 + "\n";
+                                break;
+                            case 4:
+                                instr += "\tmove.l (SP)+, " + destLoc1 + "\n";
+                                break;
+                            case 32:
+                                // Var String = Var String
+                                int destinoOff = vt.varTable.get(Integer.parseInt(src1.substring(1))).offset;
+                                String regDest = vt.varTable.get(Integer.parseInt(src1.substring(1))).proc == 0 ? "(A5)" : "(A6)";
+                                for (int i = 0; i < 32; i += 4) {
+                                    instr += "\tmove.l (SP)+, " + (destinoOff + i) + regDest + "\n";
+                                }
+                                break;
+                        }
                     }
-
                     break;
                 case RETURN:
-                    // Para indexar el return
-                    int returnOffset = pt.procTable.get(Integer.parseInt(src1)).paramSize;
-                    returnOffset += vt.SAVED_STATE_SIZE; //Espacio de variables de retorno 
-                    // Tamaño return
-                    int returnSize = pt.procTable.get(Integer.parseInt(src1)).returnSize;
-                    //--int returnedVarOffset = vt.varTable.get(Integer.parseInt(dest.substring(1))).offset;
-                    instr += "\t;send return value\n";
-                    String varToRet = getLocation(dest);
-                    //instr += "\tmove.l " + returnedVarOffset + "(A6), " + returnOffset + "(A6)\n";
-                    switch (returnSize) {
-                        case 2:
-                            instr += "\tmove.w " + varToRet + ", " + returnOffset + "(A6)\n";
-                            break;
-                        case 4:
-                            instr += "\tmove.l " + varToRet + ", " + returnOffset + "(A6)\n";
-                            break;
-                        case 32:
-                            // Var String = Var String
-                            int srcOff = vt.varTable.get(Integer.parseInt(dest.substring(1))).offset;
-                            String regSrc = vt.varTable.get(Integer.parseInt(dest.substring(1))).proc == 0 ? "(A5)" : "(A6)";
-                            for (int i = 0; i < 32; i += 4) {
-                                instr += "\tmove.l " + (srcOff + i) + regSrc + ", " + (returnOffset + i) + "(A6)\n";
-                            }
-                            break;
+                    if (src1 != null) {
+                        // Para indexar el return
+                        int returnOffset = pt.procTable.get(Integer.parseInt(src1)).paramSize;
+                        returnOffset += vt.SAVED_STATE_SIZE; //Espacio de variables de retorno 
+                        // Tamaño return
+                        int returnSize = pt.procTable.get(Integer.parseInt(src1)).returnSize;
+                        //--int returnedVarOffset = vt.varTable.get(Integer.parseInt(dest.substring(1))).offset;
+                        instr += "\t;send return value\n";
+                        String varToRet = getLocation(dest);
+                        //instr += "\tmove.l " + returnedVarOffset + "(A6), " + returnOffset + "(A6)\n";
+                        switch (returnSize) {
+                            case 2:
+                                instr += "\tmove.w " + varToRet + ", " + returnOffset + "(A6)\n";
+                                break;
+                            case 4:
+                                instr += "\tmove.l " + varToRet + ", " + returnOffset + "(A6)\n";
+                                break;
+                            case 32:
+                                // Var String = Var String
+                                int srcOff = vt.varTable.get(Integer.parseInt(dest.substring(1))).offset;
+                                String regSrc = vt.varTable.get(Integer.parseInt(dest.substring(1))).proc == 0 ? "(A5)" : "(A6)";
+                                for (int i = 0; i < 32; i += 4) {
+                                    instr += "\tmove.l " + (srcOff + i) + regSrc + ", " + (returnOffset + i) + "(A6)\n";
+                                }
+                                break;
+                        }
                     }
                     instr += "\t;prepare SP\n";
                     instr += "\tmove.l A6, SP\n";
@@ -475,6 +478,30 @@ public class ThreeAddrCode {
             // Generamos valores TRUE y FALSE
             writer.print("\tTRUE:\tEQU\t1\n");
             writer.print("\tFALSE:\tEQU\t0\n");
+            // Subrutinas de lectura escritura
+            writer.print("WRITE:\n"
+                    + "\t;Do the print\n"
+                    + "\tmove.l #14, D0\n"
+                    + "\tlea 4(SP), A1\n"
+                    + "\ttrap #15\n"
+                    + "\tmove.b #11, D0\n"
+                    + "\tmove.l D7, D1\n"
+                    + "\ttrap #15\n"
+                    + "\taddq.b #1, D7\n" //D7 stores line number
+                    + "\t;give control to caller\n"
+                    + "\trts\n");
+            
+            writer.print("READ:\n"
+                    + "\t;Do the read\n"
+                    + "\tmove #2, D0\n"
+                    + "\tmovea.l SP, A1\n"
+                    + "\tadd.l #4,A1\n"
+                    + "\ttrap #15\n"
+                    + "\taddq.b #1, D7\n" //D7 stores line number
+                    // Hemos escrito una linea mas
+                    + "\t;give control to caller\n"
+                    + "\trts\n");
+
             // Generamos etiqueta START
             writer.print("START:\n");
 
@@ -503,7 +530,8 @@ public class ThreeAddrCode {
             code.forEach((_item) -> {
                 writer.print(_item.get68KCode() + "\n");
             });
-
+            // Generamos codigo de finalizacion de programa
+            writer.print("\n\t;Terminate program\n\tmove #9,D0\n\ttrap #15\n");
             // Generamos codigo de END
             writer.print("\n\tSIMHALT\n\n\n\n\tEND\tSTART");
             writer.close();

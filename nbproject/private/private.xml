@@ -3,15 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ruben/Documents/TeamWorkingProjects/compilador/src/compilador/Nodes/NodeAssign.java</file>
-            <file>file:/C:/Users/Ruben/Documents/TeamWorkingProjects/compilador/src/compilador/ProcTable.java</file>
-            <file>file:/C:/Users/Ruben/Documents/TeamWorkingProjects/compilador/src/compilador/Nodes/NodeCall.java</file>
-            <file>file:/C:/Users/Ruben/Documents/TeamWorkingProjects/compilador/src/compilador/Nodes/NodeValue.java</file>
-            <file>file:/C:/Users/Ruben/Documents/TeamWorkingProjects/compilador/src/compilador/Nodes/NodeMethod.java</file>
-            <file>file:/C:/Users/Ruben/Documents/TeamWorkingProjects/compilador/src/compilador/SymbolTable.java</file>
-            <file>file:/C:/Users/Ruben/Documents/TeamWorkingProjects/compilador/src/compilador/VarTable.java</file>
             <file>file:/C:/Users/Ruben/Documents/TeamWorkingProjects/compilador/src/compilador/ThreeAddrCode.java</file>
-            <file>file:/C:/Users/Ruben/Documents/TeamWorkingProjects/compilador/src/compilador/Nodes/NodeAssignation.java</file>
         </group>
     </open-files>
 </project-private>

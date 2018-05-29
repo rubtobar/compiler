@@ -1,17 +1,49 @@
 	ORG	$1000
 	TRUE:	EQU	1
 	FALSE:	EQU	0
+WRITE:
+	;Do the print
+	move.l #14, D0
+	lea 4(SP), A1
+	trap #15
+	move.b #11, D0
+	move.l D7, D1
+	trap #15
+	addq.b #1, D7
+	;give control to caller
+	rts
+READ:
+	;Do the read
+	move #2, D0
+	movea.l SP, A1
+	add.l #4,A1
+	trap #15
+	addq.b #1, D7
+	;give control to caller
+	rts
 START:
 	;A6 to index variables
 	move.l SP, A6
 	;A5 to index global variables
 	move.l SP, A5
-	;num save space in Stack
+	;t2 save space in Stack
+	sub.l #4, SP
+	;i save space in Stack
+	sub.l #4, SP
+	;t3 save space in Stack
+	sub.l #4, SP
+	;t4 save space in Stack
 	sub.l #2, SP
+	;t5 save space in Stack
+	sub.l #4, SP
+	;t6 save space in Stack
+	sub.l #4, SP
+	;t0 save space in Stack
+	sub.l #32, SP
+	;str save space in Stack
+	sub.l #32, SP
 	;t1 save space in Stack
 	sub.l #4, SP
-	;t2 save space in Stack
-	sub.l #2, SP
 	;goto: MAIN
 	BRA MAIN
 ;L0: skip
@@ -22,14 +54,11 @@ L0:
 	;set BP
 	move.l SP, A6
 	;save space for local vars
-	sub.l #2, SP
+	sub.l #0, SP
 
-	;t0 = TRUE
-	move.w #TRUE, -2(A6)
-
-	;return t0
+	;return var
 	;send return value
-	move.w -2(A6), 12(A6)
+	move.l 8(A6), 12(A6)
 	;prepare SP
 	move.l A6, SP
 	;restore BP
@@ -40,24 +69,117 @@ L0:
 ;MAIN: skip
 MAIN:
 	;space for return
-	sub.l #2, SP
+	sub.l #32, SP
 
-	;t1 = 3
-	move.l #3, -4(A5)
+	;t0 = call READ
+	bsr.l READ
+	;clean parameters
+	add.l #0, SP
+	;fetch return
+	move.l (SP)+, -32(A5)
+	move.l (SP)+, -28(A5)
+	move.l (SP)+, -24(A5)
+	move.l (SP)+, -20(A5)
+	move.l (SP)+, -16(A5)
+	move.l (SP)+, -12(A5)
+	move.l (SP)+, -8(A5)
+	move.l (SP)+, -4(A5)
+
+	;str = t0
+	move.l -32(A5), -64(A5)
+	move.l -28(A5), -60(A5)
+	move.l -24(A5), -56(A5)
+	move.l -20(A5), -52(A5)
+	move.l -16(A5), -48(A5)
+	move.l -12(A5), -44(A5)
+	move.l -8(A5), -40(A5)
+	move.l -4(A5), -36(A5)
+
+	;space for return
+	sub.l #4, SP
+
+	;t1 = 0
+	move.l #0, -68(A5)
 
 	;param t1
-	move.l -4(A5), -(SP)
+	move.l -68(A5), -(SP)
 
 	;t2 = call L0
 	bsr.l L0
 	;clean parameters
 	add.l #4, SP
 	;fetch return
-	move.w (SP)+, -6(A5)
+	move.l (SP)+, -72(A5)
 
-	;num = t2
-	move.w -6(A5), -8(A5)
+	;i = t2
+	move.l -72(A5), -76(A5)
 
+;L1: skip
+L1:
+	;t3 = 5
+	move.l #5, -80(A5)
+
+	;if i < t3 goto L3
+	move.l -76(A5), D0
+	cmp.l -80(A5), D0
+	blt.l L3
+
+	;t4 = FALSE
+	move.w #FALSE, -82(A5)
+
+	;goto: L4
+	BRA L4
+;L3: skip
+L3:
+	;t4 = TRUE
+	move.w #TRUE, -82(A5)
+
+;L4: skip
+L4:
+	;if t4 = FALSE goto L2
+	move.l -82(A5), D0
+	cmp.l #FALSE, D0
+	beq.l L2
+
+	;space for return
+	sub.l #0, SP
+
+	;param str
+	sub.l #32, SP
+	move.l -64(A5), 0(SP)
+	move.l -60(A5), 4(SP)
+	move.l -56(A5), 8(SP)
+	move.l -52(A5), 12(SP)
+	move.l -48(A5), 16(SP)
+	move.l -44(A5), 20(SP)
+	move.l -40(A5), 24(SP)
+	move.l -36(A5), 28(SP)
+
+	;call WRITE
+	bsr.l WRITE
+	;clean parameters
+	add.l #32, SP
+	;fetch return
+
+	;t5 = 1
+	move.l #1, -86(A5)
+
+	;t6 = i + t5
+	move.l -76(A5), D0
+	add.l -86(A5), D0
+	move.l D0,-90(A5)
+
+	;i = t6
+	move.l -90(A5), -76(A5)
+
+	;goto: L1
+	BRA L1
+;L2: skip
+L2:
+
+	;Terminate program
+	move #9,D0
+	trap #15
 
 	SIMHALT
 
