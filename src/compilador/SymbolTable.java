@@ -145,10 +145,6 @@ public class SymbolTable {
                 int procSize = vt.addVar(descriptionTable.get(id).id, currentProcId, size, id, isParam);
                 pt.updateProcSize(currentProcId, procSize);
                 break;
-//            case DCONST:
-//                // id,programa,size,offset,value
-//                vt.addVar(descriptionTable.get(id).id, currentProcId, size, id);
-//                break;
             case DPROC:
                 int returnSize = 0;  // Tamaño de return de la funcion
                 // añadimos proc a la tabla de procs

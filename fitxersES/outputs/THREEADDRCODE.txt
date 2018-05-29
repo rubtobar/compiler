@@ -1,7 +1,7 @@
 goto: MAIN
 L0: skip
 preambulo funcion
-t0 = 5
+t0 = TRUE
 return t0
 MAIN: skip
 space for return

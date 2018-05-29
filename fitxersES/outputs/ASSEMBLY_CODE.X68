@@ -7,44 +7,57 @@ START:
 	;A5 to index global variables
 	move.l SP, A5
 	;num save space in Stack
-	sub.l #4, SP
+	sub.l #2, SP
 	;t1 save space in Stack
 	sub.l #4, SP
 	;t2 save space in Stack
-	sub.l #4, SP
+	sub.l #2, SP
 	;goto: MAIN
 	BRA MAIN
 ;L0: skip
 L0:
 	;preambulo funcion
+	;save BP
 	move.l A6, -(SP)
+	;set BP
 	move.l SP, A6
-	sub.l #4, SP
+	;save space for local vars
+	sub.l #2, SP
 
-	;t0 = 5
-	move.l #5, -4(A6)
+	;t0 = TRUE
+	move.w #TRUE, -2(A6)
+
 	;return t0
-	move.l -4(A6), 12(A6)
+	;send return value
+	move.w -2(A6), 12(A6)
+	;prepare SP
 	move.l A6, SP
+	;restore BP
 	move.l (SP)+, A6
+	;give control to caller
 	rts
 
 ;MAIN: skip
 MAIN:
 	;space for return
-	sub.l #4, SP
+	sub.l #2, SP
 
 	;t1 = 3
 	move.l #3, -4(A5)
+
 	;param t1
 	move.l -4(A5), -(SP)
 
 	;t2 = call L0
 	bsr.l L0
+	;clean parameters
 	add.l #4, SP
+	;fetch return
+	move.w (SP)+, -6(A5)
 
 	;num = t2
-	move.l -8(A5), -12(A5)
+	move.w -6(A5), -8(A5)
+
 
 	SIMHALT
 

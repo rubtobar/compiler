@@ -211,23 +211,67 @@ public class ThreeAddrCode {
                 case CALL:
                     ProcTable.Proc prog = pt.procTable.get(Integer.parseInt(dest.substring(1)));
                     instr += "\tbsr.l " + prog.label + "\n"; // Saltamos a dest
-                    /* 
-                        Aquí movemos el valor de retorno a la variable indicada por src1, i eliminamos ese espacio de la pila 
-                    */
+                    instr += "\t;clean parameters\n";
                     instr += "\tadd.l #" + prog.paramSize + ", SP\n"; // limpiamos los parametros de la pila a la vuelta
+                    int returnTemporalVar = vt.varTable.get(Integer.parseInt(src1.substring(1))).offset;
+                    instr += "\t;fetch return\n";
+                    //instr += "\tmove.l (SP)+, " + returnTemporalVar + "(A5)\n";
+                    String destLoc1 = getLocation(src1);
+                    size = vt.varTable.get(Integer.parseInt(src1.substring(1))).size;
+                    switch (size) {
+                        case 2:
+                            instr += "\tmove.w (SP)+, " + destLoc1 + "\n";
+                            break;
+                        case 4:
+                            instr += "\tmove.l (SP)+, " + destLoc1 + "\n";
+                            break;
+                        case 32:
+                            // Var String = Var String
+                            int destinoOff = vt.varTable.get(Integer.parseInt(src1.substring(1))).offset;
+                            String regDest = vt.varTable.get(Integer.parseInt(src1.substring(1))).proc == 0 ? "(A5)" : "(A6)";
+                            for (int i = 0; i < 32; i += 4) {
+                                instr += "\tmove.l (SP)+, " + (destinoOff + i) + regDest + "\n";
+                            }
+                            break;
+                    }
+
                     break;
                 case RETURN:
+                    // Para indexar el return
                     int returnOffset = pt.procTable.get(Integer.parseInt(src1)).paramSize;
                     returnOffset += vt.SAVED_STATE_SIZE; //Espacio de variables de retorno 
-                    int returnedVarOffset = vt.varTable.get(Integer.parseInt(dest.substring(1))).offset;
-                    instr += "\tmove.l " + returnedVarOffset + "(A6), " + returnOffset + "(A6)\n";
+                    // Tamaño return
+                    int returnSize = pt.procTable.get(Integer.parseInt(src1)).returnSize;
+                    //--int returnedVarOffset = vt.varTable.get(Integer.parseInt(dest.substring(1))).offset;
+                    instr += "\t;send return value\n";
+                    String varToRet = getLocation(dest);
+                    //instr += "\tmove.l " + returnedVarOffset + "(A6), " + returnOffset + "(A6)\n";
+                    switch (returnSize) {
+                        case 2:
+                            instr += "\tmove.w " + varToRet + ", " + returnOffset + "(A6)\n";
+                            break;
+                        case 4:
+                            instr += "\tmove.l " + varToRet + ", " + returnOffset + "(A6)\n";
+                            break;
+                        case 32:
+                            // Var String = Var String
+                            int srcOff = vt.varTable.get(Integer.parseInt(dest.substring(1))).offset;
+                            String regSrc = vt.varTable.get(Integer.parseInt(dest.substring(1))).proc == 0 ? "(A5)" : "(A6)";
+                            for (int i = 0; i < 32; i += 4) {
+                                instr += "\tmove.l " + (srcOff + i) + regSrc + ", " + (returnOffset + i) + "(A6)\n";
+                            }
+                            break;
+                    }
+                    instr += "\t;prepare SP\n";
                     instr += "\tmove.l A6, SP\n";
+                    instr += "\t;restore BP\n";
                     instr += "\tmove.l (SP)+, A6\n";
+                    instr += "\t;give control to caller\n";
                     instr += "\trts\n"; // Saltamos
                     break;
                 case RETURN_SPACE:
                     int retSize = pt.procTable.get(Integer.parseInt(dest)).returnSize;
-                    instr += "\tsub.l #" + retSize + ", SP\n" ; // reservamos el espacio en la pila para el return
+                    instr += "\tsub.l #" + retSize + ", SP\n"; // reservamos el espacio en la pila para el return
                     break;
                 case PARAM:
                     size = vt.varTable.get(Integer.parseInt(dest.substring(1))).size;
@@ -249,10 +293,10 @@ public class ThreeAddrCode {
                         size = vt.varTable.get(Integer.parseInt(dest.substring(1))).size;
                         switch (size) {
                             case 2:
-                                instr += "\tmove.w" + " " + srcLoc + ", " + destLoc;
+                                instr += "\tmove.w" + " " + srcLoc + ", " + destLoc + "\n";
                                 break;
                             case 4:
-                                instr += "\tmove.l" + " " + srcLoc + ", " + destLoc;
+                                instr += "\tmove.l" + " " + srcLoc + ", " + destLoc + "\n";
                                 break;
                             case 32:
                                 // Var String = Var String
@@ -283,8 +327,11 @@ public class ThreeAddrCode {
 
                     break;
                 case PREFUNCT:
+                    instr += "\t;save BP\n";
                     instr += "\tmove.l A6, -(SP)\n"; // Guardamos BP
+                    instr += "\t;set BP\n";
                     instr += "\tmove.l SP, A6\n"; // colocamos BP nuevo
+                    instr += "\t;save space for local vars\n";
                     instr += "\tsub.l #" + pt.procTable.get(Integer.parseInt(dest)).localSize + ", SP\n"; // colocamos espacio para variables locales
                     break;
                 default:

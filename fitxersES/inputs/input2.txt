@@ -1,9 +1,10 @@
-int a(int z){
-	return 5;
+
+boolean a(int z){
+	return true;
 }
 /*
 * Programa principal
 */
 main {
-	int num = a(3);
+	boolean num = a(3);
 }

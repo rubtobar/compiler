@@ -1,22 +1,22 @@
-1:1: tk_id: 'int'
-1:5: tk_id: 'a'
-1:6: tk_openp
-1:7: tk_id: 'int'
-1:11: tk_id: 'z'
-1:12: tk_closep
-1:13: tk_leftb
-2:2: tk_return
-2:9: tk_digits: '5'
-2:10: tk_pcoma
-3:1: tk_rightb
-7:1: tk_main
-7:6: tk_leftb
-8:2: tk_id: 'int'
-8:6: tk_id: 'num'
-8:10: tk_equal
-8:12: tk_id: 'a'
-8:13: tk_openp
-8:14: tk_digits: '3'
-8:15: tk_closep
-8:16: tk_pcoma
-9:1: tk_rightb
+2:1: tk_id: 'boolean'
+2:9: tk_id: 'a'
+2:10: tk_openp
+2:11: tk_id: 'int'
+2:15: tk_id: 'z'
+2:16: tk_closep
+2:17: tk_leftb
+3:2: tk_return
+3:9: tk_id: 'true'
+3:13: tk_pcoma
+4:1: tk_rightb
+8:1: tk_main
+8:6: tk_leftb
+9:2: tk_id: 'boolean'
+9:10: tk_id: 'num'
+9:14: tk_equal
+9:16: tk_id: 'a'
+9:17: tk_openp
+9:18: tk_digits: '3'
+9:19: tk_closep
+9:20: tk_pcoma
+10:1: tk_rightb
