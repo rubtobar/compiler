@@ -24,7 +24,7 @@ public class ProcTable {
         int depth;
         int paramSize;
         int localSize;
-        int returnSize;
+        public int returnSize;
 
         public Proc(String name, String label, int depth, int paramSize, int localSize, int returnSize) {
             this.name = name;

@@ -26,6 +26,7 @@ START:
 	move.l SP, A6
 	;A5 to index global variables
 	move.l SP, A5
+
 	;t2 save space in Stack
 	sub.l #4, SP
 	;i save space in Stack
@@ -68,7 +69,7 @@ L0:
 
 ;MAIN: skip
 MAIN:
-	;space for return
+	;READ return space
 	sub.l #32, SP
 
 	;t0 = call READ
@@ -95,7 +96,7 @@ MAIN:
 	move.l -8(A5), -40(A5)
 	move.l -4(A5), -36(A5)
 
-	;space for return
+	;L0 return space
 	sub.l #4, SP
 
 	;t1 = 0
@@ -141,9 +142,6 @@ L4:
 	cmp.l #FALSE, D0
 	beq.l L2
 
-	;space for return
-	sub.l #0, SP
-
 	;param str
 	sub.l #32, SP
 	move.l -64(A5), 0(SP)
@@ -159,7 +157,6 @@ L4:
 	bsr.l WRITE
 	;clean parameters
 	add.l #32, SP
-	;fetch return
 
 	;t5 = 1
 	move.l #1, -86(A5)
@@ -176,7 +173,6 @@ L4:
 	BRA L1
 ;L2: skip
 L2:
-
 	;Terminate program
 	move #9,D0
 	trap #15

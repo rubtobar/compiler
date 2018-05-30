@@ -6,7 +6,7 @@ import static compilador.Compilador.*;
 %%
 // Declaracions
 
-string     = (\" ([^\"] | [(\\\")])* \") | (\' ([^\'] | [(\\\')])* \')
+string     = (\"[^\"]*\") | (\'[^\']*\')
 digit      = [0-9]
 digits     = {digit}+
 id         = [A-Za-z_][A-Za-z0-9_]*

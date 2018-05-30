@@ -106,7 +106,7 @@ public class ThreeAddrCode {
                 case PREFUNCT:
                     return "preambulo funcion";
                 case RETURN_SPACE:
-                    return "space for return";
+                    return sdest+" return space";
             }
             return "--:INSTRUCTIONERROR:--";
         }
@@ -214,9 +214,9 @@ public class ThreeAddrCode {
                     instr += "\t;clean parameters\n";
                     instr += "\tadd.l #" + prog.paramSize + ", SP\n"; // limpiamos los parametros de la pila a la vuelta
                     //int returnTemporalVar = vt.varTable.get(Integer.parseInt(src1.substring(1))).offset;
-                    instr += "\t;fetch return\n";
                     //instr += "\tmove.l (SP)+, " + returnTemporalVar + "(A5)\n";
                     if (src1 != null) {
+                        instr += "\t;fetch return\n";
                         String destLoc1 = getLocation(src1);
                         size = vt.varTable.get(Integer.parseInt(src1.substring(1))).size;
                         switch (size) {
@@ -273,7 +273,7 @@ public class ThreeAddrCode {
                     instr += "\trts\n"; // Saltamos
                     break;
                 case RETURN_SPACE:
-                    int retSize = pt.procTable.get(Integer.parseInt(dest)).returnSize;
+                    int retSize = pt.procTable.get(Integer.parseInt(dest.substring(1))).returnSize;
                     instr += "\tsub.l #" + retSize + ", SP\n"; // reservamos el espacio en la pila para el return
                     break;
                 case PARAM:
@@ -508,9 +508,9 @@ public class ThreeAddrCode {
             // Colocamos A6 para indexar el StackPointer
             writer.print("\t;A6 to index variables\n");
             writer.print("\tmove.l SP, A6\n");
-            // Colocamos A6 para indexar el StackPointer
+            // Colocamos A5 para indexar el StackPointer
             writer.print("\t;A5 to index global variables\n");
-            writer.print("\tmove.l SP, A5\n");
+            writer.print("\tmove.l SP, A5\n\n");
 
             // Generamos variables globales 
             // Generamos variables del main
@@ -531,7 +531,7 @@ public class ThreeAddrCode {
                 writer.print(_item.get68KCode() + "\n");
             });
             // Generamos codigo de finalizacion de programa
-            writer.print("\n\t;Terminate program\n\tmove #9,D0\n\ttrap #15\n");
+            writer.print("\t;Terminate program\n\tmove #9,D0\n\ttrap #15\n");
             // Generamos codigo de END
             writer.print("\n\tSIMHALT\n\n\n\n\tEND\tSTART");
             writer.close();

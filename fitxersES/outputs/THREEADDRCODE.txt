@@ -3,10 +3,10 @@ L0: skip
 preambulo funcion
 return var
 MAIN: skip
-space for return
+READ return space
 t0 = call READ
 str = t0
-space for return
+L0 return space
 t1 = 0
 param t1
 t2 = call L0
@@ -20,7 +20,6 @@ L3: skip
 t4 = TRUE
 L4: skip
 if t4 = FALSE goto L2
-space for return
 param str
 call WRITE
 t5 = 1

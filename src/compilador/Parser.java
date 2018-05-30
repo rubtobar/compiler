@@ -446,7 +446,7 @@ class CUP$Parser$actions {
 	        Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	    TblSymbol aux = st.get((String) nP.result);
-		if (aux == null){/*ignora*/}
+		if (aux == null || et == null){/*ignora*/}
 		else if (aux.d.tsb == TSB.VOID) {
 			errPrinter.unexpectedReturn(rtn.line, rtn.column);
 		} else if (aux.d.tsb != et.result) {
@@ -762,7 +762,7 @@ class CUP$Parser$actions {
             errPrinter.assigmentToConst(id.line, id.column, id.getAtribut());
         } else if (aux.d.dt != DescriptionType.DVAR) {
             errPrinter.undeclaredVariable(id.line, id.column, id.getAtribut());
-        }else if (te.result == null) {
+        }else if (te == null) {
             // Ignorar
         } else if (te.result != aux.d.tsb) {
             errPrinter.unexpectedValueType(eq.line, eq.column, te.result.toString(), aux.d.tsb.toString());
