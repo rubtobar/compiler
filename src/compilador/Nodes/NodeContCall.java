@@ -8,15 +8,15 @@ import java.util.ArrayList;
 
 public class NodeContCall extends Node {
 
+    public final String proc;
     private final NodeExpr expr;
     private final NodeContCall contCall;
-    public int procId;
 
-    public NodeContCall(NodeExpr expr, NodeContCall contCall, int procId, Object result) {
+    public NodeContCall(String proc, NodeExpr expr, NodeContCall contCall, Object result) {
         super(result);
+        this.proc = proc;
         this.expr = expr;
         this.contCall = contCall;
-        this.procId = procId;
     }
 
     public ArrayList generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {

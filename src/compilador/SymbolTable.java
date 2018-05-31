@@ -28,6 +28,9 @@ public class SymbolTable {
     private ProcTable pt;
     private int tempVarCounter;
     int currentProcId;
+    Set<String> protectedProcs = new TreeSet<String>() {{
+        add("readInt"); add("readString"); add("write@INT"); add("write@STRING");
+    }};
 
     public SymbolTable(VarTable vt, ProcTable pt) {
         this.expansionTable = new ArrayList<>();
@@ -153,15 +156,15 @@ public class SymbolTable {
                 String wrid = "";
                 if (null != id) {
                     switch (id) {
-                        case "write_INT":
-                        case "write_STRING":
+                        case "write@INT":
+                        case "write@STRING":
                             wrid = id;
                             break;
-                        case "STRING_read":
+                        case "readString":
                             wrid = id;
                             returnSize = 32;
                             break;
-                        case "INT_read":
+                        case "readInt":
                             wrid = id;
                             returnSize = 4;
                             break;
@@ -183,10 +186,10 @@ public class SymbolTable {
                     }
                 }
                 // String name, String label, int prof, int nparam, int localSize, int returnSize
-                pt.add(descriptionTable.get(id).id, id, wrid, 0, 0, size, returnSize);
+                pt.add(descriptionTable.get(id).id, id, wrid.toUpperCase(), 0, 0, size, returnSize);
                 /*En caso de que sean funciones reservadas no cambiamos el
                 corrent proc durante las declaraciones*/
-                if (!"write".equals(id) && !"read".equals(id)) {
+                if (!protectedProcs.contains(id)) {
                     currentProcId = descriptionTable.get(id).id;
                 }
                 break;

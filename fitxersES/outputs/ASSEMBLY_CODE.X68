@@ -27,6 +27,8 @@ START:
 	;A5 to index global variables
 	move.l SP, A5
 
+	;t0 save space in Stack
+	sub.l #4, SP
 	;goto: MAIN
 	BRA MAIN
 ;L0: skip
@@ -37,14 +39,9 @@ L0:
 	;set BP
 	move.l SP, A6
 	;save space for local vars
-	sub.l #4, SP
+	sub.l #0, SP
 
-	;t0 = 0
-	move.l #0, -4(A6)
-
-	;return t0
-	;send return value
-	move.l -4(A6), 16(A6)
+	;return null
 	;prepare SP
 	move.l A6, SP
 	;restore BP
@@ -62,7 +59,9 @@ L1:
 	;save space for local vars
 	sub.l #0, SP
 
-	;return null
+	;return b
+	;send return value
+	move.l 8(A6), 12(A6)
 	;prepare SP
 	move.l A6, SP
 	;restore BP

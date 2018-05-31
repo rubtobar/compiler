@@ -1,9 +1,8 @@
 goto: MAIN
 L0: skip
 preambulo funcion
-t0 = 0
-return t0
+return null
 L1: skip
 preambulo funcion
-return null
+return b
 MAIN: skip
