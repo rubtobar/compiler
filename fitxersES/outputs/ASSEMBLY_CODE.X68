@@ -36,8 +36,10 @@ START:
 	;t4 save space in Stack
 	sub.l #2, SP
 	;t5 save space in Stack
-	sub.l #4, SP
+	sub.l #32, SP
 	;t6 save space in Stack
+	sub.l #4, SP
+	;t7 save space in Stack
 	sub.l #4, SP
 	;t0 save space in Stack
 	sub.l #32, SP
@@ -142,32 +144,49 @@ L4:
 	cmp.l #FALSE, D0
 	beq.l L2
 
+<<<<<<< Updated upstream
 	;param str
+=======
+	;space for return
+	sub.l #0, SP
+
+	;t5 = "str");
+		write("str"
+	move.l #'str"', -114(A5)
+	move.l #');
+', -110(A5)
+	move.l #'		wr', -106(A5)
+	move.l #'ite(', -102(A5)
+	move.l #'"str', -98(A5)
+	move.b #0, -94(A5)
+
+	;param t5
+>>>>>>> Stashed changes
 	sub.l #32, SP
-	move.l -64(A5), 0(SP)
-	move.l -60(A5), 4(SP)
-	move.l -56(A5), 8(SP)
-	move.l -52(A5), 12(SP)
-	move.l -48(A5), 16(SP)
-	move.l -44(A5), 20(SP)
-	move.l -40(A5), 24(SP)
-	move.l -36(A5), 28(SP)
+	move.l -114(A5), 0(SP)
+	move.l -110(A5), 4(SP)
+	move.l -106(A5), 8(SP)
+	move.l -102(A5), 12(SP)
+	move.l -98(A5), 16(SP)
+	move.l -94(A5), 20(SP)
+	move.l -90(A5), 24(SP)
+	move.l -86(A5), 28(SP)
 
 	;call WRITE
 	bsr.l WRITE
 	;clean parameters
 	add.l #32, SP
 
-	;t5 = 1
-	move.l #1, -86(A5)
+	;t6 = 1
+	move.l #1, -118(A5)
 
-	;t6 = i + t5
+	;t7 = i + t6
 	move.l -76(A5), D0
-	add.l -86(A5), D0
-	move.l D0,-90(A5)
+	add.l -118(A5), D0
+	move.l D0,-122(A5)
 
-	;i = t6
-	move.l -90(A5), -76(A5)
+	;i = t7
+	move.l -122(A5), -76(A5)
 
 	;goto: L1
 	BRA L1

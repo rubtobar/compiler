@@ -20,10 +20,17 @@ L3: skip
 t4 = TRUE
 L4: skip
 if t4 = FALSE goto L2
+<<<<<<< Updated upstream
 param str
+=======
+space for return
+t5 = "str");
+		write("str"
+param t5
+>>>>>>> Stashed changes
 call WRITE
-t5 = 1
-t6 = i + t5
-i = t6
+t6 = 1
+t7 = i + t6
+i = t7
 goto: L1
 L2: skip
