@@ -8,8 +8,7 @@ main {
 	string str = read();
 	int i = a(0);
 	while (i < 5) {
-		write("str");
-		write("str");
+		write(str);
 		i = i + 1; 
 	}
 }

@@ -1,4 +1,0 @@
-2:9: SEMANTIC ERROR:
-> 	return True;
-Undeclared variable 'True'
-

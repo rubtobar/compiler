@@ -1,12 +1,48 @@
-1:1: tk_id: 'boolean'
-1:9: tk_id: 'a'
-1:10: tk_openp
-1:11: tk_id: 'int'
-1:15: tk_id: 'var'
-1:18: tk_closep
-1:19: tk_leftb
+1:1: tk_id: 'int'
+1:5: tk_id: 'a'
+1:6: tk_openp
+1:7: tk_id: 'int'
+1:11: tk_id: 'var'
+1:14: tk_closep
+1:15: tk_leftb
 2:2: tk_return
-2:9: tk_id: 'True'
-2:13: tk_pcoma
+2:9: tk_id: 'var'
+2:12: tk_pcoma
 3:1: tk_rightb
 7:1: tk_main
+7:6: tk_leftb
+8:2: tk_id: 'string'
+8:9: tk_id: 'str'
+8:13: tk_equal
+8:15: tk_id: 'read'
+8:19: tk_openp
+8:20: tk_closep
+8:21: tk_pcoma
+9:2: tk_id: 'int'
+9:6: tk_id: 'i'
+9:8: tk_equal
+9:10: tk_id: 'a'
+9:11: tk_openp
+9:12: tk_digits: '0'
+9:13: tk_closep
+9:14: tk_pcoma
+10:2: tk_while
+10:8: tk_openp
+10:9: tk_id: 'i'
+10:11: tk_op_rel: '<'
+10:13: tk_digits: '5'
+10:14: tk_closep
+10:16: tk_leftb
+11:3: tk_id: 'write'
+11:8: tk_openp
+11:9: tk_id: 'str'
+11:12: tk_closep
+11:13: tk_pcoma
+12:3: tk_id: 'i'
+12:5: tk_equal
+12:7: tk_id: 'i'
+12:9: tk_op_aritm: '+'
+12:11: tk_digits: '1'
+12:12: tk_pcoma
+13:2: tk_rightb
+14:1: tk_rightb
