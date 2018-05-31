@@ -29,10 +29,6 @@ START:
 
 	;t0 save space in Stack
 	sub.l #4, SP
-	;t1 save space in Stack
-	sub.l #4, SP
-	;c save space in Stack
-	sub.l #4, SP
 	;goto: MAIN
 	BRA MAIN
 ;L0: skip
@@ -53,46 +49,18 @@ L0:
 	;give control to caller
 	rts
 
-;L1: skip
-L1:
-	;preambulo funcion
-	;save BP
-	move.l A6, -(SP)
-	;set BP
-	move.l SP, A6
-	;save space for local vars
-	sub.l #0, SP
-
-	;return b
-	;send return value
-	move.l 8(A6), 12(A6)
-	;prepare SP
-	move.l A6, SP
-	;restore BP
-	move.l (SP)+, A6
-	;give control to caller
-	rts
-
 ;MAIN: skip
 MAIN:
-	;L1 return space
-	sub.l #4, SP
-
-	;t0 = 1
-	move.l #1, -4(A5)
+	;t0 = 2
+	move.l #2, -4(A5)
 
 	;param t0
 	move.l -4(A5), -(SP)
 
-	;t1 = call L1
-	bsr.l L1
+	;call WRITE_INT
+	bsr.l WRITE_INT
 	;clean parameters
 	add.l #4, SP
-	;fetch return
-	move.l (SP)+, -8(A5)
-
-	;c = t1
-	move.l -8(A5), -12(A5)
 
 	;Terminate program
 	move #9,D0

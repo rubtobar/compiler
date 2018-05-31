@@ -1,11 +1,7 @@
-void a(int a, int b){
+void function(){
 	
 }
 
-int a(int b){
-	return b;
-}
-
 main {
-	int c = a(1);
+	write(2);
 }

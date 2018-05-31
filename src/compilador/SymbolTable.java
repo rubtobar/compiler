@@ -186,7 +186,7 @@ public class SymbolTable {
                     }
                 }
                 // String name, String label, int prof, int nparam, int localSize, int returnSize
-                pt.add(descriptionTable.get(id).id, id, wrid.toUpperCase(), 0, 0, size, returnSize);
+                pt.add(descriptionTable.get(id).id, id, wrid.toUpperCase().replace("@", "_"), 0, 0, size, returnSize);
                 /*En caso de que sean funciones reservadas no cambiamos el
                 corrent proc durante las declaraciones*/
                 if (!protectedProcs.contains(id)) {

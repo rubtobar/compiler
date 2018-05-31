@@ -2,12 +2,7 @@ goto: MAIN
 L0: skip
 preambulo funcion
 return null
-L1: skip
-preambulo funcion
-return b
 MAIN: skip
-L1 return space
-t0 = 1
+t0 = 2
 param t0
-t1 = call L1
-c = t1
+call WRITE_INT

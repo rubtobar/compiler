@@ -1,33 +1,14 @@
 1:1: tk_id: 'void'
-1:6: tk_id: 'a'
-1:7: tk_openp
-1:8: tk_id: 'int'
-1:12: tk_id: 'a'
-1:13: tk_coma
-1:15: tk_id: 'int'
-1:19: tk_id: 'b'
-1:20: tk_closep
-1:21: tk_leftb
+1:6: tk_id: 'function'
+1:14: tk_openp
+1:15: tk_closep
+1:16: tk_leftb
 3:1: tk_rightb
-5:1: tk_id: 'int'
-5:5: tk_id: 'a'
-5:6: tk_openp
-5:7: tk_id: 'int'
-5:11: tk_id: 'b'
-5:12: tk_closep
-5:13: tk_leftb
-6:2: tk_return
-6:9: tk_id: 'b'
+5:1: tk_main
+5:6: tk_leftb
+6:2: tk_id: 'write'
+6:7: tk_openp
+6:8: tk_digits: '2'
+6:9: tk_closep
 6:10: tk_pcoma
 7:1: tk_rightb
-9:1: tk_main
-9:6: tk_leftb
-10:2: tk_id: 'int'
-10:6: tk_id: 'c'
-10:8: tk_equal
-10:10: tk_id: 'a'
-10:11: tk_openp
-10:12: tk_digits: '1'
-10:13: tk_closep
-10:14: tk_pcoma
-11:1: tk_rightb

@@ -1058,7 +1058,7 @@ class CUP$Parser$actions {
             errPrinter.undeclaredFunction(clp.line, clp.column, procName);
         }
         else {
-        	int tid = -1;
+        	Integer tid = null;
         	TSB returnType = aux.d.tsb;
         	if (returnType != TSB.VOID) {
             	tid = st.addTemp(returnType);
