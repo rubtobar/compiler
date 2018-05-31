@@ -4,3 +4,5 @@ ID		PROC		SIZE		OFFSET		VARNAME
 017		13		4		12		b
 020		18		4		8		b
 021		0		4		-4		t0
+022		0		4		-8		t1
+023		0		4		-12		c

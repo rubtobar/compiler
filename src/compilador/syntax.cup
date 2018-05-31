@@ -473,18 +473,17 @@ CALL ::=
 		{:
         ArrayList <TSB> paramList = (ArrayList <TSB>) params.result;
         String procName = params.proc;
-        int procId = 
         TblSymbol aux = st.get(procName);
         if (aux == null || aux.d.dt != DescriptionType.DPROC) {
             errPrinter.undeclaredFunction(clp.line, clp.column, procName);
         }
         else {
-        	int tid;
+        	int tid = -1;
         	TSB returnType = aux.d.tsb;
         	if (returnType != TSB.VOID) {
             	tid = st.addTemp(returnType);
            	}
-	        RESULT = new NodeCall(params, procName, tid, returnType);
+	        RESULT = new NodeCall(params, aux.id, tid, returnType);
         }
 		:}
 	| 

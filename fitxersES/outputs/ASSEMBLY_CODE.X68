@@ -29,6 +29,10 @@ START:
 
 	;t0 save space in Stack
 	sub.l #4, SP
+	;t1 save space in Stack
+	sub.l #4, SP
+	;c save space in Stack
+	sub.l #4, SP
 	;goto: MAIN
 	BRA MAIN
 ;L0: skip
@@ -71,6 +75,25 @@ L1:
 
 ;MAIN: skip
 MAIN:
+	;L1 return space
+	sub.l #4, SP
+
+	;t0 = 1
+	move.l #1, -4(A5)
+
+	;param t0
+	move.l -4(A5), -(SP)
+
+	;t1 = call L1
+	bsr.l L1
+	;clean parameters
+	add.l #4, SP
+	;fetch return
+	move.l (SP)+, -8(A5)
+
+	;c = t1
+	move.l -8(A5), -12(A5)
+
 	;Terminate program
 	move #9,D0
 	trap #15

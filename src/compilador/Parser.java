@@ -1053,18 +1053,17 @@ class CUP$Parser$actions {
 		
         ArrayList <TSB> paramList = (ArrayList <TSB>) params.result;
         String procName = params.proc;
-        int procId = 
         TblSymbol aux = st.get(procName);
         if (aux == null || aux.d.dt != DescriptionType.DPROC) {
             errPrinter.undeclaredFunction(clp.line, clp.column, procName);
         }
         else {
-        	int tid;
+        	int tid = -1;
         	TSB returnType = aux.d.tsb;
         	if (returnType != TSB.VOID) {
             	tid = st.addTemp(returnType);
            	}
-	        RESULT = new NodeCall(params, procName, tid, returnType);
+	        RESULT = new NodeCall(params, aux.id, tid, returnType);
         }
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("CALL",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
