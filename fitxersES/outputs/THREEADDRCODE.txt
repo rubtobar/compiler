@@ -1,8 +1,71 @@
 goto: MAIN
 L0: skip
 preambulo funcion
-return null
+t0 = a + b
+return t0
 MAIN: skip
-t0 = 2
-param t0
+t1 = 1
+a = t1
+t2 = "Programa sumador."
+param t2
+call WRITE_STRING
+t3 = "introdueix frase finalitzacio"
+param t3
+call WRITE_STRING
+READSTRING return space
+t4 = call READSTRING
+mySentence = t4
+L1: skip
+t5 = 0
+if a != t5 goto L3
+t6 = FALSE
+goto: L4
+L3: skip
+t6 = TRUE
+L4: skip
+if t6 = FALSE goto L2
+t7 = "0->sortir, !0->continuar"
+param t7
+call WRITE_STRING
+READINT return space
+t8 = call READINT
+a = t8
+t9 = 0
+if a != t9 goto L5
+t10 = FALSE
+goto: L6
+L5: skip
+t10 = TRUE
+L6: skip
+if t10 = FALSE goto L7
+t11 = "Introdueix el primer numero"
+param t11
+call WRITE_STRING
+READINT return space
+t12 = call READINT
+a = t12
+t13 = "Introdueix el segon numero"
+param t13
+call WRITE_STRING
+READINT return space
+t14 = call READINT
+b = t14
+t15 = "La suma dona:"
+param t15
+call WRITE_STRING
+L0 return space
+param b
+param a
+t16 = call L0
+param t16
 call WRITE_INT
+t17 = 1
+a = t17
+L7: skip
+goto: L1
+L2: skip
+t18 = "Programa finalitzat."
+param t18
+call WRITE_STRING
+param mySentence
+call WRITE_STRING

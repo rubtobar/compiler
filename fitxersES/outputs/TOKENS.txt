@@ -1,14 +1,124 @@
-1:1: tk_id: 'void'
-1:6: tk_id: 'function'
-1:14: tk_openp
-1:15: tk_closep
-1:16: tk_leftb
+1:1: tk_id: 'int'
+1:5: tk_id: 'suma'
+1:9: tk_openp
+1:10: tk_id: 'int'
+1:14: tk_id: 'a'
+1:15: tk_coma
+1:17: tk_id: 'int'
+1:21: tk_id: 'b'
+1:22: tk_closep
+1:23: tk_leftb
+2:2: tk_return
+2:9: tk_id: 'a'
+2:10: tk_op_aritm: '+'
+2:11: tk_id: 'b'
+2:12: tk_pcoma
 3:1: tk_rightb
 5:1: tk_main
 5:6: tk_leftb
-6:2: tk_id: 'write'
-6:7: tk_openp
-6:8: tk_digits: '2'
-6:9: tk_closep
-6:10: tk_pcoma
-7:1: tk_rightb
+6:2: tk_id: 'string'
+6:9: tk_id: 'mySentence'
+6:19: tk_pcoma
+7:2: tk_id: 'int'
+7:6: tk_id: 'a'
+7:8: tk_equal
+7:10: tk_digits: '1'
+7:11: tk_pcoma
+8:2: tk_id: 'int'
+8:6: tk_id: 'b'
+8:7: tk_pcoma
+9:2: tk_id: 'write'
+9:7: tk_openp
+9:8: tk_string: 'Programa sumador.'
+9:27: tk_closep
+9:28: tk_pcoma
+10:2: tk_id: 'write'
+10:7: tk_openp
+10:8: tk_string: 'introdueix frase finalitzacio'
+10:39: tk_closep
+10:40: tk_pcoma
+11:2: tk_id: 'mySentence'
+11:13: tk_equal
+11:15: tk_id: 'readString'
+11:25: tk_openp
+11:26: tk_closep
+11:27: tk_pcoma
+12:2: tk_while
+12:8: tk_openp
+12:9: tk_id: 'a'
+12:11: tk_op_rel: '!='
+12:14: tk_digits: '0'
+12:15: tk_closep
+12:17: tk_leftb
+13:3: tk_id: 'write'
+13:8: tk_openp
+13:9: tk_string: '0->sortir, !0->continuar'
+13:35: tk_closep
+13:36: tk_pcoma
+14:3: tk_id: 'a'
+14:5: tk_equal
+14:7: tk_id: 'readInt'
+14:14: tk_openp
+14:15: tk_closep
+14:16: tk_pcoma
+15:3: tk_if
+15:6: tk_openp
+15:7: tk_id: 'a'
+15:9: tk_op_rel: '!='
+15:12: tk_digits: '0'
+15:13: tk_closep
+15:15: tk_leftb
+16:4: tk_id: 'write'
+16:9: tk_openp
+16:10: tk_string: 'Introdueix el primer numero'
+16:39: tk_closep
+16:40: tk_pcoma
+17:4: tk_id: 'a'
+17:6: tk_equal
+17:8: tk_id: 'readInt'
+17:15: tk_openp
+17:16: tk_closep
+17:17: tk_pcoma
+18:4: tk_id: 'write'
+18:9: tk_openp
+18:10: tk_string: 'Introdueix el segon numero'
+18:38: tk_closep
+18:39: tk_pcoma
+19:4: tk_id: 'b'
+19:6: tk_equal
+19:8: tk_id: 'readInt'
+19:15: tk_openp
+19:16: tk_closep
+19:17: tk_pcoma
+20:4: tk_id: 'write'
+20:9: tk_openp
+20:10: tk_string: 'La suma dona:'
+20:25: tk_closep
+20:26: tk_pcoma
+21:4: tk_id: 'write'
+21:9: tk_openp
+21:10: tk_id: 'suma'
+21:14: tk_openp
+21:15: tk_id: 'a'
+21:16: tk_coma
+21:18: tk_id: 'b'
+21:19: tk_closep
+21:20: tk_closep
+21:21: tk_pcoma
+22:4: tk_id: 'a'
+22:6: tk_equal
+22:8: tk_digits: '1'
+22:9: tk_pcoma
+23:3: tk_rightb
+24:2: tk_rightb
+25:2: tk_id: 'write'
+25:7: tk_openp
+25:8: tk_string: 'Programa finalitzat.'
+25:30: tk_closep
+25:31: tk_pcoma
+26:2: tk_id: 'write'
+26:7: tk_openp
+26:8: tk_id: 'mySentence'
+26:18: tk_closep
+26:19: tk_pcoma
+27:1: tk_rightb
