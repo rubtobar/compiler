@@ -1,14 +1,11 @@
-int a(int var){
-	return var;
+int a(int a, int b){
+	return 0;
 }
-/*
-* Programa principal
-*/
+
+void a (string a, string b){
+
+}
+
 main {
-	string str = read();
-	int i = a(0);
-	while (i < 5) {
-		write(str);
-		i = i + 1; 
-	}
+
 }

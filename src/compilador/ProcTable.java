@@ -37,7 +37,7 @@ public class ProcTable {
         
         @Override
         public String toString(){     
-            return name + "\t\t" +label + "\t\t" + depth + "\t\t" + paramSize + "\t\t" + localSize + "\t\t" + returnSize;
+            return name + "\t\t\t" +label + "\t\t\t" + depth + "\t\t\t" + paramSize + "\t\t\t" + localSize + "\t\t\t" + returnSize;
         }
     }
 
@@ -58,12 +58,12 @@ public class ProcTable {
         @Override
     public String toString(){
         String str[] = new String[procTable.size()];
-        String str1 = "ID\t\tNAME\t\tLABEL\t\tPROF\t\tP.SIZE\t\tL.SIZE\t\tR.SIZE\n"
-        + "-----------------------------------------------------------------------------------------------------------------------------------------------------\n";
+        String str1 = "ID\t\t\tNAME\t\t\tLABEL\t\t\tPROF\t\t\tP.SIZE\t\t\tL.SIZE\t\t\tR.SIZE\n"
+        + "--------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
 
         int i = 0;
         for (int id : this.procTable.keySet()) {
-            str[i] = String.format("%03d", id) + "\t\t" + procTable.get(id) + "\n";
+            str[i] = String.format("%03d", id) + "\t\t\t" + procTable.get(id) + "\n";
             i++;
         }
         Arrays.sort(str);

@@ -151,11 +151,21 @@ public class SymbolTable {
                 // modificamos los valores de las variables que 
                 // hemos encontrado al encontrar el prog al que pertenecen
                 String wrid = "";
-                if ("write".equals(id)) {
-                    wrid = "WRITE";
-                } else if ("read".equals(id)) {
-                    wrid = "READ";
-                    returnSize = 32;
+                if (null != id) {
+                    switch (id) {
+                        case "write_INT":
+                        case "write_STRING":
+                            wrid = id;
+                            break;
+                        case "STRING_read":
+                            wrid = id;
+                            returnSize = 32;
+                            break;
+                        case "INT_read":
+                            wrid = id;
+                            returnSize = 4;
+                            break;
+                    }
                 }
                 if (null != d.tsb) {
                     switch (d.tsb) {
@@ -255,7 +265,7 @@ public class SymbolTable {
         protected DescriptionType dt;
         public TSB tsb;
 
-        protected enum TSB {
+        public enum TSB {
             INT, BOOL, STRING, VOID, NULL
         }
 

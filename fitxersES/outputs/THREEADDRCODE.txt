@@ -1,29 +1,9 @@
 goto: MAIN
 L0: skip
 preambulo funcion
-return var
-MAIN: skip
-READ return space
-t0 = call READ
-str = t0
-L0 return space
-t1 = 0
-param t1
-t2 = call L0
-i = t2
+t0 = 0
+return t0
 L1: skip
-t3 = 5
-if i < t3 goto L3
-t4 = FALSE
-goto: L4
-L3: skip
-t4 = TRUE
-L4: skip
-if t4 = FALSE goto L2
-param str
-call WRITE
-t5 = 1
-t6 = i + t5
-i = t6
-goto: L1
-L2: skip
+preambulo funcion
+return null
+MAIN: skip
