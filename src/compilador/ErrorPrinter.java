@@ -113,7 +113,7 @@ public class ErrorPrinter {
     public void reservedVariableName(int line, int column, String nomVar) {
         writer.println(line + ":" + column + ": SEMANTIC ERROR:\n"
             + "> " + codigo.get(line-1)
-            + "\nVariable name '"+nomVar+"' is reserved word\n");
+            + "\nVariable name '"+nomVar+"' is a reserved word\n");
         writer.flush();
         erroresEncontrados++;
     }
@@ -121,7 +121,7 @@ public class ErrorPrinter {
     public void reservedFunctionName(int line, int column, String nomProc) {
         writer.println(line + ":" + column + ": SEMANTIC ERROR:\n"
             + "> " + codigo.get(line-1)
-            + "\nFunction name '"+nomProc+"' is reserved word\n");
+            + "\nFunction '"+nomProc+"' is a reserved function\n");
         writer.flush();
         erroresEncontrados++;
     }

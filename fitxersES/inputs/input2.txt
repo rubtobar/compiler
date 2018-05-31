@@ -1,7 +1,3 @@
-void function(){
-	
-}
-
 main {
-	write(2);
+
 }
