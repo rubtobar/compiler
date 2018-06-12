@@ -1,27 +1,23 @@
-// Declaracions //
-int resultat = 0;
-const int a = 3;
-const int b = 2;
-
-// Procediments //
 int suma(int a, int b){
 	return a+b;
 }
 
-int resta(int a, int b){
-	return a-b;
-}
-
-/*
-* Programa principal
-*/
 main {
-	string entrada = read();
-	if (entrada == "suma"){
-		resultat = suma(a,b);
+	int a;
+	int b;
+	write('Programa sumador.');
+	while (a != 0) {
+		write('0->sortir, !0->continuar');
+		a = readInt();
+		if (a != 0) {
+			write('Introdueix el primer numero');
+			a = readInt();
+			write('Introdueix el segon numero');
+			b = readInt();
+			write('La suma dona:');
+			write(suma(a, b));
+		}
+		a = 1;
 	}
-	if (entrada == "resta"){
-		resultat = resta(a,b);
-	}
-	write("lleest!");
+	write('Programa finalitzat.');
 }

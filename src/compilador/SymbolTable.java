@@ -28,6 +28,9 @@ public class SymbolTable {
     private ProcTable pt;
     private int tempVarCounter;
     int currentProcId;
+    Set<String> protectedProcs = new TreeSet<String>() {{
+        add("readInt"); add("readString"); add("write@INT"); add("write@STRING");
+    }};
 
     public SymbolTable(VarTable vt, ProcTable pt) {
         this.expansionTable = new ArrayList<>();
@@ -151,11 +154,21 @@ public class SymbolTable {
                 // modificamos los valores de las variables que 
                 // hemos encontrado al encontrar el prog al que pertenecen
                 String wrid = "";
-                if ("write".equals(id)) {
-                    wrid = "WRITE";
-                } else if ("read".equals(id)) {
-                    wrid = "READ";
-                    returnSize = 32;
+                if (null != id) {
+                    switch (id) {
+                        case "write@INT":
+                        case "write@STRING":
+                            wrid = id;
+                            break;
+                        case "readString":
+                            wrid = id;
+                            returnSize = 32;
+                            break;
+                        case "readInt":
+                            wrid = id;
+                            returnSize = 4;
+                            break;
+                    }
                 }
                 if (null != d.tsb) {
                     switch (d.tsb) {
@@ -173,10 +186,10 @@ public class SymbolTable {
                     }
                 }
                 // String name, String label, int prof, int nparam, int localSize, int returnSize
-                pt.add(descriptionTable.get(id).id, id, wrid, 0, 0, size, returnSize);
+                pt.add(descriptionTable.get(id).id, id, wrid.toUpperCase().replace("@", "_"), 0, 0, size, returnSize);
                 /*En caso de que sean funciones reservadas no cambiamos el
                 corrent proc durante las declaraciones*/
-                if (!"write".equals(id) && !"read".equals(id)) {
+                if (!protectedProcs.contains(id)) {
                     currentProcId = descriptionTable.get(id).id;
                 }
                 break;
@@ -255,7 +268,7 @@ public class SymbolTable {
         protected DescriptionType dt;
         public TSB tsb;
 
-        protected enum TSB {
+        public enum TSB {
             INT, BOOL, STRING, VOID, NULL
         }
 

@@ -3,7 +3,6 @@ package compilador.Nodes;
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
-import compilador.LabelCount;
 
 public class NodeHead extends Node {
 

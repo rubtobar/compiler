@@ -479,7 +479,7 @@ public class ThreeAddrCode {
             writer.print("\tTRUE:\tEQU\t1\n");
             writer.print("\tFALSE:\tEQU\t0\n");
             // Subrutinas de lectura escritura
-            writer.print("WRITE:\n"
+            writer.print("WRITE_STRING:\n"
                     + "\t;Do the print\n"
                     + "\tmove.l #14, D0\n"
                     + "\tlea 4(SP), A1\n"
@@ -491,12 +491,34 @@ public class ThreeAddrCode {
                     + "\t;give control to caller\n"
                     + "\trts\n");
             
-            writer.print("READ:\n"
+            writer.print("WRITE_INT:\n"
+                    + "\t;Do the print\n"
+                    + "\tmove.l #3, D0\n"
+                    + "\tmove.l 4(SP), D1\n"
+                    + "\ttrap #15\n"
+                    + "\tmove.b #11, D0\n"
+                    + "\tmove.l D7, D1\n"
+                    + "\ttrap #15\n"
+                    + "\taddq.b #1, D7\n" //D7 stores line number
+                    + "\t;give control to caller\n"
+                    + "\trts\n");
+
+            writer.print("READSTRING:\n"
                     + "\t;Do the read\n"
                     + "\tmove #2, D0\n"
                     + "\tmovea.l SP, A1\n"
                     + "\tadd.l #4,A1\n"
                     + "\ttrap #15\n"
+                    + "\taddq.b #1, D7\n" //D7 stores line number
+                    // Hemos escrito una linea mas
+                    + "\t;give control to caller\n"
+                    + "\trts\n");
+            
+            writer.print("READINT:\n"
+                    + "\t;Do the read\n"
+                    + "\tmove #4, D0\n"
+                    + "\ttrap #15\n"
+                    + "\tmove.l D1, 4(SP)\n"
                     + "\taddq.b #1, D7\n" //D7 stores line number
                     // Hemos escrito una linea mas
                     + "\t;give control to caller\n"

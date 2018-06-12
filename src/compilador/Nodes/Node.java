@@ -1,5 +1,9 @@
 package compilador.Nodes;
 
+import compilador.SymbolTable.Description;
+import compilador.SymbolTable.Description.TSB;
+import java.util.ArrayList;
+
 
 public class Node {
 

@@ -7,8 +7,11 @@ package compilador;
 
 import compilador.Nodes.*;
 import compilador.SymbolTable.*;
+import java.util.ArrayList;
 import compilador.SymbolTable.Description.DescriptionType;
 import compilador.SymbolTable.Description.TSB;
+import compilador.SyntaxTree.Param;
+import compilador.SyntaxTree.ProcData;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java_cup.runtime.XMLElement;
@@ -380,13 +383,22 @@ class CUP$Parser$actions {
 		st.add("string", d, true, false);
 
 		d = new ProcDescription(TSB.VOID);
-		st.add("write", d, true, false);
+		st.add("write@STRING", d, true, false);
 		
-		d = new ArgDescription("write", TSB.STRING);
-		st.addParameter("write", "value", (ArgDescription) d);
+		d = new ArgDescription("write@STRING", TSB.STRING);
+		st.addParameter("write@STRING", "value", (ArgDescription) d);
+
+		d = new ProcDescription(TSB.VOID);
+		st.add("write@INT", d, true, false);
+		
+		d = new ArgDescription("write@INT", TSB.INT);
+		st.addParameter("write@INT", "value", (ArgDescription) d);
 
 		d = new ProcDescription(TSB.STRING);
-		st.add("read", d, true, false);
+		st.add("readString", d, true, false);
+
+		d = new ProcDescription(TSB.INT);
+		st.add("readInt", d, true, false);
 		} catch (AlreadyDeclaredException | ReservedSymbolException | NoProcGivenException ex) {
             Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -445,14 +457,16 @@ class CUP$Parser$actions {
 	    } catch (IllegalBlockExitException ex) {
 	        Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
 	    }
-	    TblSymbol aux = st.get((String) nP.result);
-		if (aux == null || et == null){/*ignora*/}
-		else if (aux.d.tsb == TSB.VOID) {
-			errPrinter.unexpectedReturn(rtn.line, rtn.column);
-		} else if (aux.d.tsb != et.result) {
-			errPrinter.unexpectedReturnType(rtn.line, rtn.column, (String) nP.result, aux.d.tsb.toString(), et.result.toString());
+	    if (nP != null) {
+		    TblSymbol aux = st.get((String) nP.result);
+			if (aux == null || et == null){/*ignora*/}
+			else if (aux.d.tsb == TSB.VOID) {
+				errPrinter.unexpectedReturn(rtn.line, rtn.column);
+			} else if (aux.d.tsb != et.result) {
+				errPrinter.unexpectedReturnType(rtn.line, rtn.column, (String) nP.result, aux.d.tsb.toString(), et.result.toString());
+			}
+			RESULT = new NodeMethod(nP, stcs, et, st.get((String)nP.result).id, null);
 		}
-		RESULT = new NodeMethod(nP, stcs, et, st.get((String)nP.result).id, null);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("METHOD",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -477,13 +491,15 @@ class CUP$Parser$actions {
 	    } catch (IllegalBlockExitException ex) {
 	        Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
 	    }
-	    TblSymbol aux = st.get((String) nP.result);
-	    if (aux == null){/*ignora*/}
-	    else if (aux.d.tsb != TSB.VOID){
-	    	errPrinter.missingReturn(cc.line, cc.column, (String) nP.result);
-	    }
+	    if (nP != null) {
+		    TblSymbol aux = st.get((String) nP.result);
+		    if (aux == null){/*ignora*/}
+		    else if (aux.d.tsb != TSB.VOID){
+		    	errPrinter.missingReturn(cc.line, cc.column, (String) nP.result);
+		    }
 
-	    RESULT = new NodeMethod(nP, stcs, st.get((String)nP.result).id, null);
+		    RESULT = new NodeMethod(nP, stcs, st.get((String)nP.result).id, null);
+		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("METHOD",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -517,23 +533,49 @@ class CUP$Parser$actions {
 		int cpright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token cp = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-		st.enterBlock();
-		TblSymbol aux = st.get((String)nP.result);
-		if (aux != null  && aux.d.dt == DescriptionType.DPROC) {		
-			int arg = ((ProcDescription)aux.d).firstArg;
-	        while (arg != 0 ){
-	            aux = st.getParameter(arg);
-	            try {
-	                st.add(aux.lexema, new VarDescription(aux.d.tsb), false, true);
-	            } catch (AlreadyDeclaredException ex) {
-	                Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
-	            } catch (ReservedSymbolException ex) {
-	            }
-	            arg = ((ArgDescription)aux.d).next;
+		if (nP != null) {
+			/* Add method and params to tables */
+			ProcData data = (ProcData)nP.result;
+			String name = data.name;
+			try {
+			    st.add(name, new ProcDescription(data.returnType), false, false);
+	        } catch (AlreadyDeclaredException ex) {
+	            errPrinter.alreadyDeclaredFunction(cp.line, cp.column, data.name);
+	        } catch (ReservedSymbolException ex) {
+	            errPrinter.reservedFunctionName(cp.line, cp.column, data.name);
 	        }
-			RESULT = new NodeHead(nP,nP.result);
+			for (Param param : data.params) {
+				try {
+					st.addParameter(name, param.name, new ArgDescription(param.name, param.type));
+				} catch (NoProcGivenException ex) {
+	            // Ignorar
+	            } catch (AlreadyDeclaredException ex) {
+	                errPrinter.alreadyDeclaredArgument(cp.line, cp.column, data.name, param.name);
+	            } catch (ReservedSymbolException ex) {
+	                errPrinter.reservedArgumentName(cp.line, cp.column, data.name, param.name);
+	            }
+			}
+			/* Create symbols for method evaluation */
+			st.enterBlock();
+			TblSymbol aux = st.get(data.name);
+			if (aux != null  && aux.d.dt == DescriptionType.DPROC) {		
+				int arg = ((ProcDescription)aux.d).firstArg;
+		        while (arg != 0 ){
+		            aux = st.getParameter(arg);
+		            try {
+		                st.add(aux.lexema, new VarDescription(aux.d.tsb), false, true);
+		            } catch (AlreadyDeclaredException ex) {
+		                Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+		            } catch (ReservedSymbolException ex) {
+		            }
+		            arg = ((ArgDescription)aux.d).next;
+		        }
+				RESULT = new NodeHead(nP,data.name);
+			} else {
+				RESULT = new NodeHead(nP,"");
+			}
 		} else {
-			RESULT = new NodeHead(nP,"");
+			st.enterBlock();
 		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("HEAD",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -557,12 +599,12 @@ class CUP$Parser$actions {
         } else {
         	try {
 	            st.add(nom.getAtribut(), new ProcDescription(aux.d.tsb), false, false);
+	            RESULT = new NodeHead(null, nom.getAtribut());
 	        } catch (AlreadyDeclaredException ex) {
                 errPrinter.alreadyDeclaredFunction(nom.line, nom.column, nom.getAtribut());
 	        } catch (ReservedSymbolException ex) {
                 errPrinter.reservedFunctionName(nom.line, nom.column, nom.getAtribut());
 	        }
-        	RESULT = new NodeHead(null, nom.getAtribut());
         }
         st.enterBlock();
 		
@@ -604,30 +646,20 @@ class CUP$Parser$actions {
 		Token nA = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 		TblSymbol aux = st.get(tP.getAtribut());
+		Description.TSB returnType = null;
 		if (aux == null || aux.d.dt != DescriptionType.DTYPE) {
             errPrinter.nonExistingType(tP.line, tP.column, tP.getAtribut());
-        } 
-    	try {
-        	st.add(nP.getAtribut(), new ProcDescription(aux.d.tsb), false, false);
-        } catch (AlreadyDeclaredException ex) {
-            errPrinter.alreadyDeclaredFunction(nP.line, nP.column, nP.getAtribut());
-        } catch (ReservedSymbolException ex) {
-            errPrinter.reservedFunctionName(nP.line, nP.column, nP.getAtribut());
+        } else {
+        	returnType = aux.d.tsb;
         }
         aux = st.get(tA.getAtribut());
         if (aux == null || aux.d.dt != DescriptionType.DTYPE) {
             errPrinter.nonExistingType(tA.line, tA.column, tA.getAtribut());
-        } else {
-            try {
-            	st.addParameter(nP.getAtribut(), nA.getAtribut(), new ArgDescription(nP.getAtribut(), aux.d.tsb));
-            	RESULT = new NodeContHead(null,nP.getAtribut());
-          	} catch (NoProcGivenException ex) {
-          		// Ignorar
-          	} catch (AlreadyDeclaredException ex) {
-                errPrinter.alreadyDeclaredArgument(nA.line, nA.column, nP.getAtribut(), nA.getAtribut());
-          	} catch (ReservedSymbolException ex) {
-                errPrinter.reservedArgumentName(nA.line, nA.column, nP.getAtribut(), nA.getAtribut());
-            }
+        } else if (returnType != null){
+        	String newName = nP.getAtribut()+"@"+aux.d.tsb;
+        	ArrayList <Param> params = new ArrayList();
+        	params.add(new Param(nA.getAtribut(), aux.d.tsb));
+        	RESULT = new NodeContHead(null, new ProcData(newName, returnType, params));
         }
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("CONT_HEAD",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -648,22 +680,14 @@ class CUP$Parser$actions {
 		int nomright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token nom = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
-		RESULT = new NodeContHead(proc,proc.result);
-
 		TblSymbol aux = st.get(tipus.getAtribut());
         if (aux == null || aux.d.dt != DescriptionType.DTYPE) { 
             errPrinter.nonExistingType(tipus.line, tipus.column, tipus.getAtribut());
-        } else {
-            try {
-                st.addParameter((String) proc.result, nom.getAtribut(), new ArgDescription((String) proc.result, aux.d.tsb));
-            } catch (NoProcGivenException ex) {
-            	// Ignorar
-            } catch (AlreadyDeclaredException ex) {
-                errPrinter.alreadyDeclaredArgument(nom.line, nom.column, (String) proc.result, nom.getAtribut());
-            } catch (ReservedSymbolException ex) {
-                errPrinter.reservedArgumentName(nom.line, nom.column, (String) proc.result, nom.getAtribut());
-            }
+        } else if (proc != null){
+        	ProcData data = (ProcData)proc.result;
+        	data.name = data.name+"@"+aux.d.tsb;
+        	data.params.add(new Param(nom.getAtribut(), aux.d.tsb));
+            RESULT = new NodeContHead(proc, data);
         }
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("CONT_HEAD",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1020,24 +1044,26 @@ class CUP$Parser$actions {
           case 31: // CALL ::= CONT_CALL tk_closep 
             {
               NodeCall RESULT =null;
-		int rtnleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int rtnright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		NodeContCall rtn = (NodeContCall)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int paramsleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int paramsright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		NodeContCall params = (NodeContCall)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int clpleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int clpright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token clp = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-		if (rtn != null) {
-            if (rtn.result.getClass() == Integer.class) {
-                String pname = ((ArgDescription)st.getParameter((Integer)rtn.result).d).idProc;
-                errPrinter.tooFewArgs(clp.line, clp.column, pname);
-            } else {
-            	Integer tid = null;
-            	if (rtn.result != TSB.VOID) {
-            		tid = st.addTemp((TSB)rtn.result);
-            	}
-                RESULT = new NodeCall(rtn,rtn.procId,tid,rtn.result);
-            }
+        ArrayList <TSB> paramList = (ArrayList <TSB>) params.result;
+        String procName = params.proc;
+        TblSymbol aux = st.get(procName);
+        if (aux == null || aux.d.dt != DescriptionType.DPROC) {
+            errPrinter.undeclaredFunction(clp.line, clp.column, procName);
+        }
+        else {
+        	Integer tid = null;
+        	TSB returnType = aux.d.tsb;
+        	if (returnType != TSB.VOID) {
+            	tid = st.addTemp(returnType);
+           	}
+	        RESULT = new NodeCall(params, aux.id, tid, returnType);
         }
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("CALL",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1083,26 +1109,11 @@ class CUP$Parser$actions {
 		int arg1right = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		NodeExpr arg1 = (NodeExpr)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 			
-		TblSymbol aux = st.get(id.getAtribut());
-		if (aux == null || aux.d.dt != DescriptionType.DPROC) {
-            errPrinter.undeclaredFunction(id.line, id.column, id.getAtribut());
-        } else {
-            TblSymbol param = st.getParameter(((ProcDescription) aux.d).firstArg);
-            if (param == null) {
-                errPrinter.tooManyArgs(id.line, id.column, id.getAtribut());
-            } else if (arg1 == null){
-                // ignora
-            } else if (!arg1.result.equals(param.d.tsb)) {
-                errPrinter.unexpectedArgType(opp.line, opp.column, arg1.result.toString(), param.d.tsb.toString());
-            } else {
-            	int next = ((ArgDescription) st.getParameter(((ProcDescription) aux.d).firstArg).d).next;
-                if (next == 0){
-            		RESULT = new NodeContCall(arg1,null,aux.id,aux.d.tsb);
-                } else {
-                	RESULT = new NodeContCall(arg1,null,aux.id,next);
-
-                }
-            }
+        if (arg1 != null){
+        	ArrayList<TSB> paramList = new ArrayList<>();
+        	TSB paramType = (TSB) arg1.result;
+        	paramList.add(paramType);
+        	RESULT = new NodeContCall(id.getAtribut()+"@"+paramType, arg1, null, paramList);
         }
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("CONT_CALL",14, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1113,33 +1124,15 @@ class CUP$Parser$actions {
           case 34: // CONT_CALL ::= CONT_CALL tk_coma EXPR 
             {
               NodeContCall RESULT =null;
-		int idxPleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int idxPright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		NodeContCall idxP = (NodeContCall)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		int comaleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int comaright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Token coma = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		int argXleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int argXright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		NodeExpr argX = (NodeExpr)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		int paramsleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
+		int paramsright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
+		NodeContCall params = (NodeContCall)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		int paramleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int paramright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		NodeExpr param = (NodeExpr)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-		if (idxP != null && argX != null) {
-			if (idxP.result.getClass() != Integer.class) {
-                errPrinter.tooManyArgs(coma.line, coma.column);
-	        } else {
-	            TblSymbol aux = st.getParameter((Integer) idxP.result);
-	            if (aux.d.tsb != argX.result){
-                    errPrinter.unexpectedArgType(coma.line, coma.column, argX.result.toString(), aux.d.tsb.toString());
-	            }
-	            int next = ((ArgDescription) aux.d).next;
-	            if (next == 0){
-	            	aux = st.get(((ArgDescription) aux.d).idProc);
-					RESULT = new NodeContCall(argX,idxP,aux.id,aux.d.tsb);
-	            } else {
-	            	RESULT = new NodeContCall(argX,idxP,aux.id,next);
-	            }
-	        }
-        }
+    	((ArrayList<TSB>)params.result).add((TSB)param.result);
+    	RESULT = new NodeContCall(params.proc+"@"+(TSB)param.result, param, params, params.result);
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("CONT_CALL",14, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }

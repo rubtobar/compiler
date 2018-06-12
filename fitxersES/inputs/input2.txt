@@ -1,14 +1,27 @@
-int a(int var){
-	return var;
+int suma(int a, int b){
+	return a+b;
 }
-/*
-* Programa principal
-*/
+
 main {
-	string str = read();
-	int i = a(0);
-	while (i < 5) {
-		write(str);
-		i = i + 1; 
+	string mySentence;
+	int a = 1;
+	int b;
+	write('Programa sumador.');
+	write('introdueix frase finalitzacio');
+	mySentence = readString();
+	while (a != 0) {
+		write('0->sortir, !0->continuar');
+		a = readInt();
+		if (a != 0) {
+			write('Introdueix el primer numero');
+			a = readInt();
+			write('Introdueix el segon numero');
+			b = readInt();
+			write('La suma dona:');
+			write(suma(a, b));
+			a = 1;
+		}
 	}
+	write('Programa finalitzat.');
+	write(mySentence);
 }
