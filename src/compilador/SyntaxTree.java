@@ -46,9 +46,9 @@ public class SyntaxTree {
         root.generateCode(vt, pt, lt, code);
         code.flush(THREE_ADDR_PRINTER_FILEPATH);
         code.write68Kcode(ASSEMBLY_PRINTER_FILEPATH);
-        /*code.optimize();
+        code.optimize();
         code.flush(THREE_ADDR_PRINTER_FILEPATH.replace(".txt", "_OPT.txt"));
-        code.write68Kcode(ASSEMBLY_PRINTER_FILEPATH.replace(".X68", "_OPT.X68"));*/
+        code.write68Kcode(ASSEMBLY_PRINTER_FILEPATH.replace(".X68", "_OPT.X68"));
     }
     
     public static class ProcData {

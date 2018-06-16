@@ -1,13 +1,9 @@
-t0 = 1
-a = t0
-t1 = 2
-b = t1
+a = 1
+b = 2
 t2 = a + b
 t3 = 4
-t4 = t2 - t3
-c = t4
-t5 = 3
-d = t5
+c = t2 - t3
+d = 3
 L0: skip
 t6 = 10
 if a <= t6 goto L2
@@ -20,11 +16,8 @@ if t7 = FALSE goto L1
 param a
 call WRITE_INT
 t8 = 1
-t9 = a + t8
-a = t9
+a = a + t8
 goto: L0
 L1: skip
-t10 = 4
-e = t10
-t11 = 5
-f = t11
+e = 4
+f = 5

@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeSet;
 
 /**
@@ -34,7 +35,7 @@ public class ThreeAddrCode {
 
     private class ThreeAddrIstr {
 
-        private final Operand op;
+        private Operand op;
         private String src1;
         private String src2;
         private final String dest;
@@ -386,8 +387,52 @@ public class ThreeAddrCode {
     }
 
     public void optimize() {
+        eliminarTemporales();
         commutativeNormalization();
         basicBlockIdentification();
+        recalcularOfsets();
+    }
+    
+    private void recalcularOfsets(){
+        pt.procTable.entrySet().forEach((entry) -> {
+            ProcTable.Proc proc = entry.getValue();
+            proc.localSize = 0;
+        });
+        vt.varTable.entrySet().forEach((entry) -> {
+            Balde balde = entry.getValue();
+            int proc = balde.proc;
+            int size = balde.size;
+            if (balde.offset < 0) {
+                pt.procTable.get(proc).localSize += size;
+                balde.offset = -pt.procTable.get(proc).localSize;
+            }
+            
+        });
+    }
+    
+    private boolean isOperation(ThreeAddrIstr tai){
+        return ((tai.op == Operand.SUB) || (tai.op == Operand.ADD));
+    }
+    
+    private void eliminarTemporales(){
+        ThreeAddrIstr instrCurrent;
+        ThreeAddrIstr instrNext;
+        instrCurrent = code.get(0);
+        for (int i = 1; i < code.size() ; i++) {
+            instrNext = code.get(i);
+            
+            if (instrNext.op == Operand.ASSIG && (instrCurrent.op == Operand.ASSIG || isOperation(instrCurrent) )) {
+                if (instrCurrent.dest.equals(instrNext.src1)) {
+                    instrNext.src1 = instrCurrent.src1;
+                    instrNext.src2 = instrCurrent.src2;
+                    // Eliminamos el registro de la TV
+                    vt.varTable.remove(Integer.parseInt(instrCurrent.dest.substring(1)));
+                    instrNext.op = instrCurrent.op;
+                    code.remove(--i);
+                }
+            }
+            instrCurrent = instrNext;
+        }
     }
 
     private void commutativeNormalization() {
