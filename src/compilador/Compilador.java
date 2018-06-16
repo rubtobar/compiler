@@ -65,5 +65,19 @@ public class Compilador {
             sytr.getVt().printOnFile();
             sytr.getPt().printOnFile();
         }
+        
+        int aux;
+        int a = 65; 
+        int b = 32;
+	while (a != b){
+            aux = a;
+            if (aux > b){
+                a = a - b;
+            }
+            if (aux <= b){
+                b = b - a;
+            }
+	}
+	System.out.println(a);
     }
 }

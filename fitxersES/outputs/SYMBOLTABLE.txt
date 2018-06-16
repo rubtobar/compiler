@@ -2,16 +2,17 @@
 |			POSICION		LEX			NIVEL			DESCR.TYPE		TSB			|ID			NIVEL			DESCR.TYPE		TSB	|***************|
 |***********************************************************************************************************************************************|*******************************************************************************|***************|
 |			0			void			0			DTYPE			VOID			|null										|	0	|
-|			1			string			0			DTYPE			STRING			|value			-1			DARG			STRING	|	4	|
-|			2			suma@INT@INT			1			DPROC			INT			|value			-1			DARG			INT	|		|
-|			3			false			0			DCONST			BOOL			|a			-1			DARG			INT	|		|
-|			4			readString			0			DPROC			STRING			|b			-1			DARG			INT	|		|
+|			1			string			0			DTYPE			STRING			|value			-1			DARG			STRING	|	2	|
+|			2			aux			1			DVAR			INT			|value			-1			DARG			INT	|		|
+|			3			false			0			DCONST			BOOL			|										|		|
+|			4			readString			0			DPROC			STRING			|										|		|
 |			5			write@STRING			0			DPROC			VOID			|										|		|
 |			6			main			0			DPROC			VOID			|										|		|
 |			7			write@INT			0			DPROC			VOID			|										|		|
 |			8			int			0			DTYPE			INT			|										|		|
-|			9			boolean			0			DTYPE			BOOL			|										|		|
-|			10			true			0			DCONST			BOOL			|										|		|
-|			11			readInt			0			DPROC			INT			|										|		|
+|			9			MCD			1			DPROC			INT			|										|		|
+|			10			boolean			0			DTYPE			BOOL			|										|		|
+|			11			true			0			DCONST			BOOL			|										|		|
+|			12			readInt			0			DPROC			INT			|										|		|
 +-----------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------+---------------+
 Current Level: 1

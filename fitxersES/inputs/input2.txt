@@ -1,27 +1,49 @@
-int suma(int a, int b){
-	return a+b;
+int MCD(){
+	int aux;
+	int a = 32;
+	int b = 16;
+	while (a != b){
+		aux = a;
+		if (aux > b){
+			a = a - b;
+			write('a -> ');
+			write(a);
+		}
+		if (aux <= b){
+			b = b - a;
+			write('b -> ');
+			write(b);
+		}
+	}
+	return a;
 }
 
 main {
-	string mySentence;
-	int a = 1;
-	int b;
-	write('Programa sumador.');
-	write('introdueix frase finalitzacio');
-	mySentence = readString();
-	while (a != 0) {
-		write('0->sortir, !0->continuar');
-		a = readInt();
-		if (a != 0) {
-			write('Introdueix el primer numero');
-			a = readInt();
-			write('Introdueix el segon numero');
-			b = readInt();
-			write('La suma dona:');
-			write(suma(a, b));
-			a = 1;
+	/*int a = 65;
+	int b = 32;
+	int aux;
+	write('');
+	while (a != b){
+		aux = a;
+		if (aux > b){
+			a = a - b;
+			write('a -> ');
+			write(a);
+		}
+		if (aux <= b){
+			b = b - a;
+			write('b -> ');
+			write(b);
 		}
 	}
-	write('Programa finalitzat.');
-	write(mySentence);
+	write(a);*/
+	MCD();
+	/* 
+		65, 32
+		33, 32
+		1, 32
+		1, 31
+		...
+		1, 1
+	*/
 }

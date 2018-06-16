@@ -1,6 +1,6 @@
 00001044 Starting Address
 Assembler used: EASy68K Editor/Assembler v5.15.04
-Created On: 31/5/2018 22:52:41
+Created On: 16/6/2018 17:56:06
 
 00001000                             1      ORG $1000
 00001000  =00000001                  2      TRUE:   EQU 1
@@ -50,440 +50,224 @@ Created On: 31/5/2018 22:52:41
 00001046                            46      ;A5 to index global variables
 00001046  2A4F                      47      move.l SP, A5
 00001048                            48  
-00001048                            49      ;t11 save space in Stack
-00001048  9FFC 00000020             50      sub.l #32, SP
-0000104E                            51      ;t12 save space in Stack
-0000104E  598F                      52      sub.l #4, SP
-00001050                            53      ;t13 save space in Stack
-00001050  9FFC 00000020             54      sub.l #32, SP
-00001056                            55      ;t14 save space in Stack
-00001056  598F                      56      sub.l #4, SP
-00001058                            57      ;t15 save space in Stack
-00001058  9FFC 00000020             58      sub.l #32, SP
-0000105E                            59      ;t16 save space in Stack
-0000105E  598F                      60      sub.l #4, SP
-00001060                            61      ;t17 save space in Stack
-00001060  598F                      62      sub.l #4, SP
-00001062                            63      ;t18 save space in Stack
-00001062  9FFC 00000020             64      sub.l #32, SP
-00001068                            65      ;mySentence save space in Stack
-00001068  9FFC 00000020             66      sub.l #32, SP
-0000106E                            67      ;t1 save space in Stack
-0000106E  598F                      68      sub.l #4, SP
-00001070                            69      ;a save space in Stack
-00001070  598F                      70      sub.l #4, SP
-00001072                            71      ;b save space in Stack
-00001072  598F                      72      sub.l #4, SP
-00001074                            73      ;t2 save space in Stack
-00001074  9FFC 00000020             74      sub.l #32, SP
-0000107A                            75      ;t3 save space in Stack
-0000107A  9FFC 00000020             76      sub.l #32, SP
-00001080                            77      ;t4 save space in Stack
-00001080  9FFC 00000020             78      sub.l #32, SP
-00001086                            79      ;t5 save space in Stack
-00001086  598F                      80      sub.l #4, SP
-00001088                            81      ;t6 save space in Stack
-00001088  558F                      82      sub.l #2, SP
-0000108A                            83      ;t7 save space in Stack
-0000108A  9FFC 00000020             84      sub.l #32, SP
-00001090                            85      ;t8 save space in Stack
-00001090  598F                      86      sub.l #4, SP
-00001092                            87      ;t9 save space in Stack
-00001092  598F                      88      sub.l #4, SP
-00001094                            89      ;t10 save space in Stack
-00001094  558F                      90      sub.l #2, SP
-00001096                            91      ;goto: MAIN
-00001096  6000 0020                 92      BRA MAIN
-0000109A                            93  ;L0: skip
-0000109A                            94  L0:
-0000109A                            95      ;preambulo funcion
-0000109A                            96      ;save BP
-0000109A  2F0E                      97      move.l A6, -(SP)
-0000109C                            98      ;set BP
-0000109C  2C4F                      99      move.l SP, A6
-0000109E                           100      ;save space for local vars
-0000109E  598F                     101      sub.l #4, SP
-000010A0                           102  
-000010A0                           103      ;t0 = a + b
-000010A0  202E 0008                104      move.l 8(A6), D0
-000010A4  D0AE 000C                105      add.l 12(A6), D0
-000010A8  2D40 FFFC                106      move.l D0,-4(A6)
-000010AC                           107  
-000010AC                           108      ;return t0
-000010AC                           109      ;send return value
-000010AC  2D6E FFFC 0010           110      move.l -4(A6), 16(A6)
-000010B2                           111      ;prepare SP
-000010B2  2E4E                     112      move.l A6, SP
-000010B4                           113      ;restore BP
-000010B4  2C5F                     114      move.l (SP)+, A6
-000010B6                           115      ;give control to caller
-000010B6  4E75                     116      rts
-000010B8                           117  
-000010B8                           118  ;MAIN: skip
-000010B8                           119  MAIN:
-000010B8                           120      ;t1 = 1
-000010B8  2B7C 00000001 FFDC       121      move.l #1, -36(A5)
-000010C0                           122  
-000010C0                           123      ;a = t1
-000010C0  2B6D FFDC FFD8           124      move.l -36(A5), -40(A5)
-000010C6                           125  
-000010C6                           126      ;t2 = "Programa sumador."
-000010C6  2B7C 50726F67 FFB4       127      move.l #'Prog', -76(A5)
-000010CE  2B7C 72616D61 FFB8       128      move.l #'rama', -72(A5)
-000010D6  2B7C 2073756D FFBC       129      move.l #' sum', -68(A5)
-000010DE  2B7C 61646F72 FFC0       130      move.l #'ador', -64(A5)
-000010E6  1B7C 002E FFC4           131      move.b #'.', -60(A5)
-000010EC  1B7C 0000 FFC5           132      move.b #0, -59(A5)
-000010F2                           133  
-000010F2                           134      ;param t2
-000010F2  9FFC 00000020            135      sub.l #32, SP
-000010F8  2F6D FFB4 0000           136      move.l -76(A5), 0(SP)
-000010FE  2F6D FFB8 0004           137      move.l -72(A5), 4(SP)
-00001104  2F6D FFBC 0008           138      move.l -68(A5), 8(SP)
-0000110A  2F6D FFC0 000C           139      move.l -64(A5), 12(SP)
-00001110  2F6D FFC4 0010           140      move.l -60(A5), 16(SP)
-00001116  2F6D FFC8 0014           141      move.l -56(A5), 20(SP)
-0000111C  2F6D FFCC 0018           142      move.l -52(A5), 24(SP)
-00001122  2F6D FFD0 001C           143      move.l -48(A5), 28(SP)
-00001128                           144  
-00001128                           145      ;call WRITE_STRING
-00001128  6100 FED6                146      bsr.l WRITE_STRING
-0000112C                           147      ;clean parameters
-0000112C  DFFC 00000020            148      add.l #32, SP
-00001132                           149  
-00001132                           150      ;t3 = "introdueix frase finalitzacio"
-00001132  2B7C 696E7472 FF94       151      move.l #'intr', -108(A5)
-0000113A  2B7C 6F647565 FF98       152      move.l #'odue', -104(A5)
-00001142  2B7C 69782066 FF9C       153      move.l #'ix f', -100(A5)
-0000114A  2B7C 72617365 FFA0       154      move.l #'rase', -96(A5)
-00001152  2B7C 2066696E FFA4       155      move.l #' fin', -92(A5)
-0000115A  2B7C 616C6974 FFA8       156      move.l #'alit', -88(A5)
-00001162  2B7C 7A616369 FFAC       157      move.l #'zaci', -84(A5)
-0000116A  1B7C 006F FFB0           158      move.b #'o', -80(A5)
-00001170  1B7C 0000 FFB1           159      move.b #0, -79(A5)
-00001176                           160  
-00001176                           161      ;param t3
-00001176  9FFC 00000020            162      sub.l #32, SP
-0000117C  2F6D FF94 0000           163      move.l -108(A5), 0(SP)
-00001182  2F6D FF98 0004           164      move.l -104(A5), 4(SP)
-00001188  2F6D FF9C 0008           165      move.l -100(A5), 8(SP)
-0000118E  2F6D FFA0 000C           166      move.l -96(A5), 12(SP)
-00001194  2F6D FFA4 0010           167      move.l -92(A5), 16(SP)
-0000119A  2F6D FFA8 0014           168      move.l -88(A5), 20(SP)
-000011A0  2F6D FFAC 0018           169      move.l -84(A5), 24(SP)
-000011A6  2F6D FFB0 001C           170      move.l -80(A5), 28(SP)
-000011AC                           171  
-000011AC                           172      ;call WRITE_STRING
-000011AC  6100 FE52                173      bsr.l WRITE_STRING
-000011B0                           174      ;clean parameters
-000011B0  DFFC 00000020            175      add.l #32, SP
-000011B6                           176  
-000011B6                           177      ;READSTRING return space
-000011B6  9FFC 00000020            178      sub.l #32, SP
-000011BC                           179  
-000011BC                           180      ;t4 = call READSTRING
-000011BC  6100 FE6A                181      bsr.l READSTRING
-000011C0                           182      ;clean parameters
-000011C0  DFFC 00000000            183      add.l #0, SP
-000011C6                           184      ;fetch return
-000011C6  2B5F FF74                185      move.l (SP)+, -140(A5)
-000011CA  2B5F FF78                186      move.l (SP)+, -136(A5)
-000011CE  2B5F FF7C                187      move.l (SP)+, -132(A5)
-000011D2  2B5F FF80                188      move.l (SP)+, -128(A5)
-000011D6  2B5F FF84                189      move.l (SP)+, -124(A5)
-000011DA  2B5F FF88                190      move.l (SP)+, -120(A5)
-000011DE  2B5F FF8C                191      move.l (SP)+, -116(A5)
-000011E2  2B5F FF90                192      move.l (SP)+, -112(A5)
-000011E6                           193  
-000011E6                           194      ;mySentence = t4
-000011E6  2B6D FF74 FFE0           195      move.l -140(A5), -32(A5)
-000011EC  2B6D FF78 FFE4           196      move.l -136(A5), -28(A5)
-000011F2  2B6D FF7C FFE8           197      move.l -132(A5), -24(A5)
-000011F8  2B6D FF80 FFEC           198      move.l -128(A5), -20(A5)
-000011FE  2B6D FF84 FFF0           199      move.l -124(A5), -16(A5)
-00001204  2B6D FF88 FFF4           200      move.l -120(A5), -12(A5)
-0000120A  2B6D FF8C FFF8           201      move.l -116(A5), -8(A5)
-00001210  2B6D FF90 FFFC           202      move.l -112(A5), -4(A5)
-00001216                           203  
-00001216                           204  ;L1: skip
-00001216                           205  L1:
-00001216                           206      ;t5 = 0
-00001216  2B7C 00000000 FF70       207      move.l #0, -144(A5)
-0000121E                           208  
-0000121E                           209      ;if a != t5 goto L3
-0000121E  202D FFD8                210      move.l -40(A5), D0
-00001222  B0AD FF70                211      cmp.l -144(A5), D0
-00001226  6600 000C                212      bne.l L3
-0000122A                           213  
-0000122A                           214      ;t6 = FALSE
-0000122A  3B7C 0000 FF6E           215      move.w #FALSE, -146(A5)
-00001230                           216  
-00001230                           217      ;goto: L4
-00001230  6000 0008                218      BRA L4
-00001234                           219  ;L3: skip
-00001234                           220  L3:
-00001234                           221      ;t6 = TRUE
-00001234  3B7C 0001 FF6E           222      move.w #TRUE, -146(A5)
-0000123A                           223  
-0000123A                           224  ;L4: skip
-0000123A                           225  L4:
-0000123A                           226      ;if t6 = FALSE goto L2
-0000123A  202D FF6E                227      move.l -146(A5), D0
-0000123E  B0BC 00000000            228      cmp.l #FALSE, D0
-00001244  6700 028A                229      beq.l L2
-00001248                           230  
-00001248                           231      ;t7 = "0->sortir, !0->continuar"
-00001248  2B7C 302D3E73 FF4E       232      move.l #'0->s', -178(A5)
-00001250  2B7C 6F727469 FF52       233      move.l #'orti', -174(A5)
-00001258  2B7C 722C2021 FF56       234      move.l #'r, !', -170(A5)
-00001260  2B7C 302D3E63 FF5A       235      move.l #'0->c', -166(A5)
-00001268  2B7C 6F6E7469 FF5E       236      move.l #'onti', -162(A5)
-00001270  2B7C 6E756172 FF62       237      move.l #'nuar', -158(A5)
-00001278  1B7C 0000 FF66           238      move.b #0, -154(A5)
-0000127E                           239  
-0000127E                           240      ;param t7
-0000127E  9FFC 00000020            241      sub.l #32, SP
-00001284  2F6D FF4E 0000           242      move.l -178(A5), 0(SP)
-0000128A  2F6D FF52 0004           243      move.l -174(A5), 4(SP)
-00001290  2F6D FF56 0008           244      move.l -170(A5), 8(SP)
-00001296  2F6D FF5A 000C           245      move.l -166(A5), 12(SP)
-0000129C  2F6D FF5E 0010           246      move.l -162(A5), 16(SP)
-000012A2  2F6D FF62 0014           247      move.l -158(A5), 20(SP)
-000012A8  2F6D FF66 0018           248      move.l -154(A5), 24(SP)
-000012AE  2F6D FF6A 001C           249      move.l -150(A5), 28(SP)
-000012B4                           250  
-000012B4                           251      ;call WRITE_STRING
-000012B4  6100 FD4A                252      bsr.l WRITE_STRING
-000012B8                           253      ;clean parameters
-000012B8  DFFC 00000020            254      add.l #32, SP
-000012BE                           255  
-000012BE                           256      ;READINT return space
-000012BE  598F                     257      sub.l #4, SP
-000012C0                           258  
-000012C0                           259      ;t8 = call READINT
-000012C0  6100 FD74                260      bsr.l READINT
-000012C4                           261      ;clean parameters
-000012C4  DFFC 00000000            262      add.l #0, SP
-000012CA                           263      ;fetch return
-000012CA  2B5F FF4A                264      move.l (SP)+, -182(A5)
-000012CE                           265  
-000012CE                           266      ;a = t8
-000012CE  2B6D FF4A FFD8           267      move.l -182(A5), -40(A5)
-000012D4                           268  
-000012D4                           269      ;t9 = 0
-000012D4  2B7C 00000000 FF46       270      move.l #0, -186(A5)
-000012DC                           271  
-000012DC                           272      ;if a != t9 goto L5
-000012DC  202D FFD8                273      move.l -40(A5), D0
-000012E0  B0AD FF46                274      cmp.l -186(A5), D0
-000012E4  6600 000C                275      bne.l L5
-000012E8                           276  
-000012E8                           277      ;t10 = FALSE
-000012E8  3B7C 0000 FF44           278      move.w #FALSE, -188(A5)
-000012EE                           279  
-000012EE                           280      ;goto: L6
-000012EE  6000 0008                281      BRA L6
-000012F2                           282  ;L5: skip
-000012F2                           283  L5:
-000012F2                           284      ;t10 = TRUE
-000012F2  3B7C 0001 FF44           285      move.w #TRUE, -188(A5)
-000012F8                           286  
-000012F8                           287  ;L6: skip
-000012F8                           288  L6:
-000012F8                           289      ;if t10 = FALSE goto L7
-000012F8  202D FF44                290      move.l -188(A5), D0
-000012FC  B0BC 00000000            291      cmp.l #FALSE, D0
-00001302  6700 01C8                292      beq.l L7
-00001306                           293  
-00001306                           294      ;t11 = "Introdueix el primer numero"
-00001306  2B7C 496E7472 FF24       295      move.l #'Intr', -220(A5)
-0000130E  2B7C 6F647565 FF28       296      move.l #'odue', -216(A5)
-00001316  2B7C 69782065 FF2C       297      move.l #'ix e', -212(A5)
-0000131E  2B7C 6C207072 FF30       298      move.l #'l pr', -208(A5)
-00001326  2B7C 696D6572 FF34       299      move.l #'imer', -204(A5)
-0000132E  2B7C 206E756D FF38       300      move.l #' num', -200(A5)
-00001336  1B7C 0065 FF3C           301      move.b #'e', -196(A5)
-0000133C  1B7C 0072 FF3D           302      move.b #'r', -195(A5)
-00001342  1B7C 006F FF3E           303      move.b #'o', -194(A5)
-00001348  1B7C 0000 FF3F           304      move.b #0, -193(A5)
-0000134E                           305  
-0000134E                           306      ;param t11
-0000134E  9FFC 00000020            307      sub.l #32, SP
-00001354  2F6D FF24 0000           308      move.l -220(A5), 0(SP)
-0000135A  2F6D FF28 0004           309      move.l -216(A5), 4(SP)
-00001360  2F6D FF2C 0008           310      move.l -212(A5), 8(SP)
-00001366  2F6D FF30 000C           311      move.l -208(A5), 12(SP)
-0000136C  2F6D FF34 0010           312      move.l -204(A5), 16(SP)
-00001372  2F6D FF38 0014           313      move.l -200(A5), 20(SP)
-00001378  2F6D FF3C 0018           314      move.l -196(A5), 24(SP)
-0000137E  2F6D FF40 001C           315      move.l -192(A5), 28(SP)
-00001384                           316  
-00001384                           317      ;call WRITE_STRING
-00001384  6100 FC7A                318      bsr.l WRITE_STRING
-00001388                           319      ;clean parameters
-00001388  DFFC 00000020            320      add.l #32, SP
-0000138E                           321  
-0000138E                           322      ;READINT return space
-0000138E  598F                     323      sub.l #4, SP
-00001390                           324  
-00001390                           325      ;t12 = call READINT
-00001390  6100 FCA4                326      bsr.l READINT
-00001394                           327      ;clean parameters
-00001394  DFFC 00000000            328      add.l #0, SP
-0000139A                           329      ;fetch return
-0000139A  2B5F FF20                330      move.l (SP)+, -224(A5)
-0000139E                           331  
-0000139E                           332      ;a = t12
-0000139E  2B6D FF20 FFD8           333      move.l -224(A5), -40(A5)
-000013A4                           334  
-000013A4                           335      ;t13 = "Introdueix el segon numero"
-000013A4  2B7C 496E7472 FF00       336      move.l #'Intr', -256(A5)
-000013AC  2B7C 6F647565 FF04       337      move.l #'odue', -252(A5)
-000013B4  2B7C 69782065 FF08       338      move.l #'ix e', -248(A5)
-000013BC  2B7C 6C207365 FF0C       339      move.l #'l se', -244(A5)
-000013C4  2B7C 676F6E20 FF10       340      move.l #'gon ', -240(A5)
-000013CC  2B7C 6E756D65 FF14       341      move.l #'nume', -236(A5)
-000013D4  1B7C 0072 FF18           342      move.b #'r', -232(A5)
-000013DA  1B7C 006F FF19           343      move.b #'o', -231(A5)
-000013E0  1B7C 0000 FF1A           344      move.b #0, -230(A5)
-000013E6                           345  
-000013E6                           346      ;param t13
-000013E6  9FFC 00000020            347      sub.l #32, SP
-000013EC  2F6D FF00 0000           348      move.l -256(A5), 0(SP)
-000013F2  2F6D FF04 0004           349      move.l -252(A5), 4(SP)
-000013F8  2F6D FF08 0008           350      move.l -248(A5), 8(SP)
-000013FE  2F6D FF0C 000C           351      move.l -244(A5), 12(SP)
-00001404  2F6D FF10 0010           352      move.l -240(A5), 16(SP)
-0000140A  2F6D FF14 0014           353      move.l -236(A5), 20(SP)
-00001410  2F6D FF18 0018           354      move.l -232(A5), 24(SP)
-00001416  2F6D FF1C 001C           355      move.l -228(A5), 28(SP)
-0000141C                           356  
-0000141C                           357      ;call WRITE_STRING
-0000141C  6100 FBE2                358      bsr.l WRITE_STRING
-00001420                           359      ;clean parameters
-00001420  DFFC 00000020            360      add.l #32, SP
-00001426                           361  
-00001426                           362      ;READINT return space
-00001426  598F                     363      sub.l #4, SP
-00001428                           364  
-00001428                           365      ;t14 = call READINT
-00001428  6100 FC0C                366      bsr.l READINT
-0000142C                           367      ;clean parameters
-0000142C  DFFC 00000000            368      add.l #0, SP
-00001432                           369      ;fetch return
-00001432  2B5F FEFC                370      move.l (SP)+, -260(A5)
-00001436                           371  
-00001436                           372      ;b = t14
-00001436  2B6D FEFC FFD4           373      move.l -260(A5), -44(A5)
-0000143C                           374  
-0000143C                           375      ;t15 = "La suma dona:"
-0000143C  2B7C 4C612073 FEDC       376      move.l #'La s', -292(A5)
-00001444  2B7C 756D6120 FEE0       377      move.l #'uma ', -288(A5)
-0000144C  2B7C 646F6E61 FEE4       378      move.l #'dona', -284(A5)
-00001454  1B7C 003A FEE8           379      move.b #':', -280(A5)
-0000145A  1B7C 0000 FEE9           380      move.b #0, -279(A5)
-00001460                           381  
-00001460                           382      ;param t15
-00001460  9FFC 00000020            383      sub.l #32, SP
-00001466  2F6D FEDC 0000           384      move.l -292(A5), 0(SP)
-0000146C  2F6D FEE0 0004           385      move.l -288(A5), 4(SP)
-00001472  2F6D FEE4 0008           386      move.l -284(A5), 8(SP)
-00001478  2F6D FEE8 000C           387      move.l -280(A5), 12(SP)
-0000147E  2F6D FEEC 0010           388      move.l -276(A5), 16(SP)
-00001484  2F6D FEF0 0014           389      move.l -272(A5), 20(SP)
-0000148A  2F6D FEF4 0018           390      move.l -268(A5), 24(SP)
-00001490  2F6D FEF8 001C           391      move.l -264(A5), 28(SP)
-00001496                           392  
-00001496                           393      ;call WRITE_STRING
-00001496  6100 FB68                394      bsr.l WRITE_STRING
-0000149A                           395      ;clean parameters
-0000149A  DFFC 00000020            396      add.l #32, SP
-000014A0                           397  
-000014A0                           398      ;L0 return space
-000014A0  598F                     399      sub.l #4, SP
-000014A2                           400  
-000014A2                           401      ;param b
-000014A2  2F2D FFD4                402      move.l -44(A5), -(SP)
-000014A6                           403  
-000014A6                           404      ;param a
-000014A6  2F2D FFD8                405      move.l -40(A5), -(SP)
-000014AA                           406  
-000014AA                           407      ;t16 = call L0
-000014AA  6100 FBEE                408      bsr.l L0
-000014AE                           409      ;clean parameters
-000014AE  508F                     410      add.l #8, SP
-000014B0                           411      ;fetch return
-000014B0  2B5F FED8                412      move.l (SP)+, -296(A5)
-000014B4                           413  
-000014B4                           414      ;param t16
-000014B4  2F2D FED8                415      move.l -296(A5), -(SP)
-000014B8                           416  
-000014B8                           417      ;call WRITE_INT
-000014B8  6100 FB5A                418      bsr.l WRITE_INT
-000014BC                           419      ;clean parameters
-000014BC  588F                     420      add.l #4, SP
-000014BE                           421  
-000014BE                           422      ;t17 = 1
-000014BE  2B7C 00000001 FED4       423      move.l #1, -300(A5)
-000014C6                           424  
-000014C6                           425      ;a = t17
-000014C6  2B6D FED4 FFD8           426      move.l -300(A5), -40(A5)
-000014CC                           427  
-000014CC                           428  ;L7: skip
-000014CC                           429  L7:
-000014CC                           430      ;goto: L1
-000014CC  6000 FD48                431      BRA L1
-000014D0                           432  ;L2: skip
-000014D0                           433  L2:
-000014D0                           434      ;t18 = "Programa finalitzat."
-000014D0  2B7C 50726F67 FEB4       435      move.l #'Prog', -332(A5)
-000014D8  2B7C 72616D61 FEB8       436      move.l #'rama', -328(A5)
-000014E0  2B7C 2066696E FEBC       437      move.l #' fin', -324(A5)
-000014E8  2B7C 616C6974 FEC0       438      move.l #'alit', -320(A5)
-000014F0  2B7C 7A61742E FEC4       439      move.l #'zat.', -316(A5)
-000014F8  1B7C 0000 FEC8           440      move.b #0, -312(A5)
-000014FE                           441  
-000014FE                           442      ;param t18
-000014FE  9FFC 00000020            443      sub.l #32, SP
-00001504  2F6D FEB4 0000           444      move.l -332(A5), 0(SP)
-0000150A  2F6D FEB8 0004           445      move.l -328(A5), 4(SP)
-00001510  2F6D FEBC 0008           446      move.l -324(A5), 8(SP)
-00001516  2F6D FEC0 000C           447      move.l -320(A5), 12(SP)
-0000151C  2F6D FEC4 0010           448      move.l -316(A5), 16(SP)
-00001522  2F6D FEC8 0014           449      move.l -312(A5), 20(SP)
-00001528  2F6D FECC 0018           450      move.l -308(A5), 24(SP)
-0000152E  2F6D FED0 001C           451      move.l -304(A5), 28(SP)
-00001534                           452  
-00001534                           453      ;call WRITE_STRING
-00001534  6100 FACA                454      bsr.l WRITE_STRING
-00001538                           455      ;clean parameters
-00001538  DFFC 00000020            456      add.l #32, SP
-0000153E                           457  
-0000153E                           458      ;param mySentence
-0000153E  9FFC 00000020            459      sub.l #32, SP
-00001544  2F6D FFE0 0000           460      move.l -32(A5), 0(SP)
-0000154A  2F6D FFE4 0004           461      move.l -28(A5), 4(SP)
-00001550  2F6D FFE8 0008           462      move.l -24(A5), 8(SP)
-00001556  2F6D FFEC 000C           463      move.l -20(A5), 12(SP)
-0000155C  2F6D FFF0 0010           464      move.l -16(A5), 16(SP)
-00001562  2F6D FFF4 0014           465      move.l -12(A5), 20(SP)
-00001568  2F6D FFF8 0018           466      move.l -8(A5), 24(SP)
-0000156E  2F6D FFFC 001C           467      move.l -4(A5), 28(SP)
-00001574                           468  
-00001574                           469      ;call WRITE_STRING
-00001574  6100 FA8A                470      bsr.l WRITE_STRING
-00001578                           471      ;clean parameters
-00001578  DFFC 00000020            472      add.l #32, SP
-0000157E                           473  
-0000157E                           474      ;Terminate program
-0000157E  303C 0009                475      move #9,D0
-00001582  4E4F                     476      trap #15
-00001584                           477  
-00001584  FFFF FFFF                478      SIMHALT
-00001588                           479  
-00001588                           480  
-00001588                           481  
-00001588                           482      END START
+00001048                            49      ;aux save space in Stack
+00001048  598F                      50      sub.l #4, SP
+0000104A                            51      ;t6 save space in Stack
+0000104A  558F                      52      sub.l #2, SP
+0000104C                            53      ;t7 save space in Stack
+0000104C  598F                      54      sub.l #4, SP
+0000104E                            55      ;t8 save space in Stack
+0000104E  9FFC 00000020             56      sub.l #32, SP
+00001054                            57      ;t9 save space in Stack
+00001054  598F                      58      sub.l #4, SP
+00001056                            59      ;goto: MAIN
+00001056  6000 019C                 60      BRA MAIN
+0000105A                            61  ;L0: skip
+0000105A                            62  L0:
+0000105A                            63      ;preambulo funcion
+0000105A                            64      ;save BP
+0000105A  2F0E                      65      move.l A6, -(SP)
+0000105C                            66      ;set BP
+0000105C  2C4F                      67      move.l SP, A6
+0000105E                            68      ;save space for local vars
+0000105E  9FFC 00000038             69      sub.l #56, SP
+00001064                            70  
+00001064                            71      ;t0 = 33
+00001064  2D7C 00000021 FFFC        72      move.l #33, -4(A6)
+0000106C                            73  
+0000106C                            74      ;a = t0
+0000106C  2D6E FFFC FFF8            75      move.l -4(A6), -8(A6)
+00001072                            76  
+00001072                            77      ;t1 = 16
+00001072  2D7C 00000010 FFF4        78      move.l #16, -12(A6)
+0000107A                            79  
+0000107A                            80      ;b = t1
+0000107A  2D6E FFF4 FFF0            81      move.l -12(A6), -16(A6)
+00001080                            82  
+00001080                            83  ;L1: skip
+00001080                            84  L1:
+00001080                            85      ;if a != b goto L3
+00001080  202E FFF8                 86      move.l -8(A6), D0
+00001084  B0AE FFF0                 87      cmp.l -16(A6), D0
+00001088  6600 000C                 88      bne.l L3
+0000108C                            89  
+0000108C                            90      ;t2 = FALSE
+0000108C  3D7C 0000 FFEE            91      move.w #FALSE, -18(A6)
+00001092                            92  
+00001092                            93      ;goto: L4
+00001092  6000 0008                 94      BRA L4
+00001096                            95  ;L3: skip
+00001096                            96  L3:
+00001096                            97      ;t2 = TRUE
+00001096  3D7C 0001 FFEE            98      move.w #TRUE, -18(A6)
+0000109C                            99  
+0000109C                           100  ;L4: skip
+0000109C                           101  L4:
+0000109C                           102      ;if t2 = FALSE goto L2
+0000109C  202E FFEE                103      move.l -18(A6), D0
+000010A0  B0BC 00000000            104      cmp.l #FALSE, D0
+000010A6  6700 0140                105      beq.l L2
+000010AA                           106  
+000010AA                           107      ;aux = a
+000010AA  2B6E FFF8 FFFC           108      move.l -8(A6), -4(A5)
+000010B0                           109  
+000010B0                           110      ;if aux > b goto L5
+000010B0  202D FFFC                111      move.l -4(A5), D0
+000010B4  B0AE FFF0                112      cmp.l -16(A6), D0
+000010B8  6E00 000C                113      bgt.l L5
+000010BC                           114  
+000010BC                           115      ;t3 = FALSE
+000010BC  3D7C 0000 FFEC           116      move.w #FALSE, -20(A6)
+000010C2                           117  
+000010C2                           118      ;goto: L6
+000010C2  6000 0008                119      BRA L6
+000010C6                           120  ;L5: skip
+000010C6                           121  L5:
+000010C6                           122      ;t3 = TRUE
+000010C6  3D7C 0001 FFEC           123      move.w #TRUE, -20(A6)
+000010CC                           124  
+000010CC                           125  ;L6: skip
+000010CC                           126  L6:
+000010CC                           127      ;if t3 = FALSE goto L7
+000010CC  202E FFEC                128      move.l -20(A6), D0
+000010D0  B0BC 00000000            129      cmp.l #FALSE, D0
+000010D6  6700 0072                130      beq.l L7
+000010DA                           131  
+000010DA                           132      ;t4 = a - b
+000010DA  202E FFF8                133      move.l -8(A6), D0
+000010DE  90AE FFF0                134      sub.l -16(A6), D0
+000010E2  2D40 FFE8                135      move.l D0,-24(A6)
+000010E6                           136  
+000010E6                           137      ;a = t4
+000010E6  2D6E FFE8 FFF8           138      move.l -24(A6), -8(A6)
+000010EC                           139  
+000010EC                           140      ;t5 = "a -> "
+000010EC  2D7C 61202D3E FFC8       141      move.l #'a ->', -56(A6)
+000010F4  1D7C 0020 FFCC           142      move.b #' ', -52(A6)
+000010FA  1D7C 0000 FFCD           143      move.b #0, -51(A6)
+00001100                           144  
+00001100                           145      ;param t5
+00001100  9FFC 00000020            146      sub.l #32, SP
+00001106  2F6E FFC8 0000           147      move.l -56(A6), 0(SP)
+0000110C  2F6E FFCC 0004           148      move.l -52(A6), 4(SP)
+00001112  2F6E FFD0 0008           149      move.l -48(A6), 8(SP)
+00001118  2F6E FFD4 000C           150      move.l -44(A6), 12(SP)
+0000111E  2F6E FFD8 0010           151      move.l -40(A6), 16(SP)
+00001124  2F6E FFDC 0014           152      move.l -36(A6), 20(SP)
+0000112A  2F6E FFE0 0018           153      move.l -32(A6), 24(SP)
+00001130  2F6E FFE4 001C           154      move.l -28(A6), 28(SP)
+00001136                           155  
+00001136                           156      ;call WRITE_STRING
+00001136  6100 FEC8                157      bsr.l WRITE_STRING
+0000113A                           158      ;clean parameters
+0000113A  DFFC 00000020            159      add.l #32, SP
+00001140                           160  
+00001140                           161      ;param a
+00001140  2F2E FFF8                162      move.l -8(A6), -(SP)
+00001144                           163  
+00001144                           164      ;call WRITE_INT
+00001144  6100 FECE                165      bsr.l WRITE_INT
+00001148                           166      ;clean parameters
+00001148  588F                     167      add.l #4, SP
+0000114A                           168  
+0000114A                           169  ;L7: skip
+0000114A                           170  L7:
+0000114A                           171      ;if aux <= b goto L8
+0000114A  202D FFFC                172      move.l -4(A5), D0
+0000114E  B0AE FFF0                173      cmp.l -16(A6), D0
+00001152  6F00 000C                174      ble.l L8
+00001156                           175  
+00001156                           176      ;t6 = FALSE
+00001156  3B7C 0000 FFFA           177      move.w #FALSE, -6(A5)
+0000115C                           178  
+0000115C                           179      ;goto: L9
+0000115C  6000 0008                180      BRA L9
+00001160                           181  ;L8: skip
+00001160                           182  L8:
+00001160                           183      ;t6 = TRUE
+00001160  3B7C 0001 FFFA           184      move.w #TRUE, -6(A5)
+00001166                           185  
+00001166                           186  ;L9: skip
+00001166                           187  L9:
+00001166                           188      ;if t6 = FALSE goto L10
+00001166  202D FFFA                189      move.l -6(A5), D0
+0000116A  B0BC 00000000            190      cmp.l #FALSE, D0
+00001170  6700 0072                191      beq.l L10
+00001174                           192  
+00001174                           193      ;t7 = b - a
+00001174  202E FFF0                194      move.l -16(A6), D0
+00001178  90AE FFF8                195      sub.l -8(A6), D0
+0000117C  2B40 FFF6                196      move.l D0,-10(A5)
+00001180                           197  
+00001180                           198      ;b = t7
+00001180  2D6D FFF6 FFF0           199      move.l -10(A5), -16(A6)
+00001186                           200  
+00001186                           201      ;t8 = "b -> "
+00001186  2B7C 62202D3E FFD6       202      move.l #'b ->', -42(A5)
+0000118E  1B7C 0020 FFDA           203      move.b #' ', -38(A5)
+00001194  1B7C 0000 FFDB           204      move.b #0, -37(A5)
+0000119A                           205  
+0000119A                           206      ;param t8
+0000119A  9FFC 00000020            207      sub.l #32, SP
+000011A0  2F6D FFD6 0000           208      move.l -42(A5), 0(SP)
+000011A6  2F6D FFDA 0004           209      move.l -38(A5), 4(SP)
+000011AC  2F6D FFDE 0008           210      move.l -34(A5), 8(SP)
+000011B2  2F6D FFE2 000C           211      move.l -30(A5), 12(SP)
+000011B8  2F6D FFE6 0010           212      move.l -26(A5), 16(SP)
+000011BE  2F6D FFEA 0014           213      move.l -22(A5), 20(SP)
+000011C4  2F6D FFEE 0018           214      move.l -18(A5), 24(SP)
+000011CA  2F6D FFF2 001C           215      move.l -14(A5), 28(SP)
+000011D0                           216  
+000011D0                           217      ;call WRITE_STRING
+000011D0  6100 FE2E                218      bsr.l WRITE_STRING
+000011D4                           219      ;clean parameters
+000011D4  DFFC 00000020            220      add.l #32, SP
+000011DA                           221  
+000011DA                           222      ;param b
+000011DA  2F2E FFF0                223      move.l -16(A6), -(SP)
+000011DE                           224  
+000011DE                           225      ;call WRITE_INT
+000011DE  6100 FE34                226      bsr.l WRITE_INT
+000011E2                           227      ;clean parameters
+000011E2  588F                     228      add.l #4, SP
+000011E4                           229  
+000011E4                           230  ;L10: skip
+000011E4                           231  L10:
+000011E4                           232      ;goto: L1
+000011E4  6000 FE9A                233      BRA L1
+000011E8                           234  ;L2: skip
+000011E8                           235  L2:
+000011E8                           236      ;return a
+000011E8                           237      ;send return value
+000011E8  2D6E FFF8 0008           238      move.l -8(A6), 8(A6)
+000011EE                           239      ;prepare SP
+000011EE  2E4E                     240      move.l A6, SP
+000011F0                           241      ;restore BP
+000011F0  2C5F                     242      move.l (SP)+, A6
+000011F2                           243      ;give control to caller
+000011F2  4E75                     244      rts
+000011F4                           245  
+000011F4                           246  ;MAIN: skip
+000011F4                           247  MAIN:
+000011F4                           248      ;L0 return space
+000011F4  598F                     249      sub.l #4, SP
+000011F6                           250  
+000011F6                           251      ;t9 = call L0
+000011F6  6100 FE62                252      bsr.l L0
+000011FA                           253      ;clean parameters
+000011FA  DFFC 00000000            254      add.l #0, SP
+00001200                           255      ;fetch return
+00001200  2B5F FFD2                256      move.l (SP)+, -46(A5)
+00001204                           257  
+00001204                           258      ;Terminate program
+00001204  303C 0009                259      move #9,D0
+00001208  4E4F                     260      trap #15
+0000120A                           261  
+0000120A  FFFF FFFF                262      SIMHALT
+0000120E                           263  
+0000120E                           264  
+0000120E                           265  
+0000120E                           266      END START
 
 No errors detected
 No warnings generated
@@ -493,15 +277,18 @@ SYMBOL TABLE INFORMATION
 Symbol-name         Value
 -------------------------
 FALSE               0
-L0                  109A
-L1                  1216
-L2                  14D0
-L3                  1234
-L4                  123A
-L5                  12F2
-L6                  12F8
-L7                  14CC
-MAIN                10B8
+L0                  105A
+L1                  1080
+L10                 11E4
+L2                  11E8
+L3                  1096
+L4                  109C
+L5                  10C6
+L6                  10CC
+L7                  114A
+L8                  1160
+L9                  1166
+MAIN                11F4
 READINT             1036
 READSTRING          1028
 START               1044

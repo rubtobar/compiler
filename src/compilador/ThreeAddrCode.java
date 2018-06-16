@@ -20,7 +20,7 @@ public class ThreeAddrCode {
 
     private final ArrayList<ThreeAddrIstr> code;
     private final ArrayList<BasicBlock> bbTable;
-    private final HashMap<Integer, Integer> labelTable;
+    private final HashMap<String, Integer> labelTable;
 
     private static final int BB_I = 0;
     private static final int BB_O = 1;
@@ -106,7 +106,7 @@ public class ThreeAddrCode {
                 case PREFUNCT:
                     return "preambulo funcion";
                 case RETURN_SPACE:
-                    return sdest+" return space";
+                    return sdest + " return space";
             }
             return "--:INSTRUCTIONERROR:--";
         }
@@ -380,12 +380,15 @@ public class ThreeAddrCode {
     }
 
     public void optimize() {
+        commutativeNormalization();
+        basicBlockIdentification();
+    }
+
+    private void commutativeNormalization() {
         // Commutative operator normalization
         String aux;
         ThreeAddrIstr instr;
-        boolean interChange;
         for (int i = 0; i < code.size(); i++) {
-            interChange = false;
             instr = code.get(i);
             if (instr.isCommutative()
                     && instr.src2.charAt(0) == 'v'
@@ -396,7 +399,10 @@ public class ThreeAddrCode {
                 instr.src2 = aux;
             }
         }
+    }
 
+    private void basicBlockIdentification() {
+        ThreeAddrIstr instr;
         // BB initialization
         // Leader identification //
         bbTable.add(new BasicBlock(0, 0)); // I: 0, O: 1
@@ -404,7 +410,7 @@ public class ThreeAddrCode {
         for (int i = 0; i < code.size(); i++) {
             instr = code.get(i);
             if (instr.op == Operand.SKIP) {
-                labelTable.put(Integer.parseInt(instr.dest.substring(1)), bbTable.size());
+                labelTable.put(instr.dest, bbTable.size());
                 bbTable.add(new BasicBlock(i, 0));
             } else if (instr.isCondBra()) {
                 ThreeAddrIstr nextInstr = code.get(i + 1);
@@ -429,12 +435,12 @@ public class ThreeAddrCode {
         for (int b = 2; b < bbTable.size(); b++) {
             int i = bbTable.get(b).firstI;
             instr = code.get(i);
-            int label = Integer.parseInt(instr.dest.substring(1));
+            String label = instr.dest;
             while (instr.op != Operand.GOTO && !instr.isCondBra()
                     && instr.op != Operand.RETURN && (instr.op != Operand.SKIP
                     || b == labelTable.get(label)) && i < bbTable.size()) {
                 instr = code.get(++i);
-                label = Integer.parseInt(instr.dest.substring(1));
+                label = instr.dest;
             }
             while (instr.isCondBra()) {
                 int instrBB = labelTable.get(label);
@@ -442,7 +448,7 @@ public class ThreeAddrCode {
                 bbTable.get(b).addSucc(instrBB);
                 instr = code.get(++i);
             }
-            label = Integer.parseInt(instr.dest.substring(1));
+            label = instr.dest;
             switch (instr.op) {
                 case GOTO:
                     bbTable.get(b).lastI = i;
@@ -490,7 +496,7 @@ public class ThreeAddrCode {
                     + "\taddq.b #1, D7\n" //D7 stores line number
                     + "\t;give control to caller\n"
                     + "\trts\n");
-            
+
             writer.print("WRITE_INT:\n"
                     + "\t;Do the print\n"
                     + "\tmove.l #3, D0\n"
@@ -513,7 +519,7 @@ public class ThreeAddrCode {
                     // Hemos escrito una linea mas
                     + "\t;give control to caller\n"
                     + "\trts\n");
-            
+
             writer.print("READINT:\n"
                     + "\t;Do the read\n"
                     + "\tmove #4, D0\n"
