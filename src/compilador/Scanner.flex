@@ -23,7 +23,7 @@ const      = "const"
 op_aritm   = [+-]
 op_rel     = < | > | ">=" | "<=" | "!=" | "=="
 op_log     = [&\|]
-comment	   = ("//"[^"\r\n"]*) | ("/*"[^"*/"]*"*/")
+comment	   = ("//"[^"\r\n"]*)
 whitespace = (\r|\n|\r\n) | [ \t\f]
 return     = "return"
 equal      = "="

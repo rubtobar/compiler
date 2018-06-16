@@ -27,7 +27,7 @@ public class Compilador {
     static final String VAR_TABLE_PRINTER_FILEPATH = OUTPUT_PATH + "VARTABLE.txt";
     static final String ASSEMBLY_PRINTER_FILEPATH = OUTPUT_PATH + "ASSEMBLY_CODE.X68";
     
-    static final String INPUT_FILEPATH = INPUT_PATH + "input2.txt";
+    static final String INPUT_FILEPATH = INPUT_PATH + "input.txt";
 
     public static ErrorPrinter errPrinter;
     public static TreePrinter derTree;
@@ -65,19 +65,5 @@ public class Compilador {
             sytr.getVt().printOnFile();
             sytr.getPt().printOnFile();
         }
-        
-        int aux;
-        int a = 65; 
-        int b = 32;
-	while (a != b){
-            aux = a;
-            if (aux > b){
-                a = a - b;
-            }
-            if (aux <= b){
-                b = b - a;
-            }
-	}
-	System.out.println(a);
     }
 }

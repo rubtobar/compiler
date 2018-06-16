@@ -1,10 +1,12 @@
-// Declaracions //
 
-// Procediments //
 
-/*
-* Programa principal
-*/
+
+// Programa principal
+
 main {
-
+	int a = 0;
+	while(a <= 10){
+		write(a);
+		a = a + 1;
+	}
 }

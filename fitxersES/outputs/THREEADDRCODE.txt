@@ -1,52 +1,18 @@
-goto: MAIN
-L0: skip
-preambulo funcion
-t0 = 33
+t0 = 0
 a = t0
-t1 = 16
-b = t1
-L1: skip
-if a != b goto L3
+L0: skip
+t1 = 10
+if a <= t1 goto L2
 t2 = FALSE
-goto: L4
-L3: skip
+goto: L3
+L2: skip
 t2 = TRUE
-L4: skip
-if t2 = FALSE goto L2
-aux = a
-if aux > b goto L5
-t3 = FALSE
-goto: L6
-L5: skip
-t3 = TRUE
-L6: skip
-if t3 = FALSE goto L7
-t4 = a - b
-a = t4
-t5 = "a -> "
-param t5
-call WRITE_STRING
+L3: skip
+if t2 = FALSE goto L1
 param a
 call WRITE_INT
-L7: skip
-if aux <= b goto L8
-t6 = FALSE
-goto: L9
-L8: skip
-t6 = TRUE
-L9: skip
-if t6 = FALSE goto L10
-t7 = b - a
-b = t7
-t8 = "b -> "
-param t8
-call WRITE_STRING
-param b
-call WRITE_INT
-L10: skip
-goto: L1
-L2: skip
-return a
-MAIN: skip
-L0 return space
-t9 = call L0
+t3 = 1
+t4 = a + t3
+a = t4
+goto: L0
+L1: skip

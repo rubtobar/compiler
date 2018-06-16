@@ -199,13 +199,19 @@ public class ThreeAddrCode {
                     instr += "\tbgt.l " + dest + "\n"; // enviamos a D0
                     break;
                 case BNE:
-                    instr += "\tmove.l " + getLocation(src1) + ", D0\n"; // enviamos a D0
-                    instr += "\tcmp.l " + getLocation(src2) + ", D0\n"; // enviamos a D0
+                    size = vt.varTable.get(Integer.parseInt(src1.substring(1))).size;
+                    instr += "\tmove." + (size == 4 ? "l" : "w") + " " + getLocation(src1) + ", D0\n";
+                    //instr += "\tmove.l " + getLocation(src1) + ", D0\n"; // enviamos a D0
+                    instr += "\tcmp." + (size == 4 ? "l" : "w") + " " + getLocation(src2) + ", D0\n";
+                    //instr += "\tcmp.l " + getLocation(src2) + ", D0\n"; // enviamos a D0
                     instr += "\tbne.l " + dest + "\n"; // enviamos a D0
                     break;
                 case BEQ:
-                    instr += "\tmove.l " + getLocation(src1) + ", D0\n"; // enviamos a D0
-                    instr += "\tcmp.l " + getLocation(src2) + ", D0\n"; // enviamos a D0
+                    size = vt.varTable.get(Integer.parseInt(src1.substring(1))).size;
+                    instr += "\tmove." + (size == 4 ? "l" : "w") + " " + getLocation(src1) + ", D0\n";
+                    //instr += "\tmove.l " + getLocation(src1) + ", D0\n"; // enviamos a D0
+                    instr += "\tcmp." + (size == 4 ? "l" : "w") + " " + getLocation(src2) + ", D0\n";
+                    //instr += "\tcmp.l " + getLocation(src2) + ", D0\n"; // enviamos a D0
                     instr += "\tbeq.l " + dest + "\n"; // enviamos a D0
                     break;
                 case CALL:
@@ -532,7 +538,9 @@ public class ThreeAddrCode {
 
             // Generamos etiqueta START
             writer.print("START:\n");
-
+            // Initialize line number
+            writer.print("\t;Initialize line number\n");
+            writer.print("\tmove.l #1, D7\n");
             // Colocamos A6 para indexar el StackPointer
             writer.print("\t;A6 to index variables\n");
             writer.print("\tmove.l SP, A6\n");

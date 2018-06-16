@@ -1,3 +1,4 @@
+
 int MCD(){
 	int aux;
 	int a = 32;
@@ -19,31 +20,5 @@ int MCD(){
 }
 
 main {
-	/*int a = 65;
-	int b = 32;
-	int aux;
-	write('');
-	while (a != b){
-		aux = a;
-		if (aux > b){
-			a = a - b;
-			write('a -> ');
-			write(a);
-		}
-		if (aux <= b){
-			b = b - a;
-			write('b -> ');
-			write(b);
-		}
-	}
-	write(a);*/
 	MCD();
-	/* 
-		65, 32
-		33, 32
-		1, 32
-		1, 31
-		...
-		1, 1
-	*/
 }
