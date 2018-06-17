@@ -1,9 +1,11 @@
 ID			NAME			LABEL			PROF			P.SIZE			L.SIZE			R.SIZE
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-000			main						0			0			46			0
+000			main						0			0			178			0
 007			write@STRING			WRITE_STRING			0			32			0			0
 009			write@INT			WRITE_INT			0			4			0			0
 011			readString			READSTRING			0			0			0			32
 012			readInt			READINT			0			0			0			4
-015			fun			L0			0			0			12			0
-020			fun@INT			L1			0			4			12			0
+015			neg@INT			L0			0			4			8			4
+020			abs@INT			L1			0			4			10			4
+026			mult@INT@INT			L5			0			8			30			4
+054			factorial@INT			L20			0			4			10			4

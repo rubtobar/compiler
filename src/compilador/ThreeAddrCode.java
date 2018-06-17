@@ -55,7 +55,6 @@ public class ThreeAddrCode {
         private boolean isCommutative() {
             switch (this.op) {
                 case ADD:
-                case SUB:
                 case BEQ:
                 case BNE:
                 case AND:

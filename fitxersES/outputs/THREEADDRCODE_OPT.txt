@@ -1,26 +1,155 @@
-t0 = 4
+t0 = 20
 goto: MAIN
-MAIN: skip
-a = 1
-b = 2
-t9 = a + b
-t10 = 4
-c = t9 - t10
-d = 3
+L0: skip
+preambulo
+t1 = 0
+t2 = t1 - val
+return t2
+L1: skip
+preambulo
+t3 = 0
+if val < t3 goto L2
+t4 = FALSE
+goto: L3
 L2: skip
-t13 = 10
-if a <= t13 goto L4
-t14 = FALSE
-goto: L5
-L4: skip
-t14 = TRUE
-L5: skip
-if t14 = FALSE goto L3
-param a
-call WRITE_INT
-t15 = 1
-a = a + t15
-goto: L2
+t4 = TRUE
 L3: skip
-e = 4
-f = 5
+if t4 = FALSE goto L4
+L0 return space
+param val
+t5 = call L0
+val = t5
+L4: skip
+return val
+L5: skip
+preambulo
+result = 0
+count = 0
+L1 return space
+param a
+t8 = call L1
+ax = t8
+L1 return space
+param b
+t9 = call L1
+bx = t9
+L6: skip
+if count < ax goto L8
+t10 = FALSE
+goto: L9
+L8: skip
+t10 = TRUE
+L9: skip
+if t10 = FALSE goto L7
+result = result + bx
+t12 = 1
+count = count + t12
+goto: L6
+L7: skip
+t14 = 0
+if a < t14 goto L10
+t15 = FALSE
+goto: L11
+L10: skip
+t15 = TRUE
+L11: skip
+t16 = 0
+if b < t16 goto L12
+t17 = FALSE
+goto: L13
+L12: skip
+t17 = TRUE
+L13: skip
+t18 = t15 | t17
+if t18 = FALSE goto L14
+t19 = 0
+if a > t19 goto L15
+t20 = FALSE
+goto: L16
+L15: skip
+t20 = TRUE
+L16: skip
+t21 = 0
+if b > t21 goto L17
+t22 = FALSE
+goto: L18
+L17: skip
+t22 = TRUE
+L18: skip
+t23 = t20 | t22
+if t23 = FALSE goto L19
+L0 return space
+param result
+t24 = call L0
+result = t24
+L19: skip
+L14: skip
+return result
+L20: skip
+preambulo
+t25 = 0
+if i = t25 goto L21
+t26 = FALSE
+goto: L22
+L21: skip
+t26 = TRUE
+L22: skip
+if t26 = FALSE goto L23
+result = 1
+L23: skip
+t28 = 0
+if i > t28 goto L24
+t29 = FALSE
+goto: L25
+L24: skip
+t29 = TRUE
+L25: skip
+if t29 = FALSE goto L26
+L5 return space
+L20 return space
+t30 = 1
+t31 = i - t30
+param t31
+t32 = call L20
+param t32
+param i
+t33 = call L5
+result = t33
+L26: skip
+return result
+MAIN: skip
+t34 = "---- Funcion factorial ----"
+param t34
+call WRITE_STRING
+t35 = "Introduce el valor a calcular:"
+param t35
+call WRITE_STRING
+READINT return space
+t36 = call READINT
+valor = t36
+t37 = t0
+if valor < t37 goto L27
+t38 = FALSE
+goto: L28
+L27: skip
+t38 = TRUE
+L28: skip
+if t38 = FALSE goto L29
+L20 return space
+param valor
+t39 = call L20
+param t39
+call WRITE_INT
+L29: skip
+t40 = t0
+if valor >= t40 goto L30
+t41 = FALSE
+goto: L31
+L30: skip
+t41 = TRUE
+L31: skip
+if t41 = FALSE goto L32
+t42 = "Tas pasao"
+param t42
+call WRITE_STRING
+L32: skip

@@ -1,19 +1,21 @@
 +-----------------------------------------------------------------SYMBOL TABLE------------------------------------------------------------------+--------------------------------EXPANSION TABLE--------------------------------+--SCOPE TABLE--+
 |			POSICION		LEX			NIVEL			DESCR.TYPE		TSB			|ID			NIVEL			DESCR.TYPE		TSB	|***************|
 |***********************************************************************************************************************************************|*******************************************************************************|***************|
-|			0			fun@INT			1			DPROC			VOID			|null										|	0	|
-|			1			void			0			DTYPE			VOID			|value			-1			DARG			STRING	|	3	|
-|			2			string			0			DTYPE			STRING			|value			-1			DARG			INT	|		|
-|			3			false			0			DCONST			BOOL			|a			-1			DARG			INT	|		|
-|			4			readString			0			DPROC			STRING			|										|		|
-|			5			write@STRING			0			DPROC			VOID			|										|		|
-|			6			i			1			DCONST			INT			|										|		|
-|			7			main			0			DPROC			VOID			|										|		|
+|			0			void			0			DTYPE			VOID			|null										|	0	|
+|			1			string			0			DTYPE			STRING			|value			-1			DARG			STRING	|	7	|
+|			2			factorial@INT			1			DPROC			INT			|value			-1			DARG			INT	|		|
+|			3			false			0			DCONST			BOOL			|val			-1			DARG			INT	|		|
+|			4			readString			0			DPROC			STRING			|val			-1			DARG			INT	|		|
+|			5			write@STRING			0			DPROC			VOID			|a			-1			DARG			INT	|		|
+|			6			main			0			DPROC			VOID			|b			-1			DARG			INT	|		|
+|			7			abs@INT			1			DPROC			INT			|i			-1			DARG			INT	|		|
 |			8			write@INT			0			DPROC			VOID			|										|		|
 |			9			int			0			DTYPE			INT			|										|		|
-|			10			boolean			0			DTYPE			BOOL			|										|		|
-|			11			true			0			DCONST			BOOL			|										|		|
-|			12			readInt			0			DPROC			INT			|										|		|
-|			13			fun			1			DPROC			VOID			|										|		|
+|			10			neg@INT			1			DPROC			INT			|										|		|
+|			11			boolean			0			DTYPE			BOOL			|										|		|
+|			12			true			0			DCONST			BOOL			|										|		|
+|			13			MAXVALUE			1			DCONST			INT			|										|		|
+|			14			readInt			0			DPROC			INT			|										|		|
+|			15			mult@INT@INT			1			DPROC			INT			|										|		|
 +-----------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------+---------------+
 Current Level: 1

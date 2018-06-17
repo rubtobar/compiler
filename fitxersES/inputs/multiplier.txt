@@ -1,0 +1,111 @@
+boolean continuar = true;
+
+// Negativo
+int neg(int val){
+	return 0 - val;
+}
+
+// Valor absoluto
+int abs(int val){
+	if (val < 0) {
+		val = neg(val);
+	}
+	return val;
+}
+
+// Multiplica a * b
+int mult(int a, int b){
+	int result = 0;
+	int count = 0;
+
+	int ax = abs(a);
+	int bx = abs(b);
+
+	// Multiplicamos
+	while(count < ax){
+		result = result + bx;
+		count = count + 1;
+	}
+
+	// Si la mult tiene resultado negativo
+	if (a < 0 | b < 0) {
+		if (a > 0 | b > 0) {
+			result = neg(result);
+		}
+	}
+	return result;
+}
+
+int divide_unsigned(int N, int D) {
+	int Q = 0;
+	int R = N;
+	while (R >= D) {
+		Q = Q + 1;
+		R = R - D;
+	}
+	return Q;
+}
+
+
+int divide(int N, int D){
+	int Q;
+	int RESULT = 0;
+	if (D == 0) {
+		write("Division by 0");
+	}
+	if (D < 0) {
+		Q = divide(N, neg(D));
+		RESULT = neg(Q);
+	} 
+	if (N < 0  & D > 0) {
+		Q = divide(neg(N), D);
+		RESULT = neg(Q);
+	}
+	// At this point, N ≥ 0 and D > 0
+	if (N >= 0 & D > 0) {
+		RESULT = divide_unsigned(N, D);
+	}
+	return RESULT;
+}
+
+main{
+
+	while (continuar) {
+		write('<------Calculadora------>');
+		write('0. Salir');
+		write('1. Valor absoluto');
+		write('2. Multiplicar');
+		write('3. Dividir');
+
+		int opcion = readInt();
+		if (opcion == 1) {
+			write('--Valor absoluto--');
+			write('Introduce valor:');
+			write(abs(readInt()));
+		}
+		if (opcion == 2) {
+			write('--Multiplicacion--');
+			write('Introduce primer valor:');
+			int val1 = readInt();
+			write('Introduce segundo valor:');
+			int val2 = readInt();
+			write('Resultado:');
+			write(mult(val1,val2));
+		}
+		if (opcion == 3) {
+			write('--Division--');
+			write('Introduce dividendo:');
+			int val1 = readInt();
+			write('Introduce divisor:');
+			int val2 = readInt();
+			write('Resultado:');
+			write(divide(val1,val2));
+		}
+		if (opcion == 0) {
+			continuar = false;
+			write('Saliendo');
+		}
+	}
+
+
+}

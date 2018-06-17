@@ -25,12 +25,12 @@ public class NodeValue extends Node {
     public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
         if (expr != null) {
             // Expressió
+            expr.generateCode(vt, pt, lt, gen); //*
             id = expr.tid;
         } else if (call != null) {
             // Call
             call.generateCode(vt, pt, lt, gen);
             this.id = call.tid;
-            
         } else if (value != null) {
             // Literal
             gen.add(Operator.ASSIG, value, null, "v"+id);

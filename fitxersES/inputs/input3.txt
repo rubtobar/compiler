@@ -5,7 +5,7 @@
 void imprimir(string s){
 	write("Benvingut ");
 	write(s);
-	write(".");
+	write("");
 }
 
 int saludar(int persona){
@@ -22,11 +22,16 @@ int saludar(int persona){
 	return resultat;
 }	
 
-/*
-* Programa principal
-*/
+
+//Programa principal
 main {
-	if(saludar(5) == 1){
-		write("error, persona no existeix.");
+	while(true){
+		write("1. Joan");
+		write("2. Manel");
+		write("Introdueix numero de perosona:");
+		if(saludar(readInt()) == 1){
+			write("error, persona no existeix.");
+		}
+		write("");
 	}
 }
