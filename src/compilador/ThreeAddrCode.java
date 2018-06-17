@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeSet;
 
 /**
@@ -22,6 +21,7 @@ public class ThreeAddrCode {
     private final ArrayList<ThreeAddrIstr> code;
     private final ArrayList<BasicBlock> bbTable;
     private final HashMap<String, Integer> labelTable;
+    private final TreeSet<String> programCalls;
 
     private static final int BB_I = 0;
     private static final int BB_O = 1;
@@ -29,18 +29,18 @@ public class ThreeAddrCode {
     private final VarTable vt;
     private final ProcTable pt;
 
-    public enum Operand {
+    public enum Operator {
         ADD, SUB, AND, OR, SKIP, GOTO, BLT, BLE, BGE, BGT, BNE, BEQ, CALL, RETURN, PARAM, ASSIG, PREFUNCT, RETURN_SPACE
     }
 
     private class ThreeAddrIstr {
 
-        private Operand op;
+        private Operator op;
         private String src1;
         private String src2;
         private final String dest;
 
-        public ThreeAddrIstr(Operand op, String src1, String src2, String dest) {
+        public ThreeAddrIstr(Operator op, String src1, String src2, String dest) {
             this.op = op;
             this.src1 = src1;
             this.src2 = src2;
@@ -49,7 +49,7 @@ public class ThreeAddrCode {
 
         public boolean isCondBra() {
             int ord = op.ordinal();
-            return ord >= Operand.BLT.ordinal() && ord <= Operand.BEQ.ordinal();
+            return ord >= Operator.BLT.ordinal() && ord <= Operator.BEQ.ordinal();
         }
 
         private boolean isCommutative() {
@@ -99,13 +99,13 @@ public class ThreeAddrCode {
                 case CALL:
                     return (src1 == null ? "" : ssrc1 + " = ") + "call " + sdest;
                 case RETURN:
-                    return "return " + sdest;
+                    return "return " + (sdest != null ? sdest : "");
                 case PARAM:
                     return "param " + sdest;
                 case ASSIG:
                     return sdest + " = " + ssrc1;
                 case PREFUNCT:
-                    return "preambulo funcion";
+                    return "preambulo";
                 case RETURN_SPACE:
                     return sdest + " return space";
             }
@@ -380,9 +380,10 @@ public class ThreeAddrCode {
         this.labelTable = new HashMap<>();
         this.vt = vt;
         this.pt = pt;
+        this.programCalls = new TreeSet<>();
     }
 
-    public void add(Operand op, String src1, String src2, String dest) {
+    public void add(Operator op, String src1, String src2, String dest) {
         code.add(new ThreeAddrIstr(op, src1, src2, dest));
     }
 
@@ -390,10 +391,30 @@ public class ThreeAddrCode {
         eliminarTemporales();
         commutativeNormalization();
         basicBlockIdentification();
+        eliminarFuncionesMuertas();
         recalcularOfsets();
     }
-    
-    private void recalcularOfsets(){
+
+    private void eliminarFuncionesMuertas() {
+        BasicBlock block;
+        for (int i = 2; i < bbTable.size(); i++) {
+            block = bbTable.get(i);
+            if (block.pred.isEmpty()) {
+                if (this.programCalls.contains(code.get(block.firstI).dest)) {
+                    // Engancha el bloque de codigo de la funcion
+                    // con el bloque INPUT
+                    block.pred.add(BB_I);
+
+                } else {
+                    // El codigo de la funcion nunca es llamado
+                    // Codigo muerto
+                    block.succ.clear();
+                }
+            }
+        }
+    }
+
+    private void recalcularOfsets() {
         pt.procTable.entrySet().forEach((entry) -> {
             ProcTable.Proc proc = entry.getValue();
             proc.localSize = 0;
@@ -406,22 +427,25 @@ public class ThreeAddrCode {
                 pt.procTable.get(proc).localSize += size;
                 balde.offset = -pt.procTable.get(proc).localSize;
             }
-            
+
         });
     }
-    
-    private boolean isOperation(ThreeAddrIstr tai){
-        return ((tai.op == Operand.SUB) || (tai.op == Operand.ADD));
+
+    private boolean isOperation(ThreeAddrIstr tai) {
+        return ((tai.op == Operator.SUB) || (tai.op == Operator.ADD));
     }
-    
-    private void eliminarTemporales(){
+
+    private void eliminarTemporales() {
         ThreeAddrIstr instrCurrent;
         ThreeAddrIstr instrNext;
+        if (code.isEmpty()) {
+            return;
+        }
         instrCurrent = code.get(0);
-        for (int i = 1; i < code.size() ; i++) {
+        for (int i = 1; i < code.size(); i++) {
             instrNext = code.get(i);
-            
-            if (instrNext.op == Operand.ASSIG && (instrCurrent.op == Operand.ASSIG || isOperation(instrCurrent) )) {
+
+            if (instrNext.op == Operator.ASSIG && (instrCurrent.op == Operator.ASSIG || isOperation(instrCurrent))) {
                 if (instrCurrent.dest.equals(instrNext.src1)) {
                     instrNext.src1 = instrCurrent.src1;
                     instrNext.src2 = instrCurrent.src2;
@@ -458,9 +482,17 @@ public class ThreeAddrCode {
         // Leader identification //
         bbTable.add(new BasicBlock(0, 0)); // I: 0, O: 1
         bbTable.add(new BasicBlock(0, 0));
-        for (int i = 0; i < code.size(); i++) {
+        if (code.isEmpty()) {
+            return;
+        }
+        int k = 0;
+        if (!code.get(0).op.equals(Operator.SKIP)) {
+            bbTable.add(new BasicBlock(0, 0));
+            k = 1;
+        }
+        for (int i = k; i < code.size(); i++) {
             instr = code.get(i);
-            if (instr.op == Operand.SKIP) {
+            if (instr.op == Operator.SKIP) {
                 labelTable.put(instr.dest, bbTable.size());
                 bbTable.add(new BasicBlock(i, 0));
             } else if (instr.isCondBra()) {
@@ -473,23 +505,27 @@ public class ThreeAddrCode {
                             break;
                         default:
                             bbTable.add(new BasicBlock(i + 1, 0));
+
                             break;
                     }
                 }
             }
+            if (instr.op.equals(Operator.CALL)) {
+                this.programCalls.add(pt.procTable.get(Integer.parseInt(instr.dest.substring(1))).label);
+            }
         }
         // Relation identification //
-        bbTable.get(BB_I).succ.add(2);
         if (bbTable.size() > 2) {
+            bbTable.get(BB_I).succ.add(2);
             bbTable.get(2).pred.add(BB_I);
         }
         for (int b = 2; b < bbTable.size(); b++) {
             int i = bbTable.get(b).firstI;
             instr = code.get(i);
             String label = instr.dest;
-            while (instr.op != Operand.GOTO && !instr.isCondBra()
-                    && instr.op != Operand.RETURN && (instr.op != Operand.SKIP
-                    || b == labelTable.get(label)) && i < bbTable.size()) {
+            while (instr.op != Operator.GOTO && !instr.isCondBra()
+                    && instr.op != Operator.RETURN && (instr.op != Operator.SKIP
+                    || b == labelTable.get(label)) && i < code.size() - 1) {
                 instr = code.get(++i);
                 label = instr.dest;
             }
@@ -513,11 +549,12 @@ public class ThreeAddrCode {
                     bbTable.get(b).addSucc(BB_O);
                     break;
                 default:
-                    bbTable.get(b).lastI = i - 1;
                     int next;
                     if (b < bbTable.size() - 1) {
+                        bbTable.get(b).lastI = i - 1;
                         next = b + 1;
                     } else {
+                        bbTable.get(b).lastI = i;
                         next = BB_O;
                     }
                     bbTable.get(next).addPred(b);
@@ -608,9 +645,24 @@ public class ThreeAddrCode {
             }
 
             // Generamos codigo de instrucciones
-            code.forEach((_item) -> {
-                writer.print(_item.get68KCode() + "\n");
-            });
+            if (bbTable.isEmpty()) {
+                code.forEach((_item) -> {
+                    writer.print(_item.get68KCode() + "\n");
+                });
+            } else {
+                BasicBlock block;
+                for (int i = 2; i < bbTable.size(); i++) {
+                    block = bbTable.get(i);
+                    if (block.pred.isEmpty()) {
+                        continue;
+                    }
+                    ThreeAddrIstr instr;
+                    for (int j = block.firstI; j <= block.lastI; j++) {
+                        instr = code.get(j);
+                        writer.print(instr.get68KCode() + "\n");
+                    }
+                }
+            }
             // Generamos codigo de finalizacion de programa
             writer.print("\t;Terminate program\n\tmove #9,D0\n\ttrap #15\n");
             // Generamos codigo de END
@@ -626,9 +678,24 @@ public class ThreeAddrCode {
         PrintWriter writer;
         try {
             writer = new PrintWriter(filename);
-            code.forEach((_item) -> {
-                writer.print(_item.toString() + "\n");
-            });
+            if (bbTable.isEmpty()) {
+                code.forEach((_item) -> {
+                    writer.print(_item.toString() + "\n");
+                });
+            } else {
+                BasicBlock block;
+                for (int i = 2; i < bbTable.size(); i++) {
+                    block = bbTable.get(i);
+                    if (block.pred.isEmpty()) {
+                        continue;
+                    }
+                    ThreeAddrIstr instr;
+                    for (int j = block.firstI; j <= block.lastI; j++) {
+                        instr = code.get(j);
+                        writer.print(instr.toString() + "\n");
+                    }
+                }
+            }
             writer.close();
         } catch (FileNotFoundException ex) {
             System.err.println("FALLO DE ESCRITURA EN EL CODIGO DE 3 DIRECCIONES");

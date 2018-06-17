@@ -2,7 +2,7 @@ package compilador.Nodes;
 
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
-import compilador.ThreeAddrCode.Operand;
+import compilador.ThreeAddrCode.Operator;
 import compilador.VarTable;
 import compilador.LabelCount;
 
@@ -30,11 +30,11 @@ public class NodeArExpr extends Node {
             this.tid = value.id;
         }
         if (op != null) {
-            Operand operand;
+            Operator operand;
             if (op.equals("+")) {
-                operand = Operand.ADD;
+                operand = Operator.ADD;
             } else {
-                operand = Operand.SUB;
+                operand = Operator.SUB;
             }
             gen.add(operand, "v" + arExpr.tid, "v" + value.id, "v" + tid);
         }

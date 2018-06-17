@@ -4,7 +4,7 @@ import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
 import compilador.LabelCount;
-import compilador.ThreeAddrCode.Operand;
+import compilador.ThreeAddrCode.Operator;
 
 public class NodeValue extends Node {
 
@@ -33,7 +33,7 @@ public class NodeValue extends Node {
             
         } else if (value != null) {
             // Literal
-            gen.add(Operand.ASSIG, value, null, "v"+id);
+            gen.add(Operator.ASSIG, value, null, "v"+id);
         }
         // else Variable (id ja està assignat)
     }

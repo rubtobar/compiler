@@ -2,7 +2,7 @@ package compilador.Nodes;
 
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
-import compilador.ThreeAddrCode.Operand;
+import compilador.ThreeAddrCode.Operator;
 import compilador.VarTable;
 import compilador.LabelCount;
 
@@ -19,9 +19,9 @@ import compilador.LabelCount;
         public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen){
             expr.generateCode(vt,pt,lt,gen);
             String e = lt.add();
-            gen.add(Operand.BEQ, "v"+expr.tid, "FALSE", e);
+            gen.add(Operator.BEQ, "v"+expr.tid, "FALSE", e);
             if (sentences != null) sentences.generateCode(vt,pt,lt,gen);
-            gen.add(Operand.SKIP, null, null, e);
+            gen.add(Operator.SKIP, null, null, e);
         }
         
     }

@@ -1,5 +1,11 @@
+const int i = 4;
 
-
+void fun(){
+	int a = 3+2;
+}
+void fun(int a){
+	int b = 3+2;
+}
 // Programa principal
 
 main {

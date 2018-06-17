@@ -50,135 +50,208 @@ START:
 
 	;t0 save space in Stack
 	sub.l #4, SP
+	;t7 save space in Stack
+	sub.l #4, SP
 	;a save space in Stack
 	sub.l #4, SP
-	;t1 save space in Stack
+	;t8 save space in Stack
 	sub.l #4, SP
 	;b save space in Stack
-	sub.l #4, SP
-	;t2 save space in Stack
-	sub.l #4, SP
-	;t3 save space in Stack
-	sub.l #4, SP
-	;t4 save space in Stack
-	sub.l #4, SP
-	;c save space in Stack
-	sub.l #4, SP
-	;t5 save space in Stack
-	sub.l #4, SP
-	;d save space in Stack
-	sub.l #4, SP
-	;t6 save space in Stack
-	sub.l #4, SP
-	;t7 save space in Stack
-	sub.l #2, SP
-	;t8 save space in Stack
 	sub.l #4, SP
 	;t9 save space in Stack
 	sub.l #4, SP
 	;t10 save space in Stack
 	sub.l #4, SP
+	;t11 save space in Stack
+	sub.l #4, SP
+	;c save space in Stack
+	sub.l #4, SP
+	;t12 save space in Stack
+	sub.l #4, SP
+	;d save space in Stack
+	sub.l #4, SP
+	;t13 save space in Stack
+	sub.l #4, SP
+	;t14 save space in Stack
+	sub.l #2, SP
+	;t15 save space in Stack
+	sub.l #4, SP
+	;t16 save space in Stack
+	sub.l #4, SP
+	;t17 save space in Stack
+	sub.l #4, SP
 	;e save space in Stack
 	sub.l #4, SP
-	;t11 save space in Stack
+	;t18 save space in Stack
 	sub.l #4, SP
 	;f save space in Stack
 	sub.l #4, SP
-	;t0 = 1
-	move.l #1, -4(A5)
+	;t0 = 4
+	move.l #4, -4(A5)
 
-	;a = t0
-	move.l -4(A5), -8(A5)
-
-	;t1 = 2
-	move.l #2, -12(A5)
-
-	;b = t1
-	move.l -12(A5), -16(A5)
-
-	;t2 = a + b
-	move.l -8(A5), D0
-	add.l -16(A5), D0
-	move.l D0,-20(A5)
-
-	;t3 = 4
-	move.l #4, -24(A5)
-
-	;t4 = t2 - t3
-	move.l -20(A5), D0
-	sub.l -24(A5), D0
-	move.l D0,-28(A5)
-
-	;c = t4
-	move.l -28(A5), -32(A5)
-
-	;t5 = 3
-	move.l #3, -36(A5)
-
-	;d = t5
-	move.l -36(A5), -40(A5)
-
+	;goto: MAIN
+	BRA MAIN
 ;L0: skip
 L0:
-	;t6 = 10
-	move.l #10, -44(A5)
+	;preambulo
+	;save BP
+	move.l A6, -(SP)
+	;set BP
+	move.l SP, A6
+	;save space for local vars
+	sub.l #16, SP
 
-	;if a <= t6 goto L2
-	move.l -8(A5), D0
-	cmp.l -44(A5), D0
-	ble.l L2
+	;t1 = 3
+	move.l #3, -4(A6)
 
-	;t7 = FALSE
-	move.w #FALSE, -46(A5)
+	;t2 = 2
+	move.l #2, -8(A6)
 
-	;goto: L3
-	BRA L3
+	;t3 = t1 + t2
+	move.l -4(A6), D0
+	add.l -8(A6), D0
+	move.l D0,-12(A6)
+
+	;a = t3
+	move.l -12(A6), -16(A6)
+
+	;return 
+	;prepare SP
+	move.l A6, SP
+	;restore BP
+	move.l (SP)+, A6
+	;give control to caller
+	rts
+
+;L1: skip
+L1:
+	;preambulo
+	;save BP
+	move.l A6, -(SP)
+	;set BP
+	move.l SP, A6
+	;save space for local vars
+	sub.l #16, SP
+
+	;t4 = 3
+	move.l #3, -4(A6)
+
+	;t5 = 2
+	move.l #2, -8(A6)
+
+	;t6 = t4 + t5
+	move.l -4(A6), D0
+	add.l -8(A6), D0
+	move.l D0,-12(A6)
+
+	;b = t6
+	move.l -12(A6), -16(A6)
+
+	;return 
+	;prepare SP
+	move.l A6, SP
+	;restore BP
+	move.l (SP)+, A6
+	;give control to caller
+	rts
+
+;MAIN: skip
+MAIN:
+	;t7 = 1
+	move.l #1, -8(A5)
+
+	;a = t7
+	move.l -8(A5), -12(A5)
+
+	;t8 = 2
+	move.l #2, -16(A5)
+
+	;b = t8
+	move.l -16(A5), -20(A5)
+
+	;t9 = a + b
+	move.l -12(A5), D0
+	add.l -20(A5), D0
+	move.l D0,-24(A5)
+
+	;t10 = 4
+	move.l #4, -28(A5)
+
+	;t11 = t9 - t10
+	move.l -24(A5), D0
+	sub.l -28(A5), D0
+	move.l D0,-32(A5)
+
+	;c = t11
+	move.l -32(A5), -36(A5)
+
+	;t12 = 3
+	move.l #3, -40(A5)
+
+	;d = t12
+	move.l -40(A5), -44(A5)
+
 ;L2: skip
 L2:
-	;t7 = TRUE
-	move.w #TRUE, -46(A5)
+	;t13 = 10
+	move.l #10, -48(A5)
 
-;L3: skip
-L3:
-	;if t7 = FALSE goto L1
-	move.w -46(A5), D0
+	;if a <= t13 goto L4
+	move.l -12(A5), D0
+	cmp.l -48(A5), D0
+	ble.l L4
+
+	;t14 = FALSE
+	move.w #FALSE, -50(A5)
+
+	;goto: L5
+	BRA L5
+;L4: skip
+L4:
+	;t14 = TRUE
+	move.w #TRUE, -50(A5)
+
+;L5: skip
+L5:
+	;if t14 = FALSE goto L3
+	move.w -50(A5), D0
 	cmp.w #FALSE, D0
-	beq.l L1
+	beq.l L3
 
 	;param a
-	move.l -8(A5), -(SP)
+	move.l -12(A5), -(SP)
 
 	;call WRITE_INT
 	bsr.l WRITE_INT
 	;clean parameters
 	add.l #4, SP
 
-	;t8 = 1
-	move.l #1, -50(A5)
+	;t15 = 1
+	move.l #1, -54(A5)
 
-	;t9 = a + t8
-	move.l -8(A5), D0
-	add.l -50(A5), D0
-	move.l D0,-54(A5)
+	;t16 = a + t15
+	move.l -12(A5), D0
+	add.l -54(A5), D0
+	move.l D0,-58(A5)
 
-	;a = t9
-	move.l -54(A5), -8(A5)
+	;a = t16
+	move.l -58(A5), -12(A5)
 
-	;goto: L0
-	BRA L0
-;L1: skip
-L1:
-	;t10 = 4
-	move.l #4, -58(A5)
+	;goto: L2
+	BRA L2
+;L3: skip
+L3:
+	;t17 = 4
+	move.l #4, -62(A5)
 
-	;e = t10
-	move.l -58(A5), -62(A5)
+	;e = t17
+	move.l -62(A5), -66(A5)
 
-	;t11 = 5
-	move.l #5, -66(A5)
+	;t18 = 5
+	move.l #5, -70(A5)
 
-	;f = t11
-	move.l -66(A5), -70(A5)
+	;f = t18
+	move.l -70(A5), -74(A5)
 
 	;Terminate program
 	move #9,D0

@@ -4,7 +4,7 @@ import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
 import compilador.LabelCount;
-import compilador.ThreeAddrCode.Operand;
+import compilador.ThreeAddrCode.Operator;
 
 public class NodeExpr extends Node {
 
@@ -22,7 +22,7 @@ public class NodeExpr extends Node {
     }
 
     public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
-        Operand log_op;
+        Operator log_op;
         int e1, e2;
         if (expr != null) {
             expr.generateCode(vt, pt, lt, gen);
@@ -30,9 +30,9 @@ public class NodeExpr extends Node {
         logExpr.generateCode(vt, pt, lt, gen);
         if (expr != null) {
             if ("&".equals(op)) {
-                log_op = Operand.AND;
+                log_op = Operator.AND;
             } else {
-                log_op = Operand.OR;
+                log_op = Operator.OR;
             }
             gen.add(log_op, "v"+expr.tid, "v"+logExpr.tid, "v"+tid);
         } else {

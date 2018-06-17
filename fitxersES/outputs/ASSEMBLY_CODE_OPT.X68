@@ -48,102 +48,111 @@ START:
 	;A5 to index global variables
 	move.l SP, A5
 
+	;t0 save space in Stack
+	sub.l #4, SP
 	;a save space in Stack
 	sub.l #4, SP
 	;b save space in Stack
 	sub.l #4, SP
-	;t2 save space in Stack
+	;t9 save space in Stack
 	sub.l #4, SP
-	;t3 save space in Stack
+	;t10 save space in Stack
 	sub.l #4, SP
 	;c save space in Stack
 	sub.l #4, SP
 	;d save space in Stack
 	sub.l #4, SP
-	;t6 save space in Stack
+	;t13 save space in Stack
 	sub.l #4, SP
-	;t7 save space in Stack
+	;t14 save space in Stack
 	sub.l #2, SP
-	;t8 save space in Stack
+	;t15 save space in Stack
 	sub.l #4, SP
 	;e save space in Stack
 	sub.l #4, SP
 	;f save space in Stack
 	sub.l #4, SP
+	;t0 = 4
+	move.l #4, -4(A5)
+
+	;goto: MAIN
+	BRA MAIN
+;MAIN: skip
+MAIN:
 	;a = 1
-	move.l #1, -4(A5)
+	move.l #1, -8(A5)
 
 	;b = 2
-	move.l #2, -8(A5)
+	move.l #2, -12(A5)
 
-	;t2 = a + b
-	move.l -4(A5), D0
-	add.l -8(A5), D0
-	move.l D0,-12(A5)
+	;t9 = a + b
+	move.l -8(A5), D0
+	add.l -12(A5), D0
+	move.l D0,-16(A5)
 
-	;t3 = 4
-	move.l #4, -16(A5)
+	;t10 = 4
+	move.l #4, -20(A5)
 
-	;c = t2 - t3
-	move.l -12(A5), D0
-	sub.l -16(A5), D0
-	move.l D0,-20(A5)
+	;c = t9 - t10
+	move.l -16(A5), D0
+	sub.l -20(A5), D0
+	move.l D0,-24(A5)
 
 	;d = 3
-	move.l #3, -24(A5)
+	move.l #3, -28(A5)
 
-;L0: skip
-L0:
-	;t6 = 10
-	move.l #10, -28(A5)
-
-	;if a <= t6 goto L2
-	move.l -4(A5), D0
-	cmp.l -28(A5), D0
-	ble.l L2
-
-	;t7 = FALSE
-	move.w #FALSE, -30(A5)
-
-	;goto: L3
-	BRA L3
 ;L2: skip
 L2:
-	;t7 = TRUE
-	move.w #TRUE, -30(A5)
+	;t13 = 10
+	move.l #10, -32(A5)
 
-;L3: skip
-L3:
-	;if t7 = FALSE goto L1
-	move.w -30(A5), D0
+	;if a <= t13 goto L4
+	move.l -8(A5), D0
+	cmp.l -32(A5), D0
+	ble.l L4
+
+	;t14 = FALSE
+	move.w #FALSE, -34(A5)
+
+	;goto: L5
+	BRA L5
+;L4: skip
+L4:
+	;t14 = TRUE
+	move.w #TRUE, -34(A5)
+
+;L5: skip
+L5:
+	;if t14 = FALSE goto L3
+	move.w -34(A5), D0
 	cmp.w #FALSE, D0
-	beq.l L1
+	beq.l L3
 
 	;param a
-	move.l -4(A5), -(SP)
+	move.l -8(A5), -(SP)
 
 	;call WRITE_INT
 	bsr.l WRITE_INT
 	;clean parameters
 	add.l #4, SP
 
-	;t8 = 1
-	move.l #1, -34(A5)
+	;t15 = 1
+	move.l #1, -38(A5)
 
-	;a = a + t8
-	move.l -4(A5), D0
-	add.l -34(A5), D0
-	move.l D0,-4(A5)
+	;a = a + t15
+	move.l -8(A5), D0
+	add.l -38(A5), D0
+	move.l D0,-8(A5)
 
-	;goto: L0
-	BRA L0
-;L1: skip
-L1:
+	;goto: L2
+	BRA L2
+;L3: skip
+L3:
 	;e = 4
-	move.l #4, -38(A5)
+	move.l #4, -42(A5)
 
 	;f = 5
-	move.l #5, -42(A5)
+	move.l #5, -46(A5)
 
 	;Terminate program
 	move #9,D0

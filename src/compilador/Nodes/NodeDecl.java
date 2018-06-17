@@ -4,7 +4,7 @@ import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
 import compilador.LabelCount;
-import compilador.ThreeAddrCode.Operand;
+import compilador.ThreeAddrCode.Operator;
 
 public class NodeDecl extends Node {
 
@@ -20,7 +20,7 @@ public class NodeDecl extends Node {
     public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
         if (assign.expr != null) {
             assign.generateCode(vt, pt, lt, gen);
-            gen.add(Operand.ASSIG, "v" + assign.expr.tid, null, "v" + vid);
+            gen.add(Operator.ASSIG, "v" + assign.expr.tid, null, "v" + vid);
         }
     }
 }

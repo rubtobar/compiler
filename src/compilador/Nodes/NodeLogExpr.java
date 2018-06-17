@@ -2,7 +2,7 @@ package compilador.Nodes;
 
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
-import compilador.ThreeAddrCode.Operand;
+import compilador.ThreeAddrCode.Operator;
 import compilador.VarTable;
 import compilador.LabelCount;
 
@@ -22,39 +22,39 @@ public class NodeLogExpr extends Node {
     }
 
     public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
-        Operand comparator = null;
+        Operator comparator = null;
         String e1, e2;
         arExpr.generateCode(vt, pt, lt, gen);
         if (logExpr != null) {
             logExpr.generateCode(vt, pt, lt, gen);
             switch (op) {
                 case ">":
-                    comparator = Operand.BGT;
+                    comparator = Operator.BGT;
                     break;
                 case "<":
-                    comparator = Operand.BLT;
+                    comparator = Operator.BLT;
                     break;
                 case ">=":
-                    comparator = Operand.BGE;
+                    comparator = Operator.BGE;
                     break;
                 case "<=":
-                    comparator = Operand.BLE;
+                    comparator = Operator.BLE;
                     break;
                 case "==":
-                    comparator = Operand.BEQ;
+                    comparator = Operator.BEQ;
                     break;
                 case "!=":
-                    comparator = Operand.BNE;
+                    comparator = Operator.BNE;
                     break;
             }
             e1 = lt.add();
             gen.add(comparator, "v" + logExpr.tid, "v" + arExpr.tid, e1);
-            gen.add(Operand.ASSIG, "FALSE", null, "v" + tid);
+            gen.add(Operator.ASSIG, "FALSE", null, "v" + tid);
             e2 = lt.add();
-            gen.add(Operand.GOTO, null, null, e2);
-            gen.add(Operand.SKIP, null, null, e1);
-            gen.add(Operand.ASSIG, "TRUE", null, "v" + tid);
-            gen.add(Operand.SKIP, null, null, e2);
+            gen.add(Operator.GOTO, null, null, e2);
+            gen.add(Operator.SKIP, null, null, e1);
+            gen.add(Operator.ASSIG, "TRUE", null, "v" + tid);
+            gen.add(Operator.SKIP, null, null, e2);
         } else {
             tid = arExpr.tid;
         }

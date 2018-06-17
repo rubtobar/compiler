@@ -6,7 +6,7 @@ import compilador.ProcTable;
 import compilador.ThreeAddrCode;
 import compilador.VarTable;
 import compilador.LabelCount;
-import compilador.ThreeAddrCode.Operand;
+import compilador.ThreeAddrCode.Operator;
 
 public class NodeAssignation extends Node {
 
@@ -22,7 +22,7 @@ public class NodeAssignation extends Node {
     public void generateCode(VarTable vt, ProcTable pt, LabelCount lt, ThreeAddrCode gen) {
         if (expr != null) {
             expr.generateCode(vt,pt,lt,gen);
-            gen.add(Operand.ASSIG, "v"+expr.tid, null, "v"+id);
+            gen.add(Operator.ASSIG, "v"+expr.tid, null, "v"+id);
         }
     }
 

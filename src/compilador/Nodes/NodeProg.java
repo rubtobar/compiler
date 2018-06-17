@@ -22,10 +22,10 @@ public class NodeProg extends Node {
             decls.generateCode(vt, pt, lt, gen);
         }
         if (methods != null) {
-            gen.add(ThreeAddrCode.Operand.GOTO, null, null, "MAIN");
+            gen.add(ThreeAddrCode.Operator.GOTO, null, null, "MAIN");
             methods.generateCode(vt, pt, lt, gen);
-            gen.add(ThreeAddrCode.Operand.SKIP, null, null, "MAIN");
         }
+        gen.add(ThreeAddrCode.Operator.SKIP, null, null, "MAIN");
         if (sentences != null) {
             sentences.generateCode(vt, pt, lt, gen);
         }

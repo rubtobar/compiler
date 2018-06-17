@@ -2,7 +2,7 @@ package compilador.Nodes;
 
 import compilador.ProcTable;
 import compilador.ThreeAddrCode;
-import compilador.ThreeAddrCode.Operand;
+import compilador.ThreeAddrCode.Operator;
 import compilador.VarTable;
 import compilador.LabelCount;
 
@@ -33,9 +33,9 @@ public class NodeMethod extends Node {
         head.generateCode(vt, pt, gen);
         String e = lt.add();
         pt.procTable.get(np).label = e;
-        gen.add(Operand.SKIP, null, null, e);
+        gen.add(Operator.SKIP, null, null, e);
         // Generamos preambulo de funcion
-        gen.add(Operand.PREFUNCT, null, null, ""+np);
+        gen.add(Operator.PREFUNCT, null, null, ""+np);
         if (sentences != null) {
             sentences.generateCode(vt, pt, lt, gen);
         }
@@ -43,9 +43,9 @@ public class NodeMethod extends Node {
             returnExpr.generateCode(vt, pt, lt, gen);
         }
         if (returnExpr != null) {
-            gen.add(Operand.RETURN, ""+np, null, "v" + returnExpr.tid);
+            gen.add(Operator.RETURN, ""+np, null, "v" + returnExpr.tid);
         } else {
-            gen.add(Operand.RETURN, null, null, null);
+            gen.add(Operator.RETURN, null, null, null);
         }
     }
 }
