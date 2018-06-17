@@ -216,7 +216,7 @@ public class SymbolTable {
                 size = ((TypeDescription) descriptionTable.get("string").d).size;
                 break;
         }
-        int procSize = vt.addVar(id, currentProcId, size, "t" + tempVarCounter++, false);
+        int procSize = vt.addVar(id, currentProcId, size, "t#" + tempVarCounter++, false);
         pt.updateProcSize(currentProcId, procSize);
         return id;
     }

@@ -27,7 +27,7 @@ public class Compilador {
     static final String VAR_TABLE_PRINTER_FILEPATH = OUTPUT_PATH + "VARTABLE.txt";
     static final String ASSEMBLY_PRINTER_FILEPATH = OUTPUT_PATH + "ASSEMBLY_CODE.X68";
     
-    static final String INPUT_FILEPATH = INPUT_PATH + "recursivo.txt";
+    static final String INPUT_FILEPATH = INPUT_PATH + "calculadora.txt";
 
     public static ErrorPrinter errPrinter;
     public static TreePrinter derTree;

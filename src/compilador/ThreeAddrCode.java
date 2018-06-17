@@ -9,6 +9,7 @@ import compilador.VarTable.Balde;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.TreeSet;
 
@@ -356,12 +357,16 @@ public class ThreeAddrCode {
         private int lastI;
         private final TreeSet<Integer> pred;
         private final TreeSet<Integer> succ;
+        ArrayList<ThreeAddrIstr> inn;
+        final ArrayList<ThreeAddrIstr> out;
 
         public BasicBlock(int firstI, int lastI) {
             pred = new TreeSet<>();
             succ = new TreeSet<>();
             this.firstI = firstI;
             this.lastI = lastI;
+            inn = null;
+            out = new ArrayList<>();
         }
 
         public void addPred(int newPred) {
@@ -391,7 +396,101 @@ public class ThreeAddrCode {
         commutativeNormalization();
         basicBlockIdentification();
         eliminarFuncionesMuertas();
+        eliminarExpresionesDisponiblesPropagacion();
         recalcularOfsets();
+    }
+
+    private boolean isOperation(ThreeAddrIstr tai) {
+        switch (tai.op) {
+            case ADD:
+            case SUB:
+            case AND:
+            case OR:
+            case ASSIG:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private boolean eliminarExpresionesDisponiblesBloque() {
+        boolean cambios = false;
+
+        for (int nblock = 2; nblock < bbTable.size(); nblock++) {
+            // Por casa bloque
+            BasicBlock block = bbTable.get(nblock);
+            // Calcular Ins con Outs de predecesores
+            ArrayList<ThreeAddrIstr> aux = new ArrayList(bbTable.get(block.pred.first()).out);
+            
+            block.pred.forEach(entry -> {
+                // Por cada predecesor
+                bbTable.get(entry);
+                aux.retainAll(bbTable.get(entry).out);
+            });
+            // Miramos si ha habido cambios
+            if (block.inn == null || !block.inn.containsAll(aux)) {
+                cambios = true;
+                if (block.inn == null) {
+                    block.inn = new ArrayList<>(aux.size());
+                }
+                block.inn.clear();
+                block.inn.addAll(aux);
+            } else {
+                continue;
+            }
+
+            aux.removeAll(block.out);
+            block.out.addAll(aux);
+
+            for (int i = block.firstI; i <= block.lastI; i++) {
+                // Por cada instruccion
+                ThreeAddrIstr tai = code.get(i);
+                if (isOperation(tai)) {
+                    // Borramos las que dejan de ser disponibles
+                    for (int j = 0; j < block.out.size(); j++) {
+                        // Por cada instruccion en la lista de OUT
+                        //La instruccion esta disponible, sus src1 y src2 son iguales
+                        if (tai.op != Operator.ASSIG
+                                && tai.src1.equals(block.out.get(j).src1)
+                                && tai.src2.equals(block.out.get(j).src2)
+                                && !tai.dest.equals(block.out.get(j).dest)) {
+                            // copiamos el valor
+                            tai.op = Operator.ASSIG;
+                            tai.src1 = block.out.get(j).dest;
+                            tai.src2 = null;
+                            break;
+                        } // Src1 o Src2 han sido modificados o Destino se ha modificado
+                        else {
+                            if (tai.dest.equals(block.out.get(j).src1)
+                                    || tai.dest.equals(block.out.get(j).src2)
+                                    || tai.dest.equals(block.out.get(j).dest)) {
+                                block.out.remove(j);
+                            }
+                            if (tai.op != Operator.ASSIG) {
+                                block.out.add(tai);
+                            }
+
+                        }
+                    }
+                    if (block.out.isEmpty() && tai.op != Operator.ASSIG) {
+                        block.out.add(tai);
+                    }
+                }
+            }
+        }
+        return cambios;
+    }
+
+    private void eliminarExpresionesDisponiblesPropagacion() {
+        while (eliminarExpresionesDisponiblesBloque()) {
+
+        }
+
+//        eliminarExpresionesDisponiblesBloque();
+        //eliminarExpresionesDisponiblesBloque();
+//        eliminarExpresionesDisponiblesBloque();
+//        eliminarExpresionesDisponiblesBloque();
+//        eliminarExpresionesDisponiblesBloque();
     }
 
     private void eliminarFuncionesMuertas() {
@@ -430,7 +529,7 @@ public class ThreeAddrCode {
         });
     }
 
-    private boolean isOperation(ThreeAddrIstr tai) {
+    private boolean isArOperation(ThreeAddrIstr tai) {
         return ((tai.op == Operator.SUB) || (tai.op == Operator.ADD));
     }
 
@@ -444,14 +543,18 @@ public class ThreeAddrCode {
         for (int i = 1; i < code.size(); i++) {
             instrNext = code.get(i);
 
-            if (instrNext.op == Operator.ASSIG && (instrCurrent.op == Operator.ASSIG || isOperation(instrCurrent))) {
+            if (instrNext.op == Operator.ASSIG && (instrCurrent.op == Operator.ASSIG || isArOperation(instrCurrent))) {
                 if (instrCurrent.dest.equals(instrNext.src1)) {
                     instrNext.src1 = instrCurrent.src1;
                     instrNext.src2 = instrCurrent.src2;
-                    // Eliminamos el registro de la TV
-                    vt.varTable.remove(Integer.parseInt(instrCurrent.dest.substring(1)));
-                    instrNext.op = instrCurrent.op;
-                    code.remove(--i);
+                    
+                    if (vt.varTable.get(Integer.parseInt(instrCurrent.dest.substring(1))).name.startsWith("t#")) {
+                        // Eliminamos el registro de la TV
+                        vt.varTable.remove(Integer.parseInt(instrCurrent.dest.substring(1)));
+                        instrNext.op = instrCurrent.op;
+                        // Eliminamos la linea de codigo redundante
+                        code.remove(--i);
+                    }
                 }
             }
             instrCurrent = instrNext;
