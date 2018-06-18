@@ -20,5 +20,5 @@ int MCD(){
 }
 
 main {
-	MCD();
+	
 }

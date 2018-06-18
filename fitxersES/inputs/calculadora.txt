@@ -69,7 +69,6 @@ int divide(int N, int D){
 }
 
 main{
-
 	while (continuar) {
 		write('<------Calculadora------>');
 		write('0. Salir');
@@ -106,6 +105,4 @@ main{
 			write('Saliendo');
 		}
 	}
-
-
 }

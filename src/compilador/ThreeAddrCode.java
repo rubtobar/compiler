@@ -9,7 +9,6 @@ import compilador.VarTable.Balde;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.TreeSet;
 
@@ -22,7 +21,7 @@ public class ThreeAddrCode {
     private final ArrayList<ThreeAddrIstr> code;
     private final ArrayList<BasicBlock> bbTable;
     private final HashMap<String, Integer> labelTable;
-    private final TreeSet<String> programCalls;
+    private final TreeSet<Integer> visitados;
 
     private static final int BB_I = 0;
     private static final int BB_O = 1;
@@ -39,7 +38,7 @@ public class ThreeAddrCode {
         private Operator op;
         private String src1;
         private String src2;
-        private final String dest;
+        private String dest;
 
         public ThreeAddrIstr(Operator op, String src1, String src2, String dest) {
             this.op = op;
@@ -384,7 +383,7 @@ public class ThreeAddrCode {
         this.labelTable = new HashMap<>();
         this.vt = vt;
         this.pt = pt;
-        this.programCalls = new TreeSet<>();
+        this.visitados = new TreeSet<>();
     }
 
     public void add(Operator op, String src1, String src2, String dest) {
@@ -419,9 +418,20 @@ public class ThreeAddrCode {
         for (int nblock = 2; nblock < bbTable.size(); nblock++) {
             // Por casa bloque
             BasicBlock block = bbTable.get(nblock);
-            // Calcular Ins con Outs de predecesores
-            ArrayList<ThreeAddrIstr> aux = new ArrayList(bbTable.get(block.pred.first()).out);
             
+            // No continuar si el bloque es inaccesible -- funciones muertas
+            if (block.pred.isEmpty()){
+                continue;
+            }
+
+            // Calcular Ins con Outs de predecesores
+            ArrayList<ThreeAddrIstr> aux;
+            if (block.pred.isEmpty()) {
+                aux = new ArrayList<>();
+            } else {
+                aux = new ArrayList(bbTable.get(block.pred.first()).out);
+            }
+
             block.pred.forEach(entry -> {
                 // Por cada predecesor
                 bbTable.get(entry);
@@ -485,31 +495,97 @@ public class ThreeAddrCode {
         while (eliminarExpresionesDisponiblesBloque()) {
 
         }
-
-//        eliminarExpresionesDisponiblesBloque();
-        //eliminarExpresionesDisponiblesBloque();
-//        eliminarExpresionesDisponiblesBloque();
-//        eliminarExpresionesDisponiblesBloque();
-//        eliminarExpresionesDisponiblesBloque();
     }
 
     private void eliminarFuncionesMuertas() {
+        /* Encontrar los bloques que se son llamados en algun punto del programa */
+        visitados.add(2);
+        encontrarBloquesAccesibles(bbTable.get(2));
+        
+        /* "Eliminar" los subprogramas que no son llamados */
         BasicBlock block;
-        for (int i = 2; i < bbTable.size(); i++) {
+        for (int i = 3; i < bbTable.size(); i++) {
             block = bbTable.get(i);
-            if (block.pred.isEmpty()) {
-                if (this.programCalls.contains(code.get(block.firstI).dest)) {
+            if (block.pred.isEmpty() || (block.pred.size() == 1 && block.pred.first() == i)) {
+                if (visitados.contains(i)) {
                     // Engancha el bloque de codigo de la funcion
                     // con el bloque INPUT
                     block.pred.add(BB_I);
-
-                } else {
+                } else if (!block.succ.isEmpty()) {
                     // El codigo de la funcion nunca es llamado
                     // Codigo muerto
-                    block.succ.clear();
+                    eliminarSucesores(block, block.succ.first() == BB_O);
                 }
             }
         }
+    }
+
+    private void encontrarBloquesAccesibles(BasicBlock block) {
+        ThreeAddrIstr instr;
+        TreeSet<Integer> nuevos = new TreeSet<>();
+               
+        // Si hemos llegado al bloque de salida
+        if (block.succ.isEmpty()) {
+            return;
+        }
+
+        for (int i = block.firstI; i <= block.lastI; i++) {
+            // Buscar instrucciones CALL y GOTO
+            instr = code.get(i);
+            Operator operator = instr.op;
+            if (isBranch(operator)) {
+                String label;
+                if (operator.equals(Operator.CALL)) {
+                    int proc = Integer.parseInt(instr.dest.substring(1));
+                    label = pt.procTable.get(proc).label;
+                } else {
+                    label = instr.dest;
+                }
+                try {
+                    int nblock = labelTable.get(label);
+                    nuevos.add(nblock);
+                } catch (Exception c) {
+                    // Cuando llamamos a WRITE o READ
+                }
+            }
+        }
+        
+        nuevos.addAll(block.succ);
+        
+        nuevos.forEach(entry -> {
+            // Para cada bloque sucesor o llamado, ejecutar esta funcion
+            if (!visitados.contains(entry)) {
+                visitados.add(entry);
+                encontrarBloquesAccesibles(bbTable.get(entry));
+            }
+        });        
+    }
+
+    private boolean isBranch(Operator o) {
+        switch (o) {
+            case BEQ:
+            case BGE:
+            case BGT:
+            case BLE:
+            case BLT:
+            case BNE:
+            case GOTO:
+            case CALL:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private void eliminarSucesores(BasicBlock block, boolean ultimo) {
+        BasicBlock nextBlock;
+        block.pred.clear();
+        block.succ.forEach(entry -> {
+            if (entry != BB_O && !bbTable.get(entry).equals(block) && !bbTable.get(entry).pred.isEmpty()) {
+                eliminarSucesores(bbTable.get(entry), entry == BB_O);
+            }
+        });
+        block.succ.clear();
     }
 
     private void recalcularOfsets() {
@@ -543,15 +619,28 @@ public class ThreeAddrCode {
         for (int i = 1; i < code.size(); i++) {
             instrNext = code.get(i);
 
-            if (instrNext.op == Operator.ASSIG && (instrCurrent.op == Operator.ASSIG || isArOperation(instrCurrent))) {
-                if (instrCurrent.dest.equals(instrNext.src1)) {
-                    instrNext.src1 = instrCurrent.src1;
-                    instrNext.src2 = instrCurrent.src2;
-                    
-                    if (vt.varTable.get(Integer.parseInt(instrCurrent.dest.substring(1))).name.startsWith("t#")) {
-                        // Eliminamos el registro de la TV
-                        vt.varTable.remove(Integer.parseInt(instrCurrent.dest.substring(1)));
+            if (instrNext.op == Operator.ASSIG
+                    && (instrCurrent.op == Operator.ASSIG
+                    || isArOperation(instrCurrent)
+                    || instrCurrent.op == Operator.CALL)) {
+                String varCurrent;
+                if (instrCurrent.op.equals(Operator.CALL)) {
+                    varCurrent = instrCurrent.src1;
+                } else {
+                    varCurrent = instrCurrent.dest;
+                }
+                if (varCurrent != null && varCurrent.equals(instrNext.src1)) {
+                    if (vt.varTable.get(Integer.parseInt(varCurrent.substring(1))).name.startsWith("t#")) {
                         instrNext.op = instrCurrent.op;
+                        if (instrCurrent.op.equals(Operator.CALL)) {
+                            instrNext.src1 = instrNext.dest;
+                            instrNext.dest = instrCurrent.dest;
+                        } else {
+                            instrNext.src1 = instrCurrent.src1;
+                            instrNext.src2 = instrCurrent.src2;
+                        }
+                        // Eliminamos el registro de la TV
+                        vt.varTable.remove(Integer.parseInt(varCurrent.substring(1)));
                         // Eliminamos la linea de codigo redundante
                         code.remove(--i);
                     }
@@ -611,9 +700,6 @@ public class ThreeAddrCode {
                             break;
                     }
                 }
-            }
-            if (instr.op.equals(Operator.CALL)) {
-                this.programCalls.add(pt.procTable.get(Integer.parseInt(instr.dest.substring(1))).label);
             }
         }
         // Relation identification //

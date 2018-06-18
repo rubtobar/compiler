@@ -17,7 +17,6 @@ main {
 			write('La suma dona:');
 			write(suma(a, b));
 		}
-		a = 1;
 	}
 	write('Programa finalitzat.');
 }
