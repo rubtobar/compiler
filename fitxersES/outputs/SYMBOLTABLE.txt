@@ -2,21 +2,25 @@
 |			POSICION		LEX			NIVEL			DESCR.TYPE		TSB			|ID			NIVEL			DESCR.TYPE		TSB	|***************|
 |***********************************************************************************************************************************************|*******************************************************************************|***************|
 |			0			void			0			DTYPE			VOID			|null										|	0	|
-|			1			string			0			DTYPE			STRING			|value			-1			DARG			STRING	|	10	|
-|			2			false			0			DCONST			BOOL			|value			-1			DARG			INT	|		|
-|			3			readString			0			DPROC			STRING			|val			-1			DARG			INT	|		|
-|			4			write@STRING			0			DPROC			VOID			|val			-1			DARG			INT	|		|
-|			5			main			0			DPROC			VOID			|a			-1			DARG			INT	|		|
-|			6			abs@INT			1			DPROC			INT			|b			-1			DARG			INT	|		|
-|			7			write@INT			0			DPROC			VOID			|N			-1			DARG			INT	|		|
-|			8			int			0			DTYPE			INT			|D			-1			DARG			INT	|		|
-|			9			neg@INT			1			DPROC			INT			|N			-1			DARG			INT	|		|
-|			10			boolean			0			DTYPE			BOOL			|D			-1			DARG			INT	|		|
-|			11			divide_unsigned@INT@INT			1			DPROC			INT			|										|		|
-|			12			true			0			DCONST			BOOL			|										|		|
-|			13			continuar			1			DVAR			BOOL			|										|		|
-|			14			readInt			0			DPROC			INT			|										|		|
-|			15			divide@INT@INT			1			DPROC			INT			|										|		|
-|			16			mult@INT@INT			1			DPROC			INT			|										|		|
+|			1			esPrimo@INT			1			DPROC			BOOL			|value			-1			DARG			STRING	|	15	|
+|			2			string			0			DTYPE			STRING			|value			-1			DARG			INT	|		|
+|			3			factorial@INT			1			DPROC			INT			|val			-1			DARG			INT	|		|
+|			4			false			0			DCONST			BOOL			|val			-1			DARG			INT	|		|
+|			5			readString			0			DPROC			STRING			|a			-1			DARG			INT	|		|
+|			6			write@STRING			0			DPROC			VOID			|b			-1			DARG			INT	|		|
+|			7			main			0			DPROC			VOID			|n			-1			DARG			INT	|		|
+|			8			power2@INT			1			DPROC			INT			|N			-1			DARG			INT	|		|
+|			9			abs@INT			1			DPROC			INT			|D			-1			DARG			INT	|		|
+|			10			write@INT			0			DPROC			VOID			|N			-1			DARG			INT	|		|
+|			11			int			0			DTYPE			INT			|D			-1			DARG			INT	|		|
+|			12			neg@INT			1			DPROC			INT			|a			-1			DARG			INT	|		|
+|			13			boolean			0			DTYPE			BOOL			|b			-1			DARG			INT	|		|
+|			14			divide_unsigned@INT@INT			1			DPROC			INT			|n			-1			DARG			INT	|		|
+|			15			true			0			DCONST			BOOL			|i			-1			DARG			INT	|		|
+|			16			continuar			1			DVAR			BOOL			|										|		|
+|			17			readInt			0			DPROC			INT			|										|		|
+|			18			mod@INT@INT			1			DPROC			INT			|										|		|
+|			19			divide@INT@INT			1			DPROC			INT			|										|		|
+|			20			mult@INT@INT			1			DPROC			INT			|										|		|
 +-----------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------+---------------+
 Current Level: 1

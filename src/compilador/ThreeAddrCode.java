@@ -415,7 +415,7 @@ public class ThreeAddrCode {
     private boolean eliminarExpresionesDisponiblesBloque() {
         boolean cambios = false;
 
-        for (int nblock = 2; nblock < bbTable.size(); nblock++) {
+        for (Integer nblock : visitados) {
             // Por casa bloque
             BasicBlock block = bbTable.get(nblock);
 
@@ -498,26 +498,10 @@ public class ThreeAddrCode {
     }
 
     private void eliminarBloquesMuertos() {
-        /* Encontrar los bloques que se son llamados en algun punto del programa */
+        /* Encontrar los bloques que pueden 
+        ser ejecutados en algun punto del programa */
         visitados.add(2);
         encontrarBloquesAccesibles(bbTable.get(2));
-
-        /* "Eliminar" los subprogramas que no son llamados */
-        BasicBlock block;
-        for (int i = 3; i < bbTable.size(); i++) {
-            block = bbTable.get(i);
-            if (block.pred.isEmpty() || (block.pred.size() == 1 && block.pred.first() == i)) {
-                if (visitados.contains(i)) {
-                    // Engancha el bloque de codigo de la funcion
-                    // con el bloque INPUT
-                    block.pred.add(BB_I);
-                } else if (!block.succ.isEmpty()) {
-                    // El codigo de la funcion nunca es llamado
-                    // Codigo muerto
-                    eliminarSucesores(block, block.succ.first() == BB_O);
-                }
-            }
-        }
     }
 
     private void encontrarBloquesAccesibles(BasicBlock block) {
@@ -557,33 +541,6 @@ public class ThreeAddrCode {
                 encontrarBloquesAccesibles(bbTable.get(entry));
             }
         });
-    }
-
-    private boolean isBranch(Operator o) {
-        switch (o) {
-            case BEQ:
-            case BGE:
-            case BGT:
-            case BLE:
-            case BLT:
-            case BNE:
-            case GOTO:
-            case CALL:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    private void eliminarSucesores(BasicBlock block, boolean ultimo) {
-        BasicBlock nextBlock;
-        block.pred.clear();
-        block.succ.forEach(entry -> {
-            if (entry != BB_O && !bbTable.get(entry).equals(block) && !bbTable.get(entry).pred.isEmpty()) {
-                eliminarSucesores(bbTable.get(entry), entry == BB_O);
-            }
-        });
-        block.succ.clear();
     }
 
     private void recalcularOfsets() {

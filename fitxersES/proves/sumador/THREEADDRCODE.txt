@@ -1,0 +1,32 @@
+t#0 = 10
+MAIN: skip
+t#1 = "Introdueix un numero:"
+param t#1
+call WRITE_STRING
+t#2 = t#0
+loopCount = t#2
+t#3 = 0
+counter = t#3
+READINT return space
+t#4 = call READINT
+n = t#4
+L0: skip
+t#5 = 0
+if loopCount > t#5 goto L2
+t#6 = FALSE
+goto: L3
+L2: skip
+t#6 = TRUE
+L3: skip
+if t#6 = FALSE goto L1
+t#7 = n + counter
+param t#7
+call WRITE_INT
+t#8 = 1
+t#9 = loopCount - t#8
+loopCount = t#9
+t#10 = 1
+t#11 = counter + t#10
+counter = t#11
+goto: L0
+L1: skip

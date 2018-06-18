@@ -57,10 +57,7 @@ public class Compilador {
         System.out.println("Errores encontrados: " + errPrinter.erroresEncontrados);
 
         if (errPrinter.erroresEncontrados == 0) {
-            /*en este caso podemos pasar a generar el codigo intermedio
-            * unicamente necesitamos traducir las instrucciones que vamos encontrando
-             */
-
+            //en este caso podemos pasar a generar el codigo
             sytr.generateCode();
             sytr.getVt().printOnFile();
             sytr.getPt().printOnFile();

@@ -1,0 +1,16 @@
+6:16: SEMANTIC ERROR:
+> 		val = neg(val);
+undeclared function 'neg@INT'
+
+96:18: SEMANTIC ERROR:
+>     while(power(i) <= n){
+undeclared function 'power@INT'
+
+156:16: SEMANTIC ERROR: Not a logic statement. Found: '<'
+> 			if (esPrimo < true){
+
+168:13: SEMANTIC ERROR: Unexpected value type. Expected: BOOL, Found: INT
+> 				boolean result = factorial(entrada);
+
+173:43: SYNTAX ERROR:   Not a sentence
+

@@ -1,0 +1,13 @@
+const int TIMES = 10;
+
+main {
+    write('Introdueix un numero:');
+    int loopCount = TIMES;
+    int counter = 0;
+    int n = readInt();
+    while (loopCount > 0){
+        write(n + counter);
+        loopCount = loopCount - 1;
+        counter = counter + 1;
+    }
+}

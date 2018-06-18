@@ -1,0 +1,11 @@
+6:5: SEMANTIC ERROR:
+>     TIMES = 3;
+Trying to reasign to constant 'TIMES'
+
+8:13: SEMANTIC ERROR: Unexpected value type. Expected: BOOL, Found: INT
+>     boolean n = readInt();
+
+10:27: SYNTAX ERROR:   Not a sentence
+
+14:1: SYNTAX ERROR:   Incorrect syntax in main 
+

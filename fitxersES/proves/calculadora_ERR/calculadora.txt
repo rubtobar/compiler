@@ -1,16 +1,16 @@
 boolean continuar = true;
 
-// Negativo
-int neg(int val){
-	return 0 - val;
-}
-
 // Valor absoluto
 int abs(int val){
 	if (val < 0) {
 		val = neg(val);
 	}
 	return val;
+}
+
+// Negativo
+int neg(int val){
+	return 0 - val;
 }
 
 // Multiplica a * b
@@ -93,7 +93,7 @@ boolean esPrimo(int n){
     int i = 5;
     int w = 2;
 
-    while(power2(i) <= n){
+    while(power(i) <= n){
         if (mod(n, i) == 0){
             result = false;
         }
@@ -153,7 +153,7 @@ main{
 			write('Introduce numero:');
 			boolean esPrimo = esPrimo(readInt());
 			write('Resultado:');
-			if (esPrimo == true){
+			if (esPrimo < true){
 				write('Es primo!');
 			}
 			if (esPrimo == false){
@@ -165,9 +165,9 @@ main{
 			write('Introduce numero:');
 			int entrada = readInt();
 			if (entrada < 20){
-				int result = factorial(entrada);
+				boolean result = factorial(entrada);
 				write('Resultado:');
-				write(result);
+				write(result)
 			}
 			if (entrada >= 20){
 				write('El numero es demasiado grande');

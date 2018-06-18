@@ -74,12 +74,10 @@ START:
 	sub.l #2, SP
 	;t#24 save space in Stack
 	sub.l #4, SP
-	;t#34 save space in Stack
-	sub.l #4, SP
 	;t#35 save space in Stack
-	sub.l #2, SP
-	;t#36 save space in Stack
 	sub.l #4, SP
+	;t#36 save space in Stack
+	sub.l #2, SP
 	;t#37 save space in Stack
 	sub.l #4, SP
 	;t#38 save space in Stack
@@ -87,15 +85,15 @@ START:
 	;t#39 save space in Stack
 	sub.l #4, SP
 	;t#40 save space in Stack
-	sub.l #2, SP
-	;t#41 save space in Stack
 	sub.l #4, SP
-	;t#42 save space in Stack
+	;t#41 save space in Stack
 	sub.l #2, SP
+	;t#42 save space in Stack
+	sub.l #4, SP
 	;t#43 save space in Stack
 	sub.l #2, SP
 	;t#44 save space in Stack
-	sub.l #4, SP
+	sub.l #2, SP
 	;t#45 save space in Stack
 	sub.l #4, SP
 	;t#46 save space in Stack
@@ -103,92 +101,212 @@ START:
 	;t#47 save space in Stack
 	sub.l #4, SP
 	;t#48 save space in Stack
-	sub.l #2, SP
-	;t#49 save space in Stack
 	sub.l #4, SP
-	;t#50 save space in Stack
+	;t#49 save space in Stack
 	sub.l #2, SP
+	;t#50 save space in Stack
+	sub.l #4, SP
 	;t#51 save space in Stack
 	sub.l #2, SP
 	;t#52 save space in Stack
-	sub.l #4, SP
-	;t#53 save space in Stack
-	sub.l #32, SP
-	;t#54 save space in Stack
-	sub.l #32, SP
-	;t#55 save space in Stack
-	sub.l #32, SP
-	;t#56 save space in Stack
-	sub.l #32, SP
-	;t#57 save space in Stack
-	sub.l #32, SP
-	;t#58 save space in Stack
-	sub.l #4, SP
-	;opcion save space in Stack
-	sub.l #4, SP
-	;t#59 save space in Stack
-	sub.l #4, SP
-	;t#60 save space in Stack
 	sub.l #2, SP
-	;t#61 save space in Stack
-	sub.l #32, SP
-	;t#62 save space in Stack
-	sub.l #32, SP
-	;t#63 save space in Stack
+	;t#53 save space in Stack
 	sub.l #4, SP
 	;t#64 save space in Stack
 	sub.l #4, SP
 	;t#65 save space in Stack
 	sub.l #4, SP
 	;t#66 save space in Stack
-	sub.l #2, SP
+	sub.l #4, SP
 	;t#67 save space in Stack
-	sub.l #32, SP
+	sub.l #2, SP
 	;t#68 save space in Stack
-	sub.l #32, SP
+	sub.l #4, SP
 	;t#69 save space in Stack
 	sub.l #4, SP
-	;val1 save space in Stack
-	sub.l #4, SP
 	;t#70 save space in Stack
-	sub.l #32, SP
+	sub.l #4, SP
 	;t#71 save space in Stack
-	sub.l #4, SP
-	;val2 save space in Stack
-	sub.l #4, SP
+	sub.l #2, SP
 	;t#72 save space in Stack
-	sub.l #32, SP
+	sub.l #2, SP
 	;t#73 save space in Stack
-	sub.l #4, SP
+	sub.l #2, SP
 	;t#74 save space in Stack
 	sub.l #4, SP
+	;i save space in Stack
+	sub.l #4, SP
 	;t#75 save space in Stack
-	sub.l #2, SP
+	sub.l #4, SP
+	;w save space in Stack
+	sub.l #4, SP
 	;t#76 save space in Stack
-	sub.l #32, SP
+	sub.l #4, SP
 	;t#77 save space in Stack
-	sub.l #32, SP
+	sub.l #2, SP
 	;t#78 save space in Stack
 	sub.l #4, SP
-	;val1 save space in Stack
-	sub.l #4, SP
 	;t#79 save space in Stack
-	sub.l #32, SP
+	sub.l #4, SP
 	;t#80 save space in Stack
-	sub.l #4, SP
-	;val2 save space in Stack
-	sub.l #4, SP
+	sub.l #2, SP
 	;t#81 save space in Stack
-	sub.l #32, SP
+	sub.l #2, SP
 	;t#82 save space in Stack
 	sub.l #4, SP
 	;t#83 save space in Stack
 	sub.l #4, SP
 	;t#84 save space in Stack
+	sub.l #4, SP
+	;t#88 save space in Stack
+	sub.l #4, SP
+	;t#89 save space in Stack
 	sub.l #2, SP
-	;t#85 save space in Stack
+	;t#90 save space in Stack
+	sub.l #4, SP
+	;t#91 save space in Stack
+	sub.l #4, SP
+	;t#92 save space in Stack
+	sub.l #4, SP
+	;t#93 save space in Stack
+	sub.l #4, SP
+	;t#94 save space in Stack
+	sub.l #32, SP
+	;t#95 save space in Stack
+	sub.l #32, SP
+	;t#96 save space in Stack
+	sub.l #32, SP
+	;t#97 save space in Stack
+	sub.l #32, SP
+	;t#98 save space in Stack
+	sub.l #32, SP
+	;t#99 save space in Stack
+	sub.l #32, SP
+	;t#100 save space in Stack
+	sub.l #32, SP
+	;t#101 save space in Stack
+	sub.l #4, SP
+	;opcion save space in Stack
+	sub.l #4, SP
+	;t#102 save space in Stack
+	sub.l #4, SP
+	;t#103 save space in Stack
 	sub.l #2, SP
-	;t#86 save space in Stack
+	;t#104 save space in Stack
+	sub.l #32, SP
+	;t#105 save space in Stack
+	sub.l #32, SP
+	;t#106 save space in Stack
+	sub.l #4, SP
+	;t#107 save space in Stack
+	sub.l #4, SP
+	;t#108 save space in Stack
+	sub.l #4, SP
+	;t#109 save space in Stack
+	sub.l #2, SP
+	;t#110 save space in Stack
+	sub.l #32, SP
+	;t#111 save space in Stack
+	sub.l #32, SP
+	;t#112 save space in Stack
+	sub.l #4, SP
+	;val1 save space in Stack
+	sub.l #4, SP
+	;t#113 save space in Stack
+	sub.l #32, SP
+	;t#114 save space in Stack
+	sub.l #4, SP
+	;val2 save space in Stack
+	sub.l #4, SP
+	;t#115 save space in Stack
+	sub.l #32, SP
+	;t#116 save space in Stack
+	sub.l #4, SP
+	;t#117 save space in Stack
+	sub.l #4, SP
+	;t#118 save space in Stack
+	sub.l #2, SP
+	;t#119 save space in Stack
+	sub.l #32, SP
+	;t#120 save space in Stack
+	sub.l #32, SP
+	;t#121 save space in Stack
+	sub.l #4, SP
+	;val1 save space in Stack
+	sub.l #4, SP
+	;t#122 save space in Stack
+	sub.l #32, SP
+	;t#123 save space in Stack
+	sub.l #4, SP
+	;val2 save space in Stack
+	sub.l #4, SP
+	;t#124 save space in Stack
+	sub.l #32, SP
+	;t#125 save space in Stack
+	sub.l #4, SP
+	;t#126 save space in Stack
+	sub.l #4, SP
+	;t#127 save space in Stack
+	sub.l #2, SP
+	;t#128 save space in Stack
+	sub.l #32, SP
+	;t#129 save space in Stack
+	sub.l #32, SP
+	;t#130 save space in Stack
+	sub.l #4, SP
+	;t#131 save space in Stack
+	sub.l #2, SP
+	;esPrimo save space in Stack
+	sub.l #2, SP
+	;t#132 save space in Stack
+	sub.l #32, SP
+	;t#133 save space in Stack
+	sub.l #2, SP
+	;t#134 save space in Stack
+	sub.l #2, SP
+	;t#135 save space in Stack
+	sub.l #32, SP
+	;t#136 save space in Stack
+	sub.l #2, SP
+	;t#137 save space in Stack
+	sub.l #2, SP
+	;t#138 save space in Stack
+	sub.l #32, SP
+	;t#139 save space in Stack
+	sub.l #4, SP
+	;t#140 save space in Stack
+	sub.l #2, SP
+	;t#141 save space in Stack
+	sub.l #32, SP
+	;t#142 save space in Stack
+	sub.l #32, SP
+	;t#143 save space in Stack
+	sub.l #4, SP
+	;entrada save space in Stack
+	sub.l #4, SP
+	;t#144 save space in Stack
+	sub.l #4, SP
+	;t#145 save space in Stack
+	sub.l #2, SP
+	;t#146 save space in Stack
+	sub.l #4, SP
+	;result save space in Stack
+	sub.l #4, SP
+	;t#147 save space in Stack
+	sub.l #32, SP
+	;t#148 save space in Stack
+	sub.l #4, SP
+	;t#149 save space in Stack
+	sub.l #2, SP
+	;t#150 save space in Stack
+	sub.l #32, SP
+	;t#151 save space in Stack
+	sub.l #4, SP
+	;t#152 save space in Stack
+	sub.l #2, SP
+	;t#153 save space in Stack
+	sub.l #2, SP
+	;t#154 save space in Stack
 	sub.l #32, SP
 	;t#0 = TRUE
 	move.w #TRUE, -2(A5)
@@ -528,64 +646,100 @@ L20:
 	;set BP
 	move.l SP, A6
 	;save space for local vars
+	sub.l #4, SP
+
+	;L5 return space
+	sub.l #4, SP
+
+	;param n
+	move.l 8(A6), -(SP)
+
+	;param n
+	move.l 8(A6), -(SP)
+
+	;t#25 = call L5
+	bsr.l L5
+	;clean parameters
+	add.l #8, SP
+	;fetch return
+	move.l (SP)+, -4(A6)
+
+	;return t#25
+	;send return value
+	move.l -4(A6), 12(A6)
+	;prepare SP
+	move.l A6, SP
+	;restore BP
+	move.l (SP)+, A6
+	;give control to caller
+	rts
+
+;L21: skip
+L21:
+	;preambulo
+	;save BP
+	move.l A6, -(SP)
+	;set BP
+	move.l SP, A6
+	;save space for local vars
 	sub.l #26, SP
 
-	;t#25 = 0
+	;t#26 = 0
 	move.l #0, -4(A6)
 
-	;Q = t#25
+	;Q = t#26
 	move.l -4(A6), -8(A6)
 
 	;R = N
 	move.l 8(A6), -12(A6)
 
-;L21: skip
-L21:
-	;if R >= D goto L23
+;L22: skip
+L22:
+	;if R >= D goto L24
 	move.l -12(A6), D0
 	cmp.l 12(A6), D0
-	bge.l L23
+	bge.l L24
 
-	;t#26 = FALSE
+	;t#27 = FALSE
 	move.w #FALSE, -14(A6)
 
-	;goto: L24
-	BRA L24
-;L23: skip
-L23:
-	;t#26 = TRUE
-	move.w #TRUE, -14(A6)
-
+	;goto: L25
+	BRA L25
 ;L24: skip
 L24:
-	;if t#26 = FALSE goto L22
+	;t#27 = TRUE
+	move.w #TRUE, -14(A6)
+
+;L25: skip
+L25:
+	;if t#27 = FALSE goto L23
 	move.w -14(A6), D0
 	cmp.w #FALSE, D0
-	beq.l L22
+	beq.l L23
 
-	;t#27 = 1
+	;t#28 = 1
 	move.l #1, -18(A6)
 
-	;t#28 = Q + t#27
+	;t#29 = Q + t#28
 	move.l -8(A6), D0
 	add.l -18(A6), D0
 	move.l D0,-22(A6)
 
-	;Q = t#28
+	;Q = t#29
 	move.l -22(A6), -8(A6)
 
-	;t#29 = R - D
+	;t#30 = R - D
 	move.l -12(A6), D0
 	sub.l 12(A6), D0
 	move.l D0,-26(A6)
 
-	;R = t#29
+	;R = t#30
 	move.l -26(A6), -12(A6)
 
-	;goto: L21
-	BRA L21
-;L22: skip
-L22:
+	;goto: L22
+	BRA L22
+;L23: skip
+L23:
 	;return Q
 	;send return value
 	move.l -8(A6), 16(A6)
@@ -596,8 +750,8 @@ L22:
 	;give control to caller
 	rts
 
-;L25: skip
-L25:
+;L26: skip
+L26:
 	;preambulo
 	;save BP
 	move.l A6, -(SP)
@@ -606,45 +760,45 @@ L25:
 	;save space for local vars
 	sub.l #50, SP
 
-	;t#30 = 0
+	;t#31 = 0
 	move.l #0, -8(A6)
 
-	;RESULT = t#30
+	;RESULT = t#31
 	move.l -8(A6), -12(A6)
 
-	;t#31 = 0
+	;t#32 = 0
 	move.l #0, -16(A6)
 
-	;if D = t#31 goto L26
+	;if D = t#32 goto L27
 	move.l 12(A6), D0
 	cmp.l -16(A6), D0
-	beq.l L26
+	beq.l L27
 
-	;t#32 = FALSE
+	;t#33 = FALSE
 	move.w #FALSE, -18(A6)
 
-	;goto: L27
-	BRA L27
-;L26: skip
-L26:
-	;t#32 = TRUE
-	move.w #TRUE, -18(A6)
-
+	;goto: L28
+	BRA L28
 ;L27: skip
 L27:
-	;if t#32 = FALSE goto L28
+	;t#33 = TRUE
+	move.w #TRUE, -18(A6)
+
+;L28: skip
+L28:
+	;if t#33 = FALSE goto L29
 	move.w -18(A6), D0
 	cmp.w #FALSE, D0
-	beq.l L28
+	beq.l L29
 
-	;t#33 = "Division by 0"
+	;t#34 = "Division by 0"
 	move.l #'Divi', -50(A6)
 	move.l #'sion', -46(A6)
 	move.l #' by ', -42(A6)
 	move.b #'0', -38(A6)
 	move.b #0, -37(A6)
 
-	;param t#33
+	;param t#34
 	sub.l #32, SP
 	move.l -50(A6), 0(SP)
 	move.l -46(A6), 4(SP)
@@ -660,34 +814,34 @@ L27:
 	;clean parameters
 	add.l #32, SP
 
-;L28: skip
-L28:
-	;t#34 = 0
-	move.l #0, -40(A5)
-
-	;if D < t#34 goto L29
-	move.l 12(A6), D0
-	cmp.l -40(A5), D0
-	blt.l L29
-
-	;t#35 = FALSE
-	move.w #FALSE, -42(A5)
-
-	;goto: L30
-	BRA L30
 ;L29: skip
 L29:
-	;t#35 = TRUE
-	move.w #TRUE, -42(A5)
+	;t#35 = 0
+	move.l #0, -40(A5)
 
+	;if D < t#35 goto L30
+	move.l 12(A6), D0
+	cmp.l -40(A5), D0
+	blt.l L30
+
+	;t#36 = FALSE
+	move.w #FALSE, -42(A5)
+
+	;goto: L31
+	BRA L31
 ;L30: skip
 L30:
-	;if t#35 = FALSE goto L31
+	;t#36 = TRUE
+	move.w #TRUE, -42(A5)
+
+;L31: skip
+L31:
+	;if t#36 = FALSE goto L32
 	move.w -42(A5), D0
 	cmp.w #FALSE, D0
-	beq.l L31
+	beq.l L32
 
-	;L25 return space
+	;L26 return space
 	sub.l #4, SP
 
 	;L0 return space
@@ -696,27 +850,27 @@ L30:
 	;param D
 	move.l 12(A6), -(SP)
 
-	;t#36 = call L0
+	;t#37 = call L0
 	bsr.l L0
 	;clean parameters
 	add.l #4, SP
 	;fetch return
 	move.l (SP)+, -46(A5)
 
-	;param t#36
+	;param t#37
 	move.l -46(A5), -(SP)
 
 	;param N
 	move.l 8(A6), -(SP)
 
-	;t#37 = call L25
-	bsr.l L25
+	;t#38 = call L26
+	bsr.l L26
 	;clean parameters
 	add.l #8, SP
 	;fetch return
 	move.l (SP)+, -50(A5)
 
-	;Q = t#37
+	;Q = t#38
 	move.l -50(A5), -4(A6)
 
 	;L0 return space
@@ -725,69 +879,69 @@ L30:
 	;param Q
 	move.l -4(A6), -(SP)
 
-	;t#38 = call L0
+	;t#39 = call L0
 	bsr.l L0
 	;clean parameters
 	add.l #4, SP
 	;fetch return
 	move.l (SP)+, -54(A5)
 
-	;RESULT = t#38
+	;RESULT = t#39
 	move.l -54(A5), -12(A6)
 
-;L31: skip
-L31:
-	;t#39 = 0
-	move.l #0, -58(A5)
-
-	;if N < t#39 goto L32
-	move.l 8(A6), D0
-	cmp.l -58(A5), D0
-	blt.l L32
-
-	;t#40 = FALSE
-	move.w #FALSE, -60(A5)
-
-	;goto: L33
-	BRA L33
 ;L32: skip
 L32:
-	;t#40 = TRUE
-	move.w #TRUE, -60(A5)
+	;t#40 = 0
+	move.l #0, -58(A5)
 
+	;if N < t#40 goto L33
+	move.l 8(A6), D0
+	cmp.l -58(A5), D0
+	blt.l L33
+
+	;t#41 = FALSE
+	move.w #FALSE, -60(A5)
+
+	;goto: L34
+	BRA L34
 ;L33: skip
 L33:
-	;t#41 = 0
-	move.l #0, -64(A5)
+	;t#41 = TRUE
+	move.w #TRUE, -60(A5)
 
-	;if D > t#41 goto L34
-	move.l 12(A6), D0
-	cmp.l -64(A5), D0
-	bgt.l L34
-
-	;t#42 = FALSE
-	move.w #FALSE, -66(A5)
-
-	;goto: L35
-	BRA L35
 ;L34: skip
 L34:
-	;t#42 = TRUE
-	move.w #TRUE, -66(A5)
+	;t#42 = 0
+	move.l #0, -64(A5)
 
+	;if D > t#42 goto L35
+	move.l 12(A6), D0
+	cmp.l -64(A5), D0
+	bgt.l L35
+
+	;t#43 = FALSE
+	move.w #FALSE, -66(A5)
+
+	;goto: L36
+	BRA L36
 ;L35: skip
 L35:
-	;t#43 = t#40 & t#42
+	;t#43 = TRUE
+	move.w #TRUE, -66(A5)
+
+;L36: skip
+L36:
+	;t#44 = t#41 & t#43
 	move.w -60(A5), D0
 	and.w -66(A5), D0
 	move.w D0,-68(A5)
 
-	;if t#43 = FALSE goto L36
+	;if t#44 = FALSE goto L37
 	move.w -68(A5), D0
 	cmp.w #FALSE, D0
-	beq.l L36
+	beq.l L37
 
-	;L25 return space
+	;L26 return space
 	sub.l #4, SP
 
 	;L0 return space
@@ -796,7 +950,7 @@ L35:
 	;param N
 	move.l 8(A6), -(SP)
 
-	;t#44 = call L0
+	;t#45 = call L0
 	bsr.l L0
 	;clean parameters
 	add.l #4, SP
@@ -806,17 +960,17 @@ L35:
 	;param D
 	move.l 12(A6), -(SP)
 
-	;param t#44
+	;param t#45
 	move.l -72(A5), -(SP)
 
-	;t#45 = call L25
-	bsr.l L25
+	;t#46 = call L26
+	bsr.l L26
 	;clean parameters
 	add.l #8, SP
 	;fetch return
 	move.l (SP)+, -76(A5)
 
-	;Q = t#45
+	;Q = t#46
 	move.l -76(A5), -4(A6)
 
 	;L0 return space
@@ -825,69 +979,69 @@ L35:
 	;param Q
 	move.l -4(A6), -(SP)
 
-	;t#46 = call L0
+	;t#47 = call L0
 	bsr.l L0
 	;clean parameters
 	add.l #4, SP
 	;fetch return
 	move.l (SP)+, -80(A5)
 
-	;RESULT = t#46
+	;RESULT = t#47
 	move.l -80(A5), -12(A6)
 
-;L36: skip
-L36:
-	;t#47 = 0
-	move.l #0, -84(A5)
-
-	;if N >= t#47 goto L37
-	move.l 8(A6), D0
-	cmp.l -84(A5), D0
-	bge.l L37
-
-	;t#48 = FALSE
-	move.w #FALSE, -86(A5)
-
-	;goto: L38
-	BRA L38
 ;L37: skip
 L37:
-	;t#48 = TRUE
-	move.w #TRUE, -86(A5)
+	;t#48 = 0
+	move.l #0, -84(A5)
 
+	;if N >= t#48 goto L38
+	move.l 8(A6), D0
+	cmp.l -84(A5), D0
+	bge.l L38
+
+	;t#49 = FALSE
+	move.w #FALSE, -86(A5)
+
+	;goto: L39
+	BRA L39
 ;L38: skip
 L38:
-	;t#49 = 0
-	move.l #0, -90(A5)
+	;t#49 = TRUE
+	move.w #TRUE, -86(A5)
 
-	;if D > t#49 goto L39
-	move.l 12(A6), D0
-	cmp.l -90(A5), D0
-	bgt.l L39
-
-	;t#50 = FALSE
-	move.w #FALSE, -92(A5)
-
-	;goto: L40
-	BRA L40
 ;L39: skip
 L39:
-	;t#50 = TRUE
-	move.w #TRUE, -92(A5)
+	;t#50 = 0
+	move.l #0, -90(A5)
 
+	;if D > t#50 goto L40
+	move.l 12(A6), D0
+	cmp.l -90(A5), D0
+	bgt.l L40
+
+	;t#51 = FALSE
+	move.w #FALSE, -92(A5)
+
+	;goto: L41
+	BRA L41
 ;L40: skip
 L40:
-	;t#51 = t#48 & t#50
+	;t#51 = TRUE
+	move.w #TRUE, -92(A5)
+
+;L41: skip
+L41:
+	;t#52 = t#49 & t#51
 	move.w -86(A5), D0
 	and.w -92(A5), D0
 	move.w D0,-94(A5)
 
-	;if t#51 = FALSE goto L41
+	;if t#52 = FALSE goto L42
 	move.w -94(A5), D0
 	cmp.w #FALSE, D0
-	beq.l L41
+	beq.l L42
 
-	;L20 return space
+	;L21 return space
 	sub.l #4, SP
 
 	;param D
@@ -896,18 +1050,18 @@ L40:
 	;param N
 	move.l 8(A6), -(SP)
 
-	;t#52 = call L20
-	bsr.l L20
+	;t#53 = call L21
+	bsr.l L21
 	;clean parameters
 	add.l #8, SP
 	;fetch return
 	move.l (SP)+, -98(A5)
 
-	;RESULT = t#52
+	;RESULT = t#53
 	move.l -98(A5), -12(A6)
 
-;L41: skip
-L41:
+;L42: skip
+L42:
 	;return RESULT
 	;send return value
 	move.l -12(A6), 16(A6)
@@ -918,127 +1072,651 @@ L41:
 	;give control to caller
 	rts
 
-;MAIN: skip
-MAIN:
-;L42: skip
-L42:
-	;if continuar = FALSE goto L43
-	move.w -4(A5), D0
-	cmp.w #FALSE, D0
-	beq.l L43
+;L43: skip
+L43:
+	;preambulo
+	;save BP
+	move.l A6, -(SP)
+	;set BP
+	move.l SP, A6
+	;save space for local vars
+	sub.l #12, SP
 
-	;t#53 = "<------Calculadora------>"
-	move.l #'<---', -130(A5)
-	move.l #'---C', -126(A5)
-	move.l #'alcu', -122(A5)
-	move.l #'lado', -118(A5)
-	move.l #'ra--', -114(A5)
-	move.l #'----', -110(A5)
-	move.b #'>', -106(A5)
-	move.b #0, -105(A5)
+	;L5 return space
+	sub.l #4, SP
 
-	;param t#53
-	sub.l #32, SP
-	move.l -130(A5), 0(SP)
-	move.l -126(A5), 4(SP)
-	move.l -122(A5), 8(SP)
-	move.l -118(A5), 12(SP)
-	move.l -114(A5), 16(SP)
-	move.l -110(A5), 20(SP)
-	move.l -106(A5), 24(SP)
-	move.l -102(A5), 28(SP)
+	;L26 return space
+	sub.l #4, SP
 
-	;call WRITE_STRING
-	bsr.l WRITE_STRING
+	;param b
+	move.l 12(A6), -(SP)
+
+	;param a
+	move.l 8(A6), -(SP)
+
+	;t#54 = call L26
+	bsr.l L26
 	;clean parameters
-	add.l #32, SP
-
-	;t#54 = "0. Salir"
-	move.l #'0. S', -162(A5)
-	move.l #'alir', -158(A5)
-	move.b #0, -154(A5)
+	add.l #8, SP
+	;fetch return
+	move.l (SP)+, -4(A6)
 
 	;param t#54
+	move.l -4(A6), -(SP)
+
+	;param b
+	move.l 12(A6), -(SP)
+
+	;t#55 = call L5
+	bsr.l L5
+	;clean parameters
+	add.l #8, SP
+	;fetch return
+	move.l (SP)+, -8(A6)
+
+	;t#56 = a - t#55
+	move.l 8(A6), D0
+	sub.l -8(A6), D0
+	move.l D0,-12(A6)
+
+	;return t#56
+	;send return value
+	move.l -12(A6), 16(A6)
+	;prepare SP
+	move.l A6, SP
+	;restore BP
+	move.l (SP)+, A6
+	;give control to caller
+	rts
+
+;L44: skip
+L44:
+	;preambulo
+	;save BP
+	move.l A6, -(SP)
+	;set BP
+	move.l SP, A6
+	;save space for local vars
+	sub.l #20, SP
+
+	;t#57 = TRUE
+	move.w #TRUE, -2(A6)
+
+	;result = t#57
+	move.w -2(A6), -4(A6)
+
+	;t#58 = 2
+	move.l #2, -8(A6)
+
+	;if n = t#58 goto L45
+	move.l 8(A6), D0
+	cmp.l -8(A6), D0
+	beq.l L45
+
+	;t#59 = FALSE
+	move.w #FALSE, -10(A6)
+
+	;goto: L46
+	BRA L46
+;L45: skip
+L45:
+	;t#59 = TRUE
+	move.w #TRUE, -10(A6)
+
+;L46: skip
+L46:
+	;t#60 = 3
+	move.l #3, -14(A6)
+
+	;if n = t#60 goto L47
+	move.l 8(A6), D0
+	cmp.l -14(A6), D0
+	beq.l L47
+
+	;t#61 = FALSE
+	move.w #FALSE, -16(A6)
+
+	;goto: L48
+	BRA L48
+;L47: skip
+L47:
+	;t#61 = TRUE
+	move.w #TRUE, -16(A6)
+
+;L48: skip
+L48:
+	;t#62 = t#59 | t#61
+	move.w -10(A6), D0
+	or.w -16(A6), D0
+	move.w D0,-18(A6)
+
+	;if t#62 = FALSE goto L49
+	move.w -18(A6), D0
+	cmp.w #FALSE, D0
+	beq.l L49
+
+	;t#63 = TRUE
+	move.w #TRUE, -20(A6)
+
+	;result = t#63
+	move.w -20(A6), -4(A6)
+
+;L49: skip
+L49:
+	;t#66 = 0
+	move.l #0, -110(A5)
+
+	;L43 return space
+	sub.l #4, SP
+
+	;t#64 = 2
+	move.l #2, -102(A5)
+
+	;param t#64
+	move.l -102(A5), -(SP)
+
+	;param n
+	move.l 8(A6), -(SP)
+
+	;t#65 = call L43
+	bsr.l L43
+	;clean parameters
+	add.l #8, SP
+	;fetch return
+	move.l (SP)+, -106(A5)
+
+	;if t#65 = t#66 goto L50
+	move.l -106(A5), D0
+	cmp.l -110(A5), D0
+	beq.l L50
+
+	;t#67 = FALSE
+	move.w #FALSE, -112(A5)
+
+	;goto: L51
+	BRA L51
+;L50: skip
+L50:
+	;t#67 = TRUE
+	move.w #TRUE, -112(A5)
+
+;L51: skip
+L51:
+	;t#70 = 0
+	move.l #0, -124(A5)
+
+	;L43 return space
+	sub.l #4, SP
+
+	;t#68 = 3
+	move.l #3, -116(A5)
+
+	;param t#68
+	move.l -116(A5), -(SP)
+
+	;param n
+	move.l 8(A6), -(SP)
+
+	;t#69 = call L43
+	bsr.l L43
+	;clean parameters
+	add.l #8, SP
+	;fetch return
+	move.l (SP)+, -120(A5)
+
+	;if t#69 = t#70 goto L52
+	move.l -120(A5), D0
+	cmp.l -124(A5), D0
+	beq.l L52
+
+	;t#71 = FALSE
+	move.w #FALSE, -126(A5)
+
+	;goto: L53
+	BRA L53
+;L52: skip
+L52:
+	;t#71 = TRUE
+	move.w #TRUE, -126(A5)
+
+;L53: skip
+L53:
+	;t#72 = t#67 | t#71
+	move.w -112(A5), D0
+	or.w -126(A5), D0
+	move.w D0,-128(A5)
+
+	;if t#72 = FALSE goto L54
+	move.w -128(A5), D0
+	cmp.w #FALSE, D0
+	beq.l L54
+
+	;t#73 = FALSE
+	move.w #FALSE, -130(A5)
+
+	;result = t#73
+	move.w -130(A5), -4(A6)
+
+;L54: skip
+L54:
+	;t#74 = 5
+	move.l #5, -134(A5)
+
+	;i = t#74
+	move.l -134(A5), -138(A5)
+
+	;t#75 = 2
+	move.l #2, -142(A5)
+
+	;w = t#75
+	move.l -142(A5), -146(A5)
+
+;L55: skip
+L55:
+	;L20 return space
+	sub.l #4, SP
+
+	;param i
+	move.l -138(A5), -(SP)
+
+	;t#76 = call L20
+	bsr.l L20
+	;clean parameters
+	add.l #4, SP
+	;fetch return
+	move.l (SP)+, -150(A5)
+
+	;if t#76 <= n goto L57
+	move.l -150(A5), D0
+	cmp.l 8(A6), D0
+	ble.l L57
+
+	;t#77 = FALSE
+	move.w #FALSE, -152(A5)
+
+	;goto: L58
+	BRA L58
+;L57: skip
+L57:
+	;t#77 = TRUE
+	move.w #TRUE, -152(A5)
+
+;L58: skip
+L58:
+	;if t#77 = FALSE goto L56
+	move.w -152(A5), D0
+	cmp.w #FALSE, D0
+	beq.l L56
+
+	;t#79 = 0
+	move.l #0, -160(A5)
+
+	;L43 return space
+	sub.l #4, SP
+
+	;param i
+	move.l -138(A5), -(SP)
+
+	;param n
+	move.l 8(A6), -(SP)
+
+	;t#78 = call L43
+	bsr.l L43
+	;clean parameters
+	add.l #8, SP
+	;fetch return
+	move.l (SP)+, -156(A5)
+
+	;if t#78 = t#79 goto L59
+	move.l -156(A5), D0
+	cmp.l -160(A5), D0
+	beq.l L59
+
+	;t#80 = FALSE
+	move.w #FALSE, -162(A5)
+
+	;goto: L60
+	BRA L60
+;L59: skip
+L59:
+	;t#80 = TRUE
+	move.w #TRUE, -162(A5)
+
+;L60: skip
+L60:
+	;if t#80 = FALSE goto L61
+	move.w -162(A5), D0
+	cmp.w #FALSE, D0
+	beq.l L61
+
+	;t#81 = FALSE
+	move.w #FALSE, -164(A5)
+
+	;result = t#81
+	move.w -164(A5), -4(A6)
+
+;L61: skip
+L61:
+	;t#82 = i + w
+	move.l -138(A5), D0
+	add.l -146(A5), D0
+	move.l D0,-168(A5)
+
+	;i = t#82
+	move.l -168(A5), -138(A5)
+
+	;t#83 = 6
+	move.l #6, -172(A5)
+
+	;t#84 = t#83 - w
+	move.l -172(A5), D0
+	sub.l -146(A5), D0
+	move.l D0,-176(A5)
+
+	;w = t#84
+	move.l -176(A5), -146(A5)
+
+	;goto: L55
+	BRA L55
+;L56: skip
+L56:
+	;return result
+	;send return value
+	move.w -4(A6), 12(A6)
+	;prepare SP
+	move.l A6, SP
+	;restore BP
+	move.l (SP)+, A6
+	;give control to caller
+	rts
+
+;L62: skip
+L62:
+	;preambulo
+	;save BP
+	move.l A6, -(SP)
+	;set BP
+	move.l SP, A6
+	;save space for local vars
+	sub.l #14, SP
+
+	;t#85 = 0
+	move.l #0, -8(A6)
+
+	;if i = t#85 goto L63
+	move.l 8(A6), D0
+	cmp.l -8(A6), D0
+	beq.l L63
+
+	;t#86 = FALSE
+	move.w #FALSE, -10(A6)
+
+	;goto: L64
+	BRA L64
+;L63: skip
+L63:
+	;t#86 = TRUE
+	move.w #TRUE, -10(A6)
+
+;L64: skip
+L64:
+	;if t#86 = FALSE goto L65
+	move.w -10(A6), D0
+	cmp.w #FALSE, D0
+	beq.l L65
+
+	;t#87 = 1
+	move.l #1, -14(A6)
+
+	;result = t#87
+	move.l -14(A6), -4(A6)
+
+;L65: skip
+L65:
+	;t#88 = 0
+	move.l #0, -180(A5)
+
+	;if i != t#88 goto L66
+	move.l 8(A6), D0
+	cmp.l -180(A5), D0
+	bne.l L66
+
+	;t#89 = FALSE
+	move.w #FALSE, -182(A5)
+
+	;goto: L67
+	BRA L67
+;L66: skip
+L66:
+	;t#89 = TRUE
+	move.w #TRUE, -182(A5)
+
+;L67: skip
+L67:
+	;if t#89 = FALSE goto L68
+	move.w -182(A5), D0
+	cmp.w #FALSE, D0
+	beq.l L68
+
+	;L5 return space
+	sub.l #4, SP
+
+	;L62 return space
+	sub.l #4, SP
+
+	;t#90 = 1
+	move.l #1, -186(A5)
+
+	;t#91 = i - t#90
+	move.l 8(A6), D0
+	sub.l -186(A5), D0
+	move.l D0,-190(A5)
+
+	;param t#91
+	move.l -190(A5), -(SP)
+
+	;t#92 = call L62
+	bsr.l L62
+	;clean parameters
+	add.l #4, SP
+	;fetch return
+	move.l (SP)+, -194(A5)
+
+	;param t#92
+	move.l -194(A5), -(SP)
+
+	;param i
+	move.l 8(A6), -(SP)
+
+	;t#93 = call L5
+	bsr.l L5
+	;clean parameters
+	add.l #8, SP
+	;fetch return
+	move.l (SP)+, -198(A5)
+
+	;result = t#93
+	move.l -198(A5), -4(A6)
+
+;L68: skip
+L68:
+	;return result
+	;send return value
+	move.l -4(A6), 12(A6)
+	;prepare SP
+	move.l A6, SP
+	;restore BP
+	move.l (SP)+, A6
+	;give control to caller
+	rts
+
+;MAIN: skip
+MAIN:
+;L69: skip
+L69:
+	;if continuar = FALSE goto L70
+	move.w -4(A5), D0
+	cmp.w #FALSE, D0
+	beq.l L70
+
+	;t#94 = "<------Calculadora------>"
+	move.l #'<---', -230(A5)
+	move.l #'---C', -226(A5)
+	move.l #'alcu', -222(A5)
+	move.l #'lado', -218(A5)
+	move.l #'ra--', -214(A5)
+	move.l #'----', -210(A5)
+	move.b #'>', -206(A5)
+	move.b #0, -205(A5)
+
+	;param t#94
 	sub.l #32, SP
-	move.l -162(A5), 0(SP)
-	move.l -158(A5), 4(SP)
-	move.l -154(A5), 8(SP)
-	move.l -150(A5), 12(SP)
-	move.l -146(A5), 16(SP)
-	move.l -142(A5), 20(SP)
-	move.l -138(A5), 24(SP)
-	move.l -134(A5), 28(SP)
+	move.l -230(A5), 0(SP)
+	move.l -226(A5), 4(SP)
+	move.l -222(A5), 8(SP)
+	move.l -218(A5), 12(SP)
+	move.l -214(A5), 16(SP)
+	move.l -210(A5), 20(SP)
+	move.l -206(A5), 24(SP)
+	move.l -202(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
 	;clean parameters
 	add.l #32, SP
 
-	;t#55 = "1. Valor absoluto"
-	move.l #'1. V', -194(A5)
-	move.l #'alor', -190(A5)
-	move.l #' abs', -186(A5)
-	move.l #'olut', -182(A5)
-	move.b #'o', -178(A5)
-	move.b #0, -177(A5)
+	;t#95 = "0. Salir"
+	move.l #'0. S', -262(A5)
+	move.l #'alir', -258(A5)
+	move.b #0, -254(A5)
 
-	;param t#55
+	;param t#95
 	sub.l #32, SP
-	move.l -194(A5), 0(SP)
-	move.l -190(A5), 4(SP)
-	move.l -186(A5), 8(SP)
-	move.l -182(A5), 12(SP)
-	move.l -178(A5), 16(SP)
-	move.l -174(A5), 20(SP)
-	move.l -170(A5), 24(SP)
-	move.l -166(A5), 28(SP)
+	move.l -262(A5), 0(SP)
+	move.l -258(A5), 4(SP)
+	move.l -254(A5), 8(SP)
+	move.l -250(A5), 12(SP)
+	move.l -246(A5), 16(SP)
+	move.l -242(A5), 20(SP)
+	move.l -238(A5), 24(SP)
+	move.l -234(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
 	;clean parameters
 	add.l #32, SP
 
-	;t#56 = "2. Multiplicar"
-	move.l #'2. M', -226(A5)
-	move.l #'ulti', -222(A5)
-	move.l #'plic', -218(A5)
-	move.b #'a', -214(A5)
-	move.b #'r', -213(A5)
-	move.b #0, -212(A5)
+	;t#96 = "1. Valor absoluto"
+	move.l #'1. V', -294(A5)
+	move.l #'alor', -290(A5)
+	move.l #' abs', -286(A5)
+	move.l #'olut', -282(A5)
+	move.b #'o', -278(A5)
+	move.b #0, -277(A5)
 
-	;param t#56
+	;param t#96
 	sub.l #32, SP
-	move.l -226(A5), 0(SP)
-	move.l -222(A5), 4(SP)
-	move.l -218(A5), 8(SP)
-	move.l -214(A5), 12(SP)
-	move.l -210(A5), 16(SP)
-	move.l -206(A5), 20(SP)
-	move.l -202(A5), 24(SP)
-	move.l -198(A5), 28(SP)
+	move.l -294(A5), 0(SP)
+	move.l -290(A5), 4(SP)
+	move.l -286(A5), 8(SP)
+	move.l -282(A5), 12(SP)
+	move.l -278(A5), 16(SP)
+	move.l -274(A5), 20(SP)
+	move.l -270(A5), 24(SP)
+	move.l -266(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
 	;clean parameters
 	add.l #32, SP
 
-	;t#57 = "3. Dividir"
-	move.l #'3. D', -258(A5)
-	move.l #'ivid', -254(A5)
-	move.b #'i', -250(A5)
-	move.b #'r', -249(A5)
-	move.b #0, -248(A5)
+	;t#97 = "2. Multiplicar"
+	move.l #'2. M', -326(A5)
+	move.l #'ulti', -322(A5)
+	move.l #'plic', -318(A5)
+	move.b #'a', -314(A5)
+	move.b #'r', -313(A5)
+	move.b #0, -312(A5)
 
-	;param t#57
+	;param t#97
 	sub.l #32, SP
-	move.l -258(A5), 0(SP)
-	move.l -254(A5), 4(SP)
-	move.l -250(A5), 8(SP)
-	move.l -246(A5), 12(SP)
-	move.l -242(A5), 16(SP)
-	move.l -238(A5), 20(SP)
-	move.l -234(A5), 24(SP)
-	move.l -230(A5), 28(SP)
+	move.l -326(A5), 0(SP)
+	move.l -322(A5), 4(SP)
+	move.l -318(A5), 8(SP)
+	move.l -314(A5), 12(SP)
+	move.l -310(A5), 16(SP)
+	move.l -306(A5), 20(SP)
+	move.l -302(A5), 24(SP)
+	move.l -298(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+	;t#98 = "3. Dividir"
+	move.l #'3. D', -358(A5)
+	move.l #'ivid', -354(A5)
+	move.b #'i', -350(A5)
+	move.b #'r', -349(A5)
+	move.b #0, -348(A5)
+
+	;param t#98
+	sub.l #32, SP
+	move.l -358(A5), 0(SP)
+	move.l -354(A5), 4(SP)
+	move.l -350(A5), 8(SP)
+	move.l -346(A5), 12(SP)
+	move.l -342(A5), 16(SP)
+	move.l -338(A5), 20(SP)
+	move.l -334(A5), 24(SP)
+	move.l -330(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+	;t#99 = "4. Es primo"
+	move.l #'4. E', -390(A5)
+	move.l #'s pr', -386(A5)
+	move.b #'i', -382(A5)
+	move.b #'m', -381(A5)
+	move.b #'o', -380(A5)
+	move.b #0, -379(A5)
+
+	;param t#99
+	sub.l #32, SP
+	move.l -390(A5), 0(SP)
+	move.l -386(A5), 4(SP)
+	move.l -382(A5), 8(SP)
+	move.l -378(A5), 12(SP)
+	move.l -374(A5), 16(SP)
+	move.l -370(A5), 20(SP)
+	move.l -366(A5), 24(SP)
+	move.l -362(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+	;t#100 = "5. Factorial"
+	move.l #'5. F', -422(A5)
+	move.l #'acto', -418(A5)
+	move.l #'rial', -414(A5)
+	move.b #0, -410(A5)
+
+	;param t#100
+	sub.l #32, SP
+	move.l -422(A5), 0(SP)
+	move.l -418(A5), 4(SP)
+	move.l -414(A5), 8(SP)
+	move.l -410(A5), 12(SP)
+	move.l -406(A5), 16(SP)
+	move.l -402(A5), 20(SP)
+	move.l -398(A5), 24(SP)
+	move.l -394(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
@@ -1048,83 +1726,83 @@ L42:
 	;READINT return space
 	sub.l #4, SP
 
-	;t#58 = call READINT
+	;t#101 = call READINT
 	bsr.l READINT
 	;clean parameters
 	add.l #0, SP
 	;fetch return
-	move.l (SP)+, -262(A5)
+	move.l (SP)+, -426(A5)
 
-	;opcion = t#58
-	move.l -262(A5), -266(A5)
+	;opcion = t#101
+	move.l -426(A5), -430(A5)
 
-	;t#59 = 1
-	move.l #1, -270(A5)
+	;t#102 = 1
+	move.l #1, -434(A5)
 
-	;if opcion = t#59 goto L44
-	move.l -266(A5), D0
-	cmp.l -270(A5), D0
-	beq.l L44
+	;if opcion = t#102 goto L71
+	move.l -430(A5), D0
+	cmp.l -434(A5), D0
+	beq.l L71
 
-	;t#60 = FALSE
-	move.w #FALSE, -272(A5)
+	;t#103 = FALSE
+	move.w #FALSE, -436(A5)
 
-	;goto: L45
-	BRA L45
-;L44: skip
-L44:
-	;t#60 = TRUE
-	move.w #TRUE, -272(A5)
+	;goto: L72
+	BRA L72
+;L71: skip
+L71:
+	;t#103 = TRUE
+	move.w #TRUE, -436(A5)
 
-;L45: skip
-L45:
-	;if t#60 = FALSE goto L46
-	move.w -272(A5), D0
+;L72: skip
+L72:
+	;if t#103 = FALSE goto L73
+	move.w -436(A5), D0
 	cmp.w #FALSE, D0
-	beq.l L46
+	beq.l L73
 
-	;t#61 = "--Valor absoluto--"
-	move.l #'--Va', -304(A5)
-	move.l #'lor ', -300(A5)
-	move.l #'abso', -296(A5)
-	move.l #'luto', -292(A5)
-	move.b #'-', -288(A5)
-	move.b #'-', -287(A5)
-	move.b #0, -286(A5)
+	;t#104 = "--Valor absoluto--"
+	move.l #'--Va', -468(A5)
+	move.l #'lor ', -464(A5)
+	move.l #'abso', -460(A5)
+	move.l #'luto', -456(A5)
+	move.b #'-', -452(A5)
+	move.b #'-', -451(A5)
+	move.b #0, -450(A5)
 
-	;param t#61
+	;param t#104
 	sub.l #32, SP
-	move.l -304(A5), 0(SP)
-	move.l -300(A5), 4(SP)
-	move.l -296(A5), 8(SP)
-	move.l -292(A5), 12(SP)
-	move.l -288(A5), 16(SP)
-	move.l -284(A5), 20(SP)
-	move.l -280(A5), 24(SP)
-	move.l -276(A5), 28(SP)
+	move.l -468(A5), 0(SP)
+	move.l -464(A5), 4(SP)
+	move.l -460(A5), 8(SP)
+	move.l -456(A5), 12(SP)
+	move.l -452(A5), 16(SP)
+	move.l -448(A5), 20(SP)
+	move.l -444(A5), 24(SP)
+	move.l -440(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
 	;clean parameters
 	add.l #32, SP
 
-	;t#62 = "Introduce valor:"
-	move.l #'Intr', -336(A5)
-	move.l #'oduc', -332(A5)
-	move.l #'e va', -328(A5)
-	move.l #'lor:', -324(A5)
-	move.b #0, -320(A5)
+	;t#105 = "Introduce valor:"
+	move.l #'Intr', -500(A5)
+	move.l #'oduc', -496(A5)
+	move.l #'e va', -492(A5)
+	move.l #'lor:', -488(A5)
+	move.b #0, -484(A5)
 
-	;param t#62
+	;param t#105
 	sub.l #32, SP
-	move.l -336(A5), 0(SP)
-	move.l -332(A5), 4(SP)
-	move.l -328(A5), 8(SP)
-	move.l -324(A5), 12(SP)
-	move.l -320(A5), 16(SP)
-	move.l -316(A5), 20(SP)
-	move.l -312(A5), 24(SP)
-	move.l -308(A5), 28(SP)
+	move.l -500(A5), 0(SP)
+	move.l -496(A5), 4(SP)
+	move.l -492(A5), 8(SP)
+	move.l -488(A5), 12(SP)
+	move.l -484(A5), 16(SP)
+	move.l -480(A5), 20(SP)
+	move.l -476(A5), 24(SP)
+	move.l -472(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
@@ -1137,142 +1815,104 @@ L45:
 	;READINT return space
 	sub.l #4, SP
 
-	;t#63 = call READINT
+	;t#106 = call READINT
 	bsr.l READINT
 	;clean parameters
 	add.l #0, SP
 	;fetch return
-	move.l (SP)+, -340(A5)
+	move.l (SP)+, -504(A5)
 
-	;param t#63
-	move.l -340(A5), -(SP)
+	;param t#106
+	move.l -504(A5), -(SP)
 
-	;t#64 = call L1
+	;t#107 = call L1
 	bsr.l L1
 	;clean parameters
 	add.l #4, SP
 	;fetch return
-	move.l (SP)+, -344(A5)
+	move.l (SP)+, -508(A5)
 
-	;param t#64
-	move.l -344(A5), -(SP)
+	;param t#107
+	move.l -508(A5), -(SP)
 
 	;call WRITE_INT
 	bsr.l WRITE_INT
 	;clean parameters
 	add.l #4, SP
 
-;L46: skip
-L46:
-	;t#65 = 2
-	move.l #2, -348(A5)
+;L73: skip
+L73:
+	;t#108 = 2
+	move.l #2, -512(A5)
 
-	;if opcion = t#65 goto L47
-	move.l -266(A5), D0
-	cmp.l -348(A5), D0
-	beq.l L47
+	;if opcion = t#108 goto L74
+	move.l -430(A5), D0
+	cmp.l -512(A5), D0
+	beq.l L74
 
-	;t#66 = FALSE
-	move.w #FALSE, -350(A5)
+	;t#109 = FALSE
+	move.w #FALSE, -514(A5)
 
-	;goto: L48
-	BRA L48
-;L47: skip
-L47:
-	;t#66 = TRUE
-	move.w #TRUE, -350(A5)
+	;goto: L75
+	BRA L75
+;L74: skip
+L74:
+	;t#109 = TRUE
+	move.w #TRUE, -514(A5)
 
-;L48: skip
-L48:
-	;if t#66 = FALSE goto L49
-	move.w -350(A5), D0
+;L75: skip
+L75:
+	;if t#109 = FALSE goto L76
+	move.w -514(A5), D0
 	cmp.w #FALSE, D0
-	beq.l L49
+	beq.l L76
 
-	;t#67 = "--Multiplicacion--"
-	move.l #'--Mu', -382(A5)
-	move.l #'ltip', -378(A5)
-	move.l #'lica', -374(A5)
-	move.l #'cion', -370(A5)
-	move.b #'-', -366(A5)
-	move.b #'-', -365(A5)
-	move.b #0, -364(A5)
+	;t#110 = "--Multiplicacion--"
+	move.l #'--Mu', -546(A5)
+	move.l #'ltip', -542(A5)
+	move.l #'lica', -538(A5)
+	move.l #'cion', -534(A5)
+	move.b #'-', -530(A5)
+	move.b #'-', -529(A5)
+	move.b #0, -528(A5)
 
-	;param t#67
+	;param t#110
 	sub.l #32, SP
-	move.l -382(A5), 0(SP)
-	move.l -378(A5), 4(SP)
-	move.l -374(A5), 8(SP)
-	move.l -370(A5), 12(SP)
-	move.l -366(A5), 16(SP)
-	move.l -362(A5), 20(SP)
-	move.l -358(A5), 24(SP)
-	move.l -354(A5), 28(SP)
+	move.l -546(A5), 0(SP)
+	move.l -542(A5), 4(SP)
+	move.l -538(A5), 8(SP)
+	move.l -534(A5), 12(SP)
+	move.l -530(A5), 16(SP)
+	move.l -526(A5), 20(SP)
+	move.l -522(A5), 24(SP)
+	move.l -518(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
 	;clean parameters
 	add.l #32, SP
 
-	;t#68 = "Introduce primer valor:"
-	move.l #'Intr', -414(A5)
-	move.l #'oduc', -410(A5)
-	move.l #'e pr', -406(A5)
-	move.l #'imer', -402(A5)
-	move.l #' val', -398(A5)
-	move.b #'o', -394(A5)
-	move.b #'r', -393(A5)
-	move.b #':', -392(A5)
-	move.b #0, -391(A5)
+	;t#111 = "Introduce primer valor:"
+	move.l #'Intr', -578(A5)
+	move.l #'oduc', -574(A5)
+	move.l #'e pr', -570(A5)
+	move.l #'imer', -566(A5)
+	move.l #' val', -562(A5)
+	move.b #'o', -558(A5)
+	move.b #'r', -557(A5)
+	move.b #':', -556(A5)
+	move.b #0, -555(A5)
 
-	;param t#68
+	;param t#111
 	sub.l #32, SP
-	move.l -414(A5), 0(SP)
-	move.l -410(A5), 4(SP)
-	move.l -406(A5), 8(SP)
-	move.l -402(A5), 12(SP)
-	move.l -398(A5), 16(SP)
-	move.l -394(A5), 20(SP)
-	move.l -390(A5), 24(SP)
-	move.l -386(A5), 28(SP)
-
-	;call WRITE_STRING
-	bsr.l WRITE_STRING
-	;clean parameters
-	add.l #32, SP
-
-	;READINT return space
-	sub.l #4, SP
-
-	;t#69 = call READINT
-	bsr.l READINT
-	;clean parameters
-	add.l #0, SP
-	;fetch return
-	move.l (SP)+, -418(A5)
-
-	;val1 = t#69
-	move.l -418(A5), -422(A5)
-
-	;t#70 = "Introduce segundo valor:"
-	move.l #'Intr', -454(A5)
-	move.l #'oduc', -450(A5)
-	move.l #'e se', -446(A5)
-	move.l #'gund', -442(A5)
-	move.l #'o va', -438(A5)
-	move.l #'lor:', -434(A5)
-	move.b #0, -430(A5)
-
-	;param t#70
-	sub.l #32, SP
-	move.l -454(A5), 0(SP)
-	move.l -450(A5), 4(SP)
-	move.l -446(A5), 8(SP)
-	move.l -442(A5), 12(SP)
-	move.l -438(A5), 16(SP)
-	move.l -434(A5), 20(SP)
-	move.l -430(A5), 24(SP)
-	move.l -426(A5), 28(SP)
+	move.l -578(A5), 0(SP)
+	move.l -574(A5), 4(SP)
+	move.l -570(A5), 8(SP)
+	move.l -566(A5), 12(SP)
+	move.l -562(A5), 16(SP)
+	move.l -558(A5), 20(SP)
+	move.l -554(A5), 24(SP)
+	move.l -550(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
@@ -1282,33 +1922,71 @@ L48:
 	;READINT return space
 	sub.l #4, SP
 
-	;t#71 = call READINT
+	;t#112 = call READINT
 	bsr.l READINT
 	;clean parameters
 	add.l #0, SP
 	;fetch return
-	move.l (SP)+, -458(A5)
+	move.l (SP)+, -582(A5)
 
-	;val2 = t#71
-	move.l -458(A5), -462(A5)
+	;val1 = t#112
+	move.l -582(A5), -586(A5)
 
-	;t#72 = "Resultado:"
-	move.l #'Resu', -494(A5)
-	move.l #'ltad', -490(A5)
-	move.b #'o', -486(A5)
-	move.b #':', -485(A5)
-	move.b #0, -484(A5)
+	;t#113 = "Introduce segundo valor:"
+	move.l #'Intr', -618(A5)
+	move.l #'oduc', -614(A5)
+	move.l #'e se', -610(A5)
+	move.l #'gund', -606(A5)
+	move.l #'o va', -602(A5)
+	move.l #'lor:', -598(A5)
+	move.b #0, -594(A5)
 
-	;param t#72
+	;param t#113
 	sub.l #32, SP
-	move.l -494(A5), 0(SP)
-	move.l -490(A5), 4(SP)
-	move.l -486(A5), 8(SP)
-	move.l -482(A5), 12(SP)
-	move.l -478(A5), 16(SP)
-	move.l -474(A5), 20(SP)
-	move.l -470(A5), 24(SP)
-	move.l -466(A5), 28(SP)
+	move.l -618(A5), 0(SP)
+	move.l -614(A5), 4(SP)
+	move.l -610(A5), 8(SP)
+	move.l -606(A5), 12(SP)
+	move.l -602(A5), 16(SP)
+	move.l -598(A5), 20(SP)
+	move.l -594(A5), 24(SP)
+	move.l -590(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+	;READINT return space
+	sub.l #4, SP
+
+	;t#114 = call READINT
+	bsr.l READINT
+	;clean parameters
+	add.l #0, SP
+	;fetch return
+	move.l (SP)+, -622(A5)
+
+	;val2 = t#114
+	move.l -622(A5), -626(A5)
+
+	;t#115 = "Resultado:"
+	move.l #'Resu', -658(A5)
+	move.l #'ltad', -654(A5)
+	move.b #'o', -650(A5)
+	move.b #':', -649(A5)
+	move.b #0, -648(A5)
+
+	;param t#115
+	sub.l #32, SP
+	move.l -658(A5), 0(SP)
+	move.l -654(A5), 4(SP)
+	move.l -650(A5), 8(SP)
+	move.l -646(A5), 12(SP)
+	move.l -642(A5), 16(SP)
+	move.l -638(A5), 20(SP)
+	move.l -634(A5), 24(SP)
+	move.l -630(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
@@ -1319,131 +1997,93 @@ L48:
 	sub.l #4, SP
 
 	;param val2
-	move.l -462(A5), -(SP)
+	move.l -626(A5), -(SP)
 
 	;param val1
-	move.l -422(A5), -(SP)
+	move.l -586(A5), -(SP)
 
-	;t#73 = call L5
+	;t#116 = call L5
 	bsr.l L5
 	;clean parameters
 	add.l #8, SP
 	;fetch return
-	move.l (SP)+, -498(A5)
+	move.l (SP)+, -662(A5)
 
-	;param t#73
-	move.l -498(A5), -(SP)
+	;param t#116
+	move.l -662(A5), -(SP)
 
 	;call WRITE_INT
 	bsr.l WRITE_INT
 	;clean parameters
 	add.l #4, SP
 
-;L49: skip
-L49:
-	;t#74 = 3
-	move.l #3, -502(A5)
+;L76: skip
+L76:
+	;t#117 = 3
+	move.l #3, -666(A5)
 
-	;if opcion = t#74 goto L50
-	move.l -266(A5), D0
-	cmp.l -502(A5), D0
-	beq.l L50
+	;if opcion = t#117 goto L77
+	move.l -430(A5), D0
+	cmp.l -666(A5), D0
+	beq.l L77
 
-	;t#75 = FALSE
-	move.w #FALSE, -504(A5)
+	;t#118 = FALSE
+	move.w #FALSE, -668(A5)
 
-	;goto: L51
-	BRA L51
-;L50: skip
-L50:
-	;t#75 = TRUE
-	move.w #TRUE, -504(A5)
+	;goto: L78
+	BRA L78
+;L77: skip
+L77:
+	;t#118 = TRUE
+	move.w #TRUE, -668(A5)
 
-;L51: skip
-L51:
-	;if t#75 = FALSE goto L52
-	move.w -504(A5), D0
+;L78: skip
+L78:
+	;if t#118 = FALSE goto L79
+	move.w -668(A5), D0
 	cmp.w #FALSE, D0
-	beq.l L52
+	beq.l L79
 
-	;t#76 = "--Division--"
-	move.l #'--Di', -536(A5)
-	move.l #'visi', -532(A5)
-	move.l #'on--', -528(A5)
-	move.b #0, -524(A5)
+	;t#119 = "--Division--"
+	move.l #'--Di', -700(A5)
+	move.l #'visi', -696(A5)
+	move.l #'on--', -692(A5)
+	move.b #0, -688(A5)
 
-	;param t#76
+	;param t#119
 	sub.l #32, SP
-	move.l -536(A5), 0(SP)
-	move.l -532(A5), 4(SP)
-	move.l -528(A5), 8(SP)
-	move.l -524(A5), 12(SP)
-	move.l -520(A5), 16(SP)
-	move.l -516(A5), 20(SP)
-	move.l -512(A5), 24(SP)
-	move.l -508(A5), 28(SP)
+	move.l -700(A5), 0(SP)
+	move.l -696(A5), 4(SP)
+	move.l -692(A5), 8(SP)
+	move.l -688(A5), 12(SP)
+	move.l -684(A5), 16(SP)
+	move.l -680(A5), 20(SP)
+	move.l -676(A5), 24(SP)
+	move.l -672(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
 	;clean parameters
 	add.l #32, SP
 
-	;t#77 = "Introduce dividendo:"
-	move.l #'Intr', -568(A5)
-	move.l #'oduc', -564(A5)
-	move.l #'e di', -560(A5)
-	move.l #'vide', -556(A5)
-	move.l #'ndo:', -552(A5)
-	move.b #0, -548(A5)
+	;t#120 = "Introduce dividendo:"
+	move.l #'Intr', -732(A5)
+	move.l #'oduc', -728(A5)
+	move.l #'e di', -724(A5)
+	move.l #'vide', -720(A5)
+	move.l #'ndo:', -716(A5)
+	move.b #0, -712(A5)
 
-	;param t#77
+	;param t#120
 	sub.l #32, SP
-	move.l -568(A5), 0(SP)
-	move.l -564(A5), 4(SP)
-	move.l -560(A5), 8(SP)
-	move.l -556(A5), 12(SP)
-	move.l -552(A5), 16(SP)
-	move.l -548(A5), 20(SP)
-	move.l -544(A5), 24(SP)
-	move.l -540(A5), 28(SP)
-
-	;call WRITE_STRING
-	bsr.l WRITE_STRING
-	;clean parameters
-	add.l #32, SP
-
-	;READINT return space
-	sub.l #4, SP
-
-	;t#78 = call READINT
-	bsr.l READINT
-	;clean parameters
-	add.l #0, SP
-	;fetch return
-	move.l (SP)+, -572(A5)
-
-	;val1 = t#78
-	move.l -572(A5), -576(A5)
-
-	;t#79 = "Introduce divisor:"
-	move.l #'Intr', -608(A5)
-	move.l #'oduc', -604(A5)
-	move.l #'e di', -600(A5)
-	move.l #'viso', -596(A5)
-	move.b #'r', -592(A5)
-	move.b #':', -591(A5)
-	move.b #0, -590(A5)
-
-	;param t#79
-	sub.l #32, SP
-	move.l -608(A5), 0(SP)
-	move.l -604(A5), 4(SP)
-	move.l -600(A5), 8(SP)
-	move.l -596(A5), 12(SP)
-	move.l -592(A5), 16(SP)
-	move.l -588(A5), 20(SP)
-	move.l -584(A5), 24(SP)
-	move.l -580(A5), 28(SP)
+	move.l -732(A5), 0(SP)
+	move.l -728(A5), 4(SP)
+	move.l -724(A5), 8(SP)
+	move.l -720(A5), 12(SP)
+	move.l -716(A5), 16(SP)
+	move.l -712(A5), 20(SP)
+	move.l -708(A5), 24(SP)
+	move.l -704(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
@@ -1453,123 +2093,596 @@ L51:
 	;READINT return space
 	sub.l #4, SP
 
-	;t#80 = call READINT
+	;t#121 = call READINT
 	bsr.l READINT
 	;clean parameters
 	add.l #0, SP
 	;fetch return
-	move.l (SP)+, -612(A5)
+	move.l (SP)+, -736(A5)
 
-	;val2 = t#80
-	move.l -612(A5), -616(A5)
+	;val1 = t#121
+	move.l -736(A5), -740(A5)
 
-	;t#81 = "Resultado:"
-	move.l #'Resu', -648(A5)
-	move.l #'ltad', -644(A5)
-	move.b #'o', -640(A5)
-	move.b #':', -639(A5)
-	move.b #0, -638(A5)
+	;t#122 = "Introduce divisor:"
+	move.l #'Intr', -772(A5)
+	move.l #'oduc', -768(A5)
+	move.l #'e di', -764(A5)
+	move.l #'viso', -760(A5)
+	move.b #'r', -756(A5)
+	move.b #':', -755(A5)
+	move.b #0, -754(A5)
 
-	;param t#81
+	;param t#122
 	sub.l #32, SP
-	move.l -648(A5), 0(SP)
-	move.l -644(A5), 4(SP)
-	move.l -640(A5), 8(SP)
-	move.l -636(A5), 12(SP)
-	move.l -632(A5), 16(SP)
-	move.l -628(A5), 20(SP)
-	move.l -624(A5), 24(SP)
-	move.l -620(A5), 28(SP)
+	move.l -772(A5), 0(SP)
+	move.l -768(A5), 4(SP)
+	move.l -764(A5), 8(SP)
+	move.l -760(A5), 12(SP)
+	move.l -756(A5), 16(SP)
+	move.l -752(A5), 20(SP)
+	move.l -748(A5), 24(SP)
+	move.l -744(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
 	;clean parameters
 	add.l #32, SP
 
-	;L25 return space
+	;READINT return space
+	sub.l #4, SP
+
+	;t#123 = call READINT
+	bsr.l READINT
+	;clean parameters
+	add.l #0, SP
+	;fetch return
+	move.l (SP)+, -776(A5)
+
+	;val2 = t#123
+	move.l -776(A5), -780(A5)
+
+	;t#124 = "Resultado:"
+	move.l #'Resu', -812(A5)
+	move.l #'ltad', -808(A5)
+	move.b #'o', -804(A5)
+	move.b #':', -803(A5)
+	move.b #0, -802(A5)
+
+	;param t#124
+	sub.l #32, SP
+	move.l -812(A5), 0(SP)
+	move.l -808(A5), 4(SP)
+	move.l -804(A5), 8(SP)
+	move.l -800(A5), 12(SP)
+	move.l -796(A5), 16(SP)
+	move.l -792(A5), 20(SP)
+	move.l -788(A5), 24(SP)
+	move.l -784(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+	;L26 return space
 	sub.l #4, SP
 
 	;param val2
-	move.l -616(A5), -(SP)
+	move.l -780(A5), -(SP)
 
 	;param val1
-	move.l -576(A5), -(SP)
+	move.l -740(A5), -(SP)
 
-	;t#82 = call L25
-	bsr.l L25
+	;t#125 = call L26
+	bsr.l L26
 	;clean parameters
 	add.l #8, SP
 	;fetch return
-	move.l (SP)+, -652(A5)
+	move.l (SP)+, -816(A5)
 
-	;param t#82
-	move.l -652(A5), -(SP)
+	;param t#125
+	move.l -816(A5), -(SP)
 
 	;call WRITE_INT
 	bsr.l WRITE_INT
 	;clean parameters
 	add.l #4, SP
 
-;L52: skip
-L52:
-	;t#83 = 0
-	move.l #0, -656(A5)
+;L79: skip
+L79:
+	;t#126 = 4
+	move.l #4, -820(A5)
 
-	;if opcion = t#83 goto L53
-	move.l -266(A5), D0
-	cmp.l -656(A5), D0
-	beq.l L53
+	;if opcion = t#126 goto L80
+	move.l -430(A5), D0
+	cmp.l -820(A5), D0
+	beq.l L80
 
-	;t#84 = FALSE
-	move.w #FALSE, -658(A5)
+	;t#127 = FALSE
+	move.w #FALSE, -822(A5)
 
-	;goto: L54
-	BRA L54
-;L53: skip
-L53:
-	;t#84 = TRUE
-	move.w #TRUE, -658(A5)
+	;goto: L81
+	BRA L81
+;L80: skip
+L80:
+	;t#127 = TRUE
+	move.w #TRUE, -822(A5)
 
-;L54: skip
-L54:
-	;if t#84 = FALSE goto L55
-	move.w -658(A5), D0
+;L81: skip
+L81:
+	;if t#127 = FALSE goto L82
+	move.w -822(A5), D0
 	cmp.w #FALSE, D0
-	beq.l L55
+	beq.l L82
 
-	;t#85 = FALSE
-	move.w #FALSE, -660(A5)
+	;t#128 = "--Es primo--"
+	move.l #'--Es', -854(A5)
+	move.l #' pri', -850(A5)
+	move.l #'mo--', -846(A5)
+	move.b #0, -842(A5)
 
-	;continuar = t#85
-	move.w -660(A5), -4(A5)
-
-	;t#86 = "Saliendo"
-	move.l #'Sali', -692(A5)
-	move.l #'endo', -688(A5)
-	move.b #0, -684(A5)
-
-	;param t#86
+	;param t#128
 	sub.l #32, SP
-	move.l -692(A5), 0(SP)
-	move.l -688(A5), 4(SP)
-	move.l -684(A5), 8(SP)
-	move.l -680(A5), 12(SP)
-	move.l -676(A5), 16(SP)
-	move.l -672(A5), 20(SP)
-	move.l -668(A5), 24(SP)
-	move.l -664(A5), 28(SP)
+	move.l -854(A5), 0(SP)
+	move.l -850(A5), 4(SP)
+	move.l -846(A5), 8(SP)
+	move.l -842(A5), 12(SP)
+	move.l -838(A5), 16(SP)
+	move.l -834(A5), 20(SP)
+	move.l -830(A5), 24(SP)
+	move.l -826(A5), 28(SP)
 
 	;call WRITE_STRING
 	bsr.l WRITE_STRING
 	;clean parameters
 	add.l #32, SP
 
-;L55: skip
-L55:
-	;goto: L42
-	BRA L42
-;L43: skip
-L43:
+	;t#129 = "Introduce numero:"
+	move.l #'Intr', -886(A5)
+	move.l #'oduc', -882(A5)
+	move.l #'e nu', -878(A5)
+	move.l #'mero', -874(A5)
+	move.b #':', -870(A5)
+	move.b #0, -869(A5)
+
+	;param t#129
+	sub.l #32, SP
+	move.l -886(A5), 0(SP)
+	move.l -882(A5), 4(SP)
+	move.l -878(A5), 8(SP)
+	move.l -874(A5), 12(SP)
+	move.l -870(A5), 16(SP)
+	move.l -866(A5), 20(SP)
+	move.l -862(A5), 24(SP)
+	move.l -858(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+	;L44 return space
+	sub.l #2, SP
+
+	;READINT return space
+	sub.l #4, SP
+
+	;t#130 = call READINT
+	bsr.l READINT
+	;clean parameters
+	add.l #0, SP
+	;fetch return
+	move.l (SP)+, -890(A5)
+
+	;param t#130
+	move.l -890(A5), -(SP)
+
+	;t#131 = call L44
+	bsr.l L44
+	;clean parameters
+	add.l #4, SP
+	;fetch return
+	move.w (SP)+, -892(A5)
+
+	;esPrimo = t#131
+	move.w -892(A5), -894(A5)
+
+	;t#132 = "Resultado:"
+	move.l #'Resu', -926(A5)
+	move.l #'ltad', -922(A5)
+	move.b #'o', -918(A5)
+	move.b #':', -917(A5)
+	move.b #0, -916(A5)
+
+	;param t#132
+	sub.l #32, SP
+	move.l -926(A5), 0(SP)
+	move.l -922(A5), 4(SP)
+	move.l -918(A5), 8(SP)
+	move.l -914(A5), 12(SP)
+	move.l -910(A5), 16(SP)
+	move.l -906(A5), 20(SP)
+	move.l -902(A5), 24(SP)
+	move.l -898(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+	;t#133 = TRUE
+	move.w #TRUE, -928(A5)
+
+	;if esPrimo = t#133 goto L83
+	move.w -894(A5), D0
+	cmp.w -928(A5), D0
+	beq.l L83
+
+	;t#134 = FALSE
+	move.w #FALSE, -930(A5)
+
+	;goto: L84
+	BRA L84
+;L83: skip
+L83:
+	;t#134 = TRUE
+	move.w #TRUE, -930(A5)
+
+;L84: skip
+L84:
+	;if t#134 = FALSE goto L85
+	move.w -930(A5), D0
+	cmp.w #FALSE, D0
+	beq.l L85
+
+	;t#135 = "Es primo!"
+	move.l #'Es p', -962(A5)
+	move.l #'rimo', -958(A5)
+	move.b #'!', -954(A5)
+	move.b #0, -953(A5)
+
+	;param t#135
+	sub.l #32, SP
+	move.l -962(A5), 0(SP)
+	move.l -958(A5), 4(SP)
+	move.l -954(A5), 8(SP)
+	move.l -950(A5), 12(SP)
+	move.l -946(A5), 16(SP)
+	move.l -942(A5), 20(SP)
+	move.l -938(A5), 24(SP)
+	move.l -934(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+;L85: skip
+L85:
+	;t#136 = FALSE
+	move.w #FALSE, -964(A5)
+
+	;if esPrimo = t#136 goto L86
+	move.w -894(A5), D0
+	cmp.w -964(A5), D0
+	beq.l L86
+
+	;t#137 = FALSE
+	move.w #FALSE, -966(A5)
+
+	;goto: L87
+	BRA L87
+;L86: skip
+L86:
+	;t#137 = TRUE
+	move.w #TRUE, -966(A5)
+
+;L87: skip
+L87:
+	;if t#137 = FALSE goto L88
+	move.w -966(A5), D0
+	cmp.w #FALSE, D0
+	beq.l L88
+
+	;t#138 = "NO es primo!"
+	move.l #'NO e', -998(A5)
+	move.l #'s pr', -994(A5)
+	move.l #'imo!', -990(A5)
+	move.b #0, -986(A5)
+
+	;param t#138
+	sub.l #32, SP
+	move.l -998(A5), 0(SP)
+	move.l -994(A5), 4(SP)
+	move.l -990(A5), 8(SP)
+	move.l -986(A5), 12(SP)
+	move.l -982(A5), 16(SP)
+	move.l -978(A5), 20(SP)
+	move.l -974(A5), 24(SP)
+	move.l -970(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+;L88: skip
+L88:
+;L82: skip
+L82:
+	;t#139 = 5
+	move.l #5, -1002(A5)
+
+	;if opcion = t#139 goto L89
+	move.l -430(A5), D0
+	cmp.l -1002(A5), D0
+	beq.l L89
+
+	;t#140 = FALSE
+	move.w #FALSE, -1004(A5)
+
+	;goto: L90
+	BRA L90
+;L89: skip
+L89:
+	;t#140 = TRUE
+	move.w #TRUE, -1004(A5)
+
+;L90: skip
+L90:
+	;if t#140 = FALSE goto L91
+	move.w -1004(A5), D0
+	cmp.w #FALSE, D0
+	beq.l L91
+
+	;t#141 = "--Factorial--"
+	move.l #'--Fa', -1036(A5)
+	move.l #'ctor', -1032(A5)
+	move.l #'ial-', -1028(A5)
+	move.b #'-', -1024(A5)
+	move.b #0, -1023(A5)
+
+	;param t#141
+	sub.l #32, SP
+	move.l -1036(A5), 0(SP)
+	move.l -1032(A5), 4(SP)
+	move.l -1028(A5), 8(SP)
+	move.l -1024(A5), 12(SP)
+	move.l -1020(A5), 16(SP)
+	move.l -1016(A5), 20(SP)
+	move.l -1012(A5), 24(SP)
+	move.l -1008(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+	;t#142 = "Introduce numero:"
+	move.l #'Intr', -1068(A5)
+	move.l #'oduc', -1064(A5)
+	move.l #'e nu', -1060(A5)
+	move.l #'mero', -1056(A5)
+	move.b #':', -1052(A5)
+	move.b #0, -1051(A5)
+
+	;param t#142
+	sub.l #32, SP
+	move.l -1068(A5), 0(SP)
+	move.l -1064(A5), 4(SP)
+	move.l -1060(A5), 8(SP)
+	move.l -1056(A5), 12(SP)
+	move.l -1052(A5), 16(SP)
+	move.l -1048(A5), 20(SP)
+	move.l -1044(A5), 24(SP)
+	move.l -1040(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+	;READINT return space
+	sub.l #4, SP
+
+	;t#143 = call READINT
+	bsr.l READINT
+	;clean parameters
+	add.l #0, SP
+	;fetch return
+	move.l (SP)+, -1072(A5)
+
+	;entrada = t#143
+	move.l -1072(A5), -1076(A5)
+
+	;t#144 = 20
+	move.l #20, -1080(A5)
+
+	;if entrada < t#144 goto L92
+	move.l -1076(A5), D0
+	cmp.l -1080(A5), D0
+	blt.l L92
+
+	;t#145 = FALSE
+	move.w #FALSE, -1082(A5)
+
+	;goto: L93
+	BRA L93
+;L92: skip
+L92:
+	;t#145 = TRUE
+	move.w #TRUE, -1082(A5)
+
+;L93: skip
+L93:
+	;if t#145 = FALSE goto L94
+	move.w -1082(A5), D0
+	cmp.w #FALSE, D0
+	beq.l L94
+
+	;L62 return space
+	sub.l #4, SP
+
+	;param entrada
+	move.l -1076(A5), -(SP)
+
+	;t#146 = call L62
+	bsr.l L62
+	;clean parameters
+	add.l #4, SP
+	;fetch return
+	move.l (SP)+, -1086(A5)
+
+	;result = t#146
+	move.l -1086(A5), -1090(A5)
+
+	;t#147 = "Resultado:"
+	move.l #'Resu', -1122(A5)
+	move.l #'ltad', -1118(A5)
+	move.b #'o', -1114(A5)
+	move.b #':', -1113(A5)
+	move.b #0, -1112(A5)
+
+	;param t#147
+	sub.l #32, SP
+	move.l -1122(A5), 0(SP)
+	move.l -1118(A5), 4(SP)
+	move.l -1114(A5), 8(SP)
+	move.l -1110(A5), 12(SP)
+	move.l -1106(A5), 16(SP)
+	move.l -1102(A5), 20(SP)
+	move.l -1098(A5), 24(SP)
+	move.l -1094(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+	;param result
+	move.l -1090(A5), -(SP)
+
+	;call WRITE_INT
+	bsr.l WRITE_INT
+	;clean parameters
+	add.l #4, SP
+
+;L94: skip
+L94:
+	;t#148 = 20
+	move.l #20, -1126(A5)
+
+	;if entrada >= t#148 goto L95
+	move.l -1076(A5), D0
+	cmp.l -1126(A5), D0
+	bge.l L95
+
+	;t#149 = FALSE
+	move.w #FALSE, -1128(A5)
+
+	;goto: L96
+	BRA L96
+;L95: skip
+L95:
+	;t#149 = TRUE
+	move.w #TRUE, -1128(A5)
+
+;L96: skip
+L96:
+	;if t#149 = FALSE goto L97
+	move.w -1128(A5), D0
+	cmp.w #FALSE, D0
+	beq.l L97
+
+	;t#150 = "El numero es demasiado grande"
+	move.l #'El n', -1160(A5)
+	move.l #'umer', -1156(A5)
+	move.l #'o es', -1152(A5)
+	move.l #' dem', -1148(A5)
+	move.l #'asia', -1144(A5)
+	move.l #'do g', -1140(A5)
+	move.l #'rand', -1136(A5)
+	move.b #'e', -1132(A5)
+	move.b #0, -1131(A5)
+
+	;param t#150
+	sub.l #32, SP
+	move.l -1160(A5), 0(SP)
+	move.l -1156(A5), 4(SP)
+	move.l -1152(A5), 8(SP)
+	move.l -1148(A5), 12(SP)
+	move.l -1144(A5), 16(SP)
+	move.l -1140(A5), 20(SP)
+	move.l -1136(A5), 24(SP)
+	move.l -1132(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+;L97: skip
+L97:
+;L91: skip
+L91:
+	;t#151 = 0
+	move.l #0, -1164(A5)
+
+	;if opcion = t#151 goto L98
+	move.l -430(A5), D0
+	cmp.l -1164(A5), D0
+	beq.l L98
+
+	;t#152 = FALSE
+	move.w #FALSE, -1166(A5)
+
+	;goto: L99
+	BRA L99
+;L98: skip
+L98:
+	;t#152 = TRUE
+	move.w #TRUE, -1166(A5)
+
+;L99: skip
+L99:
+	;if t#152 = FALSE goto L100
+	move.w -1166(A5), D0
+	cmp.w #FALSE, D0
+	beq.l L100
+
+	;t#153 = FALSE
+	move.w #FALSE, -1168(A5)
+
+	;continuar = t#153
+	move.w -1168(A5), -4(A5)
+
+	;t#154 = "Saliendo"
+	move.l #'Sali', -1200(A5)
+	move.l #'endo', -1196(A5)
+	move.b #0, -1192(A5)
+
+	;param t#154
+	sub.l #32, SP
+	move.l -1200(A5), 0(SP)
+	move.l -1196(A5), 4(SP)
+	move.l -1192(A5), 8(SP)
+	move.l -1188(A5), 12(SP)
+	move.l -1184(A5), 16(SP)
+	move.l -1180(A5), 20(SP)
+	move.l -1176(A5), 24(SP)
+	move.l -1172(A5), 28(SP)
+
+	;call WRITE_STRING
+	bsr.l WRITE_STRING
+	;clean parameters
+	add.l #32, SP
+
+;L100: skip
+L100:
+	;goto: L69
+	BRA L69
+;L70: skip
+L70:
 	;Terminate program
 	move #9,D0
 	trap #15

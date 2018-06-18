@@ -1,0 +1,35 @@
+MAIN: skip
+t#0 = 1
+a = t#0
+t#1 = 2
+b = t#1
+a = b
+t#2 = a + b
+c = t#2
+t#3 = a + b
+rep = t#3
+t#4 = TRUE
+if t#4 = FALSE goto L0
+t#5 = a + b
+d = t#5
+t#6 = 3
+a = t#6
+L0: skip
+L1: skip
+t#7 = 0
+if d > t#7 goto L3
+t#8 = FALSE
+goto: L4
+L3: skip
+t#8 = TRUE
+L4: skip
+if t#8 = FALSE goto L2
+t#9 = a + b
+e = t#9
+t#10 = 1
+t#11 = d - t#10
+d = t#11
+param d
+call WRITE_INT
+goto: L1
+L2: skip

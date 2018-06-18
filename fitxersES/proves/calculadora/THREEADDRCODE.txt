@@ -1,4 +1,5 @@
-continuar = TRUE
+t#0 = TRUE
+continuar = t#0
 goto: MAIN
 L0: skip
 preambulo
@@ -17,19 +18,24 @@ L3: skip
 if t#4 = FALSE goto L4
 L0 return space
 param val
-val = call L0
+t#5 = call L0
+val = t#5
 L4: skip
 return val
 L5: skip
 preambulo
-result = 0
-count = 0
+t#6 = 0
+result = t#6
+t#7 = 0
+count = t#7
 L1 return space
 param a
-ax = call L1
+t#8 = call L1
+ax = t#8
 L1 return space
 param b
-bx = call L1
+t#9 = call L1
+bx = t#9
 L6: skip
 if count < ax goto L8
 t#10 = FALSE
@@ -38,9 +44,11 @@ L8: skip
 t#10 = TRUE
 L9: skip
 if t#10 = FALSE goto L7
-result = result + bx
+t#11 = result + bx
+result = t#11
 t#12 = 1
-count = count + t#12
+t#13 = count + t#12
+count = t#13
 goto: L6
 L7: skip
 t#14 = 0
@@ -77,7 +85,8 @@ t#23 = t#20 | t#22
 if t#23 = FALSE goto L19
 L0 return space
 param result
-result = call L0
+t#24 = call L0
+result = t#24
 L19: skip
 L14: skip
 return result
@@ -90,7 +99,8 @@ t#25 = call L5
 return t#25
 L21: skip
 preambulo
-Q = 0
+t#26 = 0
+Q = t#26
 R = N
 L22: skip
 if R >= D goto L24
@@ -101,14 +111,17 @@ t#27 = TRUE
 L25: skip
 if t#27 = FALSE goto L23
 t#28 = 1
-Q = Q + t#28
-R = R - D
+t#29 = Q + t#28
+Q = t#29
+t#30 = R - D
+R = t#30
 goto: L22
 L23: skip
 return Q
 L26: skip
 preambulo
-RESULT = 0
+t#31 = 0
+RESULT = t#31
 t#32 = 0
 if D = t#32 goto L27
 t#33 = FALSE
@@ -135,10 +148,12 @@ param D
 t#37 = call L0
 param t#37
 param N
-Q = call L26
+t#38 = call L26
+Q = t#38
 L0 return space
 param Q
-RESULT = call L0
+t#39 = call L0
+RESULT = t#39
 L32: skip
 t#40 = 0
 if N < t#40 goto L33
@@ -162,10 +177,12 @@ param N
 t#45 = call L0
 param D
 param t#45
-Q = call L26
+t#46 = call L26
+Q = t#46
 L0 return space
 param Q
-RESULT = call L0
+t#47 = call L0
+RESULT = t#47
 L37: skip
 t#48 = 0
 if N >= t#48 goto L38
@@ -186,7 +203,8 @@ if t#52 = FALSE goto L42
 L21 return space
 param D
 param N
-RESULT = call L21
+t#53 = call L21
+RESULT = t#53
 L42: skip
 return RESULT
 L43: skip
@@ -203,7 +221,8 @@ t#56 = a - t#55
 return t#56
 L44: skip
 preambulo
-result = TRUE
+t#57 = TRUE
+result = t#57
 t#58 = 2
 if n = t#58 goto L45
 t#59 = FALSE
@@ -220,7 +239,8 @@ t#61 = TRUE
 L48: skip
 t#62 = t#59 | t#61
 if t#62 = FALSE goto L49
-result = TRUE
+t#63 = TRUE
+result = t#63
 L49: skip
 t#66 = 0
 L43 return space
@@ -248,10 +268,13 @@ t#71 = TRUE
 L53: skip
 t#72 = t#67 | t#71
 if t#72 = FALSE goto L54
-result = FALSE
+t#73 = FALSE
+result = t#73
 L54: skip
-i = 5
-w = 2
+t#74 = 5
+i = t#74
+t#75 = 2
+w = t#75
 L55: skip
 L20 return space
 param i
@@ -275,11 +298,14 @@ L59: skip
 t#80 = TRUE
 L60: skip
 if t#80 = FALSE goto L61
-result = FALSE
+t#81 = FALSE
+result = t#81
 L61: skip
-i = i + w
+t#82 = i + w
+i = t#82
 t#83 = 6
-w = t#83 - w
+t#84 = t#83 - w
+w = t#84
 goto: L55
 L56: skip
 return result
@@ -293,10 +319,11 @@ L63: skip
 t#86 = TRUE
 L64: skip
 if t#86 = FALSE goto L65
-result = 1
+t#87 = 1
+result = t#87
 L65: skip
 t#88 = 0
-if i != t#88 goto L66
+if i > t#88 goto L66
 t#89 = FALSE
 goto: L67
 L66: skip
@@ -311,7 +338,8 @@ param t#91
 t#92 = call L62
 param t#92
 param i
-result = call L5
+t#93 = call L5
+result = t#93
 L68: skip
 return result
 MAIN: skip
@@ -339,7 +367,8 @@ t#100 = "5. Factorial"
 param t#100
 call WRITE_STRING
 READINT return space
-opcion = call READINT
+t#101 = call READINT
+opcion = t#101
 t#102 = 1
 if opcion = t#102 goto L71
 t#103 = FALSE
@@ -377,12 +406,14 @@ t#111 = "Introduce primer valor:"
 param t#111
 call WRITE_STRING
 READINT return space
-val1 = call READINT
+t#112 = call READINT
+val1 = t#112
 t#113 = "Introduce segundo valor:"
 param t#113
 call WRITE_STRING
 READINT return space
-val2 = call READINT
+t#114 = call READINT
+val2 = t#114
 t#115 = "Resultado:"
 param t#115
 call WRITE_STRING
@@ -408,12 +439,14 @@ t#120 = "Introduce dividendo:"
 param t#120
 call WRITE_STRING
 READINT return space
-val1 = call READINT
+t#121 = call READINT
+val1 = t#121
 t#122 = "Introduce divisor:"
 param t#122
 call WRITE_STRING
 READINT return space
-val2 = call READINT
+t#123 = call READINT
+val2 = t#123
 t#124 = "Resultado:"
 param t#124
 call WRITE_STRING
@@ -442,7 +475,8 @@ L44 return space
 READINT return space
 t#130 = call READINT
 param t#130
-esPrimo = call L44
+t#131 = call L44
+esPrimo = t#131
 t#132 = "Resultado:"
 param t#132
 call WRITE_STRING
@@ -486,7 +520,8 @@ t#142 = "Introduce numero:"
 param t#142
 call WRITE_STRING
 READINT return space
-entrada = call READINT
+t#143 = call READINT
+entrada = t#143
 t#144 = 20
 if entrada < t#144 goto L92
 t#145 = FALSE
@@ -497,7 +532,8 @@ L93: skip
 if t#145 = FALSE goto L94
 L62 return space
 param entrada
-result = call L62
+t#146 = call L62
+result = t#146
 t#147 = "Resultado:"
 param t#147
 call WRITE_STRING
@@ -525,7 +561,8 @@ L98: skip
 t#152 = TRUE
 L99: skip
 if t#152 = FALSE goto L100
-continuar = FALSE
+t#153 = FALSE
+continuar = t#153
 t#154 = "Saliendo"
 param t#154
 call WRITE_STRING

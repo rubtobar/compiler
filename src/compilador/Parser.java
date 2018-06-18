@@ -1051,20 +1051,25 @@ class CUP$Parser$actions {
 		int clpright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Token clp = (Token)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-        ArrayList <TSB> paramList = (ArrayList <TSB>) params.result;
-        String procName = params.proc;
-        TblSymbol aux = st.get(procName);
-        if (aux == null || aux.d.dt != DescriptionType.DPROC) {
-            errPrinter.undeclaredFunction(clp.line, clp.column, procName);
-        }
-        else {
-        	Integer tid = null;
-        	TSB returnType = aux.d.tsb;
-        	if (returnType != TSB.VOID) {
-            	tid = st.addTemp(returnType);
-           	}
-	        RESULT = new NodeCall(params, aux.id, tid, returnType);
-        }
+		if (params == null){
+			// ignora
+		}
+		else {
+			ArrayList <TSB> paramList = (ArrayList <TSB>) params.result;
+			String procName = params.proc;
+			TblSymbol aux = st.get(procName);
+			if (aux == null || aux.d.dt != DescriptionType.DPROC) {
+				errPrinter.undeclaredFunction(clp.line, clp.column, procName);
+			}
+			else {
+				Integer tid = null;
+				TSB returnType = aux.d.tsb;
+				if (returnType != TSB.VOID) {
+					tid = st.addTemp(returnType);
+				}
+				RESULT = new NodeCall(params, aux.id, tid, returnType);
+			}
+		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("CALL",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -1199,13 +1204,17 @@ class CUP$Parser$actions {
 		
 		if (et == null || vt == null) {
 			// Ignorar
-		} else if (et.result != TSB.INT) {
-            errPrinter.unexpectedValueType(op.line, op.column, et.result.toString(), TSB.INT.toString());
-		} else if (vt.result != TSB.INT){
-            errPrinter.unexpectedValueType(op.line, op.column, vt.result.toString(), TSB.INT.toString());
-        } else {
+		} else if (et.result != TSB.INT && et.result != TSB.BOOL) {
+            errPrinter.unexpectedValueType(op.line, op.column, et.result.toString());
+		} else if (vt.result != TSB.INT && et.result != TSB.BOOL){
+            errPrinter.unexpectedValueType(op.line, op.column, vt.result.toString());
+        } else if (et.result != vt.result){
+			errPrinter.unexpectedValueType(op.line, op.column, vt.result.toString());
+		} else if (et.result == TSB.BOOL && !op.getAtribut().equals("==")){
+			errPrinter.notALogicStatement(op.line, op.column, op.getAtribut());
+		} else {
         	int tid = st.addTemp(TSB.BOOL);
-        	RESULT = new NodeLogExpr(et,vt,tid,op.getAtribut(),TSB.BOOL);
+        	RESULT = new NodeLogExpr(et,vt,tid,op.getAtribut(), TSB.BOOL);
 		}
 		
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("LOG_EXPR",16, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);

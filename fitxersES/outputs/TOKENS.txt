@@ -134,128 +134,113 @@
 36:15: tk_pcoma
 37:1: tk_rightb
 39:1: tk_id: 'int'
-39:5: tk_id: 'divide_unsigned'
-39:20: tk_openp
-39:21: tk_id: 'int'
-39:25: tk_id: 'N'
-39:26: tk_coma
-39:28: tk_id: 'int'
-39:32: tk_id: 'D'
-39:33: tk_closep
-39:35: tk_leftb
-40:2: tk_id: 'int'
-40:6: tk_id: 'Q'
-40:8: tk_equal
-40:10: tk_digits: '0'
-40:11: tk_pcoma
-41:2: tk_id: 'int'
-41:6: tk_id: 'R'
-41:8: tk_equal
-41:10: tk_id: 'N'
-41:11: tk_pcoma
-42:2: tk_while
-42:8: tk_openp
-42:9: tk_id: 'R'
-42:11: tk_op_rel: '>='
-42:14: tk_id: 'D'
-42:15: tk_closep
-42:17: tk_leftb
-43:3: tk_id: 'Q'
-43:5: tk_equal
-43:7: tk_id: 'Q'
-43:9: tk_op_aritm: '+'
-43:11: tk_digits: '1'
-43:12: tk_pcoma
-44:3: tk_id: 'R'
-44:5: tk_equal
-44:7: tk_id: 'R'
-44:9: tk_op_aritm: '-'
-44:11: tk_id: 'D'
-44:12: tk_pcoma
-45:2: tk_rightb
-46:2: tk_return
-46:9: tk_id: 'Q'
-46:10: tk_pcoma
-47:1: tk_rightb
-50:1: tk_id: 'int'
-50:5: tk_id: 'divide'
-50:11: tk_openp
-50:12: tk_id: 'int'
-50:16: tk_id: 'N'
-50:17: tk_coma
-50:19: tk_id: 'int'
-50:23: tk_id: 'D'
-50:24: tk_closep
-50:25: tk_leftb
-51:2: tk_id: 'int'
-51:6: tk_id: 'Q'
-51:7: tk_pcoma
-52:2: tk_id: 'int'
-52:6: tk_id: 'RESULT'
-52:13: tk_equal
-52:15: tk_digits: '0'
-52:16: tk_pcoma
-53:2: tk_if
-53:5: tk_openp
-53:6: tk_id: 'D'
-53:8: tk_op_rel: '=='
-53:11: tk_digits: '0'
-53:12: tk_closep
-53:14: tk_leftb
-54:3: tk_id: 'write'
-54:8: tk_openp
-54:9: tk_string: 'Division by 0'
+39:5: tk_id: 'power2'
+39:11: tk_openp
+39:12: tk_id: 'int'
+39:16: tk_id: 'n'
+39:17: tk_closep
+39:18: tk_leftb
+40:5: tk_return
+40:12: tk_id: 'mult'
+40:16: tk_openp
+40:17: tk_id: 'n'
+40:18: tk_coma
+40:20: tk_id: 'n'
+40:21: tk_closep
+40:22: tk_pcoma
+41:1: tk_rightb
+43:1: tk_id: 'int'
+43:5: tk_id: 'divide_unsigned'
+43:20: tk_openp
+43:21: tk_id: 'int'
+43:25: tk_id: 'N'
+43:26: tk_coma
+43:28: tk_id: 'int'
+43:32: tk_id: 'D'
+43:33: tk_closep
+43:35: tk_leftb
+44:2: tk_id: 'int'
+44:6: tk_id: 'Q'
+44:8: tk_equal
+44:10: tk_digits: '0'
+44:11: tk_pcoma
+45:2: tk_id: 'int'
+45:6: tk_id: 'R'
+45:8: tk_equal
+45:10: tk_id: 'N'
+45:11: tk_pcoma
+46:2: tk_while
+46:8: tk_openp
+46:9: tk_id: 'R'
+46:11: tk_op_rel: '>='
+46:14: tk_id: 'D'
+46:15: tk_closep
+46:17: tk_leftb
+47:3: tk_id: 'Q'
+47:5: tk_equal
+47:7: tk_id: 'Q'
+47:9: tk_op_aritm: '+'
+47:11: tk_digits: '1'
+47:12: tk_pcoma
+48:3: tk_id: 'R'
+48:5: tk_equal
+48:7: tk_id: 'R'
+48:9: tk_op_aritm: '-'
+48:11: tk_id: 'D'
+48:12: tk_pcoma
+49:2: tk_rightb
+50:2: tk_return
+50:9: tk_id: 'Q'
+50:10: tk_pcoma
+51:1: tk_rightb
+54:1: tk_id: 'int'
+54:5: tk_id: 'divide'
+54:11: tk_openp
+54:12: tk_id: 'int'
+54:16: tk_id: 'N'
+54:17: tk_coma
+54:19: tk_id: 'int'
+54:23: tk_id: 'D'
 54:24: tk_closep
-54:25: tk_pcoma
-55:2: tk_rightb
-56:2: tk_if
-56:5: tk_openp
-56:6: tk_id: 'D'
-56:8: tk_op_rel: '<'
-56:10: tk_digits: '0'
-56:11: tk_closep
-56:13: tk_leftb
-57:3: tk_id: 'Q'
-57:5: tk_equal
-57:7: tk_id: 'divide'
-57:13: tk_openp
-57:14: tk_id: 'N'
-57:15: tk_coma
-57:17: tk_id: 'neg'
-57:20: tk_openp
-57:21: tk_id: 'D'
-57:22: tk_closep
-57:23: tk_closep
-57:24: tk_pcoma
-58:3: tk_id: 'RESULT'
-58:10: tk_equal
-58:12: tk_id: 'neg'
-58:15: tk_openp
-58:16: tk_id: 'Q'
-58:17: tk_closep
-58:18: tk_pcoma
+54:25: tk_leftb
+55:2: tk_id: 'int'
+55:6: tk_id: 'Q'
+55:7: tk_pcoma
+56:2: tk_id: 'int'
+56:6: tk_id: 'RESULT'
+56:13: tk_equal
+56:15: tk_digits: '0'
+56:16: tk_pcoma
+57:2: tk_if
+57:5: tk_openp
+57:6: tk_id: 'D'
+57:8: tk_op_rel: '=='
+57:11: tk_digits: '0'
+57:12: tk_closep
+57:14: tk_leftb
+58:3: tk_id: 'write'
+58:8: tk_openp
+58:9: tk_string: 'Division by 0'
+58:24: tk_closep
+58:25: tk_pcoma
 59:2: tk_rightb
 60:2: tk_if
 60:5: tk_openp
-60:6: tk_id: 'N'
+60:6: tk_id: 'D'
 60:8: tk_op_rel: '<'
 60:10: tk_digits: '0'
-60:13: tk_op_log: '&'
-60:15: tk_id: 'D'
-60:17: tk_op_rel: '>'
-60:19: tk_digits: '0'
-60:20: tk_closep
-60:22: tk_leftb
+60:11: tk_closep
+60:13: tk_leftb
 61:3: tk_id: 'Q'
 61:5: tk_equal
 61:7: tk_id: 'divide'
 61:13: tk_openp
-61:14: tk_id: 'neg'
-61:17: tk_openp
-61:18: tk_id: 'N'
-61:19: tk_closep
-61:20: tk_coma
-61:22: tk_id: 'D'
+61:14: tk_id: 'N'
+61:15: tk_coma
+61:17: tk_id: 'neg'
+61:20: tk_openp
+61:21: tk_id: 'D'
+61:22: tk_closep
 61:23: tk_closep
 61:24: tk_pcoma
 62:3: tk_id: 'RESULT'
@@ -266,218 +251,564 @@
 62:17: tk_closep
 62:18: tk_pcoma
 63:2: tk_rightb
-65:2: tk_if
-65:5: tk_openp
-65:6: tk_id: 'N'
-65:8: tk_op_rel: '>='
-65:11: tk_digits: '0'
-65:13: tk_op_log: '&'
-65:15: tk_id: 'D'
-65:17: tk_op_rel: '>'
-65:19: tk_digits: '0'
-65:20: tk_closep
-65:22: tk_leftb
+64:2: tk_if
+64:5: tk_openp
+64:6: tk_id: 'N'
+64:8: tk_op_rel: '<'
+64:10: tk_digits: '0'
+64:13: tk_op_log: '&'
+64:15: tk_id: 'D'
+64:17: tk_op_rel: '>'
+64:19: tk_digits: '0'
+64:20: tk_closep
+64:22: tk_leftb
+65:3: tk_id: 'Q'
+65:5: tk_equal
+65:7: tk_id: 'divide'
+65:13: tk_openp
+65:14: tk_id: 'neg'
+65:17: tk_openp
+65:18: tk_id: 'N'
+65:19: tk_closep
+65:20: tk_coma
+65:22: tk_id: 'D'
+65:23: tk_closep
+65:24: tk_pcoma
 66:3: tk_id: 'RESULT'
 66:10: tk_equal
-66:12: tk_id: 'divide_unsigned'
-66:27: tk_openp
-66:28: tk_id: 'N'
-66:29: tk_coma
-66:31: tk_id: 'D'
-66:32: tk_closep
-66:33: tk_pcoma
+66:12: tk_id: 'neg'
+66:15: tk_openp
+66:16: tk_id: 'Q'
+66:17: tk_closep
+66:18: tk_pcoma
 67:2: tk_rightb
-68:2: tk_return
-68:9: tk_id: 'RESULT'
-68:15: tk_pcoma
-69:1: tk_rightb
-71:1: tk_main
-71:5: tk_leftb
-72:2: tk_while
-72:8: tk_openp
-72:9: tk_id: 'continuar'
-72:18: tk_closep
-72:20: tk_leftb
-73:3: tk_id: 'write'
-73:8: tk_openp
-73:9: tk_string: '<------Calculadora------>'
-73:36: tk_closep
-73:37: tk_pcoma
-74:3: tk_id: 'write'
-74:8: tk_openp
-74:9: tk_string: '0. Salir'
-74:19: tk_closep
-74:20: tk_pcoma
-75:3: tk_id: 'write'
-75:8: tk_openp
-75:9: tk_string: '1. Valor absoluto'
-75:28: tk_closep
-75:29: tk_pcoma
-76:3: tk_id: 'write'
+69:2: tk_if
+69:5: tk_openp
+69:6: tk_id: 'N'
+69:8: tk_op_rel: '>='
+69:11: tk_digits: '0'
+69:13: tk_op_log: '&'
+69:15: tk_id: 'D'
+69:17: tk_op_rel: '>'
+69:19: tk_digits: '0'
+69:20: tk_closep
+69:22: tk_leftb
+70:3: tk_id: 'RESULT'
+70:10: tk_equal
+70:12: tk_id: 'divide_unsigned'
+70:27: tk_openp
+70:28: tk_id: 'N'
+70:29: tk_coma
+70:31: tk_id: 'D'
+70:32: tk_closep
+70:33: tk_pcoma
+71:2: tk_rightb
+72:2: tk_return
+72:9: tk_id: 'RESULT'
+72:15: tk_pcoma
+73:1: tk_rightb
+76:1: tk_id: 'int'
+76:5: tk_id: 'mod'
 76:8: tk_openp
-76:9: tk_string: '2. Multiplicar'
-76:25: tk_closep
-76:26: tk_pcoma
-77:3: tk_id: 'write'
-77:8: tk_openp
-77:9: tk_string: '3. Dividir'
-77:21: tk_closep
-77:22: tk_pcoma
-79:3: tk_id: 'int'
-79:7: tk_id: 'opcion'
-79:14: tk_equal
-79:16: tk_id: 'readInt'
-79:23: tk_openp
-79:24: tk_closep
-79:25: tk_pcoma
-80:3: tk_if
-80:6: tk_openp
-80:7: tk_id: 'opcion'
-80:14: tk_op_rel: '=='
-80:17: tk_digits: '1'
-80:18: tk_closep
-80:20: tk_leftb
-81:4: tk_id: 'write'
-81:9: tk_openp
-81:10: tk_string: '--Valor absoluto--'
-81:30: tk_closep
-81:31: tk_pcoma
-82:4: tk_id: 'write'
-82:9: tk_openp
-82:10: tk_string: 'Introduce valor:'
-82:28: tk_closep
-82:29: tk_pcoma
-83:4: tk_id: 'write'
-83:9: tk_openp
-83:10: tk_id: 'abs'
-83:13: tk_openp
-83:14: tk_id: 'readInt'
-83:21: tk_openp
+76:9: tk_id: 'int'
+76:13: tk_id: 'a'
+76:14: tk_coma
+76:16: tk_id: 'int'
+76:20: tk_id: 'b'
+76:21: tk_closep
+76:22: tk_leftb
+77:5: tk_return
+77:12: tk_id: 'a'
+77:14: tk_op_aritm: '-'
+77:16: tk_id: 'mult'
+77:20: tk_openp
+77:21: tk_id: 'b'
+77:22: tk_coma
+77:24: tk_id: 'divide'
+77:30: tk_openp
+77:31: tk_id: 'a'
+77:32: tk_coma
+77:34: tk_id: 'b'
+77:35: tk_closep
+77:36: tk_closep
+77:37: tk_pcoma
+78:1: tk_rightb
+83:1: tk_id: 'boolean'
+83:9: tk_id: 'esPrimo'
+83:16: tk_openp
+83:17: tk_id: 'int'
+83:21: tk_id: 'n'
 83:22: tk_closep
-83:23: tk_closep
-83:24: tk_closep
-83:25: tk_pcoma
-84:3: tk_rightb
-85:3: tk_if
-85:6: tk_openp
-85:7: tk_id: 'opcion'
-85:14: tk_op_rel: '=='
-85:17: tk_digits: '2'
-85:18: tk_closep
-85:20: tk_leftb
-86:4: tk_id: 'write'
-86:9: tk_openp
-86:10: tk_string: '--Multiplicacion--'
-86:30: tk_closep
-86:31: tk_pcoma
-87:4: tk_id: 'write'
-87:9: tk_openp
-87:10: tk_string: 'Introduce primer valor:'
-87:35: tk_closep
-87:36: tk_pcoma
-88:4: tk_id: 'int'
-88:8: tk_id: 'val1'
-88:13: tk_equal
-88:15: tk_id: 'readInt'
-88:22: tk_openp
-88:23: tk_closep
-88:24: tk_pcoma
-89:4: tk_id: 'write'
-89:9: tk_openp
-89:10: tk_string: 'Introduce segundo valor:'
-89:36: tk_closep
-89:37: tk_pcoma
-90:4: tk_id: 'int'
-90:8: tk_id: 'val2'
-90:13: tk_equal
-90:15: tk_id: 'readInt'
-90:22: tk_openp
-90:23: tk_closep
-90:24: tk_pcoma
-91:4: tk_id: 'write'
-91:9: tk_openp
-91:10: tk_string: 'Resultado:'
-91:22: tk_closep
-91:23: tk_pcoma
-92:4: tk_id: 'write'
-92:9: tk_openp
-92:10: tk_id: 'mult'
-92:14: tk_openp
-92:15: tk_id: 'val1'
-92:19: tk_coma
-92:20: tk_id: 'val2'
-92:24: tk_closep
-92:25: tk_closep
-92:26: tk_pcoma
-93:3: tk_rightb
-94:3: tk_if
-94:6: tk_openp
-94:7: tk_id: 'opcion'
-94:14: tk_op_rel: '=='
-94:17: tk_digits: '3'
-94:18: tk_closep
-94:20: tk_leftb
-95:4: tk_id: 'write'
-95:9: tk_openp
-95:10: tk_string: '--Division--'
-95:24: tk_closep
-95:25: tk_pcoma
-96:4: tk_id: 'write'
-96:9: tk_openp
-96:10: tk_string: 'Introduce dividendo:'
-96:32: tk_closep
-96:33: tk_pcoma
-97:4: tk_id: 'int'
-97:8: tk_id: 'val1'
-97:13: tk_equal
-97:15: tk_id: 'readInt'
-97:22: tk_openp
-97:23: tk_closep
-97:24: tk_pcoma
-98:4: tk_id: 'write'
-98:9: tk_openp
-98:10: tk_string: 'Introduce divisor:'
-98:30: tk_closep
-98:31: tk_pcoma
-99:4: tk_id: 'int'
-99:8: tk_id: 'val2'
-99:13: tk_equal
-99:15: tk_id: 'readInt'
-99:22: tk_openp
-99:23: tk_closep
-99:24: tk_pcoma
-100:4: tk_id: 'write'
-100:9: tk_openp
-100:10: tk_string: 'Resultado:'
-100:22: tk_closep
-100:23: tk_pcoma
-101:4: tk_id: 'write'
-101:9: tk_openp
-101:10: tk_id: 'divide'
-101:16: tk_openp
-101:17: tk_id: 'val1'
-101:21: tk_coma
-101:22: tk_id: 'val2'
-101:26: tk_closep
-101:27: tk_closep
-101:28: tk_pcoma
-102:3: tk_rightb
-103:3: tk_if
-103:6: tk_openp
-103:7: tk_id: 'opcion'
-103:14: tk_op_rel: '=='
-103:17: tk_digits: '0'
-103:18: tk_closep
-103:20: tk_leftb
-104:4: tk_id: 'continuar'
-104:14: tk_equal
-104:16: tk_id: 'false'
-104:21: tk_pcoma
-105:4: tk_id: 'write'
-105:9: tk_openp
-105:10: tk_string: 'Saliendo'
-105:20: tk_closep
-105:21: tk_pcoma
-106:3: tk_rightb
-107:2: tk_rightb
-108:1: tk_rightb
+83:23: tk_leftb
+84:5: tk_id: 'boolean'
+84:13: tk_id: 'result'
+84:20: tk_equal
+84:22: tk_id: 'true'
+84:26: tk_pcoma
+86:5: tk_if
+86:8: tk_openp
+86:9: tk_id: 'n'
+86:11: tk_op_rel: '=='
+86:14: tk_digits: '2'
+86:16: tk_op_log: '|'
+86:18: tk_id: 'n'
+86:20: tk_op_rel: '=='
+86:23: tk_digits: '3'
+86:24: tk_closep
+86:25: tk_leftb
+87:9: tk_id: 'result'
+87:16: tk_equal
+87:18: tk_id: 'true'
+87:22: tk_pcoma
+88:5: tk_rightb
+89:5: tk_if
+89:8: tk_openp
+89:9: tk_id: 'mod'
+89:12: tk_openp
+89:13: tk_id: 'n'
+89:14: tk_coma
+89:16: tk_digits: '2'
+89:17: tk_closep
+89:19: tk_op_rel: '=='
+89:22: tk_digits: '0'
+89:24: tk_op_log: '|'
+89:26: tk_id: 'mod'
+89:29: tk_openp
+89:30: tk_id: 'n'
+89:31: tk_coma
+89:33: tk_digits: '3'
+89:34: tk_closep
+89:36: tk_op_rel: '=='
+89:39: tk_digits: '0'
+89:40: tk_closep
+89:41: tk_leftb
+90:9: tk_id: 'result'
+90:16: tk_equal
+90:18: tk_id: 'false'
+90:23: tk_pcoma
+91:5: tk_rightb
+93:5: tk_id: 'int'
+93:9: tk_id: 'i'
+93:11: tk_equal
+93:13: tk_digits: '5'
+93:14: tk_pcoma
+94:5: tk_id: 'int'
+94:9: tk_id: 'w'
+94:11: tk_equal
+94:13: tk_digits: '2'
+94:14: tk_pcoma
+96:5: tk_while
+96:10: tk_openp
+96:11: tk_id: 'power2'
+96:17: tk_openp
+96:18: tk_id: 'i'
+96:19: tk_closep
+96:21: tk_op_rel: '<='
+96:24: tk_id: 'n'
+96:25: tk_closep
+96:26: tk_leftb
+97:9: tk_if
+97:12: tk_openp
+97:13: tk_id: 'mod'
+97:16: tk_openp
+97:17: tk_id: 'n'
+97:18: tk_coma
+97:20: tk_id: 'i'
+97:21: tk_closep
+97:23: tk_op_rel: '=='
+97:26: tk_digits: '0'
+97:27: tk_closep
+97:28: tk_leftb
+98:13: tk_id: 'result'
+98:20: tk_equal
+98:22: tk_id: 'false'
+98:27: tk_pcoma
+99:9: tk_rightb
+100:9: tk_id: 'i'
+100:11: tk_equal
+100:13: tk_id: 'i'
+100:15: tk_op_aritm: '+'
+100:17: tk_id: 'w'
+100:18: tk_pcoma
+101:9: tk_id: 'w'
+101:11: tk_equal
+101:13: tk_digits: '6'
+101:15: tk_op_aritm: '-'
+101:17: tk_id: 'w'
+101:18: tk_pcoma
+102:5: tk_rightb
+103:5: tk_return
+103:12: tk_id: 'result'
+103:18: tk_pcoma
+104:1: tk_rightb
+106:1: tk_id: 'int'
+106:5: tk_id: 'factorial'
+106:14: tk_openp
+106:15: tk_id: 'int'
+106:19: tk_id: 'i'
+106:20: tk_closep
+106:22: tk_leftb
+107:2: tk_id: 'int'
+107:6: tk_id: 'result'
+107:12: tk_pcoma
+108:2: tk_if
+108:5: tk_openp
+108:6: tk_id: 'i'
+108:8: tk_op_rel: '=='
+108:11: tk_digits: '0'
+108:12: tk_closep
+108:14: tk_leftb
+109:3: tk_id: 'result'
+109:10: tk_equal
+109:12: tk_digits: '1'
+109:13: tk_pcoma
+110:2: tk_rightb
+111:2: tk_if
+111:5: tk_openp
+111:6: tk_id: 'i'
+111:8: tk_op_rel: '!='
+111:11: tk_digits: '0'
+111:12: tk_closep
+111:14: tk_leftb
+112:3: tk_id: 'result'
+112:10: tk_equal
+112:12: tk_id: 'mult'
+112:16: tk_openp
+112:17: tk_id: 'i'
+112:18: tk_coma
+112:20: tk_id: 'factorial'
+112:29: tk_openp
+112:30: tk_id: 'i'
+112:32: tk_op_aritm: '-'
+112:34: tk_digits: '1'
+112:35: tk_closep
+112:36: tk_closep
+112:37: tk_pcoma
+113:2: tk_rightb
+114:2: tk_return
+114:9: tk_id: 'result'
+114:15: tk_pcoma
+115:1: tk_rightb
+117:1: tk_main
+117:5: tk_leftb
+118:2: tk_while
+118:8: tk_openp
+118:9: tk_id: 'continuar'
+118:18: tk_closep
+118:20: tk_leftb
+119:3: tk_id: 'write'
+119:8: tk_openp
+119:9: tk_string: '<------Calculadora------>'
+119:36: tk_closep
+119:37: tk_pcoma
+120:3: tk_id: 'write'
+120:8: tk_openp
+120:9: tk_string: '0. Salir'
+120:19: tk_closep
+120:20: tk_pcoma
+121:3: tk_id: 'write'
+121:8: tk_openp
+121:9: tk_string: '1. Valor absoluto'
+121:28: tk_closep
+121:29: tk_pcoma
+122:3: tk_id: 'write'
+122:8: tk_openp
+122:9: tk_string: '2. Multiplicar'
+122:25: tk_closep
+122:26: tk_pcoma
+123:3: tk_id: 'write'
+123:8: tk_openp
+123:9: tk_string: '3. Dividir'
+123:21: tk_closep
+123:22: tk_pcoma
+124:3: tk_id: 'write'
+124:8: tk_openp
+124:9: tk_string: '4. Es primo'
+124:22: tk_closep
+124:23: tk_pcoma
+125:3: tk_id: 'write'
+125:8: tk_openp
+125:9: tk_string: '5. Factorial'
+125:23: tk_closep
+125:24: tk_pcoma
+127:3: tk_id: 'int'
+127:7: tk_id: 'opcion'
+127:14: tk_equal
+127:16: tk_id: 'readInt'
+127:23: tk_openp
+127:24: tk_closep
+127:25: tk_pcoma
+128:3: tk_if
+128:6: tk_openp
+128:7: tk_id: 'opcion'
+128:14: tk_op_rel: '=='
+128:17: tk_digits: '1'
+128:18: tk_closep
+128:20: tk_leftb
+129:4: tk_id: 'write'
+129:9: tk_openp
+129:10: tk_string: '--Valor absoluto--'
+129:30: tk_closep
+129:31: tk_pcoma
+130:4: tk_id: 'write'
+130:9: tk_openp
+130:10: tk_string: 'Introduce valor:'
+130:28: tk_closep
+130:29: tk_pcoma
+131:4: tk_id: 'write'
+131:9: tk_openp
+131:10: tk_id: 'abs'
+131:13: tk_openp
+131:14: tk_id: 'readInt'
+131:21: tk_openp
+131:22: tk_closep
+131:23: tk_closep
+131:24: tk_closep
+131:25: tk_pcoma
+132:3: tk_rightb
+133:3: tk_if
+133:6: tk_openp
+133:7: tk_id: 'opcion'
+133:14: tk_op_rel: '=='
+133:17: tk_digits: '2'
+133:18: tk_closep
+133:20: tk_leftb
+134:4: tk_id: 'write'
+134:9: tk_openp
+134:10: tk_string: '--Multiplicacion--'
+134:30: tk_closep
+134:31: tk_pcoma
+135:4: tk_id: 'write'
+135:9: tk_openp
+135:10: tk_string: 'Introduce primer valor:'
+135:35: tk_closep
+135:36: tk_pcoma
+136:4: tk_id: 'int'
+136:8: tk_id: 'val1'
+136:13: tk_equal
+136:15: tk_id: 'readInt'
+136:22: tk_openp
+136:23: tk_closep
+136:24: tk_pcoma
+137:4: tk_id: 'write'
+137:9: tk_openp
+137:10: tk_string: 'Introduce segundo valor:'
+137:36: tk_closep
+137:37: tk_pcoma
+138:4: tk_id: 'int'
+138:8: tk_id: 'val2'
+138:13: tk_equal
+138:15: tk_id: 'readInt'
+138:22: tk_openp
+138:23: tk_closep
+138:24: tk_pcoma
+139:4: tk_id: 'write'
+139:9: tk_openp
+139:10: tk_string: 'Resultado:'
+139:22: tk_closep
+139:23: tk_pcoma
+140:4: tk_id: 'write'
+140:9: tk_openp
+140:10: tk_id: 'mult'
+140:14: tk_openp
+140:15: tk_id: 'val1'
+140:19: tk_coma
+140:20: tk_id: 'val2'
+140:24: tk_closep
+140:25: tk_closep
+140:26: tk_pcoma
+141:3: tk_rightb
+142:3: tk_if
+142:6: tk_openp
+142:7: tk_id: 'opcion'
+142:14: tk_op_rel: '=='
+142:17: tk_digits: '3'
+142:18: tk_closep
+142:20: tk_leftb
+143:4: tk_id: 'write'
+143:9: tk_openp
+143:10: tk_string: '--Division--'
+143:24: tk_closep
+143:25: tk_pcoma
+144:4: tk_id: 'write'
+144:9: tk_openp
+144:10: tk_string: 'Introduce dividendo:'
+144:32: tk_closep
+144:33: tk_pcoma
+145:4: tk_id: 'int'
+145:8: tk_id: 'val1'
+145:13: tk_equal
+145:15: tk_id: 'readInt'
+145:22: tk_openp
+145:23: tk_closep
+145:24: tk_pcoma
+146:4: tk_id: 'write'
+146:9: tk_openp
+146:10: tk_string: 'Introduce divisor:'
+146:30: tk_closep
+146:31: tk_pcoma
+147:4: tk_id: 'int'
+147:8: tk_id: 'val2'
+147:13: tk_equal
+147:15: tk_id: 'readInt'
+147:22: tk_openp
+147:23: tk_closep
+147:24: tk_pcoma
+148:4: tk_id: 'write'
+148:9: tk_openp
+148:10: tk_string: 'Resultado:'
+148:22: tk_closep
+148:23: tk_pcoma
+149:4: tk_id: 'write'
+149:9: tk_openp
+149:10: tk_id: 'divide'
+149:16: tk_openp
+149:17: tk_id: 'val1'
+149:21: tk_coma
+149:22: tk_id: 'val2'
+149:26: tk_closep
+149:27: tk_closep
+149:28: tk_pcoma
+150:3: tk_rightb
+151:3: tk_if
+151:6: tk_openp
+151:7: tk_id: 'opcion'
+151:14: tk_op_rel: '=='
+151:17: tk_digits: '4'
+151:18: tk_closep
+151:20: tk_leftb
+152:4: tk_id: 'write'
+152:9: tk_openp
+152:10: tk_string: '--Es primo--'
+152:24: tk_closep
+152:25: tk_pcoma
+153:4: tk_id: 'write'
+153:9: tk_openp
+153:10: tk_string: 'Introduce numero:'
+153:29: tk_closep
+153:30: tk_pcoma
+154:4: tk_id: 'boolean'
+154:12: tk_id: 'esPrimo'
+154:20: tk_equal
+154:22: tk_id: 'esPrimo'
+154:29: tk_openp
+154:30: tk_id: 'readInt'
+154:37: tk_openp
+154:38: tk_closep
+154:39: tk_closep
+154:40: tk_pcoma
+155:4: tk_id: 'write'
+155:9: tk_openp
+155:10: tk_string: 'Resultado:'
+155:22: tk_closep
+155:23: tk_pcoma
+156:4: tk_if
+156:7: tk_openp
+156:8: tk_id: 'esPrimo'
+156:16: tk_op_rel: '=='
+156:19: tk_id: 'true'
+156:23: tk_closep
+156:24: tk_leftb
+157:5: tk_id: 'write'
+157:10: tk_openp
+157:11: tk_string: 'Es primo!'
+157:22: tk_closep
+157:23: tk_pcoma
+158:4: tk_rightb
+159:4: tk_if
+159:7: tk_openp
+159:8: tk_id: 'esPrimo'
+159:16: tk_op_rel: '=='
+159:19: tk_id: 'false'
+159:24: tk_closep
+159:25: tk_leftb
+160:5: tk_id: 'write'
+160:10: tk_openp
+160:11: tk_string: 'NO es primo!'
+160:25: tk_closep
+160:26: tk_pcoma
+161:4: tk_rightb
+162:3: tk_rightb
+163:3: tk_if
+163:6: tk_openp
+163:7: tk_id: 'opcion'
+163:14: tk_op_rel: '=='
+163:17: tk_digits: '5'
+163:18: tk_closep
+163:19: tk_leftb
+164:4: tk_id: 'write'
+164:9: tk_openp
+164:10: tk_string: '--Factorial--'
+164:25: tk_closep
+164:26: tk_pcoma
+165:4: tk_id: 'write'
+165:9: tk_openp
+165:10: tk_string: 'Introduce numero:'
+165:29: tk_closep
+165:30: tk_pcoma
+166:4: tk_id: 'int'
+166:8: tk_id: 'entrada'
+166:16: tk_equal
+166:18: tk_id: 'readInt'
+166:25: tk_openp
+166:26: tk_closep
+166:27: tk_pcoma
+167:4: tk_if
+167:7: tk_openp
+167:8: tk_id: 'entrada'
+167:16: tk_op_rel: '<'
+167:18: tk_digits: '20'
+167:20: tk_closep
+167:21: tk_leftb
+168:5: tk_id: 'int'
+168:9: tk_id: 'result'
+168:16: tk_equal
+168:18: tk_id: 'factorial'
+168:27: tk_openp
+168:28: tk_id: 'entrada'
+168:35: tk_closep
+168:36: tk_pcoma
+169:5: tk_id: 'write'
+169:10: tk_openp
+169:11: tk_string: 'Resultado:'
+169:23: tk_closep
+169:24: tk_pcoma
+170:5: tk_id: 'write'
+170:10: tk_openp
+170:11: tk_id: 'result'
+170:17: tk_closep
+170:18: tk_pcoma
+171:4: tk_rightb
+172:4: tk_if
+172:7: tk_openp
+172:8: tk_id: 'entrada'
+172:16: tk_op_rel: '>='
+172:19: tk_digits: '20'
+172:21: tk_closep
+172:22: tk_leftb
+173:5: tk_id: 'write'
+173:10: tk_openp
+173:11: tk_string: 'El numero es demasiado grande'
+173:42: tk_closep
+173:43: tk_pcoma
+174:4: tk_rightb
+175:3: tk_rightb
+176:3: tk_if
+176:6: tk_openp
+176:7: tk_id: 'opcion'
+176:14: tk_op_rel: '=='
+176:17: tk_digits: '0'
+176:18: tk_closep
+176:20: tk_leftb
+177:4: tk_id: 'continuar'
+177:14: tk_equal
+177:16: tk_id: 'false'
+177:21: tk_pcoma
+178:4: tk_id: 'write'
+178:9: tk_openp
+178:10: tk_string: 'Saliendo'
+178:20: tk_closep
+178:21: tk_pcoma
+179:3: tk_rightb
+180:2: tk_rightb
+181:1: tk_rightb

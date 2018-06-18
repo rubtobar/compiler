@@ -3,7 +3,7 @@ main {
 	int a = 1;
 	int b = 2;
 	a = b;
-	int c = a / b;
+	int c = a + b;
 	int rep = a + b;
 	int d;
 	if(true) {
@@ -13,6 +13,6 @@ main {
 	while(d > 0) {
 		int e = a + b;
 		d = d - 1;
-		write('asd', 'dsa');
+		write(d);
 	}
 }

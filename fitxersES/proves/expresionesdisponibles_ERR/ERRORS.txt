@@ -1,0 +1,10 @@
+6:12: LEXICAL ERROR:
+> 	int c = a / b;
+Unknown symbol '/'
+
+6:15: SYNTAX ERROR:   Not a sentence
+
+16:21: SEMANTIC ERROR:
+> 		write('asd', 'dsa');
+undeclared function 'write@STRING@STRING'
+
