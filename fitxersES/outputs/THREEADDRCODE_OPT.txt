@@ -1,4 +1,4 @@
-t#0 = 20
+continuar = TRUE
 goto: MAIN
 L0: skip
 preambulo
@@ -83,67 +83,221 @@ L14: skip
 return result
 L20: skip
 preambulo
-t#25 = 0
-if i = t#25 goto L21
-t#26 = FALSE
-goto: L22
+Q = 0
+R = N
 L21: skip
-t#26 = TRUE
-L22: skip
-if t#26 = FALSE goto L23
-result = 1
+if R >= D goto L23
+t#26 = FALSE
+goto: L24
 L23: skip
-t#28 = 0
-if i > t#28 goto L24
-t#29 = FALSE
-goto: L25
+t#26 = TRUE
 L24: skip
-t#29 = TRUE
+if t#26 = FALSE goto L22
+t#27 = 1
+Q = Q + t#27
+R = R - D
+goto: L21
+L22: skip
+return Q
 L25: skip
-if t#29 = FALSE goto L26
-L5 return space
-L20 return space
-t#30 = 1
-t#31 = i - t#30
-param t#31
-t#32 = call L20
-param t#32
-param i
-result = call L5
+preambulo
+RESULT = 0
+t#31 = 0
+if D = t#31 goto L26
+t#32 = FALSE
+goto: L27
 L26: skip
-return result
-MAIN: skip
-t#34 = "---- Funcion factorial ----"
-param t#34
+t#32 = TRUE
+L27: skip
+if t#32 = FALSE goto L28
+t#33 = "Division by 0"
+param t#33
 call WRITE_STRING
-t#35 = "Introduce el valor a calcular:"
-param t#35
+L28: skip
+t#34 = 0
+if D < t#34 goto L29
+t#35 = FALSE
+goto: L30
+L29: skip
+t#35 = TRUE
+L30: skip
+if t#35 = FALSE goto L31
+L25 return space
+L0 return space
+param D
+t#36 = call L0
+param t#36
+param N
+Q = call L25
+L0 return space
+param Q
+RESULT = call L0
+L31: skip
+t#39 = 0
+if N < t#39 goto L32
+t#40 = FALSE
+goto: L33
+L32: skip
+t#40 = TRUE
+L33: skip
+t#41 = 0
+if D > t#41 goto L34
+t#42 = FALSE
+goto: L35
+L34: skip
+t#42 = TRUE
+L35: skip
+t#43 = t#40 & t#42
+if t#43 = FALSE goto L36
+L25 return space
+L0 return space
+param N
+t#44 = call L0
+param D
+param t#44
+Q = call L25
+L0 return space
+param Q
+RESULT = call L0
+L36: skip
+t#47 = 0
+if N >= t#47 goto L37
+t#48 = FALSE
+goto: L38
+L37: skip
+t#48 = TRUE
+L38: skip
+t#49 = 0
+if D > t#49 goto L39
+t#50 = FALSE
+goto: L40
+L39: skip
+t#50 = TRUE
+L40: skip
+t#51 = t#48 & t#50
+if t#51 = FALSE goto L41
+L20 return space
+param D
+param N
+RESULT = call L20
+L41: skip
+return RESULT
+MAIN: skip
+L42: skip
+if continuar = FALSE goto L43
+t#53 = "<------Calculadora------>"
+param t#53
+call WRITE_STRING
+t#54 = "0. Salir"
+param t#54
+call WRITE_STRING
+t#55 = "1. Valor absoluto"
+param t#55
+call WRITE_STRING
+t#56 = "2. Multiplicar"
+param t#56
+call WRITE_STRING
+t#57 = "3. Dividir"
+param t#57
 call WRITE_STRING
 READINT return space
-valor = call READINT
-t#37 = t#0
-if valor < t#37 goto L27
-t#38 = FALSE
-goto: L28
-L27: skip
-t#38 = TRUE
-L28: skip
-if t#38 = FALSE goto L29
-L20 return space
-param valor
-t#39 = call L20
-param t#39
-call WRITE_INT
-L29: skip
-t#40 = t#0
-if valor >= t#40 goto L30
-t#41 = FALSE
-goto: L31
-L30: skip
-t#41 = TRUE
-L31: skip
-if t#41 = FALSE goto L32
-t#42 = "Tas pasao"
-param t#42
+opcion = call READINT
+t#59 = 1
+if opcion = t#59 goto L44
+t#60 = FALSE
+goto: L45
+L44: skip
+t#60 = TRUE
+L45: skip
+if t#60 = FALSE goto L46
+t#61 = "--Valor absoluto--"
+param t#61
 call WRITE_STRING
-L32: skip
+t#62 = "Introduce valor:"
+param t#62
+call WRITE_STRING
+L1 return space
+READINT return space
+t#63 = call READINT
+param t#63
+t#64 = call L1
+param t#64
+call WRITE_INT
+L46: skip
+t#65 = 2
+if opcion = t#65 goto L47
+t#66 = FALSE
+goto: L48
+L47: skip
+t#66 = TRUE
+L48: skip
+if t#66 = FALSE goto L49
+t#67 = "--Multiplicacion--"
+param t#67
+call WRITE_STRING
+t#68 = "Introduce primer valor:"
+param t#68
+call WRITE_STRING
+READINT return space
+val1 = call READINT
+t#70 = "Introduce segundo valor:"
+param t#70
+call WRITE_STRING
+READINT return space
+val2 = call READINT
+t#72 = "Resultado:"
+param t#72
+call WRITE_STRING
+L5 return space
+param val2
+param val1
+t#73 = call L5
+param t#73
+call WRITE_INT
+L49: skip
+t#74 = 3
+if opcion = t#74 goto L50
+t#75 = FALSE
+goto: L51
+L50: skip
+t#75 = TRUE
+L51: skip
+if t#75 = FALSE goto L52
+t#76 = "--Division--"
+param t#76
+call WRITE_STRING
+t#77 = "Introduce dividendo:"
+param t#77
+call WRITE_STRING
+READINT return space
+val1 = call READINT
+t#79 = "Introduce divisor:"
+param t#79
+call WRITE_STRING
+READINT return space
+val2 = call READINT
+t#81 = "Resultado:"
+param t#81
+call WRITE_STRING
+L25 return space
+param val2
+param val1
+t#82 = call L25
+param t#82
+call WRITE_INT
+L52: skip
+t#83 = 0
+if opcion = t#83 goto L53
+t#84 = FALSE
+goto: L54
+L53: skip
+t#84 = TRUE
+L54: skip
+if t#84 = FALSE goto L55
+continuar = FALSE
+t#86 = "Saliendo"
+param t#86
+call WRITE_STRING
+L55: skip
+goto: L42
+L43: skip

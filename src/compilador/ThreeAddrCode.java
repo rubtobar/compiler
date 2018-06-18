@@ -394,7 +394,7 @@ public class ThreeAddrCode {
         eliminarTemporales();
         commutativeNormalization();
         basicBlockIdentification();
-        eliminarFuncionesMuertas();
+        eliminarBloquesMuertos();
         eliminarExpresionesDisponiblesPropagacion();
         recalcularOfsets();
     }
@@ -418,9 +418,9 @@ public class ThreeAddrCode {
         for (int nblock = 2; nblock < bbTable.size(); nblock++) {
             // Por casa bloque
             BasicBlock block = bbTable.get(nblock);
-            
+
             // No continuar si el bloque es inaccesible -- funciones muertas
-            if (block.pred.isEmpty()){
+            if (block.pred.isEmpty()) {
                 continue;
             }
 
@@ -497,11 +497,11 @@ public class ThreeAddrCode {
         }
     }
 
-    private void eliminarFuncionesMuertas() {
+    private void eliminarBloquesMuertos() {
         /* Encontrar los bloques que se son llamados en algun punto del programa */
         visitados.add(2);
         encontrarBloquesAccesibles(bbTable.get(2));
-        
+
         /* "Eliminar" los subprogramas que no son llamados */
         BasicBlock block;
         for (int i = 3; i < bbTable.size(); i++) {
@@ -523,42 +523,40 @@ public class ThreeAddrCode {
     private void encontrarBloquesAccesibles(BasicBlock block) {
         ThreeAddrIstr instr;
         TreeSet<Integer> nuevos = new TreeSet<>();
-               
+
         // Si hemos llegado al bloque de salida
         if (block.succ.isEmpty()) {
             return;
         }
 
         for (int i = block.firstI; i <= block.lastI; i++) {
-            // Buscar instrucciones CALL y GOTO
+            // Buscar instrucciones CALL
             instr = code.get(i);
             Operator operator = instr.op;
-            if (isBranch(operator)) {
-                String label;
-                if (operator.equals(Operator.CALL)) {
-                    int proc = Integer.parseInt(instr.dest.substring(1));
-                    label = pt.procTable.get(proc).label;
-                } else {
-                    label = instr.dest;
-                }
+            String label;
+            if (operator.equals(Operator.CALL)) {
+                int proc = Integer.parseInt(instr.dest.substring(1));
+                label = pt.procTable.get(proc).label;
                 try {
                     int nblock = labelTable.get(label);
                     nuevos.add(nblock);
                 } catch (Exception c) {
-                    // Cuando llamamos a WRITE o READ
+                    // Cuando llamamos a una funcion reservada (WRITE / READ).
+                    // En este caso no existe la etiqueta en la table de etiquetas
                 }
             }
         }
-        
+
+        // Unimos los bloques llamados con CALL y los bloques sucesores
         nuevos.addAll(block.succ);
-        
+
         nuevos.forEach(entry -> {
             // Para cada bloque sucesor o llamado, ejecutar esta funcion
-            if (!visitados.contains(entry)) {
+            if (entry != BB_O && !visitados.contains(entry)) {
                 visitados.add(entry);
                 encontrarBloquesAccesibles(bbTable.get(entry));
             }
-        });        
+        });
     }
 
     private boolean isBranch(Operator o) {
@@ -838,18 +836,13 @@ public class ThreeAddrCode {
                     writer.print(_item.get68KCode() + "\n");
                 });
             } else {
-                BasicBlock block;
-                for (int i = 2; i < bbTable.size(); i++) {
-                    block = bbTable.get(i);
-                    if (block.pred.isEmpty()) {
-                        continue;
-                    }
+                visitados.forEach(entry -> {
                     ThreeAddrIstr instr;
-                    for (int j = block.firstI; j <= block.lastI; j++) {
+                    for (int j = bbTable.get(entry).firstI; j <= bbTable.get(entry).lastI; j++) {
                         instr = code.get(j);
                         writer.print(instr.get68KCode() + "\n");
                     }
-                }
+                });
             }
             // Generamos codigo de finalizacion de programa
             writer.print("\t;Terminate program\n\tmove #9,D0\n\ttrap #15\n");
@@ -871,18 +864,13 @@ public class ThreeAddrCode {
                     writer.print(_item.toString() + "\n");
                 });
             } else {
-                BasicBlock block;
-                for (int i = 2; i < bbTable.size(); i++) {
-                    block = bbTable.get(i);
-                    if (block.pred.isEmpty()) {
-                        continue;
-                    }
+                visitados.forEach(entry -> {
                     ThreeAddrIstr instr;
-                    for (int j = block.firstI; j <= block.lastI; j++) {
+                    for (int j = bbTable.get(entry).firstI; j <= bbTable.get(entry).lastI; j++) {
                         instr = code.get(j);
                         writer.print(instr.toString() + "\n");
                     }
-                }
+                });
             }
             writer.close();
         } catch (FileNotFoundException ex) {

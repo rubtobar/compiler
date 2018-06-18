@@ -1,6 +1,6 @@
 ID			NAME			LABEL			PROF			P.SIZE			L.SIZE			R.SIZE
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-000			main						0			0			166			0
+000			main						0			0			644			0
 007			write@STRING			WRITE_STRING			0			32			0			0
 009			write@INT			WRITE_INT			0			4			0			0
 011			readString			READSTRING			0			0			0			32
@@ -8,4 +8,5 @@ ID			NAME			LABEL			PROF			P.SIZE			L.SIZE			R.SIZE
 015			neg@INT			L0			0			4			8			4
 020			abs@INT			L1			0			4			6			4
 026			mult@INT@INT			L5			0			8			22			4
-054			factorial@INT			L20			0			4			10			4
+054			divide_unsigned@INT@INT			L20			0			8			14			4
+066			divide@INT@INT			L25			0			8			46			4
