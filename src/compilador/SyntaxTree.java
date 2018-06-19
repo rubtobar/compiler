@@ -43,6 +43,8 @@ public class SyntaxTree {
     }
 
     void generateCode() {
+        // Recalculamos para asegurar que estan bien
+        code.recalcularOfsets();
         root.generateCode(vt, pt, lt, code);
         code.flush(THREE_ADDR_PRINTER_FILEPATH);
         code.write68Kcode(ASSEMBLY_PRINTER_FILEPATH);

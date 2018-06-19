@@ -1,0 +1,17 @@
+void multiprint(string a, int num, boolean bol){
+	
+	while (num > 0){
+		if(bol == true) {
+			write(a);
+		}
+		if(bol == false) {
+			write("nope");
+		}
+		num = num - 1;
+	}
+	
+}
+
+main {
+	multiprint("hey",3, true);
+}

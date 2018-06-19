@@ -1,0 +1,49 @@
+goto: MAIN
+L0: skip
+preambulo
+L1: skip
+t#0 = 0
+if num > t#0 goto L3
+t#1 = FALSE
+goto: L4
+L3: skip
+t#1 = TRUE
+L4: skip
+if t#1 = FALSE goto L2
+t#2 = TRUE
+if bol = t#2 goto L5
+t#3 = FALSE
+goto: L6
+L5: skip
+t#3 = TRUE
+L6: skip
+if t#3 = FALSE goto L7
+param a
+call WRITE_STRING
+L7: skip
+t#4 = FALSE
+if bol = t#4 goto L8
+t#5 = FALSE
+goto: L9
+L8: skip
+t#5 = TRUE
+L9: skip
+if t#5 = FALSE goto L10
+t#6 = "nope"
+param t#6
+call WRITE_STRING
+L10: skip
+t#7 = 1
+t#8 = num - t#7
+num = t#8
+goto: L1
+L2: skip
+return 
+MAIN: skip
+t#11 = TRUE
+t#10 = 3
+t#9 = "hey"
+param t#11
+param t#10
+param t#9
+call L0

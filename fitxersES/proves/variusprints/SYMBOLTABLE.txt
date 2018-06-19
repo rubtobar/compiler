@@ -1,0 +1,17 @@
++-----------------------------------------------------------------SYMBOL TABLE------------------------------------------------------------------+--------------------------------EXPANSION TABLE--------------------------------+--SCOPE TABLE--+
+|			POSICION		LEX			NIVEL			DESCR.TYPE		TSB			|ID			NIVEL			DESCR.TYPE		TSB	|***************|
+|***********************************************************************************************************************************************|*******************************************************************************|***************|
+|			0			multiprint@STRING@INT@BOOL			1			DPROC			VOID			|null										|	0	|
+|			1			void			0			DTYPE			VOID			|value			-1			DARG			STRING	|	5	|
+|			2			string			0			DTYPE			STRING			|value			-1			DARG			INT	|		|
+|			3			false			0			DCONST			BOOL			|a			-1			DARG			STRING	|		|
+|			4			readString			0			DPROC			STRING			|num			-1			DARG			INT	|		|
+|			5			write@STRING			0			DPROC			VOID			|bol			-1			DARG			BOOL	|		|
+|			6			main			0			DPROC			VOID			|										|		|
+|			7			write@INT			0			DPROC			VOID			|										|		|
+|			8			int			0			DTYPE			INT			|										|		|
+|			9			boolean			0			DTYPE			BOOL			|										|		|
+|			10			true			0			DCONST			BOOL			|										|		|
+|			11			readInt			0			DPROC			INT			|										|		|
++-----------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------+---------------+
+Current Level: 1

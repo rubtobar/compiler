@@ -1476,10 +1476,10 @@ L65:
 	;t#88 = 0
 	move.l #0, -180(A5)
 
-	;if i > t#88 goto L66
+	;if i != t#88 goto L66
 	move.l 8(A6), D0
 	cmp.l -180(A5), D0
-	bgt.l L66
+	bne.l L66
 
 	;t#89 = FALSE
 	move.w #FALSE, -182(A5)

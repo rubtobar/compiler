@@ -1,0 +1,76 @@
+2:1: tk_main
+2:6: tk_leftb
+3:2: tk_id: 'int'
+3:6: tk_id: 'a'
+3:8: tk_equal
+3:10: tk_digits: '1'
+3:11: tk_pcoma
+4:2: tk_id: 'int'
+4:6: tk_id: 'b'
+4:8: tk_equal
+4:10: tk_digits: '2'
+4:11: tk_pcoma
+5:2: tk_id: 'a'
+5:4: tk_equal
+5:6: tk_id: 'b'
+5:7: tk_pcoma
+6:2: tk_id: 'int'
+6:6: tk_id: 'c'
+6:8: tk_equal
+6:10: tk_id: 'a'
+6:12: tk_op_aritm: '+'
+6:14: tk_id: 'b'
+6:15: tk_pcoma
+7:2: tk_id: 'int'
+7:6: tk_id: 'rep'
+7:10: tk_equal
+7:12: tk_id: 'a'
+7:14: tk_op_aritm: '+'
+7:16: tk_id: 'b'
+7:17: tk_pcoma
+8:2: tk_id: 'int'
+8:6: tk_id: 'd'
+8:7: tk_pcoma
+9:2: tk_if
+9:4: tk_openp
+9:5: tk_id: 'true'
+9:9: tk_closep
+9:11: tk_leftb
+10:3: tk_id: 'd'
+10:5: tk_equal
+10:7: tk_id: 'a'
+10:9: tk_op_aritm: '+'
+10:11: tk_id: 'b'
+10:12: tk_pcoma
+11:3: tk_id: 'a'
+11:5: tk_equal
+11:7: tk_digits: '3'
+11:8: tk_pcoma
+12:2: tk_rightb
+13:2: tk_while
+13:7: tk_openp
+13:8: tk_id: 'd'
+13:10: tk_op_rel: '>'
+13:12: tk_digits: '0'
+13:13: tk_closep
+13:15: tk_leftb
+14:3: tk_id: 'int'
+14:7: tk_id: 'e'
+14:9: tk_equal
+14:11: tk_id: 'a'
+14:13: tk_op_aritm: '+'
+14:15: tk_id: 'b'
+14:16: tk_pcoma
+15:3: tk_id: 'd'
+15:5: tk_equal
+15:7: tk_id: 'd'
+15:9: tk_op_aritm: '-'
+15:11: tk_digits: '1'
+15:12: tk_pcoma
+16:3: tk_id: 'write'
+16:8: tk_openp
+16:9: tk_id: 'd'
+16:10: tk_closep
+16:11: tk_pcoma
+17:2: tk_rightb
+18:1: tk_rightb

@@ -1,0 +1,58 @@
+1:1: tk_const
+1:7: tk_id: 'int'
+1:11: tk_id: 'TIMES'
+1:17: tk_equal
+1:19: tk_digits: '10'
+1:21: tk_pcoma
+3:1: tk_main
+3:6: tk_leftb
+4:5: tk_id: 'write'
+4:10: tk_openp
+4:11: tk_string: 'Introdueix un numero:'
+4:34: tk_closep
+4:35: tk_pcoma
+5:5: tk_id: 'int'
+5:9: tk_id: 'loopCount'
+5:19: tk_equal
+5:21: tk_id: 'TIMES'
+5:26: tk_pcoma
+6:5: tk_id: 'int'
+6:9: tk_id: 'counter'
+6:17: tk_equal
+6:19: tk_digits: '0'
+6:20: tk_pcoma
+7:5: tk_id: 'int'
+7:9: tk_id: 'n'
+7:11: tk_equal
+7:13: tk_id: 'readInt'
+7:20: tk_openp
+7:21: tk_closep
+7:22: tk_pcoma
+8:5: tk_while
+8:11: tk_openp
+8:12: tk_id: 'loopCount'
+8:22: tk_op_rel: '>'
+8:24: tk_digits: '0'
+8:25: tk_closep
+8:26: tk_leftb
+9:9: tk_id: 'write'
+9:14: tk_openp
+9:15: tk_id: 'n'
+9:17: tk_op_aritm: '+'
+9:19: tk_id: 'counter'
+9:26: tk_closep
+9:27: tk_pcoma
+10:9: tk_id: 'loopCount'
+10:19: tk_equal
+10:21: tk_id: 'loopCount'
+10:31: tk_op_aritm: '-'
+10:33: tk_digits: '1'
+10:34: tk_pcoma
+11:9: tk_id: 'counter'
+11:17: tk_equal
+11:19: tk_id: 'counter'
+11:27: tk_op_aritm: '+'
+11:29: tk_digits: '1'
+11:30: tk_pcoma
+12:5: tk_rightb
+13:1: tk_rightb

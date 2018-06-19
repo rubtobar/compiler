@@ -323,7 +323,7 @@ t#87 = 1
 result = t#87
 L65: skip
 t#88 = 0
-if i > t#88 goto L66
+if i != t#88 goto L66
 t#89 = FALSE
 goto: L67
 L66: skip

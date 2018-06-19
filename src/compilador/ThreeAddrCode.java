@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeSet;
 
 /**
@@ -543,12 +544,14 @@ public class ThreeAddrCode {
         });
     }
 
-    private void recalcularOfsets() {
+    public void recalcularOfsets() {
         pt.procTable.entrySet().forEach((entry) -> {
             ProcTable.Proc proc = entry.getValue();
             proc.localSize = 0;
         });
-        vt.varTable.entrySet().forEach((entry) -> {
+        Balde lastArgBalde = null;
+        for (Map.Entry<Integer, Balde> entry : vt.varTable.entrySet()) {
+            Integer key = entry.getKey();
             Balde balde = entry.getValue();
             int proc = balde.proc;
             int size = balde.size;
@@ -556,8 +559,17 @@ public class ThreeAddrCode {
                 pt.procTable.get(proc).localSize += size;
                 balde.offset = -pt.procTable.get(proc).localSize;
             }
-
-        });
+            // Recalculamos offsets de los parametros
+            if (balde.offset > 0) {
+                if (lastArgBalde != null && lastArgBalde.proc == balde.proc) {
+                    balde.offset = lastArgBalde.offset + lastArgBalde.size;
+                }else{
+                    balde.offset = 8;
+                }
+                lastArgBalde = balde;
+            }
+            
+        }
     }
 
     private boolean isArOperation(ThreeAddrIstr tai) {
