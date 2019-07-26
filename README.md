@@ -1,2 +1,2 @@
 ﻿Compilador de lenguaje java simple(caracterñisticas eliminadas)
-﻿a ensamblador del procesador Motorola 68000
+﻿a lenguaje ensamblador del procesador Motorola 68000
